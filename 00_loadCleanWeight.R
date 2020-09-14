@@ -5,8 +5,8 @@
 source("utils.R")
 
 ## Creating list of packages to load
-package_list <- c("oliviercecchi/butteR", "ellieallien/hypegrammaR","ellieallien/cleaninginspectoR","hunzikp/rtree",
-                  "tidyr","dplyr", "ggplot2", "readr", "stringr", "lubridate", "readxl", "rgdal", "sf")
+package_list <- c("oliviercecchi/butteR", "ElliottMess/hypegrammaR","ellieallien/cleaninginspectoR","hunzikp/rtree", "impact-initiatives/koboloops",
+                  "tidyr","dplyr", "ggplot2", "readr", "stringr", "lubridate", "readxl", "rgdal", "sf", "purrr")
 
 ## Running the packaging loading function
 loadInstall_package(package_list)
@@ -14,12 +14,140 @@ loadInstall_package(package_list)
 
 # Loading necessary data
 ## Loading raw_data
-raw_data <- read_excel("data/bfa2002_msna_2020_final_cleaning_20200830.xlsx", sheet = "clean_data")%>%
-    mutate(status = case_when(
+
+raw_data_csv <- "data/bfa2002_msna_2020_final_cleaning_20200902.csv"
+
+raw_data_info_menage_csv <- "data/bfa2002_msna_2020_final_cleaning_20200902_info_menage.csv"
+
+raw_data_excel <- "data/bfa2002_msna_2020_final_cleaning_20200902.xlsx"
+
+
+#Loading data and cleaning data and questionnaire
+raw_data <- read_csv(raw_data_csv)%>%
+  select(-`personne m2`)%>%
+  mutate(status = case_when(
       group_pop %in% c("pdi") ~ "pdi",
       group_pop %in% c("pop_local", "migrant_burkina", "rapatrie", "refugie", "migrant_int", "retourne") ~ "host",
       TRUE ~ NA_character_
-    ))
+      )
+    )%>%
+  rename("risque_fem/enlevements" ="risque_fem/enlèvements",
+         "risque_hom/enlevements" = "risque_hom/enlèvements",
+         "risque_fille/enlevements" = "risque_fille/enlèvements",
+         "risque_garcon/enlevements" = "risque_garcon/enlèvements")%>%
+  mutate(across(where(is.character), str_remove_all, pattern = fixed("\n")))%>%
+  mutate(across(where(is.character), str_remove_all, pattern = fixed("\r")))%>%
+  mutate(across(where(is.character), str_remove_all, pattern = fixed(";")))
+
+names(raw_data) <- gsub("\\/", "\\.", names(raw_data))
+
+survey <- read_excel("data/reach_bfa_msna_outil_V2.xlsx", sheet = "survey")%>%
+  mutate(across(where(is.character), str_remove_all, pattern = fixed("\n")))%>%
+  mutate(across(where(is.character), str_remove_all, pattern = fixed("\r")))%>%
+  mutate(name = str_replace_all(name, pattern = fixed("è"), replacement = "e"))
+
+write_csv(survey,"data/survey.csv")
+
+choices <- read_excel("data/reach_bfa_msna_outil_V2.xlsx", sheet = "choices")%>%
+  mutate(name = str_replace_all(name, pattern = "[è|é]", replacement = "e"))%>%
+  mutate(across(where(is.character), str_remove_all, pattern = fixed("\n")))%>%
+  mutate(across(where(is.character), str_remove_all, pattern = fixed("\r")))
+
+write_csv(choices,"data/choices.csv")
+
+### Loading repeat loops
+raw_data_info_menage <- read_csv(raw_data_info_menage_csv)%>%
+  rename(submission_uuid = `_submission__uuid`,
+         parent_index = `_parent_index`)
+
+raw_data_maladie_moins_5ans_rpt <- read_excel(raw_data_excel, sheet = "maladie_moins_5ans_rpt")%>%
+  rename(submission_uuid = `_submission__uuid...2`,
+         parent_index = `_parent_index...1`)
+
+raw_data_naissances <- read_excel(raw_data_excel, sheet = "naissances")%>%
+  rename(submission_uuid = `_submission__uuid...2`,
+         parent_index = `_parent_index...1`)
+
+raw_data_membre_marche_dificile <- read_excel(raw_data_excel, sheet = "membre_marche_dificile")%>%
+  rename(submission_uuid = `_submission__uuid...2`,
+         parent_index = `_parent_index...1`)
+
+raw_data_membre_soins_difficile <- read_excel(raw_data_excel, sheet = "soins_difficile")%>%
+  rename(submission_uuid = `_submission__uuid...2`,
+         parent_index = `_parent_index...1`)
+
+raw_data_membre_concentration_difficile <- read_excel(raw_data_excel, sheet = "concentration_difficile")%>%
+  rename(submission_uuid = `_submission__uuid...2`,
+         parent_index = `_parent_index...1`)
+
+raw_data_membre_membre_vision_diffcile <- read_excel(raw_data_excel, sheet = "membre_vision_diffcile")%>%
+  rename(submission_uuid = `_submission__uuid...13`,
+         parent_index = `_parent_index...1`)
+
+raw_data_membre_membre_entendre_difficile <- read_excel(raw_data_excel, sheet = "membre_entendre_difficile")%>%
+  rename(submission_uuid = `_submission__uuid...2`,
+         parent_index = `_parent_index...1`)
+
+raw_data_membre_difficulte_communication <- read_excel(raw_data_excel, sheet = "communication_difficile")%>%
+  rename(submission_uuid = `_submission__uuid...2`,
+         parent_index = `_parent_index...1`)
+
+raw_data_membre_repeat_nbre_pers_decedes <- read_excel(raw_data_excel, sheet = "repeat_nbre_pers_decedes")%>%
+  rename(submission_uuid = `_submission__uuid...2`,
+         parent_index = `_parent_index...1`)
+
+loop_frames <- list(raw_data_info_menage, raw_data_maladie_moins_5ans_rpt, raw_data_naissances, raw_data_membre_marche_dificile,
+                 raw_data_membre_soins_difficile, raw_data_membre_concentration_difficile, raw_data_membre_membre_vision_diffcile,
+                 raw_data_membre_membre_entendre_difficile, raw_data_membre_difficulte_communication, raw_data_membre_repeat_nbre_pers_decedes)
+
+loop_frames_names <- list("raw_data_info_menage", "raw_data_maladie_moins_5ans_rpt", "raw_data_naissances", "raw_data_membre_marche_dificile",
+                    "raw_data_membre_soins_difficile", "raw_data_membre_concentration_difficile", "raw_data_membre_membre_vision_diffcile",
+                    "raw_data_membre_membre_entendre_difficile", "raw_data_membre_difficulte_communication", "raw_data_membre_repeat_nbre_pers_decedes")
+
+
+list_remove_data <- lapply(loop_frames, remove_delParents_fromLoop, raw_data, uuid.name.parent = "uuid", uuid.name.loop = "submission_uuid")
+
+names(list_remove_data) <- loop_frames_names
+
+# create_objects_from_df(list_remove_data)
+
+
+### Running cleaninginspectoR and other checks on data
+
+# cleaninginspectoR_results <- cleaninginspectoR::inspect_all(raw_data, uuid.column.name = "uuid")%>%
+#   index_toUUID(raw_data, uuid.column.name = "uuid")
+# 
+# 
+# cleaninginspectoR_results_info_menage <- cleaninginspectoR::inspect_all(raw_data_info_menage,uuid.column.name = "submission_uuid" )%>%
+#   filter(issue_type != "duplicate in "submission_uuid")
+# 
+# 
+# cleaninginspectoR_results_maladie_moins_5ans_rpt <- cleaninginspectoR::inspect_all(raw_data_maladie_moins_5ans_rpt, uuid.column.name = "_submission__uuid...2" )%>%
+#   filter(issue_type != "duplicate in _submission__uuid...2")
+# 
+# cleaninginspectoR_results_naissances <- cleaninginspectoR::inspect_all(raw_data_naissances, uuid.column.name = "_submission__uuid...2" )%>%
+#   filter(issue_type != "duplicate in _submission__uuid...2")
+# 
+# cleaninginspectoR_results_membre_marche_dificile <- cleaninginspectoR::inspect_all(raw_data_membre_marche_dificile, uuid.column.name = "_submission__uuid...2" )%>%
+#   filter(issue_type != "duplicate in _submission__uuid...2")
+# 
+# cleaninginspectoR_results_membre_soins_difficile <- cleaninginspectoR::inspect_all(raw_data_membre_soins_difficile, uuid.column.name = "_submission__uuid...2" )%>%
+#   filter(issue_type != "duplicate in _submission__uuid...2")
+# 
+# cleaninginspectoR_results_concentration_difficile <- cleaninginspectoR::inspect_all(raw_data_membre_concentration_difficile, uuid.column.name = "_submission__uuid...2" )%>%
+#   filter(issue_type != "duplicate in _submission__uuid...2")
+# 
+# cleaninginspectoR_results_concentration_difficile <- cleaninginspectoR::inspect_all(raw_data_membre_concentration_difficile , uuid.column.name = "_submission__uuid...2" )%>%
+#   filter(issue_type != "duplicate in _submission__uuid...2")
+# 
+# cleaninginspectoR_results_membre_vision_diffcile <- cleaninginspectoR::inspect_all(raw_data_membre_membre_vision_diffcile, uuid.column.name = "_submission__uuid...2" )%>%
+#   filter(issue_type != "duplicate in _submission__uuid...2")
+# 
+# cleaninginspectoR_results_membre_entendre_difficile <- cleaninginspectoR::inspect_all(raw_data_membre_membre_entendre_difficile , uuid.column.name = "_submission__uuid...2" )%>%
+#   filter(issue_type != "duplicate in _submission__uuid...2")
+# 
+# cleaninginspectoR_results_membre_repeat_nbre_pers_decedes <- cleaninginspectoR::inspect_all(raw_data_membre_repeat_nbre_pers_decedes, uuid.column.name = "_submission__uuid...2" )%>%
+#   filter(issue_type != "duplicate in _submission__uuid...2")
 
 
 ### Loading sampling strategies 
@@ -35,25 +163,25 @@ samplingStrategies <- read_excel("data/Sampling_RU.xlsx", sheet = "Tableau Sampl
 
 ### Cleaning pcodes for other localites
 
-bfa_pcodes <- read_excel("data/sampling-resume-enq.xlsx", sheet = "ITOS ADMIN3 PCODES")%>%
-  mutate(adm123 = cleaning_chr( gsub("-","_", tolower(paste0(ADM1_FR, ADM2_FR, ADM3_FR)))))
-
-pcodes_probs <- raw_data%>%
-  select(admin1, admin2, admin3, pcode, localite, autre_localite, "_gpsmenage_latitude", "_gpsmenage_longitude", uuid)%>%
-  rename("gpsmenage_latitude" = "_gpsmenage_latitude", "gpsmenage_longitude"= "_gpsmenage_longitude")%>%
-  filter(localite == 'autre')%>%
-  mutate(
-    localite = case_when(localite == 'autre' ~ autre_localite,
-                         TRUE ~ localite),
-    gpsmenage_latitude = case_when(gpsmenage_latitude == "NA" ~ NA_character_ ,
-                                   TRUE ~ gpsmenage_latitude),
-    gpsmenage_longitude = case_when(gpsmenage_longitude == "NA" ~ NA_character_ ,
-                                    TRUE ~ gpsmenage_longitude)
-    
-  )%>%
-  group_by(admin1, admin2, admin3,pcode, localite)%>%
-  distinct()%>%
-  filter(!is.na(gpsmenage_latitude))
+# bfa_pcodes <- read_excel("data/sampling-resume-enq.xlsx", sheet = "ITOS ADMIN3 PCODES")%>%
+#   mutate(adm123 = cleaning_chr( gsub("-","_", tolower(paste0(ADM1_FR, ADM2_FR, ADM3_FR)))))
+# 
+# pcodes_probs <- raw_data%>%
+#   select(admin1, admin2, admin3, pcode, localite, autre_localite, "_gpsmenage_latitude", "_gpsmenage_longitude", uuid)%>%
+#   rename("gpsmenage_latitude" = "_gpsmenage_latitude", "gpsmenage_longitude"= "_gpsmenage_longitude")%>%
+#   filter(localite == 'autre')%>%
+#   mutate(
+#     localite = case_when(localite == 'autre' ~ autre_localite,
+#                          TRUE ~ localite),
+#     gpsmenage_latitude = case_when(gpsmenage_latitude == "NA" ~ NA_character_ ,
+#                                    TRUE ~ as.character(gpsmenage_latitude)),
+#     gpsmenage_longitude = case_when(gpsmenage_longitude == "NA" ~ NA_character_ ,
+#                                     TRUE ~ as.character(gpsmenage_longitude))
+#   )%>%
+#   group_by(admin1, admin2, admin3,pcode, localite)%>%
+#   distinct()%>%
+#   filter(!is.na(gpsmenage_latitude))%>%
+#   ungroup()
 
 
 ### Loading clusters sampling frame and cleaning centers of clusters
@@ -84,117 +212,511 @@ samplingFrame <- read_excel("data/REACH_BFA_Pop_for_weighting_20201308.xlsx", sh
 
 samplingFrame_adm2 <- samplingFrame%>%
   filter(Admin1 %in% c("Est", "Centre-Nord","Sahel","Boucle du Mouhoun","Nord"))%>%
-  mutate(strata = paste(Admin2Pcod, strata, sep = "_"))%>%
   filter(!is.na(Population))
 
 
-
 ### Creating spatial objects for missingPcodes and clusters centers
-cluster_sf <- sf::st_as_sf(clusterSample, coords = c("X", "Y"), crs = 4326)%>%
-  select(POINT_X, POINT_Y, id_sampl, psu_id, strata_id, ADM3_PCODE, NEAR_pcode, NEAR_featureNam)%>%
-  st_set_crs("EPSG:4326")
+# cluster_sf <- sf::st_as_sf(clusterSample, coords = c("X", "Y"), crs = 4326)%>%
+#   select(POINT_X, POINT_Y, id_sampl, psu_id, strata_id, ADM3_PCODE, NEAR_pcode, NEAR_featureNam)%>%
+#   st_set_crs("EPSG:4326")
 
-missingPoints_sf <- sf::st_as_sf(pcodes_probs, coords = c("gpsmenage_longitude", "gpsmenage_latitude"), crs = 4326)%>%
-  st_set_crs("EPSG:4326")
+# missingPoints_sf <- sf::st_as_sf(pcodes_probs, coords = c("gpsmenage_longitude", "gpsmenage_latitude"), crs = 4326)%>%
+#   st_set_crs("EPSG:4326")
 
 ### Loading OCHA's settlement layer
 
-bfa_settlments <- read_csv("data/shapes/bfa_pplp_1m_nga_ocha/bfa_pplp_1m_nga_ocha.csv")%>%
-  sf::st_as_sf(coords = c("Coord_X", "Coord_Y"), crs = 4326)
+bfa_admin2 <- read_csv("data/shapes/bfa_pplp_1m_nga_ocha/bfa_pplp_1m_nga_ocha.csv")%>%
+  select(admin3Name, admin3Pcod)%>%
+  distinct()%>%
+  mutate(admin3Name = tolower(admin3Name),
+         admin3Name = case_when(
+           admin3Name == "karangasso - sambla" ~ "karangasso_sambla",
+           admin3Name == "karangasso - vigue" ~ "karangasso_vigue",
+           admin3Name == "fada n'gourma"  ~ "fada_n_gourma",
+           admin3Name == "n'dorola" ~ "n_dorola",
+           admin3Name == "tin-akoff" ~ "tin_akoff",
+           admin3Name == "gorom-gorom" ~ "gorom_gorom",
+           admin3Name == "la-todin" ~ "la_todin",
+           admin3Name == "pobe-mangao" ~ "pobe_mangao",
+           admin3Name == "bobo-dioulasso" ~ "bobo_dioulasso",
+           TRUE ~ admin3Name
+         ))
+  
+
+raw_data <- left_join(raw_data, bfa_admin2, by = c("admin3" = "admin3Name"))
+
+# bfa_settlments <- read_csv("data/shapes/bfa_pplp_1m_nga_ocha/bfa_pplp_1m_nga_ocha.csv")%>%
+#   sf::st_as_sf(coords = c("Coord_X", "Coord_Y"), crs = 4326)
   
 ### Replacing missing pcodes by closest pcode
 
-distance_check <- butteR::closest_distance_rtree(missingPoints_sf, bfa_settlments)%>%
-  select(uuid, pcode.1)
+# distance_check <- butteR::closest_distance_rtree(missingPoints_sf, bfa_settlments)%>%
+#   select(uuid, pcode.1)
+# 
+# 
+# raw_data <- raw_data%>%
+#   left_join(distance_check, by = "uuid")%>%
+#   mutate(pcode = case_when(is.na(pcode) ~ pcode.1,
+#                            TRUE ~ pcode))
 
 
-raw_data <- raw_data%>%
-  left_join(distance_check, by = "uuid")%>%
-  mutate(pcode = case_when(is.na(pcode) ~ pcode.1,
-                           TRUE ~ pcode))
+
+## Creating and writting cleaning_log to log changes
+
+cleaning_log_change <- data.frame(Auteur = NA, Index = NA, uuid = NA, Date = NA, Base = NA, Enqueteur = NA, Question = NA,
+         `Probl?me` = NA,
+         "Anciennes valeurs" = NA, "Nouvelles valeurs" = NA, ddsagr = NA, "Retour Enquêteur" =NA, "Retour chargé" = NA, Action = NA,
+         "Commentaire RBB" =0L,"Commentaire CC" = 0L,	"Commentaire AO" =0L,	"Commentaire GIS" =0L,	"dffgawesd" =0L)
+
+##### Affecting data from repeat loops to main dataframe ####
+
+raw_data_info_menage <- raw_data_info_menage%>%
+  filter(parent_index %in% raw_data$index)%>%
+  mutate(agegrp_0_5_femmes = if_else(age_hh < 5 &sexe_hh == "femme",1,0),
+         agegrp_0_5_hommes = if_else(age_hh < 5 &sexe_hh == "homme",1,0),
+         agegrp_5_18_femmes = if_else((age_hh >= 5 & age_hh <18 ) & sexe_hh == "femme",1,0),
+         agegrp_5_18_hommes = if_else((age_hh >= 5 & age_hh < 18) & sexe_hh == "homme",1,0),
+         agegrp_18_65_femmes = if_else((age_hh >= 18 & age_hh < 65 ) & sexe_hh == "femme",1,0),
+         agegrp_18_65_hommes = if_else((age_hh >= 18 & age_hh < 65 ) & sexe_hh == "homme",1,0),
+         agegrp_65plus_femmes = if_else(age_hh >= 65 &sexe_hh == "femme",1,0),
+         agegrp_65plus_hommes = if_else(age_hh >= 65 &sexe_hh == "homme",1,0)
+         )
+         
+
+raw_data <- affect_loop_to_parent(loop = as.data.frame(raw_data_info_menage), parent = as.data.frame(raw_data), aggregate.function = sum,
+                                  variable.to.add = c(
+                                    sum_age_0_5mois = "age_0_5mois",
+                                    total_agegrp_0_5_femmes = "agegrp_0_5_femmes",
+                                    total_agegrp_0_5_hommes = "agegrp_0_5_hommes",
+                                    total_agegrp_5_18_femmes = "agegrp_5_18_femmes",
+                                    total_agegrp_5_18_hommes = "agegrp_5_18_hommes",
+                                    total_agegrp_18_65_femmes = "agegrp_18_65_femmes",
+                                    total_agegrp_18_65_hommes = "agegrp_18_65_hommes",
+                                    total_agegrp_65plus_femmes = "agegrp_65plus_femmes",
+                                    total_agegrp_65plus_hommes = "agegrp_65plus_hommes"
+                                  ),
+                                  uuid.name.loop = "parent_index", uuid.name.parent = "index")
+
+
+raw_data_naissances <- levels_asBinaryColumns(raw_data_naissances, "lieu_accouchement")
+raw_data_naissances <- levels_asBinaryColumns(raw_data_naissances, "raison_dominicile")
+
+raw_data <- affect_loop_to_parent(loop = as.data.frame(raw_data_naissances), parent = as.data.frame(raw_data), aggregate.function = sum,
+                                      variable.to.add = c(
+                                        sum_lieu_accouchement.autre = "lieu_accouchement.autre",
+                                        sum_lieu_accouchement.centre_sante = "lieu_accouchement.centre_sante",
+                                        sum_lieu_accouchement.maison = "lieu_accouchement.maison",
+                                        sum_raison_domicil_accouche_assiste_domicil = "raison_dominicile.accouche_assiste_domicil",
+                                        sum_raison_domicil_accouche_centre_ferme = "raison_dominicile.centre_ferme",
+                                        sum_raison_domicil_accouche_centre_financ_inacc = "raison_dominicile.centre_financ_inacc",
+                                        sum_raison_domicil_centre_surpeuple = "raison_dominicile.centre_surpeuple",
+                                        sum_raison_domicil_maternite_pas_sur = "raison_dominicile.maternite_pas_sur",
+                                        sum_raison_domicil_nsp = "raison_dominicile.nsp",
+                                        sum_raison_domicil_physique_mere = "raison_dominicile.physique_mere",
+                                        sum_raison_domicil_rejoindre_centre = "raison_dominicile.rejoindre_centre"
+                                      ),
+                                      uuid.name.loop = "parent_index", uuid.name.parent = "index")
+
+
+issues_withNaissances <- raw_data%>%
+  select(total_naissance,
+         sum_lieu_accouchement.centre_sante,sum_lieu_accouchement.autre,sum_lieu_accouchement.maison,
+         uuid)%>%
+  mutate(oops_naissance = case_when(sum_lieu_accouchement.centre_sante > total_naissance ~"oops",
+                                    sum_lieu_accouchement.autre > total_naissance ~ "oops",
+                                    sum_lieu_accouchement.maison > total_naissance ~ "oops",
+                                    TRUE~"OK"))%>%
+  filter(oops_naissance=="oops")%>%
+  write_csv("problemes_repeat_Naissances.csv")
+
+
+raw_data_maladie_moins_5ans_rpt <- raw_data_maladie_moins_5ans_rpt%>%
+  mutate_at(vars(starts_with("maladie_moins_5ans/")), as.numeric)
+
+raw_data <- affect_loop_to_parent(loop = as.data.frame(raw_data_maladie_moins_5ans_rpt), parent = as.data.frame(raw_data), aggregate.function = sum,
+                                      variable.to.add = c(
+                                        sum_enfants_5ans_maladie.palu = "maladie_moins_5ans/palu",
+                                        sum_enfants_5ans_maladie.infect_respiratoire = "maladie_moins_5ans/infect_respiratoire",
+                                        sum_enfants_5ans_maladie.diarrhee =  "maladie_moins_5ans/diarrhee",
+                                        sum_enfants_5ans_maladie.autre = "maladie_moins_5ans/autre",
+                                        sum_enfants_5ans_maladie.nsp = "maladie_moins_5ans/nsp"
+                                      ),
+                                      uuid.name.loop = "parent_index", uuid.name.parent = "index")
+
+issues_enfants_malades <- raw_data%>%
+  select(total_moins_5ans,
+         sum_enfants_5ans_maladie.palu,sum_enfants_5ans_maladie.infect_respiratoire,sum_enfants_5ans_maladie.diarrhee,sum_enfants_5ans_maladie.autre,sum_enfants_5ans_maladie.nsp,
+         uuid)%>%
+  mutate(oops_malade = case_when(sum_enfants_5ans_maladie.palu > total_moins_5ans ~"oops",
+                                    sum_enfants_5ans_maladie.infect_respiratoire > total_moins_5ans ~ "oops",
+                                    sum_enfants_5ans_maladie.diarrhee > total_moins_5ans ~ "oops",
+                                    sum_enfants_5ans_maladie.autre > total_moins_5ans ~ "oops",
+                                    sum_enfants_5ans_maladie.nsp > total_moins_5ans ~ "oops",
+                                    TRUE~"OK"))%>%
+  filter(oops_malade=="oops")%>%
+  write_csv("problemes_repeat_malades.csv")
 
 
 
-### Creating and writting cleaning_log to log changes
+raw_data_membre_marche_dificile <- levels_asBinaryColumns(raw_data_membre_marche_dificile, "genre_marche")%>%
+  mutate(agegrp = case_when(genre_marche == "homme" & (age_marche < 5) ~ "garcons_moins5",
+                            genre_marche == "femme" & (age_marche < 5) ~ "filles_moins5",
+                            genre_marche == "homme" & (age_marche >= 5 & age_marche <18) ~ "garcons_5_18",
+                            genre_marche == "femme" & (age_marche >= 5 & age_marche <18) ~ "filles_5_18",
+                            genre_marche == "homme" & (age_marche >= 18 & age_marche < 65) ~ "hommes_18_64",
+                            genre_marche == "femme" & (age_marche >= 18 & age_marche < 65) ~ "femmes_18_64",
+                            genre_marche == "homme" & (age_marche >= 65) ~ "hommes_65plus",
+                            genre_marche == "femme" & (age_marche >= 65) ~ "femmes_65plus",
+                            TRUE ~ NA_character_
+  ),
+  marche_dif_garcons_moins5 = if_else(agegrp == "garcons_moins5", TRUE, FALSE),
+  marche_dif_filles_moins5 = if_else(agegrp == "filles_moins5", TRUE, FALSE),
+  marche_dif_garcons_5_18 = if_else(agegrp == "garcons_5_18", TRUE, FALSE),
+  marche_dif_filles_5_18 = if_else(agegrp == "filles_5_18", TRUE, FALSE),
+  marche_dif_hommes_18_64 = if_else(agegrp == "hommes_18_64", TRUE, FALSE),
+  marche_dif_femmes_18_64 = if_else(agegrp == "femmes_18_64", TRUE, FALSE),
+  marche_dif_hommes_65plus = if_else(agegrp == "hommes_65plus", TRUE, FALSE),
+  marche_dif_femmes_65plus = if_else(agegrp == "femmes_65plus", TRUE, FALSE)
+  )
 
-cleaning_log_change <- pcodes_probs %>%
-  select(uuid, pcode)%>%
-  left_join(raw_data, by = "uuid")%>%
-  mutate(Auteur = "Elliott Messeiller", Index = NA, uuid=uuid, Date = as.Date("01-09-2020"), Base = NA, Enqueteur = enumerator_id, Question = "Localité et PCode",
-         Problème = "Autre choisi pour la localité. Les PCodes ne peuvent donc pas être calculé par ODK pour ces localités. Les localités ne sont pas non plus dans la base de donnée ITOS du COD OCHA pour les localités",
-         "Anciennes valeurs" = pcode.x, "Nouvelles valeurs" = pcode.y, ddsagr = NA, "Retour Enquêteur" =NA, "Retour chargé" = NA, Action = "Modifié",
-         "Commentaire RBB" =0L,"Commentaire CC" = 0L,	"Commentaire AO" =0L,	"Commentaire GIS" =0L,	"dffgawesd" =0L)%>%
-  select(Auteur, Index, uuid, Date, Base, Enqueteur, Question, Problème, `Anciennes valeurs`, "Nouvelles valeurs", ddsagr, "Retour Enquêteur", "Retour chargé", Action,
-         "Commentaire RBB","Commentaire CC" = 0L,	"Commentaire AO",	"Commentaire GIS",	"dffgawesd")
 
-write_csv(cleaning_log_change, "outputs/logs/cleaning_log_missingPcodes.csv")
+
+
+raw_data <- affect_loop_to_parent(loop = as.data.frame(raw_data_membre_marche_dificile), parent = as.data.frame(raw_data), aggregate.function = sum,
+                                      variable.to.add = c(
+                                        sum_marche_dif_garcons_moins5 = "marche_dif_garcons_moins5",
+                                        sum_marche_dif_filles_moins5 = "marche_dif_filles_moins5",
+                                        sum_marche_dif_garcons_5_18 = "marche_dif_garcons_5_18",
+                                        sum_marche_dif_filles_5_18 = "marche_dif_filles_5_18",
+                                        sum_marche_dif_hommes_18_64 = "marche_dif_hommes_18_64",
+                                        sum_marche_dif_femmes_18_64 = "marche_dif_femmes_18_64",
+                                        sum_marche_dif_hommes_65plus = "marche_dif_hommes_65plus",
+                                        sum_marche_dif_femmes_65plus = "marche_dif_femmes_65plus"
+                                      ),
+                                      uuid.name.loop = "parent_index", uuid.name.parent = "index")
+
+
+raw_data_membre_soins_difficile <- raw_data_membre_soins_difficile%>%
+  mutate(
+    soins_dif_garcons_moins5 = if_else(genre_soins == "homme" & (age_soins < 5), TRUE, FALSE),
+    soins_dif_filles_moins5 = if_else(genre_soins == "homme" & (age_soins < 5), TRUE, FALSE),
+    soins_dif_garcons_5_18 = if_else(genre_soins == "homme" & (age_soins >= 5 & age_soins <18), TRUE, FALSE),
+    soins_dif_filles_5_18 = if_else(genre_soins == "femme" & (age_soins >= 5 & age_soins <18), TRUE, FALSE),
+    soins_dif_hommes_18_64 = if_else(genre_soins == "homme" & (age_soins >= 18 & age_soins <65), TRUE, FALSE),
+    soins_dif_femmes_18_64 = if_else(genre_soins == "femme" & (age_soins >= 18 & age_soins <65), TRUE, FALSE),
+    soins_dif_hommes_65plus = if_else(genre_soins == "homme" & (age_soins >= 65), TRUE, FALSE),
+    soins_dif_femmes_65plus = if_else(genre_soins == "femme" & (age_soins >= 65), TRUE, FALSE)
+  )
+
+raw_data <- affect_loop_to_parent(loop = as.data.frame(raw_data_membre_soins_difficile), parent = as.data.frame(raw_data), aggregate.function = sum,
+                                      variable.to.add = c(
+                                        sum_soins_dif_garcons_moins5 = "soins_dif_garcons_moins5",
+                                        sum_soins_dif_filles_moins5 = "soins_dif_filles_moins5",
+                                        sum_soins_dif_garcons_5_18 = "soins_dif_garcons_5_18",
+                                        sum_soins_dif_filles_5_18 = "soins_dif_filles_5_18",
+                                        sum_soins_dif_hommes_18_64 = "soins_dif_hommes_18_64",
+                                        sum_soins_dif_femmes_18_64 = "soins_dif_femmes_18_64",
+                                        sum_soins_dif_hommes_65plus = "soins_dif_hommes_65plus",
+                                        sum_soins_dif_femmes_65plus = "soins_dif_femmes_65plus"
+                                      ),
+                                      uuid.name.loop = "parent_index", uuid.name.parent = "index")
+
+raw_data_membre_concentration_difficile <- raw_data_membre_concentration_difficile%>%
+  mutate(
+    concentration_dif_garcons_moins5 = if_else(genre_concentration == "homme" & (age_concentration < 5), TRUE, FALSE),
+    concentration_dif_filles_moins5 = if_else(genre_concentration == "homme" & (age_concentration < 5), TRUE, FALSE),
+    concentration_dif_garcons_5_18 = if_else(genre_concentration == "homme" & (age_concentration >= 5 & age_concentration <18), TRUE, FALSE),
+    concentration_dif_filles_5_18 = if_else(genre_concentration == "femme" & (age_concentration >= 5 & age_concentration <18), TRUE, FALSE),
+    concentration_dif_hommes_18_64 = if_else(genre_concentration == "homme" & (age_concentration >= 18 & age_concentration <65), TRUE, FALSE),
+    concentration_dif_femmes_18_64 = if_else(genre_concentration == "femme" & (age_concentration >= 18 & age_concentration <65), TRUE, FALSE),
+    concentration_dif_hommes_65plus = if_else(genre_concentration == "homme" & (age_concentration >= 65), TRUE, FALSE),
+    concentration_dif_femmes_65plus = if_else(genre_concentration == "femme" & (age_concentration >= 65), TRUE, FALSE)
+  )
+
+
+raw_data <- affect_loop_to_parent(loop = as.data.frame(raw_data_membre_concentration_difficile), parent = as.data.frame(raw_data), aggregate.function = sum,
+                                      variable.to.add = c(
+                                        sum_concentration_dif_garcons_moins5 = "concentration_dif_garcons_moins5",
+                                        sum_concentration_dif_filles_moins5 = "concentration_dif_filles_moins5",
+                                        sum_concentration_dif_garcons_5_18 = "concentration_dif_garcons_5_18",
+                                        sum_concentration_dif_filles_5_18 = "concentration_dif_filles_5_18",
+                                        sum_concentration_dif_hommes_18_64 = "concentration_dif_hommes_18_64",
+                                        sum_concentration_dif_femmes_18_64 = "concentration_dif_femmes_18_64",
+                                        sum_concentration_dif_hommes_65plus = "concentration_dif_hommes_65plus",
+                                        sum_concentration_dif_femmes_65plus = "concentration_dif_femmes_65plus"
+                                      ),
+                                      uuid.name.loop = "parent_index", uuid.name.parent = "index")
+
+
+raw_data_membre_membre_vision_diffcile <- raw_data_membre_membre_vision_diffcile%>%
+  mutate(
+    vision_dif_garcons_moins5 = if_else(genre_vision == "homme" & (age_vision < 5), TRUE, FALSE),
+    vision_dif_filles_moins5 = if_else(genre_vision == "homme" & (age_vision < 5), TRUE, FALSE),
+    vision_dif_garcons_5_18 = if_else(genre_vision == "homme" & (age_vision >= 5 & age_vision <18), TRUE, FALSE),
+    vision_dif_filles_5_18 = if_else(genre_vision == "femme" & (age_vision >= 5 & age_vision <18), TRUE, FALSE),
+    vision_dif_hommes_18_64 = if_else(genre_vision == "homme" & (age_vision >= 18 & age_vision <65), TRUE, FALSE),
+    vision_dif_femmes_18_64 = if_else(genre_vision == "femme" & (age_vision >= 18 & age_vision <65), TRUE, FALSE),
+    vision_dif_hommes_65plus = if_else(genre_vision == "homme" & (age_vision >= 65), TRUE, FALSE),
+    vision_dif_femmes_65plus = if_else(genre_vision == "femme" & (age_vision >= 65), TRUE, FALSE)
+  )
+
+
+raw_data <- affect_loop_to_parent(loop = as.data.frame(raw_data_membre_membre_vision_diffcile), parent = as.data.frame(raw_data), aggregate.function = sum,
+                                      variable.to.add = c(
+                                        sum_vision_dif_garcons_moins5 = "vision_dif_garcons_moins5",
+                                        sum_vision_dif_filles_moins5 = "vision_dif_filles_moins5",
+                                        sum_vision_dif_garcons_5_18 = "vision_dif_garcons_5_18",
+                                        sum_vision_dif_filles_5_18 = "vision_dif_filles_5_18",
+                                        sum_vision_dif_hommes_18_64 = "vision_dif_hommes_18_64",
+                                        sum_vision_dif_femmes_18_64 = "vision_dif_femmes_18_64",
+                                        sum_vision_dif_hommes_65plus = "vision_dif_hommes_65plus",
+                                        sum_vision_dif_femmes_65plus = "vision_dif_femmes_65plus"
+                                      ),
+                                      uuid.name.loop = "parent_index", uuid.name.parent = "index")
+
+
+raw_data_membre_membre_entendre_difficile <- raw_data_membre_membre_entendre_difficile%>%
+  mutate(
+    entendre_dif_garcons_moins5 = if_else(genre_entendre == "homme" & (age_entendre < 5), TRUE, FALSE),
+    entendre_dif_filles_moins5 = if_else(genre_entendre == "homme" & (age_entendre < 5), TRUE, FALSE),
+    entendre_dif_garcons_5_18 = if_else(genre_entendre == "homme" & (age_entendre >= 5 & age_entendre <18), TRUE, FALSE),
+    entendre_dif_filles_5_18 = if_else(genre_entendre == "femme" & (age_entendre >= 5 & age_entendre <18), TRUE, FALSE),
+    entendre_dif_hommes_18_64 = if_else(genre_entendre == "homme" & (age_entendre >= 18 & age_entendre <65), TRUE, FALSE),
+    entendre_dif_femmes_18_64 = if_else(genre_entendre == "femme" & (age_entendre >= 18 & age_entendre <65), TRUE, FALSE),
+    entendre_dif_hommes_65plus = if_else(genre_entendre == "homme" & (age_entendre >= 65), TRUE, FALSE),
+    entendre_dif_femmes_65plus = if_else(genre_entendre == "femme" & (age_entendre >= 65), TRUE, FALSE)
+  )
+
+
+raw_data <- affect_loop_to_parent(loop = as.data.frame(raw_data_membre_membre_entendre_difficile), parent = as.data.frame(raw_data), aggregate.function = sum,
+                                      variable.to.add = c(
+                                        sum_entendre_dif_garcons_moins5 = "entendre_dif_garcons_moins5",
+                                        sum_entendre_dif_filles_moins5 = "entendre_dif_filles_moins5",
+                                        sum_entendre_dif_garcons_5_18 = "entendre_dif_garcons_5_18",
+                                        sum_entendre_dif_filles_5_18 = "entendre_dif_filles_5_18",
+                                        sum_entendre_dif_hommes_18_64 = "entendre_dif_hommes_18_64",
+                                        sum_entendre_dif_femmes_18_64 = "entendre_dif_femmes_18_64",
+                                        sum_entendre_dif_hommes_65plus = "entendre_dif_hommes_65plus",
+                                        sum_entendre_dif_femmes_65plus = "entendre_dif_femmes_65plus"
+                                      ),
+                                      uuid.name.loop = "parent_index", uuid.name.parent = "index")
+
+raw_data_membre_repeat_nbre_pers_decedes <- raw_data_membre_repeat_nbre_pers_decedes%>%
+  mutate(
+    deces_dif_garcons_moins5 = if_else(sexe_deces == "homme" & (age_deces < 5), TRUE, FALSE),
+    deces_dif_filles_moins5 = if_else(sexe_deces == "homme" & (age_deces < 5), TRUE, FALSE),
+    deces_dif_garcons_5_18 = if_else(sexe_deces == "homme" & (age_deces >= 5 & age_deces <18), TRUE, FALSE),
+    deces_dif_filles_5_18 = if_else(sexe_deces == "femme" & (age_deces >= 5 & age_deces <18), TRUE, FALSE),
+    deces_dif_hommes_18_64 = if_else(sexe_deces == "homme" & (age_deces >= 18 & age_deces <65), TRUE, FALSE),
+    deces_dif_femmes_18_64 = if_else(sexe_deces == "femme" & (age_deces >= 18 & age_deces <65), TRUE, FALSE),
+    deces_dif_hommes_65plus = if_else(sexe_deces == "homme" & (age_deces >= 65), TRUE, FALSE),
+    deces_dif_femmes_65plus = if_else(sexe_deces == "femme" & (age_deces >= 65), TRUE, FALSE)
+  )%>%
+  levels_asBinaryColumns("raison_deces")
+
+raw_data_membre_difficulte_communication <- raw_data_membre_difficulte_communication%>%
+  mutate(
+    communication_dif_garcons_moins5 = if_else(genre_difficulte_communication == "homme" & (age_difficulte_communication < 5), TRUE, FALSE),
+    communication_dif_filles_moins5 = if_else(genre_difficulte_communication == "homme" & (age_difficulte_communication < 5), TRUE, FALSE),
+    communication_dif_garcons_5_18 = if_else(genre_difficulte_communication == "homme" & (age_difficulte_communication >= 5 & age_difficulte_communication <18), TRUE, FALSE),
+    communication_dif_filles_5_18 = if_else(genre_difficulte_communication == "femme" & (age_difficulte_communication >= 5 & age_difficulte_communication <18), TRUE, FALSE),
+    communication_dif_hommes_18_64 = if_else(genre_difficulte_communication == "homme" & (age_difficulte_communication >= 18 & age_difficulte_communication <65), TRUE, FALSE),
+    communication_dif_femmes_18_64 = if_else(genre_difficulte_communication == "femme" & (age_difficulte_communication >= 18 & age_difficulte_communication <65), TRUE, FALSE),
+    communication_dif_hommes_65plus = if_else(genre_difficulte_communication == "homme" & (age_difficulte_communication >= 65), TRUE, FALSE),
+    communication_dif_femmes_65plus = if_else(genre_difficulte_communication == "femme" & (age_difficulte_communication >= 65), TRUE, FALSE)
+  )
+
+
+raw_data <- affect_loop_to_parent(loop = as.data.frame(raw_data_membre_difficulte_communication), parent = as.data.frame(raw_data), aggregate.function = sum,
+                                  variable.to.add = c(
+                                    sum_communication_dif_garcons_moins5 = "communication_dif_garcons_moins5",
+                                    sum_communication_dif_filles_moins5 = "communication_dif_filles_moins5",
+                                    sum_communication_dif_garcons_5_18 = "communication_dif_garcons_5_18",
+                                    sum_communication_dif_filles_5_18 = "communication_dif_filles_5_18",
+                                    sum_communication_dif_hommes_18_64 = "communication_dif_hommes_18_64",
+                                    sum_communication_dif_femmes_18_64 = "communication_dif_femmes_18_64",
+                                    sum_communication_dif_hommes_65plus = "communication_dif_hommes_65plus",
+                                    sum_communication_dif_femmes_65plus = "communication_dif_femmes_65plus"
+                                  ),
+                                  uuid.name.loop = "parent_index", uuid.name.parent = "index")
+
+
+raw_data <- affect_loop_to_parent(loop = as.data.frame(raw_data_membre_repeat_nbre_pers_decedes), parent = as.data.frame(raw_data), aggregate.function = sum,
+                                      variable.to.add = c(
+                                        sum_deces_dif_garcons_moins5 = "deces_dif_garcons_moins5",
+                                        sum_deces_dif_filles_moins5 = "deces_dif_filles_moins5",
+                                        sum_deces_dif_garcons_5_18 = "deces_dif_garcons_5_18",
+                                        sum_deces_dif_filles_5_18 = "deces_dif_filles_5_18",
+                                        sum_deces_dif_hommes_18_64 = "deces_dif_hommes_18_64",
+                                        sum_deces_dif_femmes_18_64 = "deces_dif_femmes_18_64",
+                                        sum_deces_dif_hommes_65plus = "deces_dif_hommes_65plus",
+                                        sum_deces_dif_femmes_65plus = "deces_dif_femmes_65plus",
+                                        sum_raison_deces_diarrhee = "raison_deces.diarrhee",
+                                        sum_raison_deces_autre_maladie = "raison_deces.autre_maladie",
+                                        sum_raison_deces_morsure = "raison_deces.morsure",
+                                        sum_raison_deces_deces_natu = "raison_deces.deces_natu",
+                                        sum_raison_deces_faim = "raison_deces.faim",
+                                        sum_raison_deces_accident_travail = "raison_deces.accident_travail",
+                                        sum_raison_deces_problemes_respi = "raison_deces.problemes_respi",
+                                        sum_raison_deces_autre = "raison_deces.autre",
+                                        sum_raison_deces_catastrophe_natu = "raison_deces.catastrophe_natu",
+                                        sum_raison_deces_accident_conflit = "raison_deces.accident_conflit",
+                                        sum_raison_deces_en_couche = "raison_deces.en_couche",
+                                        sum_raison_deces_accident_route = "raison_deces.accident_route"
+                                      ),
+                                      uuid.name.loop = "parent_index", uuid.name.parent = "index")
+
+
+### removing deleted from loops
+
+list_remove_data <- lapply(loop_frames, remove_delParents_fromLoop, raw_data, uuid.name.parent = "uuid", uuid.name.loop = "submission_uuid")
+
+names(list_remove_data) <- loop_frames_names
+
+
+invisible(create_objects_from_df(list_remove_data))
 
 
 # WEIGHTING #
 
-coords <- c("gpsmenage_longitude", "gpsmenage_latitude")
-
-raw_data_ClusterSmpl <- raw_data%>%
-  rename("gpsmenage_latitude" = "_gpsmenage_latitude", "gpsmenage_longitude"= "_gpsmenage_longitude")%>%
-  mutate_at(vars(all_of(coords)), as.numeric)%>%
-  filter(!is.na(gpsmenage_latitude) & !is.na(gpsmenage_longitude), modalite == "direct" & status == "host")%>%
-  sf::st_as_sf(coords = coords, crs = 4326)%>%
-  st_set_crs("EPSG:4326")
-
-## Finding closest cluster to all direct host interviews
-
-all_closest_cluster <- butteR::closest_distance_rtree(raw_data_ClusterSmpl, cluster_sf)
-
-closest_cluster <- all_closest_cluster%>%
-  filter(dist_m <=1500)%>%
-  select(uuid, id_sampl)
-
+# coords <- c("gpsmenage_longitude", "gpsmenage_latitude")
+# 
+# raw_data_ClusterSmpl <- raw_data%>%
+#   rename("gpsmenage_latitude" = "_gpsmenage_latitude", "gpsmenage_longitude"= "_gpsmenage_longitude")%>%
+#   mutate_at(vars(all_of(coords)), as.numeric)%>%
+#   filter(!is.na(gpsmenage_latitude) & !is.na(gpsmenage_longitude), modalite == "direct" & status == "host")%>%
+#   sf::st_as_sf(coords = coords, crs = 4326)%>%
+#   st_set_crs("EPSG:4326")
+# 
+# ## Finding closest cluster to all direct host interviews
+# 
+# all_closest_cluster <- butteR::closest_distance_rtree(raw_data_ClusterSmpl, cluster_sf)
+# 
+# closest_cluster <- all_closest_cluster%>%
+#   filter(dist_m <=1500)%>%
+#   select(uuid, id_sampl)
+# 
+# raw_data <- raw_data%>%
+#   left_join(closest_cluster, by = "uuid")%>%
+#   mutate(pcode = case_when(id_sampl == "id_45382" ~ NA_character_,
+#                            id_sampl == "id_45749" ~ NA_character_,
+#                            TRUE ~ pcode
+#   ))
+#   
+# 
 raw_data <- raw_data%>%
-  left_join(closest_cluster, by = "uuid")%>%
-  mutate(pcode = case_when(id_sampl == "id_45382" ~ NA_character_,
-                           id_sampl == "id_45749" ~ NA_character_,
-                           TRUE ~ pcode
-  ))
-  
-
-raw_data <- raw_data%>%
-  mutate(admin1Pcode = gsub(".{8}$", "", pcode),
-         admin2Pcode = gsub(".{6}$", "", pcode),
-         admin3Pcode = gsub(".{4}$", "", pcode),
+  mutate(admin1Pcode = gsub(".{4}$", "", admin3Pcod),
+         admin2Pcode = gsub(".{2}$", "", admin3Pcod),
+         admin3Pcode = admin3Pcod,
          sampling_id = paste(admin2Pcode, status, sep = "_")
-  )
+  )%>%
+  select(-admin3Pcod)
 
+### Adding useful columns for calculations
+raw_data <- raw_data%>%
+  rowwise()%>%
+  mutate(
+      taille_abri = case_when(taille_abri == "NSP" ~ NA_integer_, TRUE ~ as.integer(taille_abri)),
+      personne_m2 = taille_abri/taille_menage,
+      fcs2 = sum(jr_consom_cereale*2 + jr_consom_noix*3 + jr_consom_lait*4 + jr_consom_viande*4 + jr_consom_legume*1 + jr_consom_fruit*1 + jr_consom_huile*0.5+
+                   jr_consom_sucre*0.5 + jr_consom_epice*0, na.rm = T),
+      fcs2_thresholds = case_when(fcs2>=0 & fcs2 <=21 ~ "pauvre",
+                                  fcs2 > 21 & fcs2 <= 35 ~ "limite",
+                                  fcs2 > 35 ~ "acceptable",
+                                  TRUE ~ NA_character_),
+      rcsi_score = sum(jr_moins_prefere*1, jr_emprunt_nourriture*2, jr_diminu_quantite*1, jr_rest_consommation*3, jr_nbr_repas*1, na.rm = T),
+      rcsi_thresholds = case_when(
+        rcsi_score == 0 ~ "no_coping",
+        rcsi_score > 0 & rcsi_score <= 7 ~ "low",
+        rcsi_score > 7 & rcsi_score <= 15 ~ "medium",
+        rcsi_score > 15 ~ "high",
+        TRUE ~ NA_character_
+      ),
+      nbr_aucun_aliment_new = hhs_recoding(aucun_aliment, nbr_aucun_aliment),
+      nbr_dormir_affame_new = hhs_recoding(dormir_affame, nbr_dormir_affame),
+      nbr_pas_assez_nourriture_new = hhs_recoding(pas_assez_nourriture, nbr_pas_assez_nourriture),
+      hhs_score = sum(nbr_aucun_aliment_new, nbr_dormir_affame_new, nbr_pas_assez_nourriture_new, na.rm = T),
+      hhs_thresholds = case_when(
+        hhs_score <= 1 ~ "peu_pasFaim",
+        hhs_score >1 & hhs_score <= 3 ~ "faim_moderee",
+        hhs_score > 3 & hhs_score <= 6 ~ "faim_severe",
+        TRUE ~ NA_character_
+      ),
+      vente_actif_recoded = lcs_recoding(vente_actif),
+      vente_actif_prod_recoded = lcs_recoding(vente_actif_prod),
+      reduction_depense_recoded = lcs_recoding(reduction_depense),
+      epargne_recoded = lcs_recoding(epargne),
+      emprunt_nourritur_recoded = lcs_recoding(emprunt_nourritur),
+      enfant_ecole_recoded = lcs_recoding(enfant_ecole),
+      vente_maison_recoded = lcs_recoding(vente_maison),
+      activite_risque_recoded = lcs_recoding(activite_risque),
+      mendie_recoded = lcs_recoding(mendie),
+      vente_animal_recoded = lcs_recoding(vente_animal),
+      conso_semence_recoded = lcs_recoding(conso_semence),
+      lcs_urgence = if_else(sum(vente_maison_recoded, mendie_recoded, activite_risque_recoded, na.rm = T ) >= 1, 1,0),
+      lcs_crise = if_else(sum(vente_actif_prod_recoded,reduction_depense_recoded,  enfant_ecole_recoded, conso_semence_recoded, na.rm = T) >= 1, 1, 0),
+      lcs_stress = if_else(sum(vente_actif_recoded, epargne_recoded, emprunt_nourritur_recoded, vente_animal_recoded, na.rm = T) >= 1, 1,0),
+      lcs_minimal = if_else((lcs_urgence + lcs_crise + lcs_stress) == 0, 1, 0),
+      lcs_total = if_else(lcs_urgence ==1, "urgence", if_else(lcs_crise == 1, "crise", if_else( lcs_stress ==1, "stress", "minimal"))),
+      auMoinsUneWG = if_else(sum(nombre_soins_difficile, nombre_difficulte_vision, nombre_difficulte_entendre,
+                                 nombre_difficulte_marche, nombre_difficulte_concentration, nombre_difficulte_communication, na.rm = T)>0,1,0),
+      auMoinsUnePersonneDortDehors = if_else(dorme_exterieur >0, 1,0),
+      auMoinsUnEnfantMalade = if_else(malade_5ans>0,1,0),
+      typologie_source_eau = case_when(source_eau %in% c("pmh","poste_auto", "puit_protege","source_amenage","borne_fontaine",
+                                                         "eau _robi_conce","eau _bout","eau _camion") ~ "amelioree",
+                                       source_eau %in% c("puit_tradi", "non_amenage") ~ "non_amelioree",
+                                       source_eau %in% c("course_eau", "eau_pluie") ~ "surface",
+                                       TRUE ~ NA_character_
+      )
+  )
 
 ### Weighting cluster sample
 
+
+# raw_data_clusters_tab <- raw_data%>%
+#   group_by(id_sampl)%>%
+#   summarise(effictive_interviews = n(), .groups = "drop")
+# 
+# clusterSample_check <- clusterSample%>%
+#   left_join(raw_data_clusters_tab, by = "id_sampl")%>%
+#   mutate(diff_sampl_reality = survey_buffer - effictive_interviews)%>%
+#   select(id_sampl, strata_id, psu_id, population, ADM1_FR, ADM2_FR, ADM3_FR, ADM3_PCODE, survey_buffer, effictive_interviews, diff_sampl_reality)
+#   ### Little difference between sample and effective 
+# 
+# 
+# # 
+# clusterSample_adm2 <- clusterSample%>%
+#   filter(ADM1_PCODE %in% c("BF46", "BF49", "BF52", "BF54", "BF56"))
+# 
+# 
+# 
+# cluster_wght_representative <- map_to_weighting(sampling.frame = clusterSample, 
+#                                               data = raw_data_representative,
+#                                               sampling.frame.population.column = "population",
+#                                               sampling.frame.stratum.column = "id_sampl",
+#                                               data.stratum.column = "id_sampl"
+# )
+
 raw_data$sampling_strat <- paste(raw_data$status, raw_data$modalite, sep = "_")
 
-clusterSample_adm2 <- clusterSample%>%
-  filter(ADM1_PCODE %in% c("BF46", "BF49", "BF52", "BF54", "BF56"))
-
-
 raw_data_representative <- raw_data%>%
-  filter(sampling_strat == "host_direct", id_sampl %in% clusterSample_adm2$id_sampl, sampling_id != "BF5002_host")
-
-cluster_wght_representative <- map_to_weighting(sampling.frame = clusterSample, 
-                                              data = raw_data_representative,
-                                              sampling.frame.population.column = "population",
-                                              sampling.frame.stratum.column = "id_sampl",
-                                              data.stratum.column = "id_sampl"
-                                              )
+  filter(admin1Pcode %in% c("BF46", "BF49", "BF52", "BF54", "BF56"),
+         sampling_id %in% samplingFrame_adm2$strata,
+         sampling_strat == "host_direct",
+         sampling_id != "BF5002_host")
 
 admin2_repesentative_wght <- map_to_weighting(sampling.frame = samplingFrame_adm2, 
                                               data = raw_data_representative,
                                               sampling.frame.population.column = "Population",
                                               sampling.frame.stratum.column = "strata",
-                                              data.stratum.column = "sampling_id"
-)
+                                              data.stratum.column = "sampling_id")
 
-combined_weights_representative <- combine_weighting_functions(cluster_wght_representative, admin2_repesentative_wght)
+# combined_weights_representative <- combine_weighting_functions(cluster_wght_representative, admin2_repesentative_wght)
 
-raw_data_representative$weights <- combined_weights_representative(raw_data_representative)
+# raw_data_representative$weights <- combined_weights_representative(raw_data_representative)
 
-write.csv(raw_data_representative, "outputs/datasets/BFA_MSNA_2020_dataset_cleanedWeighted_representativeData.csv")
+raw_data_representative$weights_sampling <- admin2_repesentative_wght(raw_data_representative)
+
 
 
 ### Weighting for quota admin 2 only
@@ -213,61 +735,91 @@ admin2_affected_wght <- map_to_weighting(sampling.frame = samplingFrame_adm2,
                                                     data.stratum.column = "sampling_id"
                                                     )
 
-raw_data_adm2_quota$weights <- admin2_affected_wght(raw_data_adm2_quota)
+raw_data_adm2_quota$weights_sampling <- admin2_affected_wght(raw_data_adm2_quota)
 
-write.csv(raw_data_adm2_quota, "outputs/datasets/BFA_MSNA_2020_dataset_cleanedWeighted_quota_ADM2affected.csv")
 
 
 ### Combining cluster weights with admin2 quota weights for 5 most affected regions
 
 raw_data_adm2_affected_all <- rbind(raw_data_representative, raw_data_adm2_quota)
 
-write.csv(raw_data_adm2_affected_all, "outputs/datasets/BFA_MSNA_2020_dataset_cleanedWeighted_ADM2affected.csv")
+raw_data_adm2 <- raw_data%>%
+  filter(admin1Pcode %in% c("BF46", "BF49", "BF52", "BF54", "BF56"),
+         sampling_id %in% samplingFrame_adm2$strata
+  )
+
+admin2_wght <- map_to_weighting(sampling.frame = samplingFrame_adm2, 
+                                         data = raw_data_adm2,
+                                         sampling.frame.population.column = "Population",
+                                         sampling.frame.stratum.column = "strata",
+                                         data.stratum.column = "sampling_id"
+)
+
 
 ### Weighting for admin1 ###
 
 #### Weighting admin1 cluster ####
 
-raw_data_ClusterSmpl_adm1 <- raw_data%>%
-  filter(sampling_strat == "host_direct", id_sampl %in% clusterSample$id_sampl,
-         !sampling_id %in%  c("NA_host", "NA_pdi"))
+# raw_data_ClusterSmpl_adm1 <- raw_data%>%
+#   filter(sampling_strat == "host_direct", id_sampl %in% clusterSample$id_sampl,
+#          !sampling_id %in%  c("NA_host", "NA_pdi"))
+# 
+# cluster_wght_admin1 <- map_to_weighting(sampling.frame = clusterSample,
+#                                         data = raw_data_ClusterSmpl_adm1,
+#                                         sampling.frame.population.column = "population",
+#                                         sampling.frame.stratum.column = "id_sampl",
+#                                         data.stratum.column = "id_sampl"
+# )
 
-cluster_wght_admin1 <- map_to_weighting(sampling.frame = clusterSample,
-                                        data = raw_data_ClusterSmpl_adm1,
-                                        sampling.frame.population.column = "population",
-                                        sampling.frame.stratum.column = "id_sampl",
-                                        data.stratum.column = "id_sampl"
-)
+# sf_cluster_wght_admin1 <- map_to_weighting(sampling.frame = samplingFrame, 
+#                                            data = raw_data_ClusterSmpl_adm1,
+#                                            sampling.frame.population.column = "Population",
+#                                            sampling.frame.stratum.column = "strata",
+#                                            data.stratum.column = "sampling_id"
+# )
 
-sf_cluster_wght_admin1 <- map_to_weighting(sampling.frame = samplingFrame, 
-                                           data = raw_data_ClusterSmpl_adm1,
-                                           sampling.frame.population.column = "Population",
-                                           sampling.frame.stratum.column = "strata",
-                                           data.stratum.column = "sampling_id"
-)
+# combined_weights_adm1_cluster <- combine_weighting_functions(cluster_wght_admin1, sf_cluster_wght_admin1)
 
-combined_weights_adm1_cluster <- combine_weighting_functions(cluster_wght_admin1, sf_cluster_wght_admin1)
+# raw_data_ClusterSmpl_adm1$weights <- combined_weights_adm1_cluster(raw_data_ClusterSmpl_adm1)
 
-raw_data_ClusterSmpl_adm1$weights <- combined_weights_adm1_cluster(raw_data_ClusterSmpl_adm1)
 
 #### Weighting admin1 quotas ####
 
-raw_data_quota_adm1 <- raw_data%>%
-  filter(sampling_strat != "host_direct", sampling_id %in% samplingFrame$strata,
+raw_data_adm1 <- raw_data%>%
+  filter(sampling_id %in% samplingFrame$strata,
          !sampling_id %in%  c("NA_host", "NA_pdi"))
 
 sf_wght_admin1 <- map_to_weighting(sampling.frame = samplingFrame, 
-                                              data = raw_data_quota_adm1,
+                                              data = raw_data_adm1,
                                               sampling.frame.population.column = "Population",
                                               sampling.frame.stratum.column = "strata",
-                                              data.stratum.column = "sampling_id"
-)
+                                              data.stratum.column = "sampling_id")
 
-raw_data_quota_adm1$weights <- sf_wght_admin1(raw_data_quota_adm1)
+raw_data_adm1$weights_sampling <- sf_wght_admin1(raw_data_adm1)
 
-### Combining cluster weights with admin1 quota weights
 
-raw_data_adm1_all <- rbind(raw_data_ClusterSmpl_adm1, raw_data_quota_adm1)
+### Removing from main data frames surveys with no sampling ID attriuable
 
-write.csv(raw_data_adm1_all, "outputs/datasets/BFA_MSNA_2020_dataset_cleanedWeighted_ADM1.csv")
+not_in_raw_data_adm1 <- raw_data[!raw_data$uuid %in% raw_data_adm1$uuid, ]
+
+if(nrow(not_in_raw_data_adm1)>0){
+cleaning_log_change <- cleaning_log_change%>%
+  add_row(Auteur = "Elliott Messeiller", uuid = not_in_raw_data_adm1$uuid, Date = Sys.Date(), Enqueteur = not_in_raw_data_adm1$enumerator_id, Question = "Localite",
+          `Probl.me` = "Localité introuvable dans base de données des localités COD OCHA. Impossible d'attribuer au bon PSU.",
+          `Anciennes.valeurs` = not_in_raw_data_adm1$uuid, Action = "Enquêtes supprimées")
+}
+
+### Writing files
+
+write_csv(cleaning_log_change, "outputs/logs/cleaning_log_missingPcodes.csv")
+write_csv(raw_data_adm1, "outputs/datasets/BFA_MSNA_2020_dataset_cleanedWeighted_ADM1.csv")
+write_csv(raw_data_representative, "outputs/datasets/BFA_MSNA_2020_dataset_cleanedWeighted_representativeData.csv")
+write_csv(raw_data_adm2_quota, "outputs/datasets/BFA_MSNA_2020_dataset_cleanedWeighted_quota_ADM2affected.csv")
+write_csv(raw_data_adm2_affected_all, "outputs/datasets/BFA_MSNA_2020_dataset_cleanedWeighted_ADM2_all.csv")
+
+loopsFiles.names <- paste0("./outputs/datasets/loops/BFA_MSNA_2020_dataset_cleanedWeighted_",unlist(loop_frames_names), ".csv")
+
+for(i in seq_along(list_remove_data)){
+  write_csv(list_remove_data[[i]], loopsFiles.names[[i]])
+}
 
