@@ -587,7 +587,7 @@ names(summary_stats_admin_1_grp_final)[1:5] <- c("Question de recherche", "Sous-
 
 
 
-write_csv(summary_stats_admin_1_grp_final, "outputs/tables/summary_stats_admin_1_grp_FreshOutOfTheOven.csv")
+write_csv(summary_stats_admin_1_grp_final, "outputs/tables/summary_stats_admin_1_grp.csv")
 write_csv(summary_stats_admin_2_grp_final_grp, "outputs/tables/summary_stats_admin_2_grp.csv")
 
 
