@@ -143,9 +143,11 @@ form_dictionnary <- function(data, survey, choices, analysisplanTemplate =NULL){
       type == "begin group" ~ "begin_group",
       TRUE ~ type
     ))%>%
-    separate(type, into = c("qtype", "list_name"), sep = " ", remove = FALSE)
+    separate(type, into = c("qtype", "list_name"), sep = " ", remove = FALSE)%>%
+    mutate(list_name = case_when(is.na(list_name)~ paste0("liste_",name),
+                                 TRUE ~ list_name))
   
-  dico <- full_join(survey_try, choices, by = "list_name")%>%
+  dico <- left_join(survey_try, choices, by = "list_name")%>%
     distinct()%>%
     rename(name_question = name.x, label_question = label.x, name_choice = name.y, label_choice = label.y)%>%
     mutate(question_choice = case_when(is.na(name_choice) ~ name_question,
@@ -158,7 +160,8 @@ form_dictionnary <- function(data, survey, choices, analysisplanTemplate =NULL){
     dico <- dico%>%
       filter(name_question %in% analysisplanTemplate$dependent.variable)%>%
       left_join(analysisplanTemplate, by = c("name_question" = "dependent.variable"))%>%
-      select(research.question_label, sub.research.question_label, type, list_name, name_question, label_question, name_choice, label_choice, question_choice, label_indicator, dependent.variable.type)
+      select(research.question_label, sub.research.question_label, type, list_name, name_question, label_question, name_choice, label_choice, question_choice, label_indicator, dependent.variable.type)%>%
+      distinct()
   }
   
   return(dico)

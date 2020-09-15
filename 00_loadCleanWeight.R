@@ -15,11 +15,11 @@ loadInstall_package(package_list)
 # Loading necessary data
 ## Loading raw_data
 
-raw_data_csv <- "data/bfa2002_msna_2020_final_cleaning_20200902.csv"
+raw_data_csv <- "data/bfa2002_msna_2020_final_cleaning_20200913_PH_MF.csv"
 
-raw_data_info_menage_csv <- "data/bfa2002_msna_2020_final_cleaning_20200902_info_menage.csv"
+raw_data_info_menage_csv <- "data/bfa2002_msna_2020_final_cleaning_20200913_PH_MF_info_menage.csv"
 
-raw_data_excel <- "data/bfa2002_msna_2020_final_cleaning_20200902.xlsx"
+raw_data_excel <- "data/bfa2002_msna_2020_final_cleaning_20200913_PH_MF.xlsx"
 
 
 #Loading data and cleaning data and questionnaire
@@ -281,6 +281,21 @@ raw_data_info_menage <- raw_data_info_menage%>%
          agegrp_65plus_femmes = if_else(age_hh >= 65 &sexe_hh == "femme",1,0),
          agegrp_65plus_hommes = if_else(age_hh >= 65 &sexe_hh == "homme",1,0)
          )
+
+
+raw_data_info_menage <- koboloops::add_parent_to_loop(loop = as.data.frame(raw_data_info_menage), parent = as.data.frame(raw_data), variables.to.keep = c("barriere_edu", "status"), uuid.name.loop = "parent_index", uuid.name.parent = "index")%>%
+  mutate(enfants_descolarise_insecurite = case_when(
+    statut_educatif == "non" & barriere_edu %in% c("insecurite_ecole", "insecurite_trajet","groupes_armes_ecole", "non_fonctionnelle") ~ 1,
+    statut_educatif == "oui" ~ 0,
+    TRUE ~  0
+    ),
+  score_edu = case_when(statut_educatif == "non" & barriere_edu %in% c("insecurite_ecole", "insecurite_trajet","groupes_armes_ecole", "non_fonctionnelle") ~ "4",
+                        statut_educatif == "non" ~ "3",
+                        statut_educatif == "oui" & status == "pdi" ~ "3",
+                        statut_educatif == "oui" & status != "pdi" ~ "1",
+                        TRUE ~ NA_character_
+    )
+  )
          
 
 raw_data <- affect_loop_to_parent(loop = as.data.frame(raw_data_info_menage), parent = as.data.frame(raw_data), aggregate.function = sum,
@@ -613,9 +628,31 @@ raw_data <- raw_data%>%
   select(-admin3Pcod)
 
 ### Adding useful columns for calculations
+add_to_changeLog_ic_age <- raw_data%>%
+  select(uuid, age_chef_menage, ic_age)%>%
+  filter(is.na(age_chef_menage))
+
+cleaning_log_change <- cleaning_log_change%>%
+  add_row(Auteur = "Elliott Messeiller", Index = NA, uuid = add_to_changeLog_ic_age$uuid, Date = Sys.Date(), Base = NA, Enqueteur = NA, Question = "Age chef menage", "Probl.me" = "Manque âge du chef de ménage quand il est le répondant",
+          Anciennes.valeurs = NA, Nouvelles.valeurs = add_to_changeLog_ic_age$ic_age)
+
+add_to_changeLog_ic_genre <- raw_data%>%
+  select(uuid, genre_chef_menage, ic_genre)%>%
+  filter(is.na(genre_chef_menage))
+
+cleaning_log_change <- cleaning_log_change%>%
+  mutate(across(everything(), as.character))%>%
+  add_row(Auteur = "Elliott Messeiller", Index = NA, uuid = add_to_changeLog_ic_genre$uuid, Date = as.character(Sys.Date()), Base = NA, Enqueteur = NA,
+          Question = "Genre du chef menage", "Probl.me" = "Manque genre du chef de ménage quand il est le répondant",
+          Anciennes.valeurs = NA, Nouvelles.valeurs = add_to_changeLog_ic_genre$ic_genre)
+
 raw_data <- raw_data%>%
   rowwise()%>%
   mutate(
+      age_chef_menage = case_when( chef_menage == "oui" && is.na(age_chef_menage) ~ ic_age,
+                                  TRUE ~ age_chef_menage),
+      genre_chef_menage = case_when(chef_menage == "oui" && is.na(genre_chef_menage) ~ ic_genre,
+                                    TRUE ~ ic_genre),
       taille_abri = case_when(taille_abri == "NSP" ~ NA_integer_, TRUE ~ as.integer(taille_abri)),
       personne_m2 = taille_abri/taille_menage,
       fcs2 = sum(jr_consom_cereale*2 + jr_consom_noix*3 + jr_consom_lait*4 + jr_consom_viande*4 + jr_consom_legume*1 + jr_consom_fruit*1 + jr_consom_huile*0.5+
@@ -667,7 +704,29 @@ raw_data <- raw_data%>%
                                        source_eau %in% c("puit_tradi", "non_amenage") ~ "non_amelioree",
                                        source_eau %in% c("course_eau", "eau_pluie") ~ "surface",
                                        TRUE ~ NA_character_
-      )
+      ),
+      probleme_abri.inondation = case_when(str_detect(probleme_abri, "inondations") ~ TRUE,
+                                            !str_detect(probleme_abri, "inondations") ~ FALSE),
+      
+      total_3_5 = sum(total_3_5_femmes, total_3_5_hommes, na.rm = T),
+      total_6_12 = sum(total_6_12_femmes, total_6_12_hommes, na.rm = T),
+      total_13_17 = sum(total_13_17_femmes, total_13_17_hommes, na.rm = T),
+      
+      educ.3_5an_total = sum(total_educ_3_5an_garcon,total_educ_3_5an_fille, na.rm = T),
+      infor_educ.3_5an_total = sum(total_infor_educ_3_5an_garcon, total_infor_educ_3_5an_fille, na.rm = T),
+      non_for_educ.3_5an_total = sum(total_non_for_educ_3_5an_garcon, total_non_for_educ_3_5an_fille, na.rm = T),
+      aucune_educ.3_5an_total = sum(total_aucune_educ_3_5an_garcon, total_aucune_educ_3_5an_fille, na.rm = T),
+      
+      educ.6_12an_total = sum(total_educ_6_12an_garcon,total_educ_6_12an_fille, na.rm = T),
+      infor_educ.6_12an_total = sum(total_infor_educ_6_12an_garcon, total_infor_educ_6_12an_fille, na.rm = T),
+      non_for_educ.6_12an_total = sum(total_non_for_educ_6_12an_garcon, total_non_for_educ_6_12an_fille, na.rm = T),
+      aucune_educ.6_12an_total = sum(total_aucune_educ_6_12an_garcon, total_aucune_educ_6_12an_fille, na.rm = T),
+      
+      educ.13_17an_total = sum(total_educ_13_17an_garcon,total_educ_13_17an_fille, na.rm = T),
+      infor_educ.13_17an_total = sum(total_infor_educ_13_17an_garcon, total_infor_educ_13_17an_fille, na.rm = T),
+      non_for_educ.13_17an_total = sum(total_non_for_educ_13_17an_garcon, total_non_for_educ_13_17an_fille, na.rm = T),
+      aucune_educ.13_17an_total = sum(total_aucune_educ_13_17an_garcon, total_aucune_educ_13_17an_fille, na.rm = T)
+      
   )
 
 ### Weighting cluster sample

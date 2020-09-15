@@ -106,3 +106,24 @@ try.csv
 outputs/logs/cleaning_log_missingPcodes.csv
 outputs/logs/cleaning_log_missingPcodes.csv
 outputs/logs/cleaning_log_missingPcodes.csv
+data/bfa2002_msna_2020_final_cleaning_20200913_PH_MF.csv
+data/bfa2002_msna_2020_final_cleaning_20200913_PH_MF.xlsx
+data/bfa2002_msna_2020_final_cleaning_20200913_PH_MF_info_menage.csv
+data/old_datafiles/bfa2002_msna_2020_final_cleaning_20200902.csv
+data/old_datafiles/bfa2002_msna_2020_final_cleaning_20200902.xlsx
+data/old_datafiles/bfa2002_msna_2020_final_cleaning_20200902_info_menage.csv
+data/~$reach_bfa_msna_outil_V2.xlsx
+outputs/datasets/.~lock.BFA_MSNA_2020_dataset_cleanedWeighted_ADM1.csv#
+outputs/datasets/REACH_BFA_dataset_2002_MSNA_2020_Septembre2020.xlsx
+outputs/datasets/~$REACH_BFA_dataset_2002_MSNA_2020_Septembre2020.xlsx
+outputs/logs/cleaning_log_missingPcodes.csv
+outputs/tables/summary_stats_admin_1_grp_FreshOutOfTheOven.csv
+probleme_education.csv
+outputs/logs/cleaning_log_missingPcodes.csv
+xy.RData
+outputs/logs/cleaning_log_missingPcodes.csv
+outputs/logs/cleaning_log_missingPcodes.csv
+outputs/logs/cleaning_log_missingPcodes.csv
+outputs/logs/cleaning_log_missingPcodes.csv
+outputs/logs/cleaning_log_missingPcodes.csv
+01_Analysis (conflicted).R
