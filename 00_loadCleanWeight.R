@@ -26,11 +26,11 @@ raw_data_excel <- "data/bfa2002_msna_2020_final_cleaning_20200913_PH_MF.xlsx"
 raw_data <- read_csv(raw_data_csv)%>%
   select(-`personne m2`)%>%
   mutate(status = case_when(
-      group_pop %in% c("pdi") ~ "pdi",
-      group_pop %in% c("pop_local", "migrant_burkina", "rapatrie", "refugie", "migrant_int", "retourne") ~ "host",
-      TRUE ~ NA_character_
-      )
-    )%>%
+    group_pop %in% c("pdi") ~ "pdi",
+    group_pop %in% c("pop_local", "migrant_burkina", "rapatrie", "refugie", "migrant_int", "retourne") ~ "host",
+    TRUE ~ NA_character_
+  )
+  )%>%
   rename("risque_fem/enlevements" ="risque_fem/enlèvements",
          "risque_hom/enlevements" = "risque_hom/enlèvements",
          "risque_fille/enlevements" = "risque_fille/enlèvements",
@@ -68,41 +68,48 @@ raw_data_naissances <- read_excel(raw_data_excel, sheet = "naissances")%>%
   rename(submission_uuid = `_submission__uuid...2`,
          parent_index = `_parent_index...1`)
 
-raw_data_membre_marche_dificile <- read_excel(raw_data_excel, sheet = "membre_marche_dificile")%>%
-  rename(submission_uuid = `_submission__uuid...2`,
-         parent_index = `_parent_index...1`)
+raw_data_membre_marche_dificile <- read_excel(raw_data_excel, sheet = "membre_marche_dificile")
+# %>% 
+#   rename(submission_uuid = `_submission__uuid...2`,
+#          parent_index = `_parent_index...1`)
 
-raw_data_membre_soins_difficile <- read_excel(raw_data_excel, sheet = "soins_difficile")%>%
-  rename(submission_uuid = `_submission__uuid...2`,
-         parent_index = `_parent_index...1`)
+raw_data_membre_soins_difficile <- read_excel(raw_data_excel, sheet = "soins_difficile")
+# %>% 
+#   rename(submission_uuid = `_submission__uuid`,
+#          parent_index = `_parent_index`)
 
-raw_data_membre_concentration_difficile <- read_excel(raw_data_excel, sheet = "concentration_difficile")%>%
-  rename(submission_uuid = `_submission__uuid...2`,
-         parent_index = `_parent_index...1`)
+raw_data_membre_concentration_difficile <- read_excel(raw_data_excel, sheet = "concentration_difficile") 
+# %>%
+#   rename(submission_uuid = `_submission__uuid...2`,
+#          parent_index = `_parent_index...1`)
 
-raw_data_membre_membre_vision_diffcile <- read_excel(raw_data_excel, sheet = "membre_vision_diffcile")%>%
-  rename(submission_uuid = `_submission__uuid...13`,
-         parent_index = `_parent_index...1`)
+raw_data_membre_membre_vision_diffcile <- read_excel(raw_data_excel, sheet = "membre_vision_diffcile")
+# %>%
+#   rename(submission_uuid = `_submission__uuid...13`,
+#          parent_index = `_parent_index...1`)
 
-raw_data_membre_membre_entendre_difficile <- read_excel(raw_data_excel, sheet = "membre_entendre_difficile")%>%
-  rename(submission_uuid = `_submission__uuid...2`,
-         parent_index = `_parent_index...1`)
+raw_data_membre_membre_entendre_difficile <- read_excel(raw_data_excel, sheet = "membre_entendre_difficile")
+# %>%
+#   rename(submission_uuid = `_submission__uuid...2`,
+#          parent_index = `_parent_index...1`)
 
-raw_data_membre_difficulte_communication <- read_excel(raw_data_excel, sheet = "communication_difficile")%>%
-  rename(submission_uuid = `_submission__uuid...2`,
-         parent_index = `_parent_index...1`)
+raw_data_membre_difficulte_communication <- read_excel(raw_data_excel, sheet = "communication_difficile")
+# %>%
+#   rename(submission_uuid = `_submission__uuid...2`,
+#          parent_index = `_parent_index...1`)
 
-raw_data_membre_repeat_nbre_pers_decedes <- read_excel(raw_data_excel, sheet = "repeat_nbre_pers_decedes")%>%
-  rename(submission_uuid = `_submission__uuid...2`,
-         parent_index = `_parent_index...1`)
+raw_data_membre_repeat_nbre_pers_decedes <- read_excel(raw_data_excel, sheet = "repeat_nbre_pers_decedes")
+# %>%
+#   rename(submission_uuid = `_submission__uuid...2`,
+#          parent_index = `_parent_index...1`)
 
 loop_frames <- list(raw_data_info_menage, raw_data_maladie_moins_5ans_rpt, raw_data_naissances, raw_data_membre_marche_dificile,
-                 raw_data_membre_soins_difficile, raw_data_membre_concentration_difficile, raw_data_membre_membre_vision_diffcile,
-                 raw_data_membre_membre_entendre_difficile, raw_data_membre_difficulte_communication, raw_data_membre_repeat_nbre_pers_decedes)
+                    raw_data_membre_soins_difficile, raw_data_membre_concentration_difficile, raw_data_membre_membre_vision_diffcile,
+                    raw_data_membre_membre_entendre_difficile, raw_data_membre_difficulte_communication, raw_data_membre_repeat_nbre_pers_decedes)
 
 loop_frames_names <- list("raw_data_info_menage", "raw_data_maladie_moins_5ans_rpt", "raw_data_naissances", "raw_data_membre_marche_dificile",
-                    "raw_data_membre_soins_difficile", "raw_data_membre_concentration_difficile", "raw_data_membre_membre_vision_diffcile",
-                    "raw_data_membre_membre_entendre_difficile", "raw_data_membre_difficulte_communication", "raw_data_membre_repeat_nbre_pers_decedes")
+                          "raw_data_membre_soins_difficile", "raw_data_membre_concentration_difficile", "raw_data_membre_membre_vision_diffcile",
+                          "raw_data_membre_membre_entendre_difficile", "raw_data_membre_difficulte_communication", "raw_data_membre_repeat_nbre_pers_decedes")
 
 
 list_remove_data <- lapply(loop_frames, remove_delParents_fromLoop, raw_data, uuid.name.parent = "uuid", uuid.name.loop = "submission_uuid")
@@ -241,13 +248,13 @@ bfa_admin2 <- read_csv("data/shapes/bfa_pplp_1m_nga_ocha/bfa_pplp_1m_nga_ocha.cs
            admin3Name == "bobo-dioulasso" ~ "bobo_dioulasso",
            TRUE ~ admin3Name
          ))
-  
+
 
 raw_data <- left_join(raw_data, bfa_admin2, by = c("admin3" = "admin3Name"))
 
 # bfa_settlments <- read_csv("data/shapes/bfa_pplp_1m_nga_ocha/bfa_pplp_1m_nga_ocha.csv")%>%
 #   sf::st_as_sf(coords = c("Coord_X", "Coord_Y"), crs = 4326)
-  
+
 ### Replacing missing pcodes by closest pcode
 
 # distance_check <- butteR::closest_distance_rtree(missingPoints_sf, bfa_settlments)%>%
@@ -264,9 +271,9 @@ raw_data <- left_join(raw_data, bfa_admin2, by = c("admin3" = "admin3Name"))
 ## Creating and writting cleaning_log to log changes
 
 cleaning_log_change <- data.frame(Auteur = NA, Index = NA, uuid = NA, Date = NA, Base = NA, Enqueteur = NA, Question = NA,
-         `Probl?me` = NA,
-         "Anciennes valeurs" = NA, "Nouvelles valeurs" = NA, ddsagr = NA, "Retour Enquêteur" =NA, "Retour chargé" = NA, Action = NA,
-         "Commentaire RBB" =0L,"Commentaire CC" = 0L,	"Commentaire AO" =0L,	"Commentaire GIS" =0L,	"dffgawesd" =0L)
+                                  `Probl?me` = NA,
+                                  "Anciennes valeurs" = NA, "Nouvelles valeurs" = NA, ddsagr = NA, "Retour Enquêteur" =NA, "Retour chargé" = NA, Action = NA,
+                                  "Commentaire RBB" =0L,"Commentaire CC" = 0L,	"Commentaire AO" =0L,	"Commentaire GIS" =0L,	"dffgawesd" =0L)
 
 ##### Affecting data from repeat loops to main dataframe ####
 
@@ -280,7 +287,7 @@ raw_data_info_menage <- raw_data_info_menage%>%
          agegrp_18_65_hommes = if_else((age_hh >= 18 & age_hh < 65 ) & sexe_hh == "homme",1,0),
          agegrp_65plus_femmes = if_else(age_hh >= 65 &sexe_hh == "femme",1,0),
          agegrp_65plus_hommes = if_else(age_hh >= 65 &sexe_hh == "homme",1,0)
-         )
+  )
 
 
 raw_data_info_menage <- koboloops::add_parent_to_loop(loop = as.data.frame(raw_data_info_menage), parent = as.data.frame(raw_data), variables.to.keep = c("barriere_edu", "status"), uuid.name.loop = "parent_index", uuid.name.parent = "index")%>%
@@ -288,15 +295,18 @@ raw_data_info_menage <- koboloops::add_parent_to_loop(loop = as.data.frame(raw_d
     statut_educatif == "non" & barriere_edu %in% c("insecurite_ecole", "insecurite_trajet","groupes_armes_ecole", "non_fonctionnelle") ~ 1,
     statut_educatif == "oui" ~ 0,
     TRUE ~  0
-    ),
+  ),
   score_edu = case_when(statut_educatif == "non" & barriere_edu %in% c("insecurite_ecole", "insecurite_trajet","groupes_armes_ecole", "non_fonctionnelle") ~ "4",
                         statut_educatif == "non" ~ "3",
                         statut_educatif == "oui" & status == "pdi" ~ "3",
                         statut_educatif == "oui" & status != "pdi" ~ "1",
                         TRUE ~ NA_character_
-    )
   )
-         
+  )
+
+## Yann
+##where does the scoring come from? 
+
 
 raw_data <- affect_loop_to_parent(loop = as.data.frame(raw_data_info_menage), parent = as.data.frame(raw_data), aggregate.function = sum,
                                   variable.to.add = c(
@@ -312,26 +322,38 @@ raw_data <- affect_loop_to_parent(loop = as.data.frame(raw_data_info_menage), pa
                                   ),
                                   uuid.name.loop = "parent_index", uuid.name.parent = "index")
 
+## agegroup changed
 
 raw_data_naissances <- levels_asBinaryColumns(raw_data_naissances, "lieu_accouchement")
 raw_data_naissances <- levels_asBinaryColumns(raw_data_naissances, "raison_dominicile")
 
 raw_data <- affect_loop_to_parent(loop = as.data.frame(raw_data_naissances), parent = as.data.frame(raw_data), aggregate.function = sum,
-                                      variable.to.add = c(
-                                        sum_lieu_accouchement.autre = "lieu_accouchement.autre",
-                                        sum_lieu_accouchement.centre_sante = "lieu_accouchement.centre_sante",
-                                        sum_lieu_accouchement.maison = "lieu_accouchement.maison",
-                                        sum_raison_domicil_accouche_assiste_domicil = "raison_dominicile.accouche_assiste_domicil",
-                                        sum_raison_domicil_accouche_centre_ferme = "raison_dominicile.centre_ferme",
-                                        sum_raison_domicil_accouche_centre_financ_inacc = "raison_dominicile.centre_financ_inacc",
-                                        sum_raison_domicil_centre_surpeuple = "raison_dominicile.centre_surpeuple",
-                                        sum_raison_domicil_maternite_pas_sur = "raison_dominicile.maternite_pas_sur",
-                                        sum_raison_domicil_nsp = "raison_dominicile.nsp",
-                                        sum_raison_domicil_physique_mere = "raison_dominicile.physique_mere",
-                                        sum_raison_domicil_rejoindre_centre = "raison_dominicile.rejoindre_centre"
-                                      ),
-                                      uuid.name.loop = "parent_index", uuid.name.parent = "index")
+                                  variable.to.add = c(
+                                    sum_lieu_accouchement.autre = "lieu_accouchement.autre",
+                                    sum_lieu_accouchement.centre_sante = "lieu_accouchement.centre_sante",
+                                    sum_lieu_accouchement.maison = "lieu_accouchement.maison",
+                                    sum_raison_domicil_accouche_assiste_domicil = "raison_dominicile.accouche_assiste_domicil",
+                                    sum_raison_domicil_accouche_centre_ferme = "raison_dominicile.centre_ferme",
+                                    sum_raison_domicil_accouche_centre_financ_inacc = "raison_dominicile.centre_financ_inacc",
+                                    sum_raison_domicil_centre_surpeuple = "raison_dominicile.centre_surpeuple",
+                                    sum_raison_domicil_maternite_pas_sur = "raison_dominicile.maternite_pas_sur",
+                                    sum_raison_domicil_nsp = "raison_dominicile.nsp",
+                                    sum_raison_domicil_physique_mere = "raison_dominicile.physique_mere",
+                                    sum_raison_domicil_rejoindre_centre = "raison_dominicile.rejoindre_centre"
+                                  ),
+                                  uuid.name.loop = "parent_index", uuid.name.parent = "index")
+## Yann
+# aggregation ne marche pas si le lieu de naissance est différent et qu'il y a des NA
+# cf index_parent 94
+##possible correction
+# naissance_aggre <- raw_data_naissances %>%
+#   group_by(parent_index) %>%
+#   summarise(across(starts_with(c("lieu_accouchement.", "raison_dominicile.")), sum, na.rm = T)) %>%
+#   mutate(parent_index = as.character(parent_index))
+# raw_data <- raw_data %>%
+#   left_join(naissance_aggre, by = c("index" = "parent_index")) 
 
+# raw_data %>% select(index, grep(c("raison_dom"), names(naissance_aggre), value = T)) %>% write.csv("test.csv")
 
 issues_withNaissances <- raw_data%>%
   select(total_naissance,
@@ -349,25 +371,41 @@ raw_data_maladie_moins_5ans_rpt <- raw_data_maladie_moins_5ans_rpt%>%
   mutate_at(vars(starts_with("maladie_moins_5ans/")), as.numeric)
 
 raw_data <- affect_loop_to_parent(loop = as.data.frame(raw_data_maladie_moins_5ans_rpt), parent = as.data.frame(raw_data), aggregate.function = sum,
-                                      variable.to.add = c(
-                                        sum_enfants_5ans_maladie.palu = "maladie_moins_5ans/palu",
-                                        sum_enfants_5ans_maladie.infect_respiratoire = "maladie_moins_5ans/infect_respiratoire",
-                                        sum_enfants_5ans_maladie.diarrhee =  "maladie_moins_5ans/diarrhee",
-                                        sum_enfants_5ans_maladie.autre = "maladie_moins_5ans/autre",
-                                        sum_enfants_5ans_maladie.nsp = "maladie_moins_5ans/nsp"
-                                      ),
-                                      uuid.name.loop = "parent_index", uuid.name.parent = "index")
+                                  variable.to.add = c(
+                                    sum_enfants_5ans_maladie.palu = "maladie_moins_5ans/palu",
+                                    sum_enfants_5ans_maladie.infect_respiratoire = "maladie_moins_5ans/infect_respiratoire",
+                                    sum_enfants_5ans_maladie.diarrhee =  "maladie_moins_5ans/diarrhee",
+                                    sum_enfants_5ans_maladie.autre = "maladie_moins_5ans/autre",
+                                    sum_enfants_5ans_maladie.nsp = "maladie_moins_5ans/nsp"
+                                  ),
+                                  uuid.name.loop = "parent_index", uuid.name.parent = "index")
+## YANN
+maladie_agg <- raw_data_maladie_moins_5ans_rpt %>%
+  group_by(parent_index) %>%
+  summarise(across(starts_with("maladie_moins_5ans/"), sum, na.rm = T)) %>%
+  mutate(parent_index = as.character(parent_index))
+
+
+raw_data2 <- raw_data %>%
+  left_join(maladie_agg, by = c("index" = "parent_index"))
+
+raw_data2 %>%
+  select(index, starts_with(c("sum_enfants_5ans", "maladie_moins_5ans"))) %>%
+  write.csv("test2.csv")
+raw_data_maladie_moins_5ans_rpt %>%
+  filter(duplicated(parent_index)) %>% View()
+# cf 4005 et 3953
 
 issues_enfants_malades <- raw_data%>%
   select(total_moins_5ans,
          sum_enfants_5ans_maladie.palu,sum_enfants_5ans_maladie.infect_respiratoire,sum_enfants_5ans_maladie.diarrhee,sum_enfants_5ans_maladie.autre,sum_enfants_5ans_maladie.nsp,
          uuid)%>%
   mutate(oops_malade = case_when(sum_enfants_5ans_maladie.palu > total_moins_5ans ~"oops",
-                                    sum_enfants_5ans_maladie.infect_respiratoire > total_moins_5ans ~ "oops",
-                                    sum_enfants_5ans_maladie.diarrhee > total_moins_5ans ~ "oops",
-                                    sum_enfants_5ans_maladie.autre > total_moins_5ans ~ "oops",
-                                    sum_enfants_5ans_maladie.nsp > total_moins_5ans ~ "oops",
-                                    TRUE~"OK"))%>%
+                                 sum_enfants_5ans_maladie.infect_respiratoire > total_moins_5ans ~ "oops",
+                                 sum_enfants_5ans_maladie.diarrhee > total_moins_5ans ~ "oops",
+                                 sum_enfants_5ans_maladie.autre > total_moins_5ans ~ "oops",
+                                 sum_enfants_5ans_maladie.nsp > total_moins_5ans ~ "oops",
+                                 TRUE~"OK"))%>%
   filter(oops_malade=="oops")%>%
   write_csv("problemes_repeat_malades.csv")
 
@@ -398,17 +436,17 @@ raw_data_membre_marche_dificile <- levels_asBinaryColumns(raw_data_membre_marche
 
 
 raw_data <- affect_loop_to_parent(loop = as.data.frame(raw_data_membre_marche_dificile), parent = as.data.frame(raw_data), aggregate.function = sum,
-                                      variable.to.add = c(
-                                        sum_marche_dif_garcons_moins5 = "marche_dif_garcons_moins5",
-                                        sum_marche_dif_filles_moins5 = "marche_dif_filles_moins5",
-                                        sum_marche_dif_garcons_5_18 = "marche_dif_garcons_5_18",
-                                        sum_marche_dif_filles_5_18 = "marche_dif_filles_5_18",
-                                        sum_marche_dif_hommes_18_64 = "marche_dif_hommes_18_64",
-                                        sum_marche_dif_femmes_18_64 = "marche_dif_femmes_18_64",
-                                        sum_marche_dif_hommes_65plus = "marche_dif_hommes_65plus",
-                                        sum_marche_dif_femmes_65plus = "marche_dif_femmes_65plus"
-                                      ),
-                                      uuid.name.loop = "parent_index", uuid.name.parent = "index")
+                                  variable.to.add = c(
+                                    sum_marche_dif_garcons_moins5 = "marche_dif_garcons_moins5",
+                                    sum_marche_dif_filles_moins5 = "marche_dif_filles_moins5",
+                                    sum_marche_dif_garcons_5_18 = "marche_dif_garcons_5_18",
+                                    sum_marche_dif_filles_5_18 = "marche_dif_filles_5_18",
+                                    sum_marche_dif_hommes_18_64 = "marche_dif_hommes_18_64",
+                                    sum_marche_dif_femmes_18_64 = "marche_dif_femmes_18_64",
+                                    sum_marche_dif_hommes_65plus = "marche_dif_hommes_65plus",
+                                    sum_marche_dif_femmes_65plus = "marche_dif_femmes_65plus"
+                                  ),
+                                  uuid.name.loop = "parent_index", uuid.name.parent = "index")
 
 
 raw_data_membre_soins_difficile <- raw_data_membre_soins_difficile%>%
@@ -424,17 +462,17 @@ raw_data_membre_soins_difficile <- raw_data_membre_soins_difficile%>%
   )
 
 raw_data <- affect_loop_to_parent(loop = as.data.frame(raw_data_membre_soins_difficile), parent = as.data.frame(raw_data), aggregate.function = sum,
-                                      variable.to.add = c(
-                                        sum_soins_dif_garcons_moins5 = "soins_dif_garcons_moins5",
-                                        sum_soins_dif_filles_moins5 = "soins_dif_filles_moins5",
-                                        sum_soins_dif_garcons_5_18 = "soins_dif_garcons_5_18",
-                                        sum_soins_dif_filles_5_18 = "soins_dif_filles_5_18",
-                                        sum_soins_dif_hommes_18_64 = "soins_dif_hommes_18_64",
-                                        sum_soins_dif_femmes_18_64 = "soins_dif_femmes_18_64",
-                                        sum_soins_dif_hommes_65plus = "soins_dif_hommes_65plus",
-                                        sum_soins_dif_femmes_65plus = "soins_dif_femmes_65plus"
-                                      ),
-                                      uuid.name.loop = "parent_index", uuid.name.parent = "index")
+                                  variable.to.add = c(
+                                    sum_soins_dif_garcons_moins5 = "soins_dif_garcons_moins5",
+                                    sum_soins_dif_filles_moins5 = "soins_dif_filles_moins5",
+                                    sum_soins_dif_garcons_5_18 = "soins_dif_garcons_5_18",
+                                    sum_soins_dif_filles_5_18 = "soins_dif_filles_5_18",
+                                    sum_soins_dif_hommes_18_64 = "soins_dif_hommes_18_64",
+                                    sum_soins_dif_femmes_18_64 = "soins_dif_femmes_18_64",
+                                    sum_soins_dif_hommes_65plus = "soins_dif_hommes_65plus",
+                                    sum_soins_dif_femmes_65plus = "soins_dif_femmes_65plus"
+                                  ),
+                                  uuid.name.loop = "parent_index", uuid.name.parent = "index")
 
 raw_data_membre_concentration_difficile <- raw_data_membre_concentration_difficile%>%
   mutate(
@@ -450,17 +488,17 @@ raw_data_membre_concentration_difficile <- raw_data_membre_concentration_diffici
 
 
 raw_data <- affect_loop_to_parent(loop = as.data.frame(raw_data_membre_concentration_difficile), parent = as.data.frame(raw_data), aggregate.function = sum,
-                                      variable.to.add = c(
-                                        sum_concentration_dif_garcons_moins5 = "concentration_dif_garcons_moins5",
-                                        sum_concentration_dif_filles_moins5 = "concentration_dif_filles_moins5",
-                                        sum_concentration_dif_garcons_5_18 = "concentration_dif_garcons_5_18",
-                                        sum_concentration_dif_filles_5_18 = "concentration_dif_filles_5_18",
-                                        sum_concentration_dif_hommes_18_64 = "concentration_dif_hommes_18_64",
-                                        sum_concentration_dif_femmes_18_64 = "concentration_dif_femmes_18_64",
-                                        sum_concentration_dif_hommes_65plus = "concentration_dif_hommes_65plus",
-                                        sum_concentration_dif_femmes_65plus = "concentration_dif_femmes_65plus"
-                                      ),
-                                      uuid.name.loop = "parent_index", uuid.name.parent = "index")
+                                  variable.to.add = c(
+                                    sum_concentration_dif_garcons_moins5 = "concentration_dif_garcons_moins5",
+                                    sum_concentration_dif_filles_moins5 = "concentration_dif_filles_moins5",
+                                    sum_concentration_dif_garcons_5_18 = "concentration_dif_garcons_5_18",
+                                    sum_concentration_dif_filles_5_18 = "concentration_dif_filles_5_18",
+                                    sum_concentration_dif_hommes_18_64 = "concentration_dif_hommes_18_64",
+                                    sum_concentration_dif_femmes_18_64 = "concentration_dif_femmes_18_64",
+                                    sum_concentration_dif_hommes_65plus = "concentration_dif_hommes_65plus",
+                                    sum_concentration_dif_femmes_65plus = "concentration_dif_femmes_65plus"
+                                  ),
+                                  uuid.name.loop = "parent_index", uuid.name.parent = "index")
 
 
 raw_data_membre_membre_vision_diffcile <- raw_data_membre_membre_vision_diffcile%>%
@@ -477,17 +515,17 @@ raw_data_membre_membre_vision_diffcile <- raw_data_membre_membre_vision_diffcile
 
 
 raw_data <- affect_loop_to_parent(loop = as.data.frame(raw_data_membre_membre_vision_diffcile), parent = as.data.frame(raw_data), aggregate.function = sum,
-                                      variable.to.add = c(
-                                        sum_vision_dif_garcons_moins5 = "vision_dif_garcons_moins5",
-                                        sum_vision_dif_filles_moins5 = "vision_dif_filles_moins5",
-                                        sum_vision_dif_garcons_5_18 = "vision_dif_garcons_5_18",
-                                        sum_vision_dif_filles_5_18 = "vision_dif_filles_5_18",
-                                        sum_vision_dif_hommes_18_64 = "vision_dif_hommes_18_64",
-                                        sum_vision_dif_femmes_18_64 = "vision_dif_femmes_18_64",
-                                        sum_vision_dif_hommes_65plus = "vision_dif_hommes_65plus",
-                                        sum_vision_dif_femmes_65plus = "vision_dif_femmes_65plus"
-                                      ),
-                                      uuid.name.loop = "parent_index", uuid.name.parent = "index")
+                                  variable.to.add = c(
+                                    sum_vision_dif_garcons_moins5 = "vision_dif_garcons_moins5",
+                                    sum_vision_dif_filles_moins5 = "vision_dif_filles_moins5",
+                                    sum_vision_dif_garcons_5_18 = "vision_dif_garcons_5_18",
+                                    sum_vision_dif_filles_5_18 = "vision_dif_filles_5_18",
+                                    sum_vision_dif_hommes_18_64 = "vision_dif_hommes_18_64",
+                                    sum_vision_dif_femmes_18_64 = "vision_dif_femmes_18_64",
+                                    sum_vision_dif_hommes_65plus = "vision_dif_hommes_65plus",
+                                    sum_vision_dif_femmes_65plus = "vision_dif_femmes_65plus"
+                                  ),
+                                  uuid.name.loop = "parent_index", uuid.name.parent = "index")
 
 
 raw_data_membre_membre_entendre_difficile <- raw_data_membre_membre_entendre_difficile%>%
@@ -504,17 +542,17 @@ raw_data_membre_membre_entendre_difficile <- raw_data_membre_membre_entendre_dif
 
 
 raw_data <- affect_loop_to_parent(loop = as.data.frame(raw_data_membre_membre_entendre_difficile), parent = as.data.frame(raw_data), aggregate.function = sum,
-                                      variable.to.add = c(
-                                        sum_entendre_dif_garcons_moins5 = "entendre_dif_garcons_moins5",
-                                        sum_entendre_dif_filles_moins5 = "entendre_dif_filles_moins5",
-                                        sum_entendre_dif_garcons_5_18 = "entendre_dif_garcons_5_18",
-                                        sum_entendre_dif_filles_5_18 = "entendre_dif_filles_5_18",
-                                        sum_entendre_dif_hommes_18_64 = "entendre_dif_hommes_18_64",
-                                        sum_entendre_dif_femmes_18_64 = "entendre_dif_femmes_18_64",
-                                        sum_entendre_dif_hommes_65plus = "entendre_dif_hommes_65plus",
-                                        sum_entendre_dif_femmes_65plus = "entendre_dif_femmes_65plus"
-                                      ),
-                                      uuid.name.loop = "parent_index", uuid.name.parent = "index")
+                                  variable.to.add = c(
+                                    sum_entendre_dif_garcons_moins5 = "entendre_dif_garcons_moins5",
+                                    sum_entendre_dif_filles_moins5 = "entendre_dif_filles_moins5",
+                                    sum_entendre_dif_garcons_5_18 = "entendre_dif_garcons_5_18",
+                                    sum_entendre_dif_filles_5_18 = "entendre_dif_filles_5_18",
+                                    sum_entendre_dif_hommes_18_64 = "entendre_dif_hommes_18_64",
+                                    sum_entendre_dif_femmes_18_64 = "entendre_dif_femmes_18_64",
+                                    sum_entendre_dif_hommes_65plus = "entendre_dif_hommes_65plus",
+                                    sum_entendre_dif_femmes_65plus = "entendre_dif_femmes_65plus"
+                                  ),
+                                  uuid.name.loop = "parent_index", uuid.name.parent = "index")
 
 raw_data_membre_repeat_nbre_pers_decedes <- raw_data_membre_repeat_nbre_pers_decedes%>%
   mutate(
@@ -557,29 +595,29 @@ raw_data <- affect_loop_to_parent(loop = as.data.frame(raw_data_membre_difficult
 
 
 raw_data <- affect_loop_to_parent(loop = as.data.frame(raw_data_membre_repeat_nbre_pers_decedes), parent = as.data.frame(raw_data), aggregate.function = sum,
-                                      variable.to.add = c(
-                                        sum_deces_dif_garcons_moins5 = "deces_dif_garcons_moins5",
-                                        sum_deces_dif_filles_moins5 = "deces_dif_filles_moins5",
-                                        sum_deces_dif_garcons_5_18 = "deces_dif_garcons_5_18",
-                                        sum_deces_dif_filles_5_18 = "deces_dif_filles_5_18",
-                                        sum_deces_dif_hommes_18_64 = "deces_dif_hommes_18_64",
-                                        sum_deces_dif_femmes_18_64 = "deces_dif_femmes_18_64",
-                                        sum_deces_dif_hommes_65plus = "deces_dif_hommes_65plus",
-                                        sum_deces_dif_femmes_65plus = "deces_dif_femmes_65plus",
-                                        sum_raison_deces_diarrhee = "raison_deces.diarrhee",
-                                        sum_raison_deces_autre_maladie = "raison_deces.autre_maladie",
-                                        sum_raison_deces_morsure = "raison_deces.morsure",
-                                        sum_raison_deces_deces_natu = "raison_deces.deces_natu",
-                                        sum_raison_deces_faim = "raison_deces.faim",
-                                        sum_raison_deces_accident_travail = "raison_deces.accident_travail",
-                                        sum_raison_deces_problemes_respi = "raison_deces.problemes_respi",
-                                        sum_raison_deces_autre = "raison_deces.autre",
-                                        sum_raison_deces_catastrophe_natu = "raison_deces.catastrophe_natu",
-                                        sum_raison_deces_accident_conflit = "raison_deces.accident_conflit",
-                                        sum_raison_deces_en_couche = "raison_deces.en_couche",
-                                        sum_raison_deces_accident_route = "raison_deces.accident_route"
-                                      ),
-                                      uuid.name.loop = "parent_index", uuid.name.parent = "index")
+                                  variable.to.add = c(
+                                    sum_deces_dif_garcons_moins5 = "deces_dif_garcons_moins5",
+                                    sum_deces_dif_filles_moins5 = "deces_dif_filles_moins5",
+                                    sum_deces_dif_garcons_5_18 = "deces_dif_garcons_5_18",
+                                    sum_deces_dif_filles_5_18 = "deces_dif_filles_5_18",
+                                    sum_deces_dif_hommes_18_64 = "deces_dif_hommes_18_64",
+                                    sum_deces_dif_femmes_18_64 = "deces_dif_femmes_18_64",
+                                    sum_deces_dif_hommes_65plus = "deces_dif_hommes_65plus",
+                                    sum_deces_dif_femmes_65plus = "deces_dif_femmes_65plus",
+                                    sum_raison_deces_diarrhee = "raison_deces.diarrhee",
+                                    sum_raison_deces_autre_maladie = "raison_deces.autre_maladie",
+                                    sum_raison_deces_morsure = "raison_deces.morsure",
+                                    sum_raison_deces_deces_natu = "raison_deces.deces_natu",
+                                    sum_raison_deces_faim = "raison_deces.faim",
+                                    sum_raison_deces_accident_travail = "raison_deces.accident_travail",
+                                    sum_raison_deces_problemes_respi = "raison_deces.problemes_respi",
+                                    sum_raison_deces_autre = "raison_deces.autre",
+                                    sum_raison_deces_catastrophe_natu = "raison_deces.catastrophe_natu",
+                                    sum_raison_deces_accident_conflit = "raison_deces.accident_conflit",
+                                    sum_raison_deces_en_couche = "raison_deces.en_couche",
+                                    sum_raison_deces_accident_route = "raison_deces.accident_route"
+                                  ),
+                                  uuid.name.loop = "parent_index", uuid.name.parent = "index")
 
 
 ### removing deleted from loops
@@ -646,87 +684,87 @@ cleaning_log_change <- cleaning_log_change%>%
           Question = "Genre du chef menage", "Probl.me" = "Manque genre du chef de ménage quand il est le répondant",
           Anciennes.valeurs = NA, Nouvelles.valeurs = add_to_changeLog_ic_genre$ic_genre)
 
-raw_data <- raw_data%>%
-  rowwise()%>%
+raw_data3 <- raw_data%>%
+  # rowwise()%>%
   mutate(
-      age_chef_menage = case_when( chef_menage == "oui" && is.na(age_chef_menage) ~ ic_age,
-                                  TRUE ~ age_chef_menage),
-      genre_chef_menage = case_when(chef_menage == "oui" && is.na(genre_chef_menage) ~ ic_genre,
-                                    TRUE ~ ic_genre),
-      taille_abri = case_when(taille_abri == "NSP" ~ NA_integer_, TRUE ~ as.integer(taille_abri)),
-      personne_m2 = taille_abri/taille_menage,
-      fcs2 = sum(jr_consom_cereale*2 + jr_consom_noix*3 + jr_consom_lait*4 + jr_consom_viande*4 + jr_consom_legume*1 + jr_consom_fruit*1 + jr_consom_huile*0.5+
-                   jr_consom_sucre*0.5 + jr_consom_epice*0, na.rm = T),
-      fcs2_thresholds = case_when(fcs2>=0 & fcs2 <=21 ~ "pauvre",
-                                  fcs2 > 21 & fcs2 <= 35 ~ "limite",
-                                  fcs2 > 35 ~ "acceptable",
-                                  TRUE ~ NA_character_),
-      rcsi_score = sum(jr_moins_prefere*1, jr_emprunt_nourriture*2, jr_diminu_quantite*1, jr_rest_consommation*3, jr_nbr_repas*1, na.rm = T),
-      rcsi_thresholds = case_when(
-        rcsi_score == 0 ~ "no_coping",
-        rcsi_score > 0 & rcsi_score <= 7 ~ "low",
-        rcsi_score > 7 & rcsi_score <= 15 ~ "medium",
-        rcsi_score > 15 ~ "high",
-        TRUE ~ NA_character_
-      ),
-      nbr_aucun_aliment_new = hhs_recoding(aucun_aliment, nbr_aucun_aliment),
-      nbr_dormir_affame_new = hhs_recoding(dormir_affame, nbr_dormir_affame),
-      nbr_pas_assez_nourriture_new = hhs_recoding(pas_assez_nourriture, nbr_pas_assez_nourriture),
-      hhs_score = sum(nbr_aucun_aliment_new, nbr_dormir_affame_new, nbr_pas_assez_nourriture_new, na.rm = T),
-      hhs_thresholds = case_when(
-        hhs_score <= 1 ~ "peu_pasFaim",
-        hhs_score >1 & hhs_score <= 3 ~ "faim_moderee",
-        hhs_score > 3 & hhs_score <= 6 ~ "faim_severe",
-        TRUE ~ NA_character_
-      ),
-      vente_actif_recoded = lcs_recoding(vente_actif),
-      vente_actif_prod_recoded = lcs_recoding(vente_actif_prod),
-      reduction_depense_recoded = lcs_recoding(reduction_depense),
-      epargne_recoded = lcs_recoding(epargne),
-      emprunt_nourritur_recoded = lcs_recoding(emprunt_nourritur),
-      enfant_ecole_recoded = lcs_recoding(enfant_ecole),
-      vente_maison_recoded = lcs_recoding(vente_maison),
-      activite_risque_recoded = lcs_recoding(activite_risque),
-      mendie_recoded = lcs_recoding(mendie),
-      vente_animal_recoded = lcs_recoding(vente_animal),
-      conso_semence_recoded = lcs_recoding(conso_semence),
-      lcs_urgence = if_else(sum(vente_maison_recoded, mendie_recoded, activite_risque_recoded, na.rm = T ) >= 1, 1,0),
-      lcs_crise = if_else(sum(vente_actif_prod_recoded,reduction_depense_recoded,  enfant_ecole_recoded, conso_semence_recoded, na.rm = T) >= 1, 1, 0),
-      lcs_stress = if_else(sum(vente_actif_recoded, epargne_recoded, emprunt_nourritur_recoded, vente_animal_recoded, na.rm = T) >= 1, 1,0),
-      lcs_minimal = if_else((lcs_urgence + lcs_crise + lcs_stress) == 0, 1, 0),
-      lcs_total = if_else(lcs_urgence ==1, "urgence", if_else(lcs_crise == 1, "crise", if_else( lcs_stress ==1, "stress", "minimal"))),
-      auMoinsUneWG = if_else(sum(nombre_soins_difficile, nombre_difficulte_vision, nombre_difficulte_entendre,
-                                 nombre_difficulte_marche, nombre_difficulte_concentration, nombre_difficulte_communication, na.rm = T)>0,1,0),
-      auMoinsUnePersonneDortDehors = if_else(dorme_exterieur >0, 1,0),
-      auMoinsUnEnfantMalade = if_else(malade_5ans>0,1,0),
-      typologie_source_eau = case_when(source_eau %in% c("pmh","poste_auto", "puit_protege","source_amenage","borne_fontaine",
-                                                         "eau _robi_conce","eau _bout","eau _camion") ~ "amelioree",
-                                       source_eau %in% c("puit_tradi", "non_amenage") ~ "non_amelioree",
-                                       source_eau %in% c("course_eau", "eau_pluie") ~ "surface",
-                                       TRUE ~ NA_character_
-      ),
-      probleme_abri.inondation = case_when(str_detect(probleme_abri, "inondations") ~ TRUE,
-                                            !str_detect(probleme_abri, "inondations") ~ FALSE),
-      
-      total_3_5 = sum(total_3_5_femmes, total_3_5_hommes, na.rm = T),
-      total_6_12 = sum(total_6_12_femmes, total_6_12_hommes, na.rm = T),
-      total_13_17 = sum(total_13_17_femmes, total_13_17_hommes, na.rm = T),
-      
-      educ.3_5an_total = sum(total_educ_3_5an_garcon,total_educ_3_5an_fille, na.rm = T),
-      infor_educ.3_5an_total = sum(total_infor_educ_3_5an_garcon, total_infor_educ_3_5an_fille, na.rm = T),
-      non_for_educ.3_5an_total = sum(total_non_for_educ_3_5an_garcon, total_non_for_educ_3_5an_fille, na.rm = T),
-      aucune_educ.3_5an_total = sum(total_aucune_educ_3_5an_garcon, total_aucune_educ_3_5an_fille, na.rm = T),
-      
-      educ.6_12an_total = sum(total_educ_6_12an_garcon,total_educ_6_12an_fille, na.rm = T),
-      infor_educ.6_12an_total = sum(total_infor_educ_6_12an_garcon, total_infor_educ_6_12an_fille, na.rm = T),
-      non_for_educ.6_12an_total = sum(total_non_for_educ_6_12an_garcon, total_non_for_educ_6_12an_fille, na.rm = T),
-      aucune_educ.6_12an_total = sum(total_aucune_educ_6_12an_garcon, total_aucune_educ_6_12an_fille, na.rm = T),
-      
-      educ.13_17an_total = sum(total_educ_13_17an_garcon,total_educ_13_17an_fille, na.rm = T),
-      infor_educ.13_17an_total = sum(total_infor_educ_13_17an_garcon, total_infor_educ_13_17an_fille, na.rm = T),
-      non_for_educ.13_17an_total = sum(total_non_for_educ_13_17an_garcon, total_non_for_educ_13_17an_fille, na.rm = T),
-      aucune_educ.13_17an_total = sum(total_aucune_educ_13_17an_garcon, total_aucune_educ_13_17an_fille, na.rm = T)
-      
+    age_chef_menage = case_when( chef_menage == "oui" && is.na(age_chef_menage) ~ ic_age,
+                                 TRUE ~ age_chef_menage),
+    genre_chef_menage = case_when(chef_menage == "oui" && is.na(genre_chef_menage) ~ ic_genre,
+                                  TRUE ~ ic_genre),
+    taille_abri = case_when(taille_abri == "NSP" ~ NA_integer_, TRUE ~ as.integer(taille_abri)),
+    personne_m2 = taille_abri/taille_menage,
+    fcs2 = sum(jr_consom_cereale*2 + jr_consom_noix*3 + jr_consom_lait*4 + jr_consom_viande*4 + jr_consom_legume*1 + jr_consom_fruit*1 + jr_consom_huile*0.5+
+                 jr_consom_sucre*0.5 + jr_consom_epice*0, na.rm = T),
+    fcs2_thresholds = case_when(fcs2>=0 & fcs2 <=21 ~ "pauvre",
+                                fcs2 > 21 & fcs2 <= 35 ~ "limite",
+                                fcs2 > 35 ~ "acceptable",
+                                TRUE ~ NA_character_),
+    rcsi_score = sum(jr_moins_prefere*1, jr_emprunt_nourriture*2, jr_diminu_quantite*1, jr_rest_consommation*3, jr_nbr_repas*1, na.rm = T),
+    rcsi_thresholds = case_when(
+      rcsi_score == 0 ~ "no_coping",
+      rcsi_score > 0 & rcsi_score <= 7 ~ "low",
+      rcsi_score > 7 & rcsi_score <= 15 ~ "medium",
+      rcsi_score > 15 ~ "high",
+      TRUE ~ NA_character_
+    ),
+    nbr_aucun_aliment_new = hhs_recoding(aucun_aliment, nbr_aucun_aliment),
+    nbr_dormir_affame_new = hhs_recoding(dormir_affame, nbr_dormir_affame),
+    nbr_pas_assez_nourriture_new = hhs_recoding(pas_assez_nourriture, nbr_pas_assez_nourriture),
+    hhs_score = sum(nbr_aucun_aliment_new, nbr_dormir_affame_new, nbr_pas_assez_nourriture_new, na.rm = T),
+    hhs_thresholds = case_when(
+      hhs_score <= 1 ~ "peu_pasFaim",
+      hhs_score >1 & hhs_score <= 3 ~ "faim_moderee",
+      hhs_score > 3 & hhs_score <= 6 ~ "faim_severe",
+      TRUE ~ NA_character_
+    ),
+    vente_actif_recoded = lcs_recoding(vente_actif),
+    vente_actif_prod_recoded = lcs_recoding(vente_actif_prod),
+    reduction_depense_recoded = lcs_recoding(reduction_depense),
+    epargne_recoded = lcs_recoding(epargne),
+    emprunt_nourritur_recoded = lcs_recoding(emprunt_nourritur),
+    enfant_ecole_recoded = lcs_recoding(enfant_ecole),
+    vente_maison_recoded = lcs_recoding(vente_maison),
+    activite_risque_recoded = lcs_recoding(activite_risque),
+    mendie_recoded = lcs_recoding(mendie),
+    vente_animal_recoded = lcs_recoding(vente_animal),
+    conso_semence_recoded = lcs_recoding(conso_semence),
+    lcs_urgence = if_else(sum(vente_maison_recoded, mendie_recoded, activite_risque_recoded, na.rm = T ) >= 1, 1,0),
+    lcs_crise = if_else(sum(vente_actif_prod_recoded,reduction_depense_recoded,  enfant_ecole_recoded, conso_semence_recoded, na.rm = T) >= 1, 1, 0),
+    lcs_stress = if_else(sum(vente_actif_recoded, epargne_recoded, emprunt_nourritur_recoded, vente_animal_recoded, na.rm = T) >= 1, 1,0),
+    lcs_minimal = if_else((lcs_urgence + lcs_crise + lcs_stress) == 0, 1, 0),
+    lcs_total = if_else(lcs_urgence ==1, "urgence", if_else(lcs_crise == 1, "crise", if_else( lcs_stress ==1, "stress", "minimal"))),
+    auMoinsUneWG = if_else(sum(nombre_soins_difficile, nombre_difficulte_vision, nombre_difficulte_entendre,
+                               nombre_difficulte_marche, nombre_difficulte_concentration, nombre_difficulte_communication, na.rm = T)>0,1,0),
+    auMoinsUnePersonneDortDehors = if_else(dorme_exterieur >0, 1,0),
+    auMoinsUnEnfantMalade = if_else(malade_5ans>0,1,0),
+    typologie_source_eau = case_when(source_eau %in% c("pmh","poste_auto", "puit_protege","source_amenage","borne_fontaine",
+                                                       "eau _robi_conce","eau _bout","eau _camion") ~ "amelioree",
+                                     source_eau %in% c("puit_tradi", "non_amenage") ~ "non_amelioree",
+                                     source_eau %in% c("course_eau", "eau_pluie") ~ "surface",
+                                     TRUE ~ NA_character_
+    ),
+    probleme_abri.inondation = case_when(str_detect(probleme_abri, "inondations") ~ TRUE,
+                                         !str_detect(probleme_abri, "inondations") ~ FALSE),
+    
+    total_3_5 = sum(total_3_5_femmes, total_3_5_hommes, na.rm = T),
+    total_6_12 = sum(total_6_12_femmes, total_6_12_hommes, na.rm = T),
+    total_13_17 = sum(total_13_17_femmes, total_13_17_hommes, na.rm = T),
+    
+    educ.3_5an_total = sum(total_educ_3_5an_garcon,total_educ_3_5an_fille, na.rm = T),
+    infor_educ.3_5an_total = sum(total_infor_educ_3_5an_garcon, total_infor_educ_3_5an_fille, na.rm = T),
+    non_for_educ.3_5an_total = sum(total_non_for_educ_3_5an_garcon, total_non_for_educ_3_5an_fille, na.rm = T),
+    aucune_educ.3_5an_total = sum(total_aucune_educ_3_5an_garcon, total_aucune_educ_3_5an_fille, na.rm = T),
+    
+    educ.6_12an_total = sum(total_educ_6_12an_garcon,total_educ_6_12an_fille, na.rm = T),
+    infor_educ.6_12an_total = sum(total_infor_educ_6_12an_garcon, total_infor_educ_6_12an_fille, na.rm = T),
+    non_for_educ.6_12an_total = sum(total_non_for_educ_6_12an_garcon, total_non_for_educ_6_12an_fille, na.rm = T),
+    aucune_educ.6_12an_total = sum(total_aucune_educ_6_12an_garcon, total_aucune_educ_6_12an_fille, na.rm = T),
+    
+    educ.13_17an_total = sum(total_educ_13_17an_garcon,total_educ_13_17an_fille, na.rm = T),
+    infor_educ.13_17an_total = sum(total_infor_educ_13_17an_garcon, total_infor_educ_13_17an_fille, na.rm = T),
+    non_for_educ.13_17an_total = sum(total_non_for_educ_13_17an_garcon, total_non_for_educ_13_17an_fille, na.rm = T),
+    aucune_educ.13_17an_total = sum(total_aucune_educ_13_17an_garcon, total_aucune_educ_13_17an_fille, na.rm = T)
+    
   )
 
 ### Weighting cluster sample
@@ -784,15 +822,15 @@ raw_data_adm2_quota <- raw_data%>%
   filter(admin1Pcode %in% c("BF46", "BF49", "BF52", "BF54", "BF56"),
          sampling_strat != "host_direct",
          sampling_id %in% samplingFrame_adm2$strata
-         )
+  )
 
 
 admin2_affected_wght <- map_to_weighting(sampling.frame = samplingFrame_adm2, 
-                                                    data = raw_data_adm2_quota,
-                                                    sampling.frame.population.column = "Population",
-                                                    sampling.frame.stratum.column = "strata",
-                                                    data.stratum.column = "sampling_id"
-                                                    )
+                                         data = raw_data_adm2_quota,
+                                         sampling.frame.population.column = "Population",
+                                         sampling.frame.stratum.column = "strata",
+                                         data.stratum.column = "sampling_id"
+)
 
 raw_data_adm2_quota$weights_sampling <- admin2_affected_wght(raw_data_adm2_quota)
 
@@ -808,10 +846,10 @@ raw_data_adm2 <- raw_data%>%
   )
 
 admin2_wght <- map_to_weighting(sampling.frame = samplingFrame_adm2, 
-                                         data = raw_data_adm2,
-                                         sampling.frame.population.column = "Population",
-                                         sampling.frame.stratum.column = "strata",
-                                         data.stratum.column = "sampling_id"
+                                data = raw_data_adm2,
+                                sampling.frame.population.column = "Population",
+                                sampling.frame.stratum.column = "strata",
+                                data.stratum.column = "sampling_id"
 )
 
 
@@ -849,10 +887,10 @@ raw_data_adm1 <- raw_data%>%
          !sampling_id %in%  c("NA_host", "NA_pdi"))
 
 sf_wght_admin1 <- map_to_weighting(sampling.frame = samplingFrame, 
-                                              data = raw_data_adm1,
-                                              sampling.frame.population.column = "Population",
-                                              sampling.frame.stratum.column = "strata",
-                                              data.stratum.column = "sampling_id")
+                                   data = raw_data_adm1,
+                                   sampling.frame.population.column = "Population",
+                                   sampling.frame.stratum.column = "strata",
+                                   data.stratum.column = "sampling_id")
 
 raw_data_adm1$weights_sampling <- sf_wght_admin1(raw_data_adm1)
 
@@ -862,10 +900,10 @@ raw_data_adm1$weights_sampling <- sf_wght_admin1(raw_data_adm1)
 not_in_raw_data_adm1 <- raw_data[!raw_data$uuid %in% raw_data_adm1$uuid, ]
 
 if(nrow(not_in_raw_data_adm1)>0){
-cleaning_log_change <- cleaning_log_change%>%
-  add_row(Auteur = "Elliott Messeiller", uuid = not_in_raw_data_adm1$uuid, Date = Sys.Date(), Enqueteur = not_in_raw_data_adm1$enumerator_id, Question = "Localite",
-          `Probl.me` = "Localité introuvable dans base de données des localités COD OCHA. Impossible d'attribuer au bon PSU.",
-          `Anciennes.valeurs` = not_in_raw_data_adm1$uuid, Action = "Enquêtes supprimées")
+  cleaning_log_change <- cleaning_log_change%>%
+    add_row(Auteur = "Elliott Messeiller", uuid = not_in_raw_data_adm1$uuid, Date = Sys.Date(), Enqueteur = not_in_raw_data_adm1$enumerator_id, Question = "Localite",
+            `Probl.me` = "Localité introuvable dans base de données des localités COD OCHA. Impossible d'attribuer au bon PSU.",
+            `Anciennes.valeurs` = not_in_raw_data_adm1$uuid, Action = "Enquêtes supprimées")
 }
 
 ### Writing files
