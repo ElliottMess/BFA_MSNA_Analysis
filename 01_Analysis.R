@@ -1,922 +1,616 @@
 
-# Loading packages
+source("analysisplan_factory.R")
 
-## Sourcing utils functions
 source("utils.R")
 
-## Creating list of packages to load
-package_list <- c("oliviercecchi/butteR", "ElliottMess/hypegrammaR","ellieallien/cleaninginspectoR","hunzikp/rtree", "impact-initiatives/koboloops",
-                  "tidyr","dplyr", "ggplot2", "readr", "stringr", "lubridate", "readxl", "rgdal", "sf", "purrr")
+source("00_loadCleanWeight.R", encoding = "UTF-8")
 
-## Running the packaging loading function
-loadInstall_package(package_list)
+start_analysis_process <- Sys.time()
+
+### Loading necessary files
+
+template_analysisplan_file <- "./data/analysis_plan_allVars_template.csv"
+analysisplanTemplate <- read_csv(template_analysisplan_file, locale = locale(encoding = "UTF-8"))
+
+cleaned_data_adm1 <- read_csv("outputs/datasets/BFA_MSNA_2020_dataset_cleanedWeighted_ADM1.csv", locale = locale(encoding = "latin1"))
+cleaned_data_adm2 <- read_csv("outputs/datasets/BFA_MSNA_2020_dataset_cleanedWeighted_ADM2_all.csv", locale = locale(encoding = "latin1"))
+choices <- read_csv("data/choices.csv", locale = locale(encoding = "UTF-8"))
+survey <- read_csv("data/survey.csv", locale = locale(encoding = "UTF-8"))
+
+questionnaire <- load_questionnaire(cleaned_data_adm1, choices = choices, questions = survey)
+
+# analysisplan_all_vars <- make_analysisplan_all_vars(df = cleaned_data, questionnaire = questionnaire, repeat.for.variable = "admin0")
+# 
+# human_questions <- survey%>%
+#   select(name, label)
+# 
+# analysisplan_all_vars <- analysisplan_all_vars%>%
+#   left_join(human_questions, by = c("dependent.variable" = "name"))
+# 
+# write_csv(analysisplan_all_vars, "analysis_plan_allVars_new.csv")
+
+added_indicators <- analysisplanTemplate%>%
+  filter(!dependent.variable %in% names(cleaned_data_adm1))%>%
+  mutate(choices = choices_name,
+    type = case_when(is.na(choices) & dependent.variable.type == "numerical" ~ "decimal",
+                          !is.na(choices) & dependent.variable.type == "categorical"~ paste0("select_multiple liste_", dependent.variable),
+                          TRUE ~ choices
+                          ))%>%
+  separate(type, into=c("qtype", "list_name"), sep = " ", remove = FALSE)
+
+added_indicators_survey <- added_indicators%>%
+  mutate(
+         hint = NA, required = NA, relevant = NA, choice_filter = NA, calculation = NA, constraint_message = NA,
+         constraint = NA,`$given_name`  = NA, repeat_count = NA, default = NA, appearance = NA
+         )%>%
+  rename(name = dependent.variable, label = label_indicator)%>%
+  select(type,name,label,hint,required,relevant,choice_filter,calculation,constraint_message,
+         constraint,`$given_name`,repeat_count,default, appearance)%>%
+  distinct()
 
 
-# Loading necessary data
-## Loading raw_data
+survey_full <- rbind(survey, added_indicators_survey)
 
-raw_data_csv <- "data/bfa2002_msna_2020_final_cleaning_20200913_PH_MF.csv"
+added_indicators_choices <- added_indicators%>%
+  rename(name = choices_name, label = choices_label )%>%
+  mutate(info_admin3 = NA, info_admin2 = NA, info_admin1 = NA, info_base = NA)%>%
+  select(names(choices))
 
-raw_data_info_menage_csv <- "data/bfa2002_msna_2020_final_cleaning_20200913_PH_MF_info_menage.csv"
+choices_full <- rbind(choices, added_indicators_choices)
+  
 
-raw_data_excel <- "data/bfa2002_msna_2020_final_cleaning_20200913_PH_MF.xlsx"
+dico <- form_dictionnary(cleaned_data_adm1, survey_full, choices_full, analysisplanTemplate)
+
+running_timezz <- data.frame(matrix(ncol = 4, nrow = 6) )
+
+names(running_timezz) <- c("Level", "Start", "End", "Running_time")
 
 
-#Loading data and cleaning data and questionnaire
-raw_data <- read_csv(raw_data_csv)%>%
-  select(-`personne m2`)%>%
-  mutate(status = case_when(
-    group_pop %in% c("pdi") ~ "pdi",
-    group_pop %in% c("pop_local", "migrant_burkina", "rapatrie", "refugie", "migrant_int", "retourne") ~ "host",
-    TRUE ~ NA_character_
-  )
+analysisplan_admin_1_grp <- make_analysis_plan_template(df= cleaned_data_adm1,
+                                                        questionnaire = questionnaire,
+                                                        repeat.for.variable = "admin1",
+                                                        independent.variable = "status",
+                                                        hypothesis.type = "group_difference",
+                                                        template_file = template_analysisplan_file
+                                                        )
+
+analysisplan_admin_1_grp <- analysisplan_admin_1_grp[!is.na(analysisplan_admin_1_grp$dependent.variable.type),]
+
+start_time_admin1_grp <- Sys.time()
+
+final_result_admin_1_grp <- from_analysisplan_map_to_output(data = cleaned_data_adm1, 
+                                                            analysisplan = analysisplan_admin_1_grp, 
+                                                            weighting = sf_wght_admin1, 
+                                                            questionnaire = questionnaire)
+
+
+end_time_admin1_grp <- Sys.time()
+
+end_time_admin1_grp - start_time_admin1_grp
+
+summary_stats_admin_1_grp <- final_result_admin_1_grp$results %>%
+  lapply(function(x){x$summary.statistic}) %>% do.call(rbind, .)%>%
+  select(repeat.var.value, independent.var.value,dependent.var, dependent.var.value, numbers)%>%
+  rename(admin1 = repeat.var.value, status = independent.var.value, variable = dependent.var, variable_value = dependent.var.value)
+
+n_adm1 <- cleaned_data_adm1%>%
+  group_by(admin1, status)%>%
+  summarise(n = n(), .groups="drop")%>%
+  pivot_longer(c(-admin1, -status), names_to = "variable", values_to = "n")%>%
+  select(-variable)
+
+which_subsets_adm1 <- cleaned_data_adm1%>%
+  group_by(admin1, status)%>%
+  summarise_all(funs(sum(is.na(.))))%>%
+  pivot_longer(c(-admin1, -status), names_to = "variable", values_to = "NAs")%>%
+  left_join(n_adm1, by = c("admin1", "status"))%>%
+  mutate(perc_NAs = round(NAs/n*100, 0))%>%
+  select(-n)
+
+which_skipLogic <- map(names(cleaned_data_adm1%>%select(-eau_propre, -admin1, -admin2, -status)), function(x)questionnaire$question_is_skipped(question.name = x, data = cleaned_data_adm1%>%select(-eau_propre)))%>%
+  as.data.frame()%>%
+  mutate(admin1 = cleaned_data_adm1$admin1, admin2 = cleaned_data_adm1$admin2, status = cleaned_data_adm1$status)
+
+names(which_skipLogic) <- c(names(cleaned_data_adm1%>%select(-eau_propre,  -admin1, -admin2, -status)), "admin1", "admin2", "status")
+
+which_skipLogic_adm1 <- which_skipLogic%>%
+  select(-admin2)%>%
+  group_by(admin1, status)%>%
+  summarise_all(funs(sum(.)))%>%
+  pivot_longer(c(-admin1, -status), names_to = "variable", values_to = "Skipped")%>%
+  left_join(n_adm1, by = c("admin1", "status"))%>%
+  mutate(perc_Skipped = round(Skipped/n*100, 0))%>%
+  select(-n)
+
+
+# summarise_subsets <- which_subsets_adm1%>%
+#   group_by(variable)%>%
+#   summarise(NAs=sum(NAs))%>%
+#   filter(!str_detect(variable,"^note_*"), !str_detect(variable,"^autre_*"), NAs >0)
+# 
+# SL_conditions <- survey
+# which_skipLogic <- map(SL_conditions$relevant,koboquest:::question_is_skipped_apply_condition_to_data , data = cleaned_data_adm1)
+  
+  
+
+##### Additional Frequencies #####
+freq_admin1_grp <- cleaned_data_adm1%>%
+  group_by(admin1, status)%>%
+  summarise(
+    #Naissances
+    freq_lieu_accouchement.centre_sante = sum(sum_lieu_accouchement.centre_sante * weights_sampling, na.rm = T)/sum(total_naissance * weights_sampling, na.rm = T),
+    freq_lieu_accouchement.maison = sum(sum_lieu_accouchement.maison * weights_sampling, na.rm = T)/sum(total_naissance * weights_sampling, na.rm = T),
+    freq_lieu_accouchement.autre = sum(sum_lieu_accouchement.autre * weights_sampling, na.rm = T)/sum(total_naissance * weights_sampling, na.rm = T),
+    freq_raison_domicil.accouche_assiste_domicil = sum(sum_raison_domicil_accouche_assiste_domicil * weights_sampling, na.rm=T)/sum(total_naissance * weights_sampling, na.rm = T),
+    freq_raison_domicil.accouche_centre_ferme = sum(sum_raison_domicil_accouche_centre_ferme * weights_sampling, na.rm=T)/sum(total_naissance * weights_sampling, na.rm = T),
+    freq_raison_domicil.accouche_centre_financ_inacc = sum(sum_raison_domicil_accouche_centre_financ_inacc * weights_sampling, na.rm=T)/sum(total_naissance * weights_sampling, na.rm = T),
+    freq_raison_domicil.centre_surpeuple = sum(sum_raison_domicil_centre_surpeuple * weights_sampling, na.rm=T)/sum(total_naissance * weights_sampling, na.rm = T),
+    freq_raison_domicil.maternite_pas_sur = sum(sum_raison_domicil_maternite_pas_sur * weights_sampling, na.rm=T)/sum(total_naissance * weights_sampling, na.rm = T),
+    freq_raison_domicil.physique_mere = sum(sum_raison_domicil_physique_mere * weights_sampling, na.rm=T)/sum(total_naissance * weights_sampling, na.rm = T),
+    freq_raison_domicil.rejoindre_centre = sum(sum_raison_domicil_rejoindre_centre * weights_sampling, na.rm=T)/sum(total_naissance * weights_sampling, na.rm = T),
+    freq_raison_domicil.nsp = sum(sum_raison_domicil_nsp * weights_sampling, na.rm=T)/sum(total_naissance * weights_sampling, na.rm = T),
+    #Enfants malades
+    freq_enfants_5ans_maladie.palu = sum(sum_enfants_5ans_maladie.palu * weights_sampling, na.rm=T)/sum(total_moins_5ans * weights_sampling, na.rm = T),
+    freq_enfants_5ans_maladie.infect_respiratoire  = sum(sum_enfants_5ans_maladie.infect_respiratoire * weights_sampling, na.rm=T)/sum(total_moins_5ans * weights_sampling, na.rm = T),
+    freq_enfants_5ans_maladie.diarrhee = sum(sum_enfants_5ans_maladie.diarrhee * weights_sampling, na.rm=T)/sum(total_moins_5ans * weights_sampling, na.rm = T),
+    freq_enfants_5ans_maladie.autre = sum(sum_enfants_5ans_maladie.autre * weights_sampling, na.rm=T)/sum(total_moins_5ans * weights_sampling, na.rm = T),
+    freq_enfants_5ans_maladie.nsp = sum(sum_enfants_5ans_maladie.nsp * weights_sampling, na.rm=T)/sum(total_moins_5ans * weights_sampling, na.rm = T),
+    #Marche
+    freq_marche_dif.garcons_moins5 = sum(sum_marche_dif_garcons_moins5 * weights_sampling, na.rm=T)/sum(total_agegrp_0_5_hommes * weights_sampling, na.rm = T),
+    freq_marche_dif.filles_moins5 = sum(sum_marche_dif_filles_moins5 * weights_sampling, na.rm=T)/sum(total_agegrp_0_5_femmes * weights_sampling, na.rm = T),
+    freq_marche_dif.garcons_5_18 = sum(sum_marche_dif_garcons_5_18 * weights_sampling, na.rm=T)/sum(total_agegrp_5_18_hommes * weights_sampling, na.rm = T),
+    freq_marche_dif.filles_5_18 = sum(sum_marche_dif_filles_5_18 * weights_sampling, na.rm=T)/sum(total_agegrp_5_18_femmes * weights_sampling, na.rm = T),
+    freq_marche_dif.hommes_18_64 = sum(sum_marche_dif_hommes_18_64 * weights_sampling, na.rm=T)/sum(total_agegrp_18_65_hommes * weights_sampling, na.rm = T),
+    freq_marche_dif.femmes_18_64 = sum(sum_marche_dif_femmes_18_64 * weights_sampling, na.rm=T)/sum(total_agegrp_18_65_femmes * weights_sampling, na.rm = T),
+    freq_marche_dif.hommes_65plus = sum(sum_marche_dif_hommes_65plus * weights_sampling, na.rm=T)/sum(total_agegrp_65plus_hommes * weights_sampling, na.rm = T),
+    freq_marche_dif.femmes_65plus = sum(sum_marche_dif_femmes_65plus * weights_sampling, na.rm=T)/sum(total_agegrp_65plus_femmes * weights_sampling, na.rm = T),
+    #Soins
+    freq_soins_dif.garcons_moins5 = sum(sum_soins_dif_garcons_moins5 * weights_sampling, na.rm=T)/sum(total_agegrp_0_5_hommes * weights_sampling, na.rm = T),
+    freq_soins_dif.filles_moins5 = sum(sum_soins_dif_filles_moins5 * weights_sampling, na.rm=T)/sum(total_agegrp_0_5_femmes * weights_sampling, na.rm = T),
+    freq_soins_dif.garcons_5_18 = sum(sum_soins_dif_garcons_5_18 * weights_sampling, na.rm=T)/sum(total_agegrp_5_18_hommes * weights_sampling, na.rm = T),
+    freq_soins_dif.filles_5_18 = sum(sum_soins_dif_filles_5_18 * weights_sampling, na.rm=T)/sum(total_agegrp_5_18_femmes * weights_sampling, na.rm = T),
+    freq_soins_dif.hommes_18_64 = sum(sum_soins_dif_hommes_18_64 * weights_sampling, na.rm=T)/sum(total_agegrp_18_65_hommes * weights_sampling, na.rm = T),
+    freq_soins_dif.femmes_18_64 = sum(sum_soins_dif_femmes_18_64 * weights_sampling, na.rm=T)/sum(total_agegrp_18_65_femmes * weights_sampling, na.rm = T),
+    freq_soins_dif.hommes_65plus = sum(sum_soins_dif_hommes_65plus * weights_sampling, na.rm=T)/sum(total_agegrp_65plus_hommes * weights_sampling, na.rm = T),
+    freq_soins_dif.femmes_65plus = sum(sum_soins_dif_femmes_65plus * weights_sampling, na.rm=T)/sum(total_agegrp_65plus_femmes * weights_sampling, na.rm = T),
+    #Concentration
+    freq_concentration_dif.garcons_moins5 = sum(sum_concentration_dif_garcons_moins5 * weights_sampling, na.rm=T)/sum(total_agegrp_0_5_hommes * weights_sampling, na.rm = T),
+    freq_concentration_dif.filles_moins5 = sum(sum_concentration_dif_filles_moins5 * weights_sampling, na.rm=T)/sum(total_agegrp_0_5_femmes * weights_sampling, na.rm = T),
+    freq_concentration_dif.garcons_5_18 = sum(sum_concentration_dif_garcons_5_18 * weights_sampling, na.rm=T)/sum(total_agegrp_5_18_hommes * weights_sampling, na.rm = T),
+    freq_concentration_dif.filles_5_18 = sum(sum_concentration_dif_filles_5_18 * weights_sampling, na.rm=T)/sum(total_agegrp_5_18_femmes * weights_sampling, na.rm = T),
+    freq_concentration_dif.hommes_18_64 = sum(sum_concentration_dif_hommes_18_64 * weights_sampling, na.rm=T)/sum(total_agegrp_18_65_hommes * weights_sampling, na.rm = T),
+    freq_concentration_dif.femmes_18_64 = sum(sum_concentration_dif_femmes_18_64 * weights_sampling, na.rm=T)/sum(total_agegrp_18_65_femmes * weights_sampling, na.rm = T),
+    freq_concentration_dif.hommes_65plus = sum(sum_concentration_dif_hommes_65plus * weights_sampling, na.rm=T)/sum(total_agegrp_65plus_hommes * weights_sampling, na.rm = T),
+    freq_concentration_dif.femmes_65plus = sum(sum_concentration_dif_femmes_65plus * weights_sampling, na.rm=T)/sum(total_agegrp_65plus_femmes * weights_sampling, na.rm = T),
+    #Vision
+    freq_vision_dif.garcons_moins5  = sum(sum_vision_dif_garcons_moins5 * weights_sampling, na.rm=T)/sum(total_agegrp_0_5_hommes * weights_sampling, na.rm = T),
+    freq_vision_dif.filles_moins5 = sum(sum_vision_dif_filles_moins5 * weights_sampling, na.rm=T)/sum(total_agegrp_0_5_femmes * weights_sampling, na.rm = T),
+    freq_vision_dif.garcons_5_18 = sum(sum_vision_dif_garcons_5_18 * weights_sampling, na.rm=T)/sum(total_agegrp_5_18_hommes * weights_sampling, na.rm = T),
+    freq_vision_dif.filles_5_18 = sum(sum_vision_dif_filles_5_18 * weights_sampling, na.rm=T)/sum(total_agegrp_5_18_femmes * weights_sampling, na.rm = T), 
+    freq_vision_dif.hommes_18_64 = sum(sum_vision_dif_hommes_18_64 * weights_sampling, na.rm=T)/sum(total_agegrp_18_65_hommes * weights_sampling, na.rm = T),
+    freq_vision_dif.femmes_18_64 = sum(sum_vision_dif_femmes_18_64 * weights_sampling, na.rm=T)/sum(total_agegrp_18_65_femmes * weights_sampling, na.rm = T),
+    freq_vision_dif.hommes_65plus = sum(sum_vision_dif_hommes_65plus * weights_sampling, na.rm=T)/sum(total_agegrp_65plus_hommes * weights_sampling, na.rm = T),
+    freq_vision_dif.femmes_65plus = sum(sum_vision_dif_femmes_65plus * weights_sampling, na.rm=T)/sum(total_agegrp_65plus_femmes * weights_sampling, na.rm = T),
+    #Entendre
+    freq_entendre_dif.garcons_moins5 = sum(sum_entendre_dif_garcons_moins5 * weights_sampling, na.rm=T)/sum(total_agegrp_0_5_hommes * weights_sampling, na.rm = T),
+    freq_entendre_dif.filles_moins5 = sum(sum_entendre_dif_filles_moins5 * weights_sampling, na.rm=T)/sum(total_agegrp_0_5_femmes * weights_sampling, na.rm = T),
+    freq_entendre_dif.garcons_5_18 = sum(sum_entendre_dif_garcons_5_18 * weights_sampling, na.rm=T)/sum(total_agegrp_5_18_hommes * weights_sampling, na.rm = T),
+    freq_entendre_dif.filles_5_18 = sum(sum_entendre_dif_filles_5_18 * weights_sampling, na.rm=T)/sum(total_agegrp_5_18_femmes * weights_sampling, na.rm = T),
+    freq_entendre_dif.hommes_18_64 = sum(sum_entendre_dif_hommes_18_64 * weights_sampling, na.rm=T)/sum(total_agegrp_18_65_hommes * weights_sampling, na.rm = T),
+    freq_entendre_dif.femmes_18_64 = sum(sum_entendre_dif_femmes_18_64 * weights_sampling, na.rm=T)/sum(total_agegrp_18_65_femmes * weights_sampling, na.rm = T),
+    freq_entendre_dif.hommes_65plus = sum(sum_entendre_dif_hommes_65plus * weights_sampling, na.rm=T)/sum(total_agegrp_65plus_hommes * weights_sampling, na.rm = T),
+    freq_entendre_dif.femmes_65plus = sum(sum_entendre_dif_femmes_65plus * weights_sampling, na.rm=T)/sum(total_agegrp_65plus_femmes * weights_sampling, na.rm = T),
+    # Communication
+    freq_communication_dif.garcons_moins5 = sum(sum_communication_dif_garcons_moins5 * weights_sampling, na.rm=T)/sum(total_agegrp_0_5_hommes * weights_sampling, na.rm = T),
+    freq_communication_dif.filles_moins5 = sum(sum_communication_dif_filles_moins5 * weights_sampling, na.rm=T)/sum(total_agegrp_0_5_femmes * weights_sampling, na.rm = T),
+    freq_communication_dif.garcons_5_18 = sum(sum_communication_dif_garcons_5_18 * weights_sampling, na.rm=T)/sum(total_agegrp_5_18_hommes * weights_sampling, na.rm = T),
+    freq_communication_dif.filles_5_18 = sum(sum_communication_dif_filles_5_18 * weights_sampling, na.rm=T)/sum(total_agegrp_5_18_femmes * weights_sampling, na.rm = T),
+    freq_communication_dif.hommes_18_64 = sum(sum_communication_dif_hommes_18_64 * weights_sampling, na.rm=T)/sum(total_agegrp_18_65_hommes * weights_sampling, na.rm = T),
+    freq_communication_dif.femmes_18_64 = sum(sum_communication_dif_femmes_18_64 * weights_sampling, na.rm=T)/sum(total_agegrp_18_65_femmes * weights_sampling, na.rm = T),
+    freq_communication_dif.hommes_65plus = sum(sum_communication_dif_hommes_65plus * weights_sampling, na.rm=T)/sum(total_agegrp_65plus_hommes * weights_sampling, na.rm = T),
+    freq_communication_dif.femmes_65plus = sum(sum_communication_dif_femmes_65plus * weights_sampling, na.rm=T)/sum(total_agegrp_65plus_femmes * weights_sampling, na.rm = T),
+    
+    #Deces
+    freq_deces_dif.garcons_moins5 = sum(sum_deces_dif_garcons_moins5 * weights_sampling, na.rm=T)/sum(total_agegrp_0_5_hommes * weights_sampling, na.rm = T),
+    freq_deces_dif.filles_moins5 = sum(sum_deces_dif_filles_moins5 * weights_sampling, na.rm=T)/sum(total_agegrp_0_5_femmes * weights_sampling, na.rm = T),
+    freq_deces_dif.garcons_5_18 = sum(sum_deces_dif_garcons_5_18 * weights_sampling, na.rm=T)/sum(total_agegrp_5_18_hommes * weights_sampling, na.rm = T),
+    freq_deces_dif.filles_5_18 = sum(sum_deces_dif_filles_5_18 * weights_sampling, na.rm=T)/sum(total_agegrp_5_18_femmes * weights_sampling, na.rm = T),
+    freq_deces_dif.hommes_18_64 = sum(sum_deces_dif_hommes_18_64 * weights_sampling, na.rm=T)/sum(total_agegrp_18_65_hommes * weights_sampling, na.rm = T),
+    freq_deces_dif.femmes_18_64 = sum(sum_deces_dif_femmes_18_64 * weights_sampling, na.rm=T)/sum(total_agegrp_18_65_femmes * weights_sampling, na.rm = T),
+    freq_deces_dif.hommes_65plus = sum(sum_deces_dif_hommes_65plus * weights_sampling, na.rm=T)/sum(total_agegrp_65plus_hommes * weights_sampling, na.rm = T),
+    freq_deces_dif.femmes_65plus = sum(sum_deces_dif_femmes_65plus * weights_sampling, na.rm=T)/sum(total_agegrp_65plus_femmes * weights_sampling, na.rm = T),
+    
+    freq_raison_deces.diarrhee = sum(sum_raison_deces_diarrhee * weights_sampling, na.rm=T)/sum(total_deces * weights_sampling, na.rm = T),
+    freq_raison_deces.autre_maladie = sum(sum_raison_deces_autre_maladie * weights_sampling, na.rm=T)/sum(total_deces * weights_sampling, na.rm = T),
+    freq_raison_deces.morsure = sum(sum_raison_deces_morsure * weights_sampling, na.rm=T)/sum(total_deces * weights_sampling, na.rm = T),
+    freq_raison_deces.deces_natu = sum(sum_raison_deces_deces_natu * weights_sampling, na.rm=T)/sum(total_deces * weights_sampling, na.rm = T),
+    freq_raison_deces.faim = sum(sum_raison_deces_faim * weights_sampling, na.rm=T)/sum(total_deces * weights_sampling, na.rm = T),
+    freq_raison_deces.accident_travail = sum(sum_raison_deces_accident_travail * weights_sampling, na.rm=T)/sum(total_deces * weights_sampling, na.rm = T),
+    freq_raison_deces.problemes_respi = sum(sum_raison_deces_problemes_respi * weights_sampling, na.rm=T)/sum(total_deces * weights_sampling, na.rm = T),
+    freq_raison_deces.autre = sum(sum_raison_deces_autre * weights_sampling, na.rm=T)/sum(total_deces * weights_sampling, na.rm = T),
+    freq_raison_deces.catastrophe_natu = sum(sum_raison_deces_catastrophe_natu * weights_sampling, na.rm=T)/sum(total_deces * weights_sampling, na.rm = T),
+    freq_raison_deces.accident_conflit = sum(sum_raison_deces_accident_conflit * weights_sampling, na.rm=T)/sum(total_deces * weights_sampling, na.rm = T),
+    freq_raison_deces.en_couche = sum(sum_raison_deces_en_couche * weights_sampling, na.rm=T)/sum(total_deces * weights_sampling, na.rm = T),
+    freq_raison_deces.accident_route = sum(sum_raison_deces_accident_route * weights_sampling, na.rm=T)/sum(total_deces * weights_sampling, na.rm = T),
+    # Education
+    freq_educ.3_5an_garcon = sum(total_educ_3_5an_garcon*weights_sampling, na.rm = T)/sum(total_3_5_hommes*weights_sampling, na.rm = T),
+    freq_infor_educ.3_5an_garcon = sum(total_infor_educ_3_5an_garcon * weights_sampling, na.rm = T)/sum(total_3_5_hommes*weights_sampling, na.rm = T),
+    freq_non_for_educ.3_5an_garcon = sum(total_non_for_educ_3_5an_garcon * weights_sampling, na.rm = T)/sum(total_3_5_hommes*weights_sampling, na.rm = T),
+    freq_aucune_educ.3_5an_garcon = sum(total_aucune_educ_3_5an_garcon * weights_sampling, na.rm = T)/sum(total_3_5_hommes*weights_sampling, na.rm = T),
+    freq_educ.3_5an_fille = sum(total_educ_3_5an_fille * weights_sampling, na.rm = T)/sum(total_3_5_femmes * weights_sampling, na.rm = T),
+    freq_infor_educ.3_5an_fille = sum(total_infor_educ_3_5an_fille * weights_sampling, na.rm = T)/sum(total_3_5_femmes * weights_sampling, na.rm = T),
+    freq_non_for_educ.3_5an_fille = sum(total_non_for_educ_3_5an_fille * weights_sampling, na.rm = T)/sum(total_3_5_femmes * weights_sampling, na.rm = T),
+    freq_aucune_educ.3_5an_fille = sum(total_aucune_educ_3_5an_fille * weights_sampling, na.rm = T)/sum(total_3_5_femmes * weights_sampling, na.rm = T),
+    
+    freq_educ.3_5an_total = sum(educ.3_5an_total*weights_sampling, na.rm=T)/sum(total_3_5*weights_sampling, na.rm = T),
+    freq_infor_educ.3_5an_total = sum(infor_educ.3_5an_total*weights_sampling, na.rm = T)/sum(total_3_5*weights_sampling, na.rm = T),
+    freq_non_for_educ.3_5an_total = sum(non_for_educ.3_5an_total*weights_sampling, na.rm = T)/sum(total_3_5*weights_sampling, na.rm = T),
+    freq_aucune_educ.3_5an_total = sum(aucune_educ.3_5an_total*weights_sampling, na.rm = T)/sum(total_3_5*weights_sampling, na.rm = T),
+    
+    freq_educ.6_12an_garcon  = sum(total_educ_6_12an_garcon * weights_sampling, na.rm = T)/sum(total_6_12_hommes * weights_sampling, na.rm = T),
+    freq_infor_educ.6_12an_garcon   = sum(total_infor_educ_6_12an_garcon * weights_sampling, na.rm = T)/sum(total_6_12_hommes * weights_sampling, na.rm = T),
+    freq_non_for_educ.6_12an_garcon  = sum(total_non_for_educ_6_12an_garcon * weights_sampling, na.rm = T)/sum(total_6_12_hommes * weights_sampling, na.rm = T),
+    freq_aucune_educ.6_12an_garcon = sum(total_aucune_educ_6_12an_garcon * weights_sampling, na.rm = T)/sum(total_6_12_hommes * weights_sampling, na.rm = T),
+    freq_educ.6_12an_fille = sum(total_educ_6_12an_fille * weights_sampling, na.rm = T)/sum(total_6_12_femmes * weights_sampling, na.rm = T),
+    freq_infor_educ.6_12an_fille = sum(total_infor_educ_6_12an_fille * weights_sampling, na.rm = T)/sum(total_6_12_femmes * weights_sampling, na.rm = T),
+    freq_non_for_educ.6_12an_fille = sum(total_non_for_educ_6_12an_fille * weights_sampling, na.rm = T)/sum(total_6_12_femmes * weights_sampling, na.rm = T),
+    freq_aucune_educ.6_12an_fille = sum(total_aucune_educ_6_12an_fille * weights_sampling, na.rm = T)/sum(total_6_12_femmes * weights_sampling, na.rm = T),
+    
+    freq_educ.6_12an_total = sum(educ.6_12an_total*weights_sampling, na.rm=T)/sum(total_6_12*weights_sampling, na.rm = T),
+    freq_infor_educ.6_12an_total = sum(infor_educ.6_12an_total*weights_sampling, na.rm = T)/sum(total_6_12*weights_sampling, na.rm = T),
+    freq_non_for_educ.6_12an_total = sum(non_for_educ.6_12an_total*weights_sampling, na.rm = T)/sum(total_6_12*weights_sampling, na.rm = T),
+    freq_aucune_educ.6_12an_total = sum(aucune_educ.6_12an_total*weights_sampling, na.rm = T)/sum(total_6_12*weights_sampling, na.rm = T),
+    
+    freq_educ.13_17an_garcon = sum(total_educ_13_17an_garcon * weights_sampling, na.rm = T)/sum(total_13_17_hommes * weights_sampling, na.rm = T),
+    freq_infor_educ.13_17an_garcon = sum(total_infor_educ_13_17an_garcon * weights_sampling, na.rm = T)/sum(total_13_17_hommes * weights_sampling, na.rm = T),
+    freq_non_for_educ.13_17an_garcon = sum(total_non_for_educ_13_17an_garcon * weights_sampling, na.rm = T)/sum(total_13_17_hommes * weights_sampling, na.rm = T),
+    freq_aucune_educ.13_17an_garcon = sum(total_aucune_educ_13_17an_garcon * weights_sampling, na.rm = T)/sum(total_13_17_hommes * weights_sampling, na.rm = T),
+    freq_educ.13_17an_fille = sum(total_educ_13_17an_fille * weights_sampling, na.rm = T)/sum(total_13_17_femmes * weights_sampling, na.rm = T),
+    freq_infor_educ.13_17an_fille = sum(total_infor_educ_13_17an_fille * weights_sampling, na.rm = T)/sum(total_13_17_femmes * weights_sampling, na.rm = T),
+    freq_non_for_educ.13_17an_fille = sum(total_non_for_educ_13_17an_fille * weights_sampling, na.rm = T)/sum(total_13_17_femmes * weights_sampling, na.rm = T),
+    freq_aucune_educ.13_17an_fille = sum(total_aucune_educ_13_17an_fille * weights_sampling, na.rm = T)/sum(total_13_17_femmes * weights_sampling, na.rm = T),
+    
+    freq_educ.13_17an_total = sum(educ.13_17an_total*weights_sampling, na.rm=T)/sum(total_13_17*weights_sampling, na.rm = T),
+    freq_infor_educ.13_17an_total = sum(infor_educ.13_17an_total*weights_sampling, na.rm = T)/sum(total_13_17*weights_sampling, na.rm = T),
+    freq_non_for_educ.13_17an_total = sum(non_for_educ.13_17an_total*weights_sampling, na.rm = T)/sum(total_13_17*weights_sampling, na.rm = T),
+    freq_aucune_educ.13_17an_total = sum(aucune_educ.13_17an_total*weights_sampling, na.rm = T)/sum(total_13_17*weights_sampling, na.rm = T),
+    
+    freq_scolarise = sum(total_scolarise * weights_sampling, na.rm = T)/sum(enfant_scolarisable * weights_sampling, na.rm = T),
+    freq_non_scolarise = sum(total_non_scolarise * weights_sampling, na.rm = T)/sum(enfant_scolarisable * weights_sampling, na.rm = T),
+    
+    freq_enfants_moins5_diarrhee = sum(enfant_selle*weights_sampling, na.rm = T)/sum(total_moins_5ans*weights_sampling, na.rm = T),
+    
+    freq_travail_fille = sum(travail_fille*weights_sampling, na.rm = T)/sum(total_0_17_femmes*weights_sampling, na.rm = T),
+    freq_travail_garcon = sum(travail_garcon*weights_sampling, na.rm = T)/sum(total_0_17_hommes*weights_sampling, na.rm = T),
+    .groups = "drop"
+    )%>%
+  pivot_longer(c(-admin1, -status), names_to = "variable", values_to = "numbers")%>%
+  separate(col=variable, into = c("variable", "variable_value"), sep = "\\.")%>%
+  distinct()%>%
+  select(admin1, status,variable, variable_value, numbers)
+
+#####
+
+bfa_admin1 <- read_csv("data/shapes/bfa_pplp_1m_nga_ocha/bfa_pplp_1m_nga_ocha.csv")%>%
+  select(admin1Name)%>%
+  mutate(admin1name = tolower(admin1Name),
+         admin1name = gsub("-","_", admin1name),
+         admin1name = gsub(" ", "_", admin1name))%>%
+  distinct()
+
+target_research_question_order <- unique(dico$research.question_label)
+target_sub_research_question_order <- unique(dico$sub.research.question_label)
+
+summary_stats_admin_1_grp_final <- bind_rows(summary_stats_admin_1_grp, freq_admin1_grp)%>%
+  left_join(which_subsets_adm1, by = c("admin1", "status", "variable"))%>%
+  left_join(which_skipLogic_adm1, by = c("admin1", "status", "variable"))%>%
+  mutate(question_choice = case_when(is.na(variable_value) ~ variable,
+                                     TRUE ~ paste0(variable, ".", variable_value)),
+         subset = if_else(perc_Skipped > 0, "Sous-ensemble de donnée", NA_character_))%>%
+  left_join(dico, by = "question_choice")%>%
+  mutate(status = case_when(status == "pdi" ~ "PDI",
+                                     status == "host" ~ "Communauté hôte",
+                                     TRUE ~ NA_character_))%>%
+  mutate(numbers = case_when(grepl("%.*?ayant de la difficulté à.*", label_indicator) & dependent.variable.type == "categorical"  ~ round(numbers*100,1),
+                             !grepl("%.*?ayant de la difficulté à.*", label_indicator) & dependent.variable.type == "categorical" ~ round(numbers*100,0),
+                             dependent.variable.type == "numerical"  ~ round(numbers,1)
+                            )
   )%>%
-  rename("risque_fem/enlevements" ="risque_fem/enlèvements",
-         "risque_hom/enlevements" = "risque_hom/enlèvements",
-         "risque_fille/enlevements" = "risque_fille/enlèvements",
-         "risque_garcon/enlevements" = "risque_garcon/enlèvements")%>%
-  mutate(across(where(is.character), str_remove_all, pattern = fixed("\n")))%>%
-  mutate(across(where(is.character), str_remove_all, pattern = fixed("\r")))%>%
-  mutate(across(where(is.character), str_remove_all, pattern = fixed(";")))
-
-names(raw_data) <- gsub("\\/", "\\.", names(raw_data))
-
-survey <- read_excel("data/reach_bfa_msna_outil_V2.xlsx", sheet = "survey")%>%
-  mutate(across(where(is.character), str_remove_all, pattern = fixed("\n")))%>%
-  mutate(across(where(is.character), str_remove_all, pattern = fixed("\r")))%>%
-  mutate(name = str_replace_all(name, pattern = fixed("è"), replacement = "e"))
-
-write_csv(survey,"data/survey.csv")
-
-choices <- read_excel("data/reach_bfa_msna_outil_V2.xlsx", sheet = "choices")%>%
-  mutate(name = str_replace_all(name, pattern = "[è|é]", replacement = "e"))%>%
-  mutate(across(where(is.character), str_remove_all, pattern = fixed("\n")))%>%
-  mutate(across(where(is.character), str_remove_all, pattern = fixed("\r")))
-
-write_csv(choices,"data/choices.csv")
-
-### Loading repeat loops
-raw_data_info_menage <- read_csv(raw_data_info_menage_csv)%>%
-  rename(submission_uuid = `_submission__uuid`,
-         parent_index = `_parent_index`)
-
-raw_data_maladie_moins_5ans_rpt <- read_excel(raw_data_excel, sheet = "maladie_moins_5ans_rpt")%>%
-  rename(submission_uuid = `_submission__uuid...2`,
-         parent_index = `_parent_index...1`)
-
-raw_data_naissances <- read_excel(raw_data_excel, sheet = "naissances")%>%
-  rename(submission_uuid = `_submission__uuid...2`,
-         parent_index = `_parent_index...1`)
-
-raw_data_membre_marche_dificile <- read_excel(raw_data_excel, sheet = "membre_marche_dificile")
-# %>% 
-#   rename(submission_uuid = `_submission__uuid...2`,
-#          parent_index = `_parent_index...1`)
-
-raw_data_membre_soins_difficile <- read_excel(raw_data_excel, sheet = "soins_difficile")
-# %>% 
-#   rename(submission_uuid = `_submission__uuid`,
-#          parent_index = `_parent_index`)
-
-raw_data_membre_concentration_difficile <- read_excel(raw_data_excel, sheet = "concentration_difficile") 
-# %>%
-#   rename(submission_uuid = `_submission__uuid...2`,
-#          parent_index = `_parent_index...1`)
-
-raw_data_membre_membre_vision_diffcile <- read_excel(raw_data_excel, sheet = "membre_vision_diffcile")
-# %>%
-#   rename(submission_uuid = `_submission__uuid...13`,
-#          parent_index = `_parent_index...1`)
-
-raw_data_membre_membre_entendre_difficile <- read_excel(raw_data_excel, sheet = "membre_entendre_difficile")
-# %>%
-#   rename(submission_uuid = `_submission__uuid...2`,
-#          parent_index = `_parent_index...1`)
-
-raw_data_membre_difficulte_communication <- read_excel(raw_data_excel, sheet = "communication_difficile")
-# %>%
-#   rename(submission_uuid = `_submission__uuid...2`,
-#          parent_index = `_parent_index...1`)
-
-raw_data_membre_repeat_nbre_pers_decedes <- read_excel(raw_data_excel, sheet = "repeat_nbre_pers_decedes")
-# %>%
-#   rename(submission_uuid = `_submission__uuid...2`,
-#          parent_index = `_parent_index...1`)
-
-loop_frames <- list(raw_data_info_menage, raw_data_maladie_moins_5ans_rpt, raw_data_naissances, raw_data_membre_marche_dificile,
-                    raw_data_membre_soins_difficile, raw_data_membre_concentration_difficile, raw_data_membre_membre_vision_diffcile,
-                    raw_data_membre_membre_entendre_difficile, raw_data_membre_difficulte_communication, raw_data_membre_repeat_nbre_pers_decedes)
-
-loop_frames_names <- list("raw_data_info_menage", "raw_data_maladie_moins_5ans_rpt", "raw_data_naissances", "raw_data_membre_marche_dificile",
-                          "raw_data_membre_soins_difficile", "raw_data_membre_concentration_difficile", "raw_data_membre_membre_vision_diffcile",
-                          "raw_data_membre_membre_entendre_difficile", "raw_data_membre_difficulte_communication", "raw_data_membre_repeat_nbre_pers_decedes")
+  select(research.question_label, sub.research.question_label, admin1, status, label_indicator, label_choice, numbers, subset)%>%
+  left_join(bfa_admin1, by = c("admin1" = "admin1name"))%>%
+  distinct()%>%
+  mutate(label_choice = case_when(is.na(label_choice) ~ label_indicator, 
+                                  TRUE ~ paste(label_indicator, label_choice, sep = ": ")))%>%
+  select(research.question_label, sub.research.question_label, admin1Name, status, label_choice,subset, numbers)%>%
+  distinct()%>%
+  filter(!is.na(label_choice))%>%
+  group_by(research.question_label, sub.research.question_label, admin1Name, status, label_choice)%>%
+  pivot_wider(names_from = c(admin1Name), values_from = numbers)%>%
+  # summarise(across(everything(), sum, na.rm=T))%>%
+  ungroup()%>%
+  mutate(sub.research.question_label = factor(sub.research.question_label, levels = target_sub_research_question_order ),
+         research.question_label = factor(research.question_label, levels = target_research_question_order))%>%
+  arrange(research.question_label,sub.research.question_label,status,label_choice)%>%
+  filter(!is.na(label_choice))%>%
+  group_by(research.question_label,sub.research.question_label,status, label_choice)%>%
+  summarise(across(where(is.numeric), sum, na.rm=T))
 
 
-list_remove_data <- lapply(loop_frames, remove_delParents_fromLoop, raw_data, uuid.name.parent = "uuid", uuid.name.loop = "submission_uuid")
 
-names(list_remove_data) <- loop_frames_names
+analysisplan_admin_2_grp <- make_analysis_plan_template(df= cleaned_data_adm2,
+                                                        questionnaire = questionnaire,
+                                                        repeat.for.variable = "admin2",
+                                                        independent.variable = "status",
+                                                        hypothesis.type = "direct_reporting",
+                                                        template_file = template_analysisplan_file
+)
 
-# create_objects_from_df(list_remove_data)
+analysisplan_admin_2_grp <- analysisplan_admin_2_grp[!is.na(analysisplan_admin_2_grp$dependent.variable.type),]
 
-
-### Running cleaninginspectoR and other checks on data
-
-# cleaninginspectoR_results <- cleaninginspectoR::inspect_all(raw_data, uuid.column.name = "uuid")%>%
-#   index_toUUID(raw_data, uuid.column.name = "uuid")
-# 
-# 
-# cleaninginspectoR_results_info_menage <- cleaninginspectoR::inspect_all(raw_data_info_menage,uuid.column.name = "submission_uuid" )%>%
-#   filter(issue_type != "duplicate in "submission_uuid")
-# 
-# 
-# cleaninginspectoR_results_maladie_moins_5ans_rpt <- cleaninginspectoR::inspect_all(raw_data_maladie_moins_5ans_rpt, uuid.column.name = "_submission__uuid...2" )%>%
-#   filter(issue_type != "duplicate in _submission__uuid...2")
-# 
-# cleaninginspectoR_results_naissances <- cleaninginspectoR::inspect_all(raw_data_naissances, uuid.column.name = "_submission__uuid...2" )%>%
-#   filter(issue_type != "duplicate in _submission__uuid...2")
-# 
-# cleaninginspectoR_results_membre_marche_dificile <- cleaninginspectoR::inspect_all(raw_data_membre_marche_dificile, uuid.column.name = "_submission__uuid...2" )%>%
-#   filter(issue_type != "duplicate in _submission__uuid...2")
-# 
-# cleaninginspectoR_results_membre_soins_difficile <- cleaninginspectoR::inspect_all(raw_data_membre_soins_difficile, uuid.column.name = "_submission__uuid...2" )%>%
-#   filter(issue_type != "duplicate in _submission__uuid...2")
-# 
-# cleaninginspectoR_results_concentration_difficile <- cleaninginspectoR::inspect_all(raw_data_membre_concentration_difficile, uuid.column.name = "_submission__uuid...2" )%>%
-#   filter(issue_type != "duplicate in _submission__uuid...2")
-# 
-# cleaninginspectoR_results_concentration_difficile <- cleaninginspectoR::inspect_all(raw_data_membre_concentration_difficile , uuid.column.name = "_submission__uuid...2" )%>%
-#   filter(issue_type != "duplicate in _submission__uuid...2")
-# 
-# cleaninginspectoR_results_membre_vision_diffcile <- cleaninginspectoR::inspect_all(raw_data_membre_membre_vision_diffcile, uuid.column.name = "_submission__uuid...2" )%>%
-#   filter(issue_type != "duplicate in _submission__uuid...2")
-# 
-# cleaninginspectoR_results_membre_entendre_difficile <- cleaninginspectoR::inspect_all(raw_data_membre_membre_entendre_difficile , uuid.column.name = "_submission__uuid...2" )%>%
-#   filter(issue_type != "duplicate in _submission__uuid...2")
-# 
-# cleaninginspectoR_results_membre_repeat_nbre_pers_decedes <- cleaninginspectoR::inspect_all(raw_data_membre_repeat_nbre_pers_decedes, uuid.column.name = "_submission__uuid...2" )%>%
-#   filter(issue_type != "duplicate in _submission__uuid...2")
-
-
-### Loading sampling strategies 
-samplingStrategies <- read_excel("data/Sampling_RU.xlsx", sheet = "Tableau Sampling Total", n_max = 663)%>%
-  select(!starts_with("..."))%>%
-  mutate_at(c("host_direct", "host_remote","idp_direct", "idp_telephone"), as.double)%>%
-  pivot_longer(cols = c("host_direct", "host_remote","idp_direct", "idp_telephone"), names_to = "sampling_strat", values_to ="surveys_toBeDone")%>%
-  filter(surveys_toBeDone >0, !is.na(surveys_toBeDone))%>%
-  select(village_P_code, sampling_strat)%>%
-  mutate(pcode_popGrp = paste(village_P_code, sampling_strat, sep = "_")
+analysisplan_admin_2_grp_reduced <- analysisplan_admin_2_grp%>%
+  filter(
+    !dependent.variable == "probleme_abri",
   )
 
 
-### Cleaning pcodes for other localites
+start_time_admin2_grp <- Sys.time()
 
-# bfa_pcodes <- read_excel("data/sampling-resume-enq.xlsx", sheet = "ITOS ADMIN3 PCODES")%>%
-#   mutate(adm123 = cleaning_chr( gsub("-","_", tolower(paste0(ADM1_FR, ADM2_FR, ADM3_FR)))))
-# 
-# pcodes_probs <- raw_data%>%
-#   select(admin1, admin2, admin3, pcode, localite, autre_localite, "_gpsmenage_latitude", "_gpsmenage_longitude", uuid)%>%
-#   rename("gpsmenage_latitude" = "_gpsmenage_latitude", "gpsmenage_longitude"= "_gpsmenage_longitude")%>%
-#   filter(localite == 'autre')%>%
-#   mutate(
-#     localite = case_when(localite == 'autre' ~ autre_localite,
-#                          TRUE ~ localite),
-#     gpsmenage_latitude = case_when(gpsmenage_latitude == "NA" ~ NA_character_ ,
-#                                    TRUE ~ as.character(gpsmenage_latitude)),
-#     gpsmenage_longitude = case_when(gpsmenage_longitude == "NA" ~ NA_character_ ,
-#                                     TRUE ~ as.character(gpsmenage_longitude))
-#   )%>%
-#   group_by(admin1, admin2, admin3,pcode, localite)%>%
-#   distinct()%>%
-#   filter(!is.na(gpsmenage_latitude))%>%
-#   ungroup()
+final_result_admin_2_grp <- from_analysisplan_map_to_output(data = cleaned_data_adm2, 
+                                                            analysisplan = analysisplan_admin_2_grp_reduced, 
+                                                            weighting = admin2_wght, 
+                                                            questionnaire = questionnaire)
 
+end_time_admin2_grp <- Sys.time()
 
-### Loading clusters sampling frame and cleaning centers of clusters
+end_time_admin2_grp - start_time_admin2_grp
 
-clusterSample <- read_excel("data/Sampling_RU.xlsx", sheet = "sample_admin2_cluster_hexa500m_")%>%
-  mutate(X = case_when(is.na(POINT_X) ~ as.double(NEAR_X),
-                       TRUE ~ as.double(POINT_X)),
-         Y = case_when(is.na(POINT_Y) ~ as.double(NEAR_Y),
-                       TRUE ~ as.double(POINT_Y))
+summary_stats_admin_2_grp <- final_result_admin_2_grp$results %>%
+  lapply(function(x){x$summary.statistic}) %>% do.call(rbind, .)%>%
+  select(repeat.var.value, independent.var.value,dependent.var, dependent.var.value, numbers)%>%
+  rename(admin2 = repeat.var.value, status = independent.var.value, variable = dependent.var, variable_value = dependent.var.value)
+
+freq_admin2_grp <- cleaned_data_adm2%>%
+  group_by(admin2, status)%>%
+  summarise(
+    #Naissances
+    freq_lieu_accouchement.centre_sante = sum(sum_lieu_accouchement.centre_sante * weights_sampling, na.rm = T)/sum(total_naissance * weights_sampling, na.rm = T),
+    freq_lieu_accouchement.maison = sum(sum_lieu_accouchement.maison * weights_sampling, na.rm = T)/sum(total_naissance * weights_sampling, na.rm = T),
+    freq_lieu_accouchement.autre = sum(sum_lieu_accouchement.autre * weights_sampling, na.rm = T)/sum(total_naissance * weights_sampling, na.rm = T),
+    freq_raison_domicil.accouche_assiste_domicil = sum(sum_raison_domicil_accouche_assiste_domicil * weights_sampling, na.rm=T)/sum(total_naissance * weights_sampling, na.rm = T),
+    freq_raison_domicil.accouche_centre_ferme = sum(sum_raison_domicil_accouche_centre_ferme * weights_sampling, na.rm=T)/sum(total_naissance * weights_sampling, na.rm = T),
+    freq_raison_domicil.accouche_centre_financ_inacc = sum(sum_raison_domicil_accouche_centre_financ_inacc * weights_sampling, na.rm=T)/sum(total_naissance * weights_sampling, na.rm = T),
+    freq_raison_domicil.centre_surpeuple = sum(sum_raison_domicil_centre_surpeuple * weights_sampling, na.rm=T)/sum(total_naissance * weights_sampling, na.rm = T),
+    freq_raison_domicil.maternite_pas_sur = sum(sum_raison_domicil_maternite_pas_sur * weights_sampling, na.rm=T)/sum(total_naissance * weights_sampling, na.rm = T),
+    freq_raison_domicil.physique_mere = sum(sum_raison_domicil_physique_mere * weights_sampling, na.rm=T)/sum(total_naissance * weights_sampling, na.rm = T),
+    freq_raison_domicil.rejoindre_centre = sum(sum_raison_domicil_rejoindre_centre * weights_sampling, na.rm=T)/sum(total_naissance * weights_sampling, na.rm = T),
+    freq_raison_domicil.nsp = sum(sum_raison_domicil_nsp * weights_sampling, na.rm=T)/sum(total_naissance * weights_sampling, na.rm = T),
+    #Enfants malades
+    freq_enfants_5ans_maladie.palu = sum(sum_enfants_5ans_maladie.palu * weights_sampling, na.rm=T)/sum(total_moins_5ans * weights_sampling, na.rm = T),
+    freq_enfants_5ans_maladie.infect_respiratoire  = sum(sum_enfants_5ans_maladie.infect_respiratoire * weights_sampling, na.rm=T)/sum(total_moins_5ans * weights_sampling, na.rm = T),
+    freq_enfants_5ans_maladie.diarrhee = sum(sum_enfants_5ans_maladie.diarrhee * weights_sampling, na.rm=T)/sum(total_moins_5ans * weights_sampling, na.rm = T),
+    freq_enfants_5ans_maladie.autre = sum(sum_enfants_5ans_maladie.autre * weights_sampling, na.rm=T)/sum(total_moins_5ans * weights_sampling, na.rm = T),
+    freq_enfants_5ans_maladie.nsp = sum(sum_enfants_5ans_maladie.nsp * weights_sampling, na.rm=T)/sum(total_moins_5ans * weights_sampling, na.rm = T),
+    #Marche
+    freq_marche_dif.garcons_moins5 = sum(sum_marche_dif_garcons_moins5 * weights_sampling, na.rm=T)/sum(total_agegrp_0_5_hommes * weights_sampling, na.rm = T),
+    freq_marche_dif.filles_moins5 = sum(sum_marche_dif_filles_moins5 * weights_sampling, na.rm=T)/sum(total_agegrp_0_5_femmes * weights_sampling, na.rm = T),
+    freq_marche_dif.garcons_5_18 = sum(sum_marche_dif_garcons_5_18 * weights_sampling, na.rm=T)/sum(total_agegrp_5_18_hommes * weights_sampling, na.rm = T),
+    freq_marche_dif.filles_5_18 = sum(sum_marche_dif_filles_5_18 * weights_sampling, na.rm=T)/sum(total_agegrp_5_18_femmes * weights_sampling, na.rm = T),
+    freq_marche_dif.hommes_18_64 = sum(sum_marche_dif_hommes_18_64 * weights_sampling, na.rm=T)/sum(total_agegrp_18_65_hommes * weights_sampling, na.rm = T),
+    freq_marche_dif.femmes_18_64 = sum(sum_marche_dif_femmes_18_64 * weights_sampling, na.rm=T)/sum(total_agegrp_18_65_femmes * weights_sampling, na.rm = T),
+    freq_marche_dif.hommes_65plus = sum(sum_marche_dif_hommes_65plus * weights_sampling, na.rm=T)/sum(total_agegrp_65plus_hommes * weights_sampling, na.rm = T),
+    freq_marche_dif.femmes_65plus = sum(sum_marche_dif_femmes_65plus * weights_sampling, na.rm=T)/sum(total_agegrp_65plus_femmes * weights_sampling, na.rm = T),
+    #Soins
+    freq_soins_dif.garcons_moins5 = sum(sum_soins_dif_garcons_moins5 * weights_sampling, na.rm=T)/sum(total_agegrp_0_5_hommes * weights_sampling, na.rm = T),
+    freq_soins_dif.filles_moins5 = sum(sum_soins_dif_filles_moins5 * weights_sampling, na.rm=T)/sum(total_agegrp_0_5_femmes * weights_sampling, na.rm = T),
+    freq_soins_dif.garcons_5_18 = sum(sum_soins_dif_garcons_5_18 * weights_sampling, na.rm=T)/sum(total_agegrp_5_18_hommes * weights_sampling, na.rm = T),
+    freq_soins_dif.filles_5_18 = sum(sum_soins_dif_filles_5_18 * weights_sampling, na.rm=T)/sum(total_agegrp_5_18_femmes * weights_sampling, na.rm = T),
+    freq_soins_dif.hommes_18_64 = sum(sum_soins_dif_hommes_18_64 * weights_sampling, na.rm=T)/sum(total_agegrp_18_65_hommes * weights_sampling, na.rm = T),
+    freq_soins_dif.femmes_18_64 = sum(sum_soins_dif_femmes_18_64 * weights_sampling, na.rm=T)/sum(total_agegrp_18_65_femmes * weights_sampling, na.rm = T),
+    freq_soins_dif.hommes_65plus = sum(sum_soins_dif_hommes_65plus * weights_sampling, na.rm=T)/sum(total_agegrp_65plus_hommes * weights_sampling, na.rm = T),
+    freq_soins_dif.femmes_65plus = sum(sum_soins_dif_femmes_65plus * weights_sampling, na.rm=T)/sum(total_agegrp_65plus_femmes * weights_sampling, na.rm = T),
+    #Concentration
+    freq_concentration_dif.garcons_moins5 = sum(sum_concentration_dif_garcons_moins5 * weights_sampling, na.rm=T)/sum(total_agegrp_0_5_hommes * weights_sampling, na.rm = T),
+    freq_concentration_dif.filles_moins5 = sum(sum_concentration_dif_filles_moins5 * weights_sampling, na.rm=T)/sum(total_agegrp_0_5_femmes * weights_sampling, na.rm = T),
+    freq_concentration_dif.garcons_5_18 = sum(sum_concentration_dif_garcons_5_18 * weights_sampling, na.rm=T)/sum(total_agegrp_5_18_hommes * weights_sampling, na.rm = T),
+    freq_concentration_dif.filles_5_18 = sum(sum_concentration_dif_filles_5_18 * weights_sampling, na.rm=T)/sum(total_agegrp_5_18_femmes * weights_sampling, na.rm = T),
+    freq_concentration_dif.hommes_18_64 = sum(sum_concentration_dif_hommes_18_64 * weights_sampling, na.rm=T)/sum(total_agegrp_18_65_hommes * weights_sampling, na.rm = T),
+    freq_concentration_dif.femmes_18_64 = sum(sum_concentration_dif_femmes_18_64 * weights_sampling, na.rm=T)/sum(total_agegrp_18_65_femmes * weights_sampling, na.rm = T),
+    freq_concentration_dif.hommes_65plus = sum(sum_concentration_dif_hommes_65plus * weights_sampling, na.rm=T)/sum(total_agegrp_65plus_hommes * weights_sampling, na.rm = T),
+    freq_concentration_dif.femmes_65plus = sum(sum_concentration_dif_femmes_65plus * weights_sampling, na.rm=T)/sum(total_agegrp_65plus_femmes * weights_sampling, na.rm = T),
+    #Vision
+    freq_vision_dif.garcons_moins5  = sum(sum_vision_dif_garcons_moins5 * weights_sampling, na.rm=T)/sum(total_agegrp_0_5_hommes * weights_sampling, na.rm = T),
+    freq_vision_dif.filles_moins5 = sum(sum_vision_dif_filles_moins5 * weights_sampling, na.rm=T)/sum(total_agegrp_0_5_femmes * weights_sampling, na.rm = T),
+    freq_vision_dif.garcons_5_18 = sum(sum_vision_dif_garcons_5_18 * weights_sampling, na.rm=T)/sum(total_agegrp_5_18_hommes * weights_sampling, na.rm = T),
+    freq_vision_dif.filles_5_18 = sum(sum_vision_dif_filles_5_18 * weights_sampling, na.rm=T)/sum(total_agegrp_5_18_femmes * weights_sampling, na.rm = T), 
+    freq_vision_dif.hommes_18_64 = sum(sum_vision_dif_hommes_18_64 * weights_sampling, na.rm=T)/sum(total_agegrp_18_65_hommes * weights_sampling, na.rm = T),
+    freq_vision_dif.femmes_18_64 = sum(sum_vision_dif_femmes_18_64 * weights_sampling, na.rm=T)/sum(total_agegrp_18_65_femmes * weights_sampling, na.rm = T),
+    freq_vision_dif.hommes_65plus = sum(sum_vision_dif_hommes_65plus * weights_sampling, na.rm=T)/sum(total_agegrp_65plus_hommes * weights_sampling, na.rm = T),
+    freq_vision_dif.femmes_65plus = sum(sum_vision_dif_femmes_65plus * weights_sampling, na.rm=T)/sum(total_agegrp_65plus_femmes * weights_sampling, na.rm = T),
+    #Entendre
+    freq_entendre_dif.garcons_moins5 = sum(sum_entendre_dif_garcons_moins5 * weights_sampling, na.rm=T)/sum(total_agegrp_0_5_hommes * weights_sampling, na.rm = T),
+    freq_entendre_dif.filles_moins5 = sum(sum_entendre_dif_filles_moins5 * weights_sampling, na.rm=T)/sum(total_agegrp_0_5_femmes * weights_sampling, na.rm = T),
+    freq_entendre_dif.garcons_5_18 = sum(sum_entendre_dif_garcons_5_18 * weights_sampling, na.rm=T)/sum(total_agegrp_5_18_hommes * weights_sampling, na.rm = T),
+    freq_entendre_dif.filles_5_18 = sum(sum_entendre_dif_filles_5_18 * weights_sampling, na.rm=T)/sum(total_agegrp_5_18_femmes * weights_sampling, na.rm = T),
+    freq_entendre_dif.hommes_18_64 = sum(sum_entendre_dif_hommes_18_64 * weights_sampling, na.rm=T)/sum(total_agegrp_18_65_hommes * weights_sampling, na.rm = T),
+    freq_entendre_dif.femmes_18_64 = sum(sum_entendre_dif_femmes_18_64 * weights_sampling, na.rm=T)/sum(total_agegrp_18_65_femmes * weights_sampling, na.rm = T),
+    freq_entendre_dif.hommes_65plus = sum(sum_entendre_dif_hommes_65plus * weights_sampling, na.rm=T)/sum(total_agegrp_65plus_hommes * weights_sampling, na.rm = T),
+    freq_entendre_dif.femmes_65plus = sum(sum_entendre_dif_femmes_65plus * weights_sampling, na.rm=T)/sum(total_agegrp_65plus_femmes * weights_sampling, na.rm = T),
+    # Communication
+    freq_communication_dif.garcons_moins5 = sum(sum_communication_dif_garcons_moins5 * weights_sampling, na.rm=T)/sum(total_agegrp_0_5_hommes * weights_sampling, na.rm = T),
+    freq_communication_dif.filles_moins5 = sum(sum_communication_dif_filles_moins5 * weights_sampling, na.rm=T)/sum(total_agegrp_0_5_femmes * weights_sampling, na.rm = T),
+    freq_communication_dif.garcons_5_18 = sum(sum_communication_dif_garcons_5_18 * weights_sampling, na.rm=T)/sum(total_agegrp_5_18_hommes * weights_sampling, na.rm = T),
+    freq_communication_dif.filles_5_18 = sum(sum_communication_dif_filles_5_18 * weights_sampling, na.rm=T)/sum(total_agegrp_5_18_femmes * weights_sampling, na.rm = T),
+    freq_communication_dif.hommes_18_64 = sum(sum_communication_dif_hommes_18_64 * weights_sampling, na.rm=T)/sum(total_agegrp_18_65_hommes * weights_sampling, na.rm = T),
+    freq_communication_dif.femmes_18_64 = sum(sum_communication_dif_femmes_18_64 * weights_sampling, na.rm=T)/sum(total_agegrp_18_65_femmes * weights_sampling, na.rm = T),
+    freq_communication_dif.hommes_65plus = sum(sum_communication_dif_hommes_65plus * weights_sampling, na.rm=T)/sum(total_agegrp_65plus_hommes * weights_sampling, na.rm = T),
+    freq_communication_dif.femmes_65plus = sum(sum_communication_dif_femmes_65plus * weights_sampling, na.rm=T)/sum(total_agegrp_65plus_femmes * weights_sampling, na.rm = T),
+    
+    #Deces
+    freq_deces_dif.garcons_moins5 = sum(sum_deces_dif_garcons_moins5 * weights_sampling, na.rm=T)/sum(total_agegrp_0_5_hommes * weights_sampling, na.rm = T),
+    freq_deces_dif.filles_moins5 = sum(sum_deces_dif_filles_moins5 * weights_sampling, na.rm=T)/sum(total_agegrp_0_5_femmes * weights_sampling, na.rm = T),
+    freq_deces_dif.garcons_5_18 = sum(sum_deces_dif_garcons_5_18 * weights_sampling, na.rm=T)/sum(total_agegrp_5_18_hommes * weights_sampling, na.rm = T),
+    freq_deces_dif.filles_5_18 = sum(sum_deces_dif_filles_5_18 * weights_sampling, na.rm=T)/sum(total_agegrp_5_18_femmes * weights_sampling, na.rm = T),
+    freq_deces_dif.hommes_18_64 = sum(sum_deces_dif_hommes_18_64 * weights_sampling, na.rm=T)/sum(total_agegrp_18_65_hommes * weights_sampling, na.rm = T),
+    freq_deces_dif.femmes_18_64 = sum(sum_deces_dif_femmes_18_64 * weights_sampling, na.rm=T)/sum(total_agegrp_18_65_femmes * weights_sampling, na.rm = T),
+    freq_deces_dif.hommes_65plus = sum(sum_deces_dif_hommes_65plus * weights_sampling, na.rm=T)/sum(total_agegrp_65plus_hommes * weights_sampling, na.rm = T),
+    freq_deces_dif.femmes_65plus = sum(sum_deces_dif_femmes_65plus * weights_sampling, na.rm=T)/sum(total_agegrp_65plus_femmes * weights_sampling, na.rm = T),
+    
+    freq_raison_deces.diarrhee = sum(sum_raison_deces_diarrhee * weights_sampling, na.rm=T)/sum(total_deces * weights_sampling, na.rm = T),
+    freq_raison_deces.autre_maladie = sum(sum_raison_deces_autre_maladie * weights_sampling, na.rm=T)/sum(total_deces * weights_sampling, na.rm = T),
+    freq_raison_deces.morsure = sum(sum_raison_deces_morsure * weights_sampling, na.rm=T)/sum(total_deces * weights_sampling, na.rm = T),
+    freq_raison_deces.deces_natu = sum(sum_raison_deces_deces_natu * weights_sampling, na.rm=T)/sum(total_deces * weights_sampling, na.rm = T),
+    freq_raison_deces.faim = sum(sum_raison_deces_faim * weights_sampling, na.rm=T)/sum(total_deces * weights_sampling, na.rm = T),
+    freq_raison_deces.accident_travail = sum(sum_raison_deces_accident_travail * weights_sampling, na.rm=T)/sum(total_deces * weights_sampling, na.rm = T),
+    freq_raison_deces.problemes_respi = sum(sum_raison_deces_problemes_respi * weights_sampling, na.rm=T)/sum(total_deces * weights_sampling, na.rm = T),
+    freq_raison_deces.autre = sum(sum_raison_deces_autre * weights_sampling, na.rm=T)/sum(total_deces * weights_sampling, na.rm = T),
+    freq_raison_deces.catastrophe_natu = sum(sum_raison_deces_catastrophe_natu * weights_sampling, na.rm=T)/sum(total_deces * weights_sampling, na.rm = T),
+    freq_raison_deces.accident_conflit = sum(sum_raison_deces_accident_conflit * weights_sampling, na.rm=T)/sum(total_deces * weights_sampling, na.rm = T),
+    freq_raison_deces.en_couche = sum(sum_raison_deces_en_couche * weights_sampling, na.rm=T)/sum(total_deces * weights_sampling, na.rm = T),
+    freq_raison_deces.accident_route = sum(sum_raison_deces_accident_route * weights_sampling, na.rm=T)/sum(total_deces * weights_sampling, na.rm = T),
+    # Education
+    freq_educ.3_5an_garcon = sum(total_educ_3_5an_garcon*weights_sampling, na.rm = T)/sum(total_3_5_hommes*weights_sampling, na.rm = T),
+    freq_infor_educ.3_5an_garcon = sum(total_infor_educ_3_5an_garcon * weights_sampling, na.rm = T)/sum(total_3_5_hommes*weights_sampling, na.rm = T),
+    freq_non_for_educ.3_5an_garcon = sum(total_non_for_educ_3_5an_garcon * weights_sampling, na.rm = T)/sum(total_3_5_hommes*weights_sampling, na.rm = T),
+    freq_aucune_educ.3_5an_garcon = sum(total_aucune_educ_3_5an_garcon * weights_sampling, na.rm = T)/sum(total_3_5_hommes*weights_sampling, na.rm = T),
+    freq_educ.3_5an_fille = sum(total_educ_3_5an_fille * weights_sampling, na.rm = T)/sum(total_3_5_femmes * weights_sampling, na.rm = T),
+    freq_infor_educ.3_5an_fille = sum(total_infor_educ_3_5an_fille * weights_sampling, na.rm = T)/sum(total_3_5_femmes * weights_sampling, na.rm = T),
+    freq_non_for_educ.3_5an_fille = sum(total_non_for_educ_3_5an_fille * weights_sampling, na.rm = T)/sum(total_3_5_femmes * weights_sampling, na.rm = T),
+    freq_aucune_educ.3_5an_fille = sum(total_aucune_educ_3_5an_fille * weights_sampling, na.rm = T)/sum(total_3_5_femmes * weights_sampling, na.rm = T),
+    
+    freq_educ.3_5an_total = sum(educ.3_5an_total*weights_sampling, na.rm=T)/sum(total_3_5*weights_sampling, na.rm = T),
+    freq_infor_educ.3_5an_total = sum(infor_educ.3_5an_total*weights_sampling, na.rm = T)/sum(total_3_5*weights_sampling, na.rm = T),
+    freq_non_for_educ.3_5an_total = sum(non_for_educ.3_5an_total*weights_sampling, na.rm = T)/sum(total_3_5*weights_sampling, na.rm = T),
+    freq_aucune_educ.3_5an_total = sum(aucune_educ.3_5an_total*weights_sampling, na.rm = T)/sum(total_3_5*weights_sampling, na.rm = T),
+    
+    freq_educ.6_12an_garcon  = sum(total_educ_6_12an_garcon * weights_sampling, na.rm = T)/sum(total_6_12_hommes * weights_sampling, na.rm = T),
+    freq_infor_educ.6_12an_garcon   = sum(total_infor_educ_6_12an_garcon * weights_sampling, na.rm = T)/sum(total_6_12_hommes * weights_sampling, na.rm = T),
+    freq_non_for_educ.6_12an_garcon  = sum(total_non_for_educ_6_12an_garcon * weights_sampling, na.rm = T)/sum(total_6_12_hommes * weights_sampling, na.rm = T),
+    freq_aucune_educ.6_12an_garcon = sum(total_aucune_educ_6_12an_garcon * weights_sampling, na.rm = T)/sum(total_6_12_hommes * weights_sampling, na.rm = T),
+    freq_educ.6_12an_fille = sum(total_educ_6_12an_fille * weights_sampling, na.rm = T)/sum(total_6_12_femmes * weights_sampling, na.rm = T),
+    freq_infor_educ.6_12an_fille = sum(total_infor_educ_6_12an_fille * weights_sampling, na.rm = T)/sum(total_6_12_femmes * weights_sampling, na.rm = T),
+    freq_non_for_educ.6_12an_fille = sum(total_non_for_educ_6_12an_fille * weights_sampling, na.rm = T)/sum(total_6_12_femmes * weights_sampling, na.rm = T),
+    freq_aucune_educ.6_12an_fille = sum(total_aucune_educ_6_12an_fille * weights_sampling, na.rm = T)/sum(total_6_12_femmes * weights_sampling, na.rm = T),
+    
+    freq_educ.6_12an_total = sum(educ.6_12an_total*weights_sampling, na.rm=T)/sum(total_6_12*weights_sampling, na.rm = T),
+    freq_infor_educ.6_12an_total = sum(infor_educ.6_12an_total*weights_sampling, na.rm = T)/sum(total_6_12*weights_sampling, na.rm = T),
+    freq_non_for_educ.6_12an_total = sum(non_for_educ.6_12an_total*weights_sampling, na.rm = T)/sum(total_6_12*weights_sampling, na.rm = T),
+    freq_aucune_educ.6_12an_total = sum(aucune_educ.6_12an_total*weights_sampling, na.rm = T)/sum(total_6_12*weights_sampling, na.rm = T),
+    
+    freq_educ.13_17an_garcon = sum(total_educ_13_17an_garcon * weights_sampling, na.rm = T)/sum(total_13_17_hommes * weights_sampling, na.rm = T),
+    freq_infor_educ.13_17an_garcon = sum(total_infor_educ_13_17an_garcon * weights_sampling, na.rm = T)/sum(total_13_17_hommes * weights_sampling, na.rm = T),
+    freq_non_for_educ.13_17an_garcon = sum(total_non_for_educ_13_17an_garcon * weights_sampling, na.rm = T)/sum(total_13_17_hommes * weights_sampling, na.rm = T),
+    freq_aucune_educ.13_17an_garcon = sum(total_aucune_educ_13_17an_garcon * weights_sampling, na.rm = T)/sum(total_13_17_hommes * weights_sampling, na.rm = T),
+    freq_educ.13_17an_fille = sum(total_educ_13_17an_fille * weights_sampling, na.rm = T)/sum(total_13_17_femmes * weights_sampling, na.rm = T),
+    freq_infor_educ.13_17an_fille = sum(total_infor_educ_13_17an_fille * weights_sampling, na.rm = T)/sum(total_13_17_femmes * weights_sampling, na.rm = T),
+    freq_non_for_educ.13_17an_fille = sum(total_non_for_educ_13_17an_fille * weights_sampling, na.rm = T)/sum(total_13_17_femmes * weights_sampling, na.rm = T),
+    freq_aucune_educ.13_17an_fille = sum(total_aucune_educ_13_17an_fille * weights_sampling, na.rm = T)/sum(total_13_17_femmes * weights_sampling, na.rm = T),
+    
+    freq_educ.13_17an_total = sum(educ.13_17an_total*weights_sampling, na.rm=T)/sum(total_13_17*weights_sampling, na.rm = T),
+    freq_infor_educ.13_17an_total = sum(infor_educ.13_17an_total*weights_sampling, na.rm = T)/sum(total_13_17*weights_sampling, na.rm = T),
+    freq_non_for_educ.13_17an_total = sum(non_for_educ.13_17an_total*weights_sampling, na.rm = T)/sum(total_13_17*weights_sampling, na.rm = T),
+    freq_aucune_educ.13_17an_total = sum(aucune_educ.13_17an_total*weights_sampling, na.rm = T)/sum(total_13_17*weights_sampling, na.rm = T),
+    
+    freq_scolarise = sum(total_scolarise * weights_sampling, na.rm = T)/sum(enfant_scolarisable * weights_sampling, na.rm = T),
+    freq_non_scolarise = sum(total_non_scolarise * weights_sampling, na.rm = T)/sum(enfant_scolarisable * weights_sampling, na.rm = T),
+    
+    freq_enfants_moins5_diarrhee = sum(enfant_selle*weights_sampling, na.rm = T)/sum(total_moins_5ans*weights_sampling, na.rm = T),
+    
+    freq_travail_fille = sum(travail_fille*weights_sampling, na.rm = T)/sum(total_0_17_femmes*weights_sampling, na.rm = T),
+    freq_travail_garcon = sum(travail_garcon*weights_sampling, na.rm = T)/sum(total_0_17_hommes*weights_sampling, na.rm = T),
+    .groups = "drop"
   )%>%
-  select(-FID)%>%
-  mutate(rowID = row_number())%>%
-  group_by(id_sampl)%>%
-  filter(rowID == min(rowID))%>%
-  slice(1) %>% # takes the first occurrence if there is a tie
-  ungroup()
-
-### Loading 2stage sampling frame
-
-samplingFrame <- read_excel("data/REACH_BFA_Pop_for_weighting_20201308.xlsx", sheet = "Population")%>%
-  group_by(Admin1, Admin1Pcod, Admin2, Admin2Pcod)%>%
-  summarise(host = sum(`Total local`, na.rm = TRUE),
-            pdi = sum(`Total PDI`, na.rm = TRUE), .groups = "drop")%>%
-  pivot_longer(cols = c("host", "pdi"), names_to = "strata", values_to = "Population")%>%
-  mutate(strata = paste(Admin2Pcod, strata, sep = "_"))%>%
-  filter(!is.na(Population), Population >0)
-
-
-samplingFrame_adm2 <- samplingFrame%>%
-  filter(Admin1 %in% c("Est", "Centre-Nord","Sahel","Boucle du Mouhoun","Nord"))%>%
-  filter(!is.na(Population))
-
-
-### Creating spatial objects for missingPcodes and clusters centers
-# cluster_sf <- sf::st_as_sf(clusterSample, coords = c("X", "Y"), crs = 4326)%>%
-#   select(POINT_X, POINT_Y, id_sampl, psu_id, strata_id, ADM3_PCODE, NEAR_pcode, NEAR_featureNam)%>%
-#   st_set_crs("EPSG:4326")
-
-# missingPoints_sf <- sf::st_as_sf(pcodes_probs, coords = c("gpsmenage_longitude", "gpsmenage_latitude"), crs = 4326)%>%
-#   st_set_crs("EPSG:4326")
-
-### Loading OCHA's settlement layer
+  pivot_longer(c(-admin2, -status), names_to = "variable", values_to = "numbers")%>%
+  separate(col=variable, into = c("variable", "variable_value"), sep = "\\.")%>%
+  select(admin2, status,variable, variable_value, numbers)
 
 bfa_admin2 <- read_csv("data/shapes/bfa_pplp_1m_nga_ocha/bfa_pplp_1m_nga_ocha.csv")%>%
-  select(admin3Name, admin3Pcod)%>%
+  select(admin1Name, admin2Name)%>%
+  mutate(admin2name = tolower(admin2Name))%>%
+  distinct()
+
+n_adm2 <- cleaned_data_adm1%>%
+  group_by(admin2, status)%>%
+  summarise(n = n(), .groups="drop")%>%
+  pivot_longer(c(-admin2, -status), names_to = "variable", values_to = "n")%>%
+  select(-variable)
+
+which_subsets_adm2 <- cleaned_data_adm1%>%
+  group_by(admin2, status)%>%
+  summarise_all(funs(sum(is.na(.))))%>%
+  pivot_longer(c(-admin2, -status), names_to = "variable", values_to = "NAs")%>%
+  left_join(n_adm2, by = c("admin2", "status"))%>%
+  mutate(perc_NAs = round(NAs/n*100, 0))%>%
+  select(-n)
+
+which_skipLogic_admin2 <- map(names(cleaned_data_adm2%>%select(-eau_propre, -admin1, -admin2, -status)), function(x)questionnaire$question_is_skipped(question.name = x, data = cleaned_data_adm2%>%select(-eau_propre)))%>%
+  as.data.frame()%>%
+  mutate(admin1 = cleaned_data_adm2$admin1, admin2 = cleaned_data_adm2$admin2, status = cleaned_data_adm2$status)
+
+names(which_skipLogic_admin2) <- c(names(cleaned_data_adm2%>%select(-eau_propre,  -admin1, -admin2, -status)), "admin1", "admin2", "status")
+
+
+which_skipLogic_adm2 <- which_skipLogic_admin2%>%
+  select(-admin1)%>%
+  group_by(admin2, status)%>%
+  summarise_all(funs(sum(.)))%>%
+  pivot_longer(c(-admin2, -status), names_to = "variable", values_to = "Skipped")%>%
+  left_join(n_adm2, by = c("admin2", "status"))%>%
+  mutate(perc_Skipped = round(Skipped/n*100, 0))%>%
+  select(-n)
+
+
+summary_stats_admin_2_grp_final_grp <- rbind(summary_stats_admin_2_grp, freq_admin2_grp)%>%
+  left_join(which_subsets_adm2, by = c("admin2", "status", "variable"))%>%
+  left_join(which_skipLogic_adm2, by = c("admin2", "status", "variable"))%>%
+  mutate(question_choice = case_when(is.na(variable_value) ~ variable,
+                                     TRUE ~ paste0(variable, ".", variable_value)),
+         subset = if_else(perc_Skipped > 0, "Sous-ensemble de donnée", NA_character_))%>%
+  left_join(dico, by = "question_choice")%>%
+  mutate(status = case_when(status == "pdi" ~ "PDI",
+                            status == "host" ~ "Communauté hôte",
+                            TRUE ~ NA_character_))%>%
+  mutate(numbers = case_when(grepl("%.*?ayant de la difficulté à.*", label_indicator) & dependent.variable.type == "categorical"  ~ round(numbers*100,1),
+                             !grepl("%.*?ayant de la difficulté à.*", label_indicator) & dependent.variable.type == "categorical" ~ round(numbers*100,0),
+                             dependent.variable.type == "numerical"  ~ round(numbers,1)
+  )
+  )%>%
+  select(research.question_label, sub.research.question_label, admin2, status, label_indicator, label_choice, numbers, subset)%>%
+  left_join(bfa_admin2, by = c("admin2" = "admin2name"))%>%
   distinct()%>%
-  mutate(admin3Name = tolower(admin3Name),
-         admin3Name = case_when(
-           admin3Name == "karangasso - sambla" ~ "karangasso_sambla",
-           admin3Name == "karangasso - vigue" ~ "karangasso_vigue",
-           admin3Name == "fada n'gourma"  ~ "fada_n_gourma",
-           admin3Name == "n'dorola" ~ "n_dorola",
-           admin3Name == "tin-akoff" ~ "tin_akoff",
-           admin3Name == "gorom-gorom" ~ "gorom_gorom",
-           admin3Name == "la-todin" ~ "la_todin",
-           admin3Name == "pobe-mangao" ~ "pobe_mangao",
-           admin3Name == "bobo-dioulasso" ~ "bobo_dioulasso",
-           TRUE ~ admin3Name
-         ))
+  mutate(label_choice = case_when(is.na(label_choice) ~ label_indicator, 
+                                  TRUE ~ paste(label_indicator, label_choice, sep = ": ")))%>%
+  select(research.question_label, sub.research.question_label, admin2Name, status, label_choice,subset, numbers)%>%
+  distinct()%>%
+  filter(!is.na(label_choice))%>%
+  group_by(research.question_label, sub.research.question_label, admin2Name, status, label_choice)%>%
+  pivot_wider(names_from = c(admin2Name), values_from = numbers)%>%
+  # summarise(across(everything(), sum, na.rm=T))%>%
+  ungroup()%>%
+  mutate(sub.research.question_label = factor(sub.research.question_label, levels = target_sub_research_question_order ),
+         research.question_label = factor(research.question_label, levels = target_research_question_order))%>%
+  arrange(research.question_label,sub.research.question_label,status,label_choice)%>%
+  filter(!is.na(label_choice))%>%
+  group_by(research.question_label,sub.research.question_label,status, label_choice)%>%
+  summarise(across(where(is.numeric), sum, na.rm=T))
 
 
-raw_data <- left_join(raw_data, bfa_admin2, by = c("admin3" = "admin3Name"))
+summary_stats_admin_2_grp_final_grp_duplicates_check <- summary_stats_admin_2_grp_final_grp%>%
+  select(status, label_choice)%>%
+  group_by(status, label_choice)%>%
+  filter(n()>1)%>%
+  distinct()
 
-# bfa_settlments <- read_csv("data/shapes/bfa_pplp_1m_nga_ocha/bfa_pplp_1m_nga_ocha.csv")%>%
-#   sf::st_as_sf(coords = c("Coord_X", "Coord_Y"), crs = 4326)
+names(summary_stats_admin_2_grp_final_grp)[1:5] <- c("Question de recherche", "Sous-question de recherche", "Groupe de population", "Indicator", "Sous-ensemble de donnée")
+names(summary_stats_admin_1_grp_final)[1:5] <- c("Question de recherche", "Sous-question de recherche", "Groupe de population", "Indicator", "Sous-ensemble de donnée")
 
-### Replacing missing pcodes by closest pcode
 
-# distance_check <- butteR::closest_distance_rtree(missingPoints_sf, bfa_settlments)%>%
-#   select(uuid, pcode.1)
-# 
-# 
-# raw_data <- raw_data%>%
-#   left_join(distance_check, by = "uuid")%>%
-#   mutate(pcode = case_when(is.na(pcode) ~ pcode.1,
-#                            TRUE ~ pcode))
 
+write_csv(summary_stats_admin_1_grp_final, "outputs/tables/summary_stats_admin_1_grp.csv")
+write_csv(summary_stats_admin_2_grp_final_grp, "outputs/tables/summary_stats_admin_2_grp.csv")
 
 
-## Creating and writting cleaning_log to log changes
 
-cleaning_log_change <- data.frame(Auteur = NA, Index = NA, uuid = NA, Date = NA, Base = NA, Enqueteur = NA, Question = NA,
-                                  `Probl?me` = NA,
-                                  "Anciennes valeurs" = NA, "Nouvelles valeurs" = NA, ddsagr = NA, "Retour Enquêteur" =NA, "Retour chargé" = NA, Action = NA,
-                                  "Commentaire RBB" =0L,"Commentaire CC" = 0L,	"Commentaire AO" =0L,	"Commentaire GIS" =0L,	"dffgawesd" =0L)
+end_analysis_process <- Sys.time()
 
-##### Affecting data from repeat loops to main dataframe ####
-
-raw_data_info_menage <- raw_data_info_menage%>%
-  filter(parent_index %in% raw_data$index)%>%
-  mutate(agegrp_0_5_femmes = if_else(age_hh < 5 &sexe_hh == "femme",1,0),
-         agegrp_0_5_hommes = if_else(age_hh < 5 &sexe_hh == "homme",1,0),
-         agegrp_5_18_femmes = if_else((age_hh >= 5 & age_hh <18 ) & sexe_hh == "femme",1,0),
-         agegrp_5_18_hommes = if_else((age_hh >= 5 & age_hh < 18) & sexe_hh == "homme",1,0),
-         agegrp_18_65_femmes = if_else((age_hh >= 18 & age_hh < 65 ) & sexe_hh == "femme",1,0),
-         agegrp_18_65_hommes = if_else((age_hh >= 18 & age_hh < 65 ) & sexe_hh == "homme",1,0),
-         agegrp_65plus_femmes = if_else(age_hh >= 65 &sexe_hh == "femme",1,0),
-         agegrp_65plus_hommes = if_else(age_hh >= 65 &sexe_hh == "homme",1,0)
-  )
-
-
-raw_data_info_menage <- koboloops::add_parent_to_loop(loop = as.data.frame(raw_data_info_menage), parent = as.data.frame(raw_data), variables.to.keep = c("barriere_edu", "status"), uuid.name.loop = "parent_index", uuid.name.parent = "index")%>%
-  mutate(enfants_descolarise_insecurite = case_when(
-    statut_educatif == "non" & barriere_edu %in% c("insecurite_ecole", "insecurite_trajet","groupes_armes_ecole", "non_fonctionnelle") ~ 1,
-    statut_educatif == "oui" ~ 0,
-    TRUE ~  0
-  ),
-  score_edu = case_when(statut_educatif == "non" & barriere_edu %in% c("insecurite_ecole", "insecurite_trajet","groupes_armes_ecole", "non_fonctionnelle") ~ "4",
-                        statut_educatif == "non" ~ "3",
-                        statut_educatif == "oui" & status == "pdi" ~ "3",
-                        statut_educatif == "oui" & status != "pdi" ~ "1",
-                        TRUE ~ NA_character_
-  )
-  )
-
-## Yann
-##where does the scoring come from? 
-
-
-raw_data <- affect_loop_to_parent(loop = as.data.frame(raw_data_info_menage), parent = as.data.frame(raw_data), aggregate.function = sum,
-                                  variable.to.add = c(
-                                    sum_age_0_5mois = "age_0_5mois",
-                                    total_agegrp_0_5_femmes = "agegrp_0_5_femmes",
-                                    total_agegrp_0_5_hommes = "agegrp_0_5_hommes",
-                                    total_agegrp_5_18_femmes = "agegrp_5_18_femmes",
-                                    total_agegrp_5_18_hommes = "agegrp_5_18_hommes",
-                                    total_agegrp_18_65_femmes = "agegrp_18_65_femmes",
-                                    total_agegrp_18_65_hommes = "agegrp_18_65_hommes",
-                                    total_agegrp_65plus_femmes = "agegrp_65plus_femmes",
-                                    total_agegrp_65plus_hommes = "agegrp_65plus_hommes"
-                                  ),
-                                  uuid.name.loop = "parent_index", uuid.name.parent = "index")
-
-## agegroup changed
-
-raw_data_naissances <- levels_asBinaryColumns(raw_data_naissances, "lieu_accouchement")
-raw_data_naissances <- levels_asBinaryColumns(raw_data_naissances, "raison_dominicile")
-
-raw_data <- affect_loop_to_parent(loop = as.data.frame(raw_data_naissances), parent = as.data.frame(raw_data), aggregate.function = sum,
-                                  variable.to.add = c(
-                                    sum_lieu_accouchement.autre = "lieu_accouchement.autre",
-                                    sum_lieu_accouchement.centre_sante = "lieu_accouchement.centre_sante",
-                                    sum_lieu_accouchement.maison = "lieu_accouchement.maison",
-                                    sum_raison_domicil_accouche_assiste_domicil = "raison_dominicile.accouche_assiste_domicil",
-                                    sum_raison_domicil_accouche_centre_ferme = "raison_dominicile.centre_ferme",
-                                    sum_raison_domicil_accouche_centre_financ_inacc = "raison_dominicile.centre_financ_inacc",
-                                    sum_raison_domicil_centre_surpeuple = "raison_dominicile.centre_surpeuple",
-                                    sum_raison_domicil_maternite_pas_sur = "raison_dominicile.maternite_pas_sur",
-                                    sum_raison_domicil_nsp = "raison_dominicile.nsp",
-                                    sum_raison_domicil_physique_mere = "raison_dominicile.physique_mere",
-                                    sum_raison_domicil_rejoindre_centre = "raison_dominicile.rejoindre_centre"
-                                  ),
-                                  uuid.name.loop = "parent_index", uuid.name.parent = "index")
-## Yann
-# aggregation ne marche pas si le lieu de naissance est différent et qu'il y a des NA
-# cf index_parent 94
-##possible correction
-naissance_aggre <- raw_data_naissances %>%
-  group_by(parent_index) %>%
-  summarise(across(starts_with(c("lieu_accouchement.", "raison_dominicile.")), sum, na.rm = T)) %>%
-  mutate(parent_index = as.character(parent_index))
-raw_data2 <- raw_data %>%
-  left_join(naissance_aggre, by = c("index" = "parent_index"))
-
-# raw_data %>% select(index, grep(c("raison_dom"), names(naissance_aggre), value = T)) %>% write.csv("test.csv")
-
-issues_withNaissances <- raw_data%>%
-  select(total_naissance,
-         sum_lieu_accouchement.centre_sante,sum_lieu_accouchement.autre,sum_lieu_accouchement.maison,
-         uuid)%>%
-  mutate(oops_naissance = case_when(sum_lieu_accouchement.centre_sante > total_naissance ~"oops",
-                                    sum_lieu_accouchement.autre > total_naissance ~ "oops",
-                                    sum_lieu_accouchement.maison > total_naissance ~ "oops",
-                                    TRUE~"OK"))%>%
-  filter(oops_naissance=="oops")%>%
-  write_csv("problemes_repeat_Naissances.csv")
-
-
-raw_data_maladie_moins_5ans_rpt <- raw_data_maladie_moins_5ans_rpt%>%
-  mutate_at(vars(starts_with("maladie_moins_5ans/")), as.numeric)
-
-raw_data <- affect_loop_to_parent(loop = as.data.frame(raw_data_maladie_moins_5ans_rpt), parent = as.data.frame(raw_data), aggregate.function = sum,
-                                  variable.to.add = c(
-                                    sum_enfants_5ans_maladie.palu = "maladie_moins_5ans/palu",
-                                    sum_enfants_5ans_maladie.infect_respiratoire = "maladie_moins_5ans/infect_respiratoire",
-                                    sum_enfants_5ans_maladie.diarrhee =  "maladie_moins_5ans/diarrhee",
-                                    sum_enfants_5ans_maladie.autre = "maladie_moins_5ans/autre",
-                                    sum_enfants_5ans_maladie.nsp = "maladie_moins_5ans/nsp"
-                                  ),
-                                  uuid.name.loop = "parent_index", uuid.name.parent = "index")
-## YANN
-maladie_agg <- raw_data_maladie_moins_5ans_rpt %>%
-  group_by(parent_index) %>%
-  summarise(across(starts_with("maladie_moins_5ans/"), sum, na.rm = T)) %>%
-  mutate(parent_index = as.character(parent_index))
-
-
-raw_data2 <- raw_data %>%
-  left_join(maladie_agg, by = c("index" = "parent_index"))
-
-raw_data2 %>%
-  select(index, starts_with(c("sum_enfants_5ans", "maladie_moins_5ans"))) %>%
-  write.csv("test2.csv")
-raw_data_maladie_moins_5ans_rpt %>%
-  filter(duplicated(parent_index)) %>% View()
-# cf 4005 et 3953
-
-issues_enfants_malades <- raw_data%>%
-  select(total_moins_5ans,
-         sum_enfants_5ans_maladie.palu,sum_enfants_5ans_maladie.infect_respiratoire,sum_enfants_5ans_maladie.diarrhee,sum_enfants_5ans_maladie.autre,sum_enfants_5ans_maladie.nsp,
-         uuid)%>%
-  mutate(oops_malade = case_when(sum_enfants_5ans_maladie.palu > total_moins_5ans ~"oops",
-                                 sum_enfants_5ans_maladie.infect_respiratoire > total_moins_5ans ~ "oops",
-                                 sum_enfants_5ans_maladie.diarrhee > total_moins_5ans ~ "oops",
-                                 sum_enfants_5ans_maladie.autre > total_moins_5ans ~ "oops",
-                                 sum_enfants_5ans_maladie.nsp > total_moins_5ans ~ "oops",
-                                 TRUE~"OK"))%>%
-  filter(oops_malade=="oops")%>%
-  write_csv("problemes_repeat_malades.csv")
-
-
-
-raw_data_membre_marche_dificile <- levels_asBinaryColumns(raw_data_membre_marche_dificile, "genre_marche")%>%
-  mutate(agegrp = case_when(genre_marche == "homme" & (age_marche < 5) ~ "garcons_moins5",
-                            genre_marche == "femme" & (age_marche < 5) ~ "filles_moins5",
-                            genre_marche == "homme" & (age_marche >= 5 & age_marche <18) ~ "garcons_5_18",
-                            genre_marche == "femme" & (age_marche >= 5 & age_marche <18) ~ "filles_5_18",
-                            genre_marche == "homme" & (age_marche >= 18 & age_marche < 65) ~ "hommes_18_64",
-                            genre_marche == "femme" & (age_marche >= 18 & age_marche < 65) ~ "femmes_18_64",
-                            genre_marche == "homme" & (age_marche >= 65) ~ "hommes_65plus",
-                            genre_marche == "femme" & (age_marche >= 65) ~ "femmes_65plus",
-                            TRUE ~ NA_character_
-  ),
-  marche_dif_garcons_moins5 = if_else(agegrp == "garcons_moins5", TRUE, FALSE),
-  marche_dif_filles_moins5 = if_else(agegrp == "filles_moins5", TRUE, FALSE),
-  marche_dif_garcons_5_18 = if_else(agegrp == "garcons_5_18", TRUE, FALSE),
-  marche_dif_filles_5_18 = if_else(agegrp == "filles_5_18", TRUE, FALSE),
-  marche_dif_hommes_18_64 = if_else(agegrp == "hommes_18_64", TRUE, FALSE),
-  marche_dif_femmes_18_64 = if_else(agegrp == "femmes_18_64", TRUE, FALSE),
-  marche_dif_hommes_65plus = if_else(agegrp == "hommes_65plus", TRUE, FALSE),
-  marche_dif_femmes_65plus = if_else(agegrp == "femmes_65plus", TRUE, FALSE)
-  )
-
-
-
-
-raw_data <- affect_loop_to_parent(loop = as.data.frame(raw_data_membre_marche_dificile), parent = as.data.frame(raw_data), aggregate.function = sum,
-                                  variable.to.add = c(
-                                    sum_marche_dif_garcons_moins5 = "marche_dif_garcons_moins5",
-                                    sum_marche_dif_filles_moins5 = "marche_dif_filles_moins5",
-                                    sum_marche_dif_garcons_5_18 = "marche_dif_garcons_5_18",
-                                    sum_marche_dif_filles_5_18 = "marche_dif_filles_5_18",
-                                    sum_marche_dif_hommes_18_64 = "marche_dif_hommes_18_64",
-                                    sum_marche_dif_femmes_18_64 = "marche_dif_femmes_18_64",
-                                    sum_marche_dif_hommes_65plus = "marche_dif_hommes_65plus",
-                                    sum_marche_dif_femmes_65plus = "marche_dif_femmes_65plus"
-                                  ),
-                                  uuid.name.loop = "parent_index", uuid.name.parent = "index")
-
-
-raw_data_membre_soins_difficile <- raw_data_membre_soins_difficile%>%
-  mutate(
-    soins_dif_garcons_moins5 = if_else(genre_soins == "homme" & (age_soins < 5), TRUE, FALSE),
-    soins_dif_filles_moins5 = if_else(genre_soins == "homme" & (age_soins < 5), TRUE, FALSE),
-    soins_dif_garcons_5_18 = if_else(genre_soins == "homme" & (age_soins >= 5 & age_soins <18), TRUE, FALSE),
-    soins_dif_filles_5_18 = if_else(genre_soins == "femme" & (age_soins >= 5 & age_soins <18), TRUE, FALSE),
-    soins_dif_hommes_18_64 = if_else(genre_soins == "homme" & (age_soins >= 18 & age_soins <65), TRUE, FALSE),
-    soins_dif_femmes_18_64 = if_else(genre_soins == "femme" & (age_soins >= 18 & age_soins <65), TRUE, FALSE),
-    soins_dif_hommes_65plus = if_else(genre_soins == "homme" & (age_soins >= 65), TRUE, FALSE),
-    soins_dif_femmes_65plus = if_else(genre_soins == "femme" & (age_soins >= 65), TRUE, FALSE)
-  )
-
-raw_data <- affect_loop_to_parent(loop = as.data.frame(raw_data_membre_soins_difficile), parent = as.data.frame(raw_data), aggregate.function = sum,
-                                  variable.to.add = c(
-                                    sum_soins_dif_garcons_moins5 = "soins_dif_garcons_moins5",
-                                    sum_soins_dif_filles_moins5 = "soins_dif_filles_moins5",
-                                    sum_soins_dif_garcons_5_18 = "soins_dif_garcons_5_18",
-                                    sum_soins_dif_filles_5_18 = "soins_dif_filles_5_18",
-                                    sum_soins_dif_hommes_18_64 = "soins_dif_hommes_18_64",
-                                    sum_soins_dif_femmes_18_64 = "soins_dif_femmes_18_64",
-                                    sum_soins_dif_hommes_65plus = "soins_dif_hommes_65plus",
-                                    sum_soins_dif_femmes_65plus = "soins_dif_femmes_65plus"
-                                  ),
-                                  uuid.name.loop = "parent_index", uuid.name.parent = "index")
-
-raw_data_membre_concentration_difficile <- raw_data_membre_concentration_difficile%>%
-  mutate(
-    concentration_dif_garcons_moins5 = if_else(genre_concentration == "homme" & (age_concentration < 5), TRUE, FALSE),
-    concentration_dif_filles_moins5 = if_else(genre_concentration == "homme" & (age_concentration < 5), TRUE, FALSE),
-    concentration_dif_garcons_5_18 = if_else(genre_concentration == "homme" & (age_concentration >= 5 & age_concentration <18), TRUE, FALSE),
-    concentration_dif_filles_5_18 = if_else(genre_concentration == "femme" & (age_concentration >= 5 & age_concentration <18), TRUE, FALSE),
-    concentration_dif_hommes_18_64 = if_else(genre_concentration == "homme" & (age_concentration >= 18 & age_concentration <65), TRUE, FALSE),
-    concentration_dif_femmes_18_64 = if_else(genre_concentration == "femme" & (age_concentration >= 18 & age_concentration <65), TRUE, FALSE),
-    concentration_dif_hommes_65plus = if_else(genre_concentration == "homme" & (age_concentration >= 65), TRUE, FALSE),
-    concentration_dif_femmes_65plus = if_else(genre_concentration == "femme" & (age_concentration >= 65), TRUE, FALSE)
-  )
-
-
-raw_data <- affect_loop_to_parent(loop = as.data.frame(raw_data_membre_concentration_difficile), parent = as.data.frame(raw_data), aggregate.function = sum,
-                                  variable.to.add = c(
-                                    sum_concentration_dif_garcons_moins5 = "concentration_dif_garcons_moins5",
-                                    sum_concentration_dif_filles_moins5 = "concentration_dif_filles_moins5",
-                                    sum_concentration_dif_garcons_5_18 = "concentration_dif_garcons_5_18",
-                                    sum_concentration_dif_filles_5_18 = "concentration_dif_filles_5_18",
-                                    sum_concentration_dif_hommes_18_64 = "concentration_dif_hommes_18_64",
-                                    sum_concentration_dif_femmes_18_64 = "concentration_dif_femmes_18_64",
-                                    sum_concentration_dif_hommes_65plus = "concentration_dif_hommes_65plus",
-                                    sum_concentration_dif_femmes_65plus = "concentration_dif_femmes_65plus"
-                                  ),
-                                  uuid.name.loop = "parent_index", uuid.name.parent = "index")
-
-
-raw_data_membre_membre_vision_diffcile <- raw_data_membre_membre_vision_diffcile%>%
-  mutate(
-    vision_dif_garcons_moins5 = if_else(genre_vision == "homme" & (age_vision < 5), TRUE, FALSE),
-    vision_dif_filles_moins5 = if_else(genre_vision == "homme" & (age_vision < 5), TRUE, FALSE),
-    vision_dif_garcons_5_18 = if_else(genre_vision == "homme" & (age_vision >= 5 & age_vision <18), TRUE, FALSE),
-    vision_dif_filles_5_18 = if_else(genre_vision == "femme" & (age_vision >= 5 & age_vision <18), TRUE, FALSE),
-    vision_dif_hommes_18_64 = if_else(genre_vision == "homme" & (age_vision >= 18 & age_vision <65), TRUE, FALSE),
-    vision_dif_femmes_18_64 = if_else(genre_vision == "femme" & (age_vision >= 18 & age_vision <65), TRUE, FALSE),
-    vision_dif_hommes_65plus = if_else(genre_vision == "homme" & (age_vision >= 65), TRUE, FALSE),
-    vision_dif_femmes_65plus = if_else(genre_vision == "femme" & (age_vision >= 65), TRUE, FALSE)
-  )
-
-
-raw_data <- affect_loop_to_parent(loop = as.data.frame(raw_data_membre_membre_vision_diffcile), parent = as.data.frame(raw_data), aggregate.function = sum,
-                                  variable.to.add = c(
-                                    sum_vision_dif_garcons_moins5 = "vision_dif_garcons_moins5",
-                                    sum_vision_dif_filles_moins5 = "vision_dif_filles_moins5",
-                                    sum_vision_dif_garcons_5_18 = "vision_dif_garcons_5_18",
-                                    sum_vision_dif_filles_5_18 = "vision_dif_filles_5_18",
-                                    sum_vision_dif_hommes_18_64 = "vision_dif_hommes_18_64",
-                                    sum_vision_dif_femmes_18_64 = "vision_dif_femmes_18_64",
-                                    sum_vision_dif_hommes_65plus = "vision_dif_hommes_65plus",
-                                    sum_vision_dif_femmes_65plus = "vision_dif_femmes_65plus"
-                                  ),
-                                  uuid.name.loop = "parent_index", uuid.name.parent = "index")
-
-
-raw_data_membre_membre_entendre_difficile <- raw_data_membre_membre_entendre_difficile%>%
-  mutate(
-    entendre_dif_garcons_moins5 = if_else(genre_entendre == "homme" & (age_entendre < 5), TRUE, FALSE),
-    entendre_dif_filles_moins5 = if_else(genre_entendre == "homme" & (age_entendre < 5), TRUE, FALSE),
-    entendre_dif_garcons_5_18 = if_else(genre_entendre == "homme" & (age_entendre >= 5 & age_entendre <18), TRUE, FALSE),
-    entendre_dif_filles_5_18 = if_else(genre_entendre == "femme" & (age_entendre >= 5 & age_entendre <18), TRUE, FALSE),
-    entendre_dif_hommes_18_64 = if_else(genre_entendre == "homme" & (age_entendre >= 18 & age_entendre <65), TRUE, FALSE),
-    entendre_dif_femmes_18_64 = if_else(genre_entendre == "femme" & (age_entendre >= 18 & age_entendre <65), TRUE, FALSE),
-    entendre_dif_hommes_65plus = if_else(genre_entendre == "homme" & (age_entendre >= 65), TRUE, FALSE),
-    entendre_dif_femmes_65plus = if_else(genre_entendre == "femme" & (age_entendre >= 65), TRUE, FALSE)
-  )
-
-
-raw_data <- affect_loop_to_parent(loop = as.data.frame(raw_data_membre_membre_entendre_difficile), parent = as.data.frame(raw_data), aggregate.function = sum,
-                                  variable.to.add = c(
-                                    sum_entendre_dif_garcons_moins5 = "entendre_dif_garcons_moins5",
-                                    sum_entendre_dif_filles_moins5 = "entendre_dif_filles_moins5",
-                                    sum_entendre_dif_garcons_5_18 = "entendre_dif_garcons_5_18",
-                                    sum_entendre_dif_filles_5_18 = "entendre_dif_filles_5_18",
-                                    sum_entendre_dif_hommes_18_64 = "entendre_dif_hommes_18_64",
-                                    sum_entendre_dif_femmes_18_64 = "entendre_dif_femmes_18_64",
-                                    sum_entendre_dif_hommes_65plus = "entendre_dif_hommes_65plus",
-                                    sum_entendre_dif_femmes_65plus = "entendre_dif_femmes_65plus"
-                                  ),
-                                  uuid.name.loop = "parent_index", uuid.name.parent = "index")
-
-raw_data_membre_repeat_nbre_pers_decedes <- raw_data_membre_repeat_nbre_pers_decedes%>%
-  mutate(
-    deces_dif_garcons_moins5 = if_else(sexe_deces == "homme" & (age_deces < 5), TRUE, FALSE),
-    deces_dif_filles_moins5 = if_else(sexe_deces == "homme" & (age_deces < 5), TRUE, FALSE),
-    deces_dif_garcons_5_18 = if_else(sexe_deces == "homme" & (age_deces >= 5 & age_deces <18), TRUE, FALSE),
-    deces_dif_filles_5_18 = if_else(sexe_deces == "femme" & (age_deces >= 5 & age_deces <18), TRUE, FALSE),
-    deces_dif_hommes_18_64 = if_else(sexe_deces == "homme" & (age_deces >= 18 & age_deces <65), TRUE, FALSE),
-    deces_dif_femmes_18_64 = if_else(sexe_deces == "femme" & (age_deces >= 18 & age_deces <65), TRUE, FALSE),
-    deces_dif_hommes_65plus = if_else(sexe_deces == "homme" & (age_deces >= 65), TRUE, FALSE),
-    deces_dif_femmes_65plus = if_else(sexe_deces == "femme" & (age_deces >= 65), TRUE, FALSE)
-  )%>%
-  levels_asBinaryColumns("raison_deces")
-
-raw_data_membre_difficulte_communication <- raw_data_membre_difficulte_communication%>%
-  mutate(
-    communication_dif_garcons_moins5 = if_else(genre_difficulte_communication == "homme" & (age_difficulte_communication < 5), TRUE, FALSE),
-    communication_dif_filles_moins5 = if_else(genre_difficulte_communication == "homme" & (age_difficulte_communication < 5), TRUE, FALSE),
-    communication_dif_garcons_5_18 = if_else(genre_difficulte_communication == "homme" & (age_difficulte_communication >= 5 & age_difficulte_communication <18), TRUE, FALSE),
-    communication_dif_filles_5_18 = if_else(genre_difficulte_communication == "femme" & (age_difficulte_communication >= 5 & age_difficulte_communication <18), TRUE, FALSE),
-    communication_dif_hommes_18_64 = if_else(genre_difficulte_communication == "homme" & (age_difficulte_communication >= 18 & age_difficulte_communication <65), TRUE, FALSE),
-    communication_dif_femmes_18_64 = if_else(genre_difficulte_communication == "femme" & (age_difficulte_communication >= 18 & age_difficulte_communication <65), TRUE, FALSE),
-    communication_dif_hommes_65plus = if_else(genre_difficulte_communication == "homme" & (age_difficulte_communication >= 65), TRUE, FALSE),
-    communication_dif_femmes_65plus = if_else(genre_difficulte_communication == "femme" & (age_difficulte_communication >= 65), TRUE, FALSE)
-  )
-
-
-raw_data <- affect_loop_to_parent(loop = as.data.frame(raw_data_membre_difficulte_communication), parent = as.data.frame(raw_data), aggregate.function = sum,
-                                  variable.to.add = c(
-                                    sum_communication_dif_garcons_moins5 = "communication_dif_garcons_moins5",
-                                    sum_communication_dif_filles_moins5 = "communication_dif_filles_moins5",
-                                    sum_communication_dif_garcons_5_18 = "communication_dif_garcons_5_18",
-                                    sum_communication_dif_filles_5_18 = "communication_dif_filles_5_18",
-                                    sum_communication_dif_hommes_18_64 = "communication_dif_hommes_18_64",
-                                    sum_communication_dif_femmes_18_64 = "communication_dif_femmes_18_64",
-                                    sum_communication_dif_hommes_65plus = "communication_dif_hommes_65plus",
-                                    sum_communication_dif_femmes_65plus = "communication_dif_femmes_65plus"
-                                  ),
-                                  uuid.name.loop = "parent_index", uuid.name.parent = "index")
-
-
-raw_data <- affect_loop_to_parent(loop = as.data.frame(raw_data_membre_repeat_nbre_pers_decedes), parent = as.data.frame(raw_data), aggregate.function = sum,
-                                  variable.to.add = c(
-                                    sum_deces_dif_garcons_moins5 = "deces_dif_garcons_moins5",
-                                    sum_deces_dif_filles_moins5 = "deces_dif_filles_moins5",
-                                    sum_deces_dif_garcons_5_18 = "deces_dif_garcons_5_18",
-                                    sum_deces_dif_filles_5_18 = "deces_dif_filles_5_18",
-                                    sum_deces_dif_hommes_18_64 = "deces_dif_hommes_18_64",
-                                    sum_deces_dif_femmes_18_64 = "deces_dif_femmes_18_64",
-                                    sum_deces_dif_hommes_65plus = "deces_dif_hommes_65plus",
-                                    sum_deces_dif_femmes_65plus = "deces_dif_femmes_65plus",
-                                    sum_raison_deces_diarrhee = "raison_deces.diarrhee",
-                                    sum_raison_deces_autre_maladie = "raison_deces.autre_maladie",
-                                    sum_raison_deces_morsure = "raison_deces.morsure",
-                                    sum_raison_deces_deces_natu = "raison_deces.deces_natu",
-                                    sum_raison_deces_faim = "raison_deces.faim",
-                                    sum_raison_deces_accident_travail = "raison_deces.accident_travail",
-                                    sum_raison_deces_problemes_respi = "raison_deces.problemes_respi",
-                                    sum_raison_deces_autre = "raison_deces.autre",
-                                    sum_raison_deces_catastrophe_natu = "raison_deces.catastrophe_natu",
-                                    sum_raison_deces_accident_conflit = "raison_deces.accident_conflit",
-                                    sum_raison_deces_en_couche = "raison_deces.en_couche",
-                                    sum_raison_deces_accident_route = "raison_deces.accident_route"
-                                  ),
-                                  uuid.name.loop = "parent_index", uuid.name.parent = "index")
-
-
-### removing deleted from loops
-
-list_remove_data <- lapply(loop_frames, remove_delParents_fromLoop, raw_data, uuid.name.parent = "uuid", uuid.name.loop = "submission_uuid")
-
-names(list_remove_data) <- loop_frames_names
-
-
-invisible(create_objects_from_df(list_remove_data))
-
-
-# WEIGHTING #
-
-# coords <- c("gpsmenage_longitude", "gpsmenage_latitude")
-# 
-# raw_data_ClusterSmpl <- raw_data%>%
-#   rename("gpsmenage_latitude" = "_gpsmenage_latitude", "gpsmenage_longitude"= "_gpsmenage_longitude")%>%
-#   mutate_at(vars(all_of(coords)), as.numeric)%>%
-#   filter(!is.na(gpsmenage_latitude) & !is.na(gpsmenage_longitude), modalite == "direct" & status == "host")%>%
-#   sf::st_as_sf(coords = coords, crs = 4326)%>%
-#   st_set_crs("EPSG:4326")
-# 
-# ## Finding closest cluster to all direct host interviews
-# 
-# all_closest_cluster <- butteR::closest_distance_rtree(raw_data_ClusterSmpl, cluster_sf)
-# 
-# closest_cluster <- all_closest_cluster%>%
-#   filter(dist_m <=1500)%>%
-#   select(uuid, id_sampl)
-# 
-# raw_data <- raw_data%>%
-#   left_join(closest_cluster, by = "uuid")%>%
-#   mutate(pcode = case_when(id_sampl == "id_45382" ~ NA_character_,
-#                            id_sampl == "id_45749" ~ NA_character_,
-#                            TRUE ~ pcode
-#   ))
-#   
-# 
-raw_data <- raw_data%>%
-  mutate(admin1Pcode = gsub(".{4}$", "", admin3Pcod),
-         admin2Pcode = gsub(".{2}$", "", admin3Pcod),
-         admin3Pcode = admin3Pcod,
-         sampling_id = paste(admin2Pcode, status, sep = "_")
-  )%>%
-  select(-admin3Pcod)
-
-### Adding useful columns for calculations
-add_to_changeLog_ic_age <- raw_data%>%
-  select(uuid, age_chef_menage, ic_age)%>%
-  filter(is.na(age_chef_menage))
-
-cleaning_log_change <- cleaning_log_change%>%
-  add_row(Auteur = "Elliott Messeiller", Index = NA, uuid = add_to_changeLog_ic_age$uuid, Date = Sys.Date(), Base = NA, Enqueteur = NA, Question = "Age chef menage", "Probl.me" = "Manque âge du chef de ménage quand il est le répondant",
-          Anciennes.valeurs = NA, Nouvelles.valeurs = add_to_changeLog_ic_age$ic_age)
-
-add_to_changeLog_ic_genre <- raw_data%>%
-  select(uuid, genre_chef_menage, ic_genre)%>%
-  filter(is.na(genre_chef_menage))
-
-cleaning_log_change <- cleaning_log_change%>%
-  mutate(across(everything(), as.character))%>%
-  add_row(Auteur = "Elliott Messeiller", Index = NA, uuid = add_to_changeLog_ic_genre$uuid, Date = as.character(Sys.Date()), Base = NA, Enqueteur = NA,
-          Question = "Genre du chef menage", "Probl.me" = "Manque genre du chef de ménage quand il est le répondant",
-          Anciennes.valeurs = NA, Nouvelles.valeurs = add_to_changeLog_ic_genre$ic_genre)
-
-raw_data3 <- raw_data%>%
-  # rowwise()%>%
-  mutate(
-    age_chef_menage = case_when( chef_menage == "oui" && is.na(age_chef_menage) ~ ic_age,
-                                 TRUE ~ age_chef_menage),
-    genre_chef_menage = case_when(chef_menage == "oui" && is.na(genre_chef_menage) ~ ic_genre,
-                                  TRUE ~ ic_genre),
-    taille_abri = case_when(taille_abri == "NSP" ~ NA_integer_, TRUE ~ as.integer(taille_abri)),
-    personne_m2 = taille_abri/taille_menage,
-    fcs2 = sum(jr_consom_cereale*2 + jr_consom_noix*3 + jr_consom_lait*4 + jr_consom_viande*4 + jr_consom_legume*1 + jr_consom_fruit*1 + jr_consom_huile*0.5+
-                 jr_consom_sucre*0.5 + jr_consom_epice*0, na.rm = T),
-    fcs2_thresholds = case_when(fcs2>=0 & fcs2 <=21 ~ "pauvre",
-                                fcs2 > 21 & fcs2 <= 35 ~ "limite",
-                                fcs2 > 35 ~ "acceptable",
-                                TRUE ~ NA_character_),
-    rcsi_score = sum(jr_moins_prefere*1, jr_emprunt_nourriture*2, jr_diminu_quantite*1, jr_rest_consommation*3, jr_nbr_repas*1, na.rm = T),
-    rcsi_thresholds = case_when(
-      rcsi_score == 0 ~ "no_coping",
-      rcsi_score > 0 & rcsi_score <= 7 ~ "low",
-      rcsi_score > 7 & rcsi_score <= 15 ~ "medium",
-      rcsi_score > 15 ~ "high",
-      TRUE ~ NA_character_
-    ),
-    nbr_aucun_aliment_new = hhs_recoding(aucun_aliment, nbr_aucun_aliment),
-    nbr_dormir_affame_new = hhs_recoding(dormir_affame, nbr_dormir_affame),
-    nbr_pas_assez_nourriture_new = hhs_recoding(pas_assez_nourriture, nbr_pas_assez_nourriture),
-    hhs_score = sum(nbr_aucun_aliment_new, nbr_dormir_affame_new, nbr_pas_assez_nourriture_new, na.rm = T),
-    hhs_thresholds = case_when(
-      hhs_score <= 1 ~ "peu_pasFaim",
-      hhs_score >1 & hhs_score <= 3 ~ "faim_moderee",
-      hhs_score > 3 & hhs_score <= 6 ~ "faim_severe",
-      TRUE ~ NA_character_
-    ),
-    vente_actif_recoded = lcs_recoding(vente_actif),
-    vente_actif_prod_recoded = lcs_recoding(vente_actif_prod),
-    reduction_depense_recoded = lcs_recoding(reduction_depense),
-    epargne_recoded = lcs_recoding(epargne),
-    emprunt_nourritur_recoded = lcs_recoding(emprunt_nourritur),
-    enfant_ecole_recoded = lcs_recoding(enfant_ecole),
-    vente_maison_recoded = lcs_recoding(vente_maison),
-    activite_risque_recoded = lcs_recoding(activite_risque),
-    mendie_recoded = lcs_recoding(mendie),
-    vente_animal_recoded = lcs_recoding(vente_animal),
-    conso_semence_recoded = lcs_recoding(conso_semence),
-    lcs_urgence = if_else(sum(vente_maison_recoded, mendie_recoded, activite_risque_recoded, na.rm = T ) >= 1, 1,0),
-    lcs_crise = if_else(sum(vente_actif_prod_recoded,reduction_depense_recoded,  enfant_ecole_recoded, conso_semence_recoded, na.rm = T) >= 1, 1, 0),
-    lcs_stress = if_else(sum(vente_actif_recoded, epargne_recoded, emprunt_nourritur_recoded, vente_animal_recoded, na.rm = T) >= 1, 1,0),
-    lcs_minimal = if_else((lcs_urgence + lcs_crise + lcs_stress) == 0, 1, 0),
-    lcs_total = if_else(lcs_urgence ==1, "urgence", if_else(lcs_crise == 1, "crise", if_else( lcs_stress ==1, "stress", "minimal"))),
-    auMoinsUneWG = if_else(sum(nombre_soins_difficile, nombre_difficulte_vision, nombre_difficulte_entendre,
-                               nombre_difficulte_marche, nombre_difficulte_concentration, nombre_difficulte_communication, na.rm = T)>0,1,0),
-    auMoinsUnePersonneDortDehors = if_else(dorme_exterieur >0, 1,0),
-    auMoinsUnEnfantMalade = if_else(malade_5ans>0,1,0),
-    typologie_source_eau = case_when(source_eau %in% c("pmh","poste_auto", "puit_protege","source_amenage","borne_fontaine",
-                                                       "eau _robi_conce","eau _bout","eau _camion") ~ "amelioree",
-                                     source_eau %in% c("puit_tradi", "non_amenage") ~ "non_amelioree",
-                                     source_eau %in% c("course_eau", "eau_pluie") ~ "surface",
-                                     TRUE ~ NA_character_
-    ),
-    probleme_abri.inondation = case_when(str_detect(probleme_abri, "inondations") ~ TRUE,
-                                         !str_detect(probleme_abri, "inondations") ~ FALSE),
-    
-    total_3_5 = sum(total_3_5_femmes, total_3_5_hommes, na.rm = T),
-    total_6_12 = sum(total_6_12_femmes, total_6_12_hommes, na.rm = T),
-    total_13_17 = sum(total_13_17_femmes, total_13_17_hommes, na.rm = T),
-    
-    educ.3_5an_total = sum(total_educ_3_5an_garcon,total_educ_3_5an_fille, na.rm = T),
-    infor_educ.3_5an_total = sum(total_infor_educ_3_5an_garcon, total_infor_educ_3_5an_fille, na.rm = T),
-    non_for_educ.3_5an_total = sum(total_non_for_educ_3_5an_garcon, total_non_for_educ_3_5an_fille, na.rm = T),
-    aucune_educ.3_5an_total = sum(total_aucune_educ_3_5an_garcon, total_aucune_educ_3_5an_fille, na.rm = T),
-    
-    educ.6_12an_total = sum(total_educ_6_12an_garcon,total_educ_6_12an_fille, na.rm = T),
-    infor_educ.6_12an_total = sum(total_infor_educ_6_12an_garcon, total_infor_educ_6_12an_fille, na.rm = T),
-    non_for_educ.6_12an_total = sum(total_non_for_educ_6_12an_garcon, total_non_for_educ_6_12an_fille, na.rm = T),
-    aucune_educ.6_12an_total = sum(total_aucune_educ_6_12an_garcon, total_aucune_educ_6_12an_fille, na.rm = T),
-    
-    educ.13_17an_total = sum(total_educ_13_17an_garcon,total_educ_13_17an_fille, na.rm = T),
-    infor_educ.13_17an_total = sum(total_infor_educ_13_17an_garcon, total_infor_educ_13_17an_fille, na.rm = T),
-    non_for_educ.13_17an_total = sum(total_non_for_educ_13_17an_garcon, total_non_for_educ_13_17an_fille, na.rm = T),
-    aucune_educ.13_17an_total = sum(total_aucune_educ_13_17an_garcon, total_aucune_educ_13_17an_fille, na.rm = T)
-    
-  )
-
-### Weighting cluster sample
-
-
-# raw_data_clusters_tab <- raw_data%>%
-#   group_by(id_sampl)%>%
-#   summarise(effictive_interviews = n(), .groups = "drop")
-# 
-# clusterSample_check <- clusterSample%>%
-#   left_join(raw_data_clusters_tab, by = "id_sampl")%>%
-#   mutate(diff_sampl_reality = survey_buffer - effictive_interviews)%>%
-#   select(id_sampl, strata_id, psu_id, population, ADM1_FR, ADM2_FR, ADM3_FR, ADM3_PCODE, survey_buffer, effictive_interviews, diff_sampl_reality)
-#   ### Little difference between sample and effective 
-# 
-# 
-# # 
-# clusterSample_adm2 <- clusterSample%>%
-#   filter(ADM1_PCODE %in% c("BF46", "BF49", "BF52", "BF54", "BF56"))
-# 
-# 
-# 
-# cluster_wght_representative <- map_to_weighting(sampling.frame = clusterSample, 
-#                                               data = raw_data_representative,
-#                                               sampling.frame.population.column = "population",
-#                                               sampling.frame.stratum.column = "id_sampl",
-#                                               data.stratum.column = "id_sampl"
-# )
-
-raw_data$sampling_strat <- paste(raw_data$status, raw_data$modalite, sep = "_")
-
-raw_data_representative <- raw_data%>%
-  filter(admin1Pcode %in% c("BF46", "BF49", "BF52", "BF54", "BF56"),
-         sampling_id %in% samplingFrame_adm2$strata,
-         sampling_strat == "host_direct",
-         sampling_id != "BF5002_host")
-
-admin2_repesentative_wght <- map_to_weighting(sampling.frame = samplingFrame_adm2, 
-                                              data = raw_data_representative,
-                                              sampling.frame.population.column = "Population",
-                                              sampling.frame.stratum.column = "strata",
-                                              data.stratum.column = "sampling_id")
-
-# combined_weights_representative <- combine_weighting_functions(cluster_wght_representative, admin2_repesentative_wght)
-
-# raw_data_representative$weights <- combined_weights_representative(raw_data_representative)
-
-raw_data_representative$weights_sampling <- admin2_repesentative_wght(raw_data_representative)
-
-
-
-### Weighting for quota admin 2 only
-
-raw_data_adm2_quota <- raw_data%>%
-  filter(admin1Pcode %in% c("BF46", "BF49", "BF52", "BF54", "BF56"),
-         sampling_strat != "host_direct",
-         sampling_id %in% samplingFrame_adm2$strata
-  )
-
-
-admin2_affected_wght <- map_to_weighting(sampling.frame = samplingFrame_adm2, 
-                                         data = raw_data_adm2_quota,
-                                         sampling.frame.population.column = "Population",
-                                         sampling.frame.stratum.column = "strata",
-                                         data.stratum.column = "sampling_id"
-)
-
-raw_data_adm2_quota$weights_sampling <- admin2_affected_wght(raw_data_adm2_quota)
-
-
-
-### Combining cluster weights with admin2 quota weights for 5 most affected regions
-
-raw_data_adm2_affected_all <- rbind(raw_data_representative, raw_data_adm2_quota)
-
-raw_data_adm2 <- raw_data%>%
-  filter(admin1Pcode %in% c("BF46", "BF49", "BF52", "BF54", "BF56"),
-         sampling_id %in% samplingFrame_adm2$strata
-  )
-
-admin2_wght <- map_to_weighting(sampling.frame = samplingFrame_adm2, 
-                                data = raw_data_adm2,
-                                sampling.frame.population.column = "Population",
-                                sampling.frame.stratum.column = "strata",
-                                data.stratum.column = "sampling_id"
-)
-
-
-### Weighting for admin1 ###
-
-#### Weighting admin1 cluster ####
-
-# raw_data_ClusterSmpl_adm1 <- raw_data%>%
-#   filter(sampling_strat == "host_direct", id_sampl %in% clusterSample$id_sampl,
-#          !sampling_id %in%  c("NA_host", "NA_pdi"))
-# 
-# cluster_wght_admin1 <- map_to_weighting(sampling.frame = clusterSample,
-#                                         data = raw_data_ClusterSmpl_adm1,
-#                                         sampling.frame.population.column = "population",
-#                                         sampling.frame.stratum.column = "id_sampl",
-#                                         data.stratum.column = "id_sampl"
-# )
-
-# sf_cluster_wght_admin1 <- map_to_weighting(sampling.frame = samplingFrame, 
-#                                            data = raw_data_ClusterSmpl_adm1,
-#                                            sampling.frame.population.column = "Population",
-#                                            sampling.frame.stratum.column = "strata",
-#                                            data.stratum.column = "sampling_id"
-# )
-
-# combined_weights_adm1_cluster <- combine_weighting_functions(cluster_wght_admin1, sf_cluster_wght_admin1)
-
-# raw_data_ClusterSmpl_adm1$weights <- combined_weights_adm1_cluster(raw_data_ClusterSmpl_adm1)
-
-
-#### Weighting admin1 quotas ####
-
-raw_data_adm1 <- raw_data%>%
-  filter(sampling_id %in% samplingFrame$strata,
-         !sampling_id %in%  c("NA_host", "NA_pdi"))
-
-sf_wght_admin1 <- map_to_weighting(sampling.frame = samplingFrame, 
-                                   data = raw_data_adm1,
-                                   sampling.frame.population.column = "Population",
-                                   sampling.frame.stratum.column = "strata",
-                                   data.stratum.column = "sampling_id")
-
-raw_data_adm1$weights_sampling <- sf_wght_admin1(raw_data_adm1)
-
-
-### Removing from main data frames surveys with no sampling ID attriuable
-
-not_in_raw_data_adm1 <- raw_data[!raw_data$uuid %in% raw_data_adm1$uuid, ]
-
-if(nrow(not_in_raw_data_adm1)>0){
-  cleaning_log_change <- cleaning_log_change%>%
-    add_row(Auteur = "Elliott Messeiller", uuid = not_in_raw_data_adm1$uuid, Date = Sys.Date(), Enqueteur = not_in_raw_data_adm1$enumerator_id, Question = "Localite",
-            `Probl.me` = "Localité introuvable dans base de données des localités COD OCHA. Impossible d'attribuer au bon PSU.",
-            `Anciennes.valeurs` = not_in_raw_data_adm1$uuid, Action = "Enquêtes supprimées")
-}
-
-### Writing files
-
-write_csv(cleaning_log_change, "outputs/logs/cleaning_log_missingPcodes.csv")
-write_csv(raw_data_adm1, "outputs/datasets/BFA_MSNA_2020_dataset_cleanedWeighted_ADM1.csv")
-write_csv(raw_data_representative, "outputs/datasets/BFA_MSNA_2020_dataset_cleanedWeighted_representativeData.csv")
-write_csv(raw_data_adm2_quota, "outputs/datasets/BFA_MSNA_2020_dataset_cleanedWeighted_quota_ADM2affected.csv")
-write_csv(raw_data_adm2_affected_all, "outputs/datasets/BFA_MSNA_2020_dataset_cleanedWeighted_ADM2_all.csv")
-
-loopsFiles.names <- paste0("./outputs/datasets/loops/BFA_MSNA_2020_dataset_cleanedWeighted_",unlist(loop_frames_names), ".csv")
-
-for(i in seq_along(list_remove_data)){
-  write_csv(list_remove_data[[i]], loopsFiles.names[[i]])
-}
+end_analysis_process - start_analysis_process
 
