@@ -331,9 +331,11 @@ summary_stats_admin_1_grp_final <- bind_rows(summary_stats_admin_1_grp, freq_adm
   mutate(sub.research.question_label = factor(sub.research.question_label, levels = target_sub_research_question_order ),
          research.question_label = factor(research.question_label, levels = target_research_question_order))%>%
   arrange(research.question_label,sub.research.question_label,status,label_choice)%>%
-  filter(!is.na(label_choice))
+  filter(!is.na(label_choice))%>%
+  group_by(research.question_label,sub.research.question_label,status, label_choice)%>%
+  summarise(across(where(is.numeric), sum, na.rm=T))
 
-names(summary_stats_admin_1_grp_final)[1:2] <- c("Région", "Groupe de population")
+
 
 analysisplan_admin_2_grp <- make_analysis_plan_template(df= cleaned_data_adm2,
                                                         questionnaire = questionnaire,
@@ -540,7 +542,14 @@ which_subsets_adm2 <- cleaned_data_adm1%>%
   mutate(perc_NAs = round(NAs/n*100, 0))%>%
   select(-n)
 
-which_skipLogic_adm2 <- which_skipLogic%>%
+which_skipLogic_admin2 <- map(names(cleaned_data_adm2%>%select(-eau_propre, -admin1, -admin2, -status)), function(x)questionnaire$question_is_skipped(question.name = x, data = cleaned_data_adm2%>%select(-eau_propre)))%>%
+  as.data.frame()%>%
+  mutate(admin1 = cleaned_data_adm2$admin1, admin2 = cleaned_data_adm2$admin2, status = cleaned_data_adm2$status)
+
+names(which_skipLogic_admin2) <- c(names(cleaned_data_adm2%>%select(-eau_propre,  -admin1, -admin2, -status)), "admin1", "admin2", "status")
+
+
+which_skipLogic_adm2 <- which_skipLogic_admin2%>%
   select(-admin1)%>%
   group_by(admin2, status)%>%
   summarise_all(funs(sum(.)))%>%
@@ -580,7 +589,16 @@ summary_stats_admin_2_grp_final_grp <- rbind(summary_stats_admin_2_grp, freq_adm
   mutate(sub.research.question_label = factor(sub.research.question_label, levels = target_sub_research_question_order ),
          research.question_label = factor(research.question_label, levels = target_research_question_order))%>%
   arrange(research.question_label,sub.research.question_label,status,label_choice)%>%
-  filter(!is.na(label_choice))
+  filter(!is.na(label_choice))%>%
+  group_by(research.question_label,sub.research.question_label,status, label_choice)%>%
+  summarise(across(where(is.numeric), sum, na.rm=T))
+
+
+summary_stats_admin_2_grp_final_grp_duplicates_check <- summary_stats_admin_2_grp_final_grp%>%
+  select(status, label_choice)%>%
+  group_by(status, label_choice)%>%
+  filter(n()>1)%>%
+  distinct()
 
 names(summary_stats_admin_2_grp_final_grp)[1:5] <- c("Question de recherche", "Sous-question de recherche", "Groupe de population", "Indicator", "Sous-ensemble de donnée")
 names(summary_stats_admin_1_grp_final)[1:5] <- c("Question de recherche", "Sous-question de recherche", "Groupe de population", "Indicator", "Sous-ensemble de donnée")

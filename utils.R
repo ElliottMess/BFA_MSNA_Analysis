@@ -167,3 +167,20 @@ form_dictionnary <- function(data, survey, choices, analysisplanTemplate =NULL){
   return(dico)
   
 }
+
+match_SL <-   function(skipped,value){
+  if(skipped == TRUE) {
+    value <- "NA.SL"
+    return(value)
+  }else{
+    return(value)
+  }
+}
+
+value_skipped_col <- function(col_value, col_skipped){
+  stopifnot(length(col_value)==length(col_skipped))
+  SLs <- map2(col_skipped,col_value, match_SL)%>% unlist()
+  
+  return(SLs)
+}
+
