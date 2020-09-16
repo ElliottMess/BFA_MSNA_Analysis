@@ -341,7 +341,7 @@ analysisplan_admin_2_grp <- make_analysis_plan_template(df= cleaned_data_adm2,
                                                         questionnaire = questionnaire,
                                                         repeat.for.variable = "admin2",
                                                         independent.variable = "status",
-                                                        hypothesis.type = "direct_reporting",
+                                                        hypothesis.type = "group_difference",
                                                         template_file = template_analysisplan_file
 )
 

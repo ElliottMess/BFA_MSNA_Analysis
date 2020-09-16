@@ -65,36 +65,37 @@ raw_data_maladie_moins_5ans_rpt <- read_excel(raw_data_excel, sheet = "maladie_m
          parent_index = `_parent_index...1`)
 
 raw_data_naissances <- read_excel(raw_data_excel, sheet = "naissances")%>%
-  rename(submission_uuid = `_submission__uuid...2`,
-         parent_index = `_parent_index...1`)
+  rename(parent_index = `_parent_index...1`,
+         submission_uuid = `_submission__id`)
 
-raw_data_membre_marche_dificile <- read_excel(raw_data_excel, sheet = "membre_marche_dificile")%>%
-  rename(submission_uuid = `_submission__uuid...2`,
-         parent_index = `_parent_index...1`)
+raw_data_membre_marche_dificile <- read_excel(raw_data_excel, sheet = "membre_marche_dificile")
+# %>%
+#   rename(submission_uuid = `_submission__uuid...2`,
+#          parent_index = `_parent_index...1`)
 
-raw_data_membre_soins_difficile <- read_excel(raw_data_excel, sheet = "soins_difficile")%>%
-  rename(submission_uuid = `_submission__uuid...2`,
-         parent_index = `_parent_index...1`)
+raw_data_membre_soins_difficile <- read_excel(raw_data_excel, sheet = "soins_difficile")
 
-raw_data_membre_concentration_difficile <- read_excel(raw_data_excel, sheet = "concentration_difficile")%>%
-  rename(submission_uuid = `_submission__uuid...2`,
-         parent_index = `_parent_index...1`)
+raw_data_membre_concentration_difficile <- read_excel(raw_data_excel, sheet = "concentration_difficile")
 
-raw_data_membre_membre_vision_diffcile <- read_excel(raw_data_excel, sheet = "membre_vision_diffcile")%>%
-  rename(submission_uuid = `_submission__uuid...13`,
-         parent_index = `_parent_index...1`)
+raw_data_membre_membre_vision_diffcile <- read_excel(raw_data_excel, sheet = "membre_vision_diffcile")
+# %>%
+#   rename(submission_uuid = `_submission__uuid...13`,
+#          parent_index = `_parent_index...1`)
 
-raw_data_membre_membre_entendre_difficile <- read_excel(raw_data_excel, sheet = "membre_entendre_difficile")%>%
-  rename(submission_uuid = `_submission__uuid...2`,
-         parent_index = `_parent_index...1`)
+raw_data_membre_membre_entendre_difficile <- read_excel(raw_data_excel, sheet = "membre_entendre_difficile")
+# %>%
+#   rename(submission_uuid = `_submission__uuid...2`,
+#          parent_index = `_parent_index...1`)
 
-raw_data_membre_difficulte_communication <- read_excel(raw_data_excel, sheet = "communication_difficile")%>%
-  rename(submission_uuid = `_submission__uuid...2`,
-         parent_index = `_parent_index...1`)
+raw_data_membre_difficulte_communication <- read_excel(raw_data_excel, sheet = "communication_difficile")
+# %>%
+#   rename(submission_uuid = `_submission__uuid...2`,
+#          parent_index = `_parent_index...1`)
 
-raw_data_membre_repeat_nbre_pers_decedes <- read_excel(raw_data_excel, sheet = "repeat_nbre_pers_decedes")%>%
-  rename(submission_uuid = `_submission__uuid...2`,
-         parent_index = `_parent_index...1`)
+raw_data_membre_repeat_nbre_pers_decedes <- read_excel(raw_data_excel, sheet = "repeat_nbre_pers_decedes")
+# %>%
+#   rename(submission_uuid = `_submission__uuid...2`,
+#          parent_index = `_parent_index...1`)
 
 loop_frames <- list(raw_data_info_menage, raw_data_maladie_moins_5ans_rpt, raw_data_naissances, raw_data_membre_marche_dificile,
                  raw_data_membre_soins_difficile, raw_data_membre_concentration_difficile, raw_data_membre_membre_vision_diffcile,
@@ -316,62 +317,62 @@ raw_data <- affect_loop_to_parent(loop = as.data.frame(raw_data_info_menage), pa
 raw_data_naissances <- levels_asBinaryColumns(raw_data_naissances, "lieu_accouchement")
 raw_data_naissances <- levels_asBinaryColumns(raw_data_naissances, "raison_dominicile")
 
-raw_data <- affect_loop_to_parent(loop = as.data.frame(raw_data_naissances), parent = as.data.frame(raw_data), aggregate.function = sum,
-                                      variable.to.add = c(
-                                        sum_lieu_accouchement.autre = "lieu_accouchement.autre",
-                                        sum_lieu_accouchement.centre_sante = "lieu_accouchement.centre_sante",
-                                        sum_lieu_accouchement.maison = "lieu_accouchement.maison",
-                                        sum_raison_domicil_accouche_assiste_domicil = "raison_dominicile.accouche_assiste_domicil",
-                                        sum_raison_domicil_accouche_centre_ferme = "raison_dominicile.centre_ferme",
-                                        sum_raison_domicil_accouche_centre_financ_inacc = "raison_dominicile.centre_financ_inacc",
-                                        sum_raison_domicil_centre_surpeuple = "raison_dominicile.centre_surpeuple",
-                                        sum_raison_domicil_maternite_pas_sur = "raison_dominicile.maternite_pas_sur",
-                                        sum_raison_domicil_nsp = "raison_dominicile.nsp",
-                                        sum_raison_domicil_physique_mere = "raison_dominicile.physique_mere",
-                                        sum_raison_domicil_rejoindre_centre = "raison_dominicile.rejoindre_centre"
-                                      ),
-                                      uuid.name.loop = "parent_index", uuid.name.parent = "index")
+naissance_aggre <- raw_data_naissances %>%
+  group_by(parent_index) %>%
+  summarise(across(starts_with(c("lieu_accouchement.", "raison_dominicile.")), sum, na.rm = T)) %>%
+  mutate(parent_index = as.character(parent_index))
+raw_data <- raw_data %>%
+  left_join(naissance_aggre, by = c("index" = "parent_index"))
 
 
-issues_withNaissances <- raw_data%>%
-  select(total_naissance,
-         sum_lieu_accouchement.centre_sante,sum_lieu_accouchement.autre,sum_lieu_accouchement.maison,
-         uuid)%>%
-  mutate(oops_naissance = case_when(sum_lieu_accouchement.centre_sante > total_naissance ~"oops",
-                                    sum_lieu_accouchement.autre > total_naissance ~ "oops",
-                                    sum_lieu_accouchement.maison > total_naissance ~ "oops",
-                                    TRUE~"OK"))%>%
-  filter(oops_naissance=="oops")%>%
-  write_csv("problemes_repeat_Naissances.csv")
+
+# issues_withNaissances <- raw_data%>%
+#   select(total_naissance,
+#          sum_lieu_accouchement.centre_sante,sum_lieu_accouchement.autre,sum_lieu_accouchement.maison,
+#          uuid)%>%
+#   mutate(oops_naissance = case_when(sum_lieu_accouchement.centre_sante > total_naissance ~"oops",
+#                                     sum_lieu_accouchement.autre > total_naissance ~ "oops",
+#                                     sum_lieu_accouchement.maison > total_naissance ~ "oops",
+#                                     TRUE~"OK"))%>%
+#   filter(oops_naissance=="oops")%>%
+#   write_csv("problemes_repeat_Naissances.csv")
 
 
-raw_data_maladie_moins_5ans_rpt <- raw_data_maladie_moins_5ans_rpt%>%
-  mutate_at(vars(starts_with("maladie_moins_5ans/")), as.numeric)
+# raw_data_maladie_moins_5ans_rpt <- raw_data_maladie_moins_5ans_rpt%>%
+#   mutate_at(vars(starts_with("maladie_moins_5ans/")), as.numeric)
+# 
+# raw_data <- affect_loop_to_parent(loop = as.data.frame(raw_data_maladie_moins_5ans_rpt), parent = as.data.frame(raw_data), aggregate.function = sum,
+#                                       variable.to.add = c(
+#                                         sum_enfants_5ans_maladie.palu = "maladie_moins_5ans/palu",
+#                                         sum_enfants_5ans_maladie.infect_respiratoire = "maladie_moins_5ans/infect_respiratoire",
+#                                         sum_enfants_5ans_maladie.diarrhee =  "maladie_moins_5ans/diarrhee",
+#                                         sum_enfants_5ans_maladie.autre = "maladie_moins_5ans/autre",
+#                                         sum_enfants_5ans_maladie.nsp = "maladie_moins_5ans/nsp"
+#                                       ),
+#                                       uuid.name.loop = "parent_index", uuid.name.parent = "index")
+# 
+# issues_enfants_malades <- raw_data%>%
+#   select(total_moins_5ans,
+#          sum_enfants_5ans_maladie.palu,sum_enfants_5ans_maladie.infect_respiratoire,sum_enfants_5ans_maladie.diarrhee,sum_enfants_5ans_maladie.autre,sum_enfants_5ans_maladie.nsp,
+#          uuid)%>%
+#   mutate(oops_malade = case_when(sum_enfants_5ans_maladie.palu > total_moins_5ans ~"oops",
+#                                     sum_enfants_5ans_maladie.infect_respiratoire > total_moins_5ans ~ "oops",
+#                                     sum_enfants_5ans_maladie.diarrhee > total_moins_5ans ~ "oops",
+#                                     sum_enfants_5ans_maladie.autre > total_moins_5ans ~ "oops",
+#                                     sum_enfants_5ans_maladie.nsp > total_moins_5ans ~ "oops",
+#                                     TRUE~"OK"))%>%
+#   filter(oops_malade=="oops")%>%
+#   write_csv("problemes_repeat_malades.csv")
 
-raw_data <- affect_loop_to_parent(loop = as.data.frame(raw_data_maladie_moins_5ans_rpt), parent = as.data.frame(raw_data), aggregate.function = sum,
-                                      variable.to.add = c(
-                                        sum_enfants_5ans_maladie.palu = "maladie_moins_5ans/palu",
-                                        sum_enfants_5ans_maladie.infect_respiratoire = "maladie_moins_5ans/infect_respiratoire",
-                                        sum_enfants_5ans_maladie.diarrhee =  "maladie_moins_5ans/diarrhee",
-                                        sum_enfants_5ans_maladie.autre = "maladie_moins_5ans/autre",
-                                        sum_enfants_5ans_maladie.nsp = "maladie_moins_5ans/nsp"
-                                      ),
-                                      uuid.name.loop = "parent_index", uuid.name.parent = "index")
-
-issues_enfants_malades <- raw_data%>%
-  select(total_moins_5ans,
-         sum_enfants_5ans_maladie.palu,sum_enfants_5ans_maladie.infect_respiratoire,sum_enfants_5ans_maladie.diarrhee,sum_enfants_5ans_maladie.autre,sum_enfants_5ans_maladie.nsp,
-         uuid)%>%
-  mutate(oops_malade = case_when(sum_enfants_5ans_maladie.palu > total_moins_5ans ~"oops",
-                                    sum_enfants_5ans_maladie.infect_respiratoire > total_moins_5ans ~ "oops",
-                                    sum_enfants_5ans_maladie.diarrhee > total_moins_5ans ~ "oops",
-                                    sum_enfants_5ans_maladie.autre > total_moins_5ans ~ "oops",
-                                    sum_enfants_5ans_maladie.nsp > total_moins_5ans ~ "oops",
-                                    TRUE~"OK"))%>%
-  filter(oops_malade=="oops")%>%
-  write_csv("problemes_repeat_malades.csv")
+maladie_agg <- raw_data_maladie_moins_5ans_rpt %>%
+  group_by(parent_index)%>%
+  mutate(across(starts_with("maladie_moins_5ans/"), as.numeric))%>%
+  summarise(across(starts_with("maladie_moins_5ans/"), sum, na.rm = T)) %>%
+  mutate(parent_index = as.character(parent_index))
 
 
+raw_data <- raw_data %>%
+  left_join(maladie_agg, by = c("index" = "parent_index"))
 
 raw_data_membre_marche_dificile <- levels_asBinaryColumns(raw_data_membre_marche_dificile, "genre_marche")%>%
   mutate(agegrp = case_when(genre_marche == "homme" & (age_marche < 5) ~ "garcons_moins5",
@@ -725,7 +726,10 @@ raw_data <- raw_data%>%
       educ.13_17an_total = sum(total_educ_13_17an_garcon,total_educ_13_17an_fille, na.rm = T),
       infor_educ.13_17an_total = sum(total_infor_educ_13_17an_garcon, total_infor_educ_13_17an_fille, na.rm = T),
       non_for_educ.13_17an_total = sum(total_non_for_educ_13_17an_garcon, total_non_for_educ_13_17an_fille, na.rm = T),
-      aucune_educ.13_17an_total = sum(total_aucune_educ_13_17an_garcon, total_aucune_educ_13_17an_fille, na.rm = T)
+      aucune_educ.13_17an_total = sum(total_aucune_educ_13_17an_garcon, total_aucune_educ_13_17an_fille, na.rm = T),
+      
+      admin2 = case_when(admin3 == "solenzo" ~ "banwa", 
+                         TRUE ~ admin2)
       
   )
 
@@ -874,7 +878,7 @@ write_csv(cleaning_log_change, "outputs/logs/cleaning_log_missingPcodes.csv")
 write_csv(raw_data_adm1, "outputs/datasets/BFA_MSNA_2020_dataset_cleanedWeighted_ADM1.csv")
 write_csv(raw_data_representative, "outputs/datasets/BFA_MSNA_2020_dataset_cleanedWeighted_representativeData.csv")
 write_csv(raw_data_adm2_quota, "outputs/datasets/BFA_MSNA_2020_dataset_cleanedWeighted_quota_ADM2affected.csv")
-write_csv(raw_data_adm2_affected_all, "outputs/datasets/BFA_MSNA_2020_dataset_cleanedWeighted_ADM2_all.csv")
+write_csv(raw_data_adm2, "outputs/datasets/BFA_MSNA_2020_dataset_cleanedWeighted_ADM2_all.csv")
 
 loopsFiles.names <- paste0("./outputs/datasets/loops/BFA_MSNA_2020_dataset_cleanedWeighted_",unlist(loop_frames_names), ".csv")
 
