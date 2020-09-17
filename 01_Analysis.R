@@ -3,7 +3,7 @@ source("analysisplan_factory.R")
 
 source("utils.R")
 
-# source("00_loadCleanWeight.R", encoding = "UTF-8")
+source("00_loadCleanWeight.R", encoding = "UTF-8")
 
 start_analysis_process <- Sys.time()
 
@@ -307,7 +307,7 @@ which_skipLogic_adm1_var <- which_skipLogic_adm1 %>%
             perc_Skipped = sum(perc_Skipped, na.rm = T)) %>%
   mutate(subset = if_else(perc_Skipped > 0, "Sous-ensemble de donnée", NA_character_))
 
-summary_stats_admin_1_grp_final2 <- bind_rows(summary_stats_admin_1_grp, freq_admin1_grp)%>%
+summary_stats_admin_1_grp_final <- bind_rows(summary_stats_admin_1_grp, freq_admin1_grp)%>%
   left_join(which_subsets_adm1, by = c("admin1", "status", "variable"))%>%
   # left_join(which_skipLogic_adm1, by = c("admin1", "status", "variable"))%>%
   mutate(question_choice = case_when(is.na(variable_value) ~ variable,
@@ -341,7 +341,10 @@ summary_stats_admin_1_grp_final2 <- bind_rows(summary_stats_admin_1_grp, freq_ad
          research.question_label = factor(research.question_label, levels = target_research_question_order))%>%
   arrange(research.question_label,sub.research.question_label,status,label_choice)%>%
   filter(!is.na(label_choice)) %>%
-  left_join(select(which_skipLogic_adm1_var, variable,subset) , by = "variable") 
+  left_join(select(which_skipLogic_adm1_var, variable,subset) , by = "variable")%>%
+  select(research.question_label, sub.research.question_label, status, label_choice,subset,everything())%>%
+  select(-variable)
+  
 
 
 
@@ -355,18 +358,13 @@ analysisplan_admin_2_grp <- make_analysis_plan_template(df= cleaned_data_adm2,
 
 analysisplan_admin_2_grp <- analysisplan_admin_2_grp[!is.na(analysisplan_admin_2_grp$dependent.variable.type),]
 
-analysisplan_admin_2_grp_reduced <- analysisplan_admin_2_grp%>%
-  filter(
-    !dependent.variable == "probleme_abri",
-  )
-
 
 start_time_admin2_grp <- Sys.time()
 
-# final_result_admin_2_grp <- from_analysisplan_map_to_output(data = cleaned_data_adm2, 
-#                                                             analysisplan = analysisplan_admin_2_grp_reduced, 
-#                                                             weighting = admin2_wght, 
-#                                                             questionnaire = questionnaire)
+final_result_admin_2_grp <- from_analysisplan_map_to_output(data = cleaned_data_adm2,
+                                                            analysisplan = analysisplan_admin_2_grp,
+                                                            weighting = admin2_wght,
+                                                            questionnaire = questionnaire)
 
 final_result_admin_2_grp <- readRDS("final_result_admin_2_grp.RDS")
 
@@ -568,13 +566,19 @@ which_skipLogic_adm2 <- which_skipLogic_admin2%>%
   mutate(perc_Skipped = round(Skipped/n*100, 0))%>%
   select(-n)
 
+which_skipLogic_adm2_var <- which_skipLogic_adm2 %>%
+  group_by(variable) %>%
+  summarise(Skipped = sum(Skipped, na.rm = T),
+            perc_Skipped = sum(perc_Skipped, na.rm = T)) %>%
+  mutate(subset = if_else(perc_Skipped > 0, "Sous-ensemble de donnée", NA_character_))
 
-summary_stats_admin_2_grp_final_grp <- rbind(summary_stats_admin_2_grp, freq_admin2_grp)%>%
+summary_stats_admin_2_grp_final <- bind_rows(summary_stats_admin_2_grp, freq_admin2_grp)%>%
   left_join(which_subsets_adm2, by = c("admin2", "status", "variable"))%>%
-  left_join(which_skipLogic_adm2, by = c("admin2", "status", "variable"))%>%
+  # left_join(which_skipLogic_adm2, by = c("admin2", "status", "variable"))%>%
   mutate(question_choice = case_when(is.na(variable_value) ~ variable,
-                                     TRUE ~ paste0(variable, ".", variable_value)),
-         subset = if_else(perc_Skipped > 0, "Sous-ensemble de donnée", NA_character_))%>%
+                                     TRUE ~ paste0(variable, ".", variable_value))) %>%
+  # ,
+  # subset = if_else(perc_Skipped > 0, "Sous-ensemble de donnée", NA_character_))%>%
   left_join(dico, by = "question_choice")%>%
   mutate(status = case_when(status == "pdi" ~ "PDI",
                             status == "host" ~ "Communauté hôte",
@@ -584,12 +588,14 @@ summary_stats_admin_2_grp_final_grp <- rbind(summary_stats_admin_2_grp, freq_adm
                              dependent.variable.type == "numerical"  ~ round(numbers,1)
   )
   )%>%
-  select(research.question_label, sub.research.question_label, admin2, status, label_indicator, label_choice, numbers, subset)%>%
+  select(research.question_label, sub.research.question_label, admin2, status, label_indicator, label_choice, numbers, variable)%>%
+  # select(research.question_label, sub.research.question_label, admin2, status, label_indicator, label_choice, numbers, subset)%>%
   left_join(bfa_admin2, by = c("admin2" = "admin2name"))%>%
   distinct()%>%
   mutate(label_choice = case_when(is.na(label_choice) ~ label_indicator, 
                                   TRUE ~ paste(label_indicator, label_choice, sep = ": ")))%>%
-  select(research.question_label, sub.research.question_label, admin2Name, status, label_choice,subset, numbers)%>%
+  select(research.question_label, sub.research.question_label, admin2Name, status, label_choice, numbers, variable)%>%
+  # select(research.question_label, sub.research.question_label, admin2Name, status, label_choice,subset, numbers)%>%
   distinct()%>%
   filter(!is.na(label_choice))%>%
   group_by(research.question_label, sub.research.question_label, admin2Name, status, label_choice)%>%
@@ -599,26 +605,16 @@ summary_stats_admin_2_grp_final_grp <- rbind(summary_stats_admin_2_grp, freq_adm
   mutate(sub.research.question_label = factor(sub.research.question_label, levels = target_sub_research_question_order ),
          research.question_label = factor(research.question_label, levels = target_research_question_order))%>%
   arrange(research.question_label,sub.research.question_label,status,label_choice)%>%
-  filter(!is.na(label_choice))%>%
-  group_by(research.question_label,sub.research.question_label,status, label_choice)%>%
-  summarise(across(where(is.numeric), sum, na.rm=T))
-
-
-summary_stats_admin_2_grp_final_grp_duplicates_check <- summary_stats_admin_2_grp_final_grp%>%
-  select(status, label_choice)%>%
-  group_by(status, label_choice)%>%
-  filter(n()>1)%>%
-  distinct()
+  filter(!is.na(label_choice)) %>%
+  left_join(select(which_skipLogic_adm2_var, variable,subset) , by = "variable")%>%
+  select(research.question_label, sub.research.question_label, status, label_choice,subset,everything())%>%
+  select(-variable)
 
 names(summary_stats_admin_2_grp_final_grp)[1:5] <- c("Question de recherche", "Sous-question de recherche", "Groupe de population", "Indicator", "Sous-ensemble de donnée")
 names(summary_stats_admin_1_grp_final)[1:5] <- c("Question de recherche", "Sous-question de recherche", "Groupe de population", "Indicator", "Sous-ensemble de donnée")
 
-
-
 write_csv(summary_stats_admin_1_grp_final, "outputs/tables/summary_stats_admin_1_grp.csv")
 write_csv(summary_stats_admin_2_grp_final_grp, "outputs/tables/summary_stats_admin_2_grp.csv")
-
-
 
 end_analysis_process <- Sys.time()
 
