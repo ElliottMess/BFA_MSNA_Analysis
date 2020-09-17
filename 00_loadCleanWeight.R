@@ -283,6 +283,13 @@ raw_data_info_menage <- raw_data_info_menage%>%
          agegrp_65plus_hommes = if_else(age_hh >= 65 &sexe_hh == "homme",1,0)
          )
 
+info_menage_agg <- raw_data_info_menage %>%
+  group_by(parent_index) %>%
+  summarise(across(starts_with(c("agegrp_", "sum_age_0_5mois")), sum, na.rm = T)) %>%
+  mutate(parent_index = as.character(parent_index))
+
+raw_data <- raw_data %>%
+  left_join(info_menage_agg, by = c("index" = "parent_index"))
 
 raw_data_info_menage <- koboloops::add_parent_to_loop(loop = as.data.frame(raw_data_info_menage), parent = as.data.frame(raw_data), variables.to.keep = c("barriere_edu", "status"), uuid.name.loop = "parent_index", uuid.name.parent = "index")%>%
   mutate(enfants_descolarise_insecurite = case_when(
@@ -299,19 +306,19 @@ raw_data_info_menage <- koboloops::add_parent_to_loop(loop = as.data.frame(raw_d
   )
          
 
-raw_data <- affect_loop_to_parent(loop = as.data.frame(raw_data_info_menage), parent = as.data.frame(raw_data), aggregate.function = sum,
-                                  variable.to.add = c(
-                                    sum_age_0_5mois = "age_0_5mois",
-                                    total_agegrp_0_5_femmes = "agegrp_0_5_femmes",
-                                    total_agegrp_0_5_hommes = "agegrp_0_5_hommes",
-                                    total_agegrp_5_18_femmes = "agegrp_5_18_femmes",
-                                    total_agegrp_5_18_hommes = "agegrp_5_18_hommes",
-                                    total_agegrp_18_65_femmes = "agegrp_18_65_femmes",
-                                    total_agegrp_18_65_hommes = "agegrp_18_65_hommes",
-                                    total_agegrp_65plus_femmes = "agegrp_65plus_femmes",
-                                    total_agegrp_65plus_hommes = "agegrp_65plus_hommes"
-                                  ),
-                                  uuid.name.loop = "parent_index", uuid.name.parent = "index")
+# raw_data <- affect_loop_to_parent(loop = as.data.frame(raw_data_info_menage), parent = as.data.frame(raw_data), aggregate.function = sum,
+#                                   variable.to.add = c(
+#                                     sum_age_0_5mois = "age_0_5mois",
+#                                     total_agegrp_0_5_femmes = "agegrp_0_5_femmes",
+#                                     total_agegrp_0_5_hommes = "agegrp_0_5_hommes",
+#                                     total_agegrp_5_18_femmes = "agegrp_5_18_femmes",
+#                                     total_agegrp_5_18_hommes = "agegrp_5_18_hommes",
+#                                     total_agegrp_18_65_femmes = "agegrp_18_65_femmes",
+#                                     total_agegrp_18_65_hommes = "agegrp_18_65_hommes",
+#                                     total_agegrp_65plus_femmes = "agegrp_65plus_femmes",
+#                                     total_agegrp_65plus_hommes = "agegrp_65plus_hommes"
+#                                   ),
+#                                   uuid.name.loop = "parent_index", uuid.name.parent = "index")
 
 
 raw_data_naissances <- levels_asBinaryColumns(raw_data_naissances, "lieu_accouchement")
@@ -321,6 +328,7 @@ naissance_aggre <- raw_data_naissances %>%
   group_by(parent_index) %>%
   summarise(across(starts_with(c("lieu_accouchement.", "raison_dominicile.")), sum, na.rm = T)) %>%
   mutate(parent_index = as.character(parent_index))
+
 raw_data <- raw_data %>%
   left_join(naissance_aggre, by = c("index" = "parent_index"))
 
@@ -385,31 +393,25 @@ raw_data_membre_marche_dificile <- levels_asBinaryColumns(raw_data_membre_marche
                             genre_marche == "femme" & (age_marche >= 65) ~ "femmes_65plus",
                             TRUE ~ NA_character_
   ),
-  marche_dif_garcons_moins5 = if_else(agegrp == "garcons_moins5", TRUE, FALSE),
-  marche_dif_filles_moins5 = if_else(agegrp == "filles_moins5", TRUE, FALSE),
-  marche_dif_garcons_5_18 = if_else(agegrp == "garcons_5_18", TRUE, FALSE),
-  marche_dif_filles_5_18 = if_else(agegrp == "filles_5_18", TRUE, FALSE),
-  marche_dif_hommes_18_64 = if_else(agegrp == "hommes_18_64", TRUE, FALSE),
-  marche_dif_femmes_18_64 = if_else(agegrp == "femmes_18_64", TRUE, FALSE),
-  marche_dif_hommes_65plus = if_else(agegrp == "hommes_65plus", TRUE, FALSE),
-  marche_dif_femmes_65plus = if_else(agegrp == "femmes_65plus", TRUE, FALSE)
+  marche_dif_garcons_moins5 = if_else(agegrp == "garcons_moins5", 1, 0),
+  marche_dif_filles_moins5 = if_else(agegrp == "filles_moins5", 1, 0),
+  marche_dif_garcons_5_18 = if_else(agegrp == "garcons_5_18", 1, 0),
+  marche_dif_filles_5_18 = if_else(agegrp == "filles_5_18", 1, 0),
+  marche_dif_hommes_18_64 = if_else(agegrp == "hommes_18_64", 1, 0),
+  marche_dif_femmes_18_64 = if_else(agegrp == "femmes_18_64", 1, 0),
+  marche_dif_hommes_65plus = if_else(agegrp == "hommes_65plus", 1, 0),
+  marche_dif_femmes_65plus = if_else(agegrp == "femmes_65plus", 1, 0)
   )
 
 
+marche_difficile_agg <- raw_data_membre_marche_dificile%>%
+  group_by(parent_index)%>%
+  mutate(across(starts_with("marche_dif_"), as.numeric))%>%
+  summarise(across(starts_with("marche_dif_"), sum, na.rm = T)) %>%
+  mutate(parent_index = as.character(parent_index))
 
-
-raw_data <- affect_loop_to_parent(loop = as.data.frame(raw_data_membre_marche_dificile), parent = as.data.frame(raw_data), aggregate.function = sum,
-                                      variable.to.add = c(
-                                        sum_marche_dif_garcons_moins5 = "marche_dif_garcons_moins5",
-                                        sum_marche_dif_filles_moins5 = "marche_dif_filles_moins5",
-                                        sum_marche_dif_garcons_5_18 = "marche_dif_garcons_5_18",
-                                        sum_marche_dif_filles_5_18 = "marche_dif_filles_5_18",
-                                        sum_marche_dif_hommes_18_64 = "marche_dif_hommes_18_64",
-                                        sum_marche_dif_femmes_18_64 = "marche_dif_femmes_18_64",
-                                        sum_marche_dif_hommes_65plus = "marche_dif_hommes_65plus",
-                                        sum_marche_dif_femmes_65plus = "marche_dif_femmes_65plus"
-                                      ),
-                                      uuid.name.loop = "parent_index", uuid.name.parent = "index")
+raw_data <- raw_data%>%
+  left_join(marche_difficile_agg, by = c("index" = "parent_index"))
 
 
 raw_data_membre_soins_difficile <- raw_data_membre_soins_difficile%>%
@@ -424,18 +426,16 @@ raw_data_membre_soins_difficile <- raw_data_membre_soins_difficile%>%
     soins_dif_femmes_65plus = if_else(genre_soins == "femme" & (age_soins >= 65), TRUE, FALSE)
   )
 
-raw_data <- affect_loop_to_parent(loop = as.data.frame(raw_data_membre_soins_difficile), parent = as.data.frame(raw_data), aggregate.function = sum,
-                                      variable.to.add = c(
-                                        sum_soins_dif_garcons_moins5 = "soins_dif_garcons_moins5",
-                                        sum_soins_dif_filles_moins5 = "soins_dif_filles_moins5",
-                                        sum_soins_dif_garcons_5_18 = "soins_dif_garcons_5_18",
-                                        sum_soins_dif_filles_5_18 = "soins_dif_filles_5_18",
-                                        sum_soins_dif_hommes_18_64 = "soins_dif_hommes_18_64",
-                                        sum_soins_dif_femmes_18_64 = "soins_dif_femmes_18_64",
-                                        sum_soins_dif_hommes_65plus = "soins_dif_hommes_65plus",
-                                        sum_soins_dif_femmes_65plus = "soins_dif_femmes_65plus"
-                                      ),
-                                      uuid.name.loop = "parent_index", uuid.name.parent = "index")
+soins_difficile_agg <- raw_data_membre_soins_difficile%>%
+  group_by(parent_index)%>%
+  mutate(across(starts_with("soins_dif_"), as.numeric))%>%
+  summarise(across(starts_with("soins_dif_"), sum, na.rm = T)) %>%
+  mutate(parent_index = as.character(parent_index))
+
+
+raw_data <- raw_data%>%
+    left_join(soins_difficile_agg, by = c("index" = "parent_index"))
+
 
 raw_data_membre_concentration_difficile <- raw_data_membre_concentration_difficile%>%
   mutate(
@@ -449,19 +449,14 @@ raw_data_membre_concentration_difficile <- raw_data_membre_concentration_diffici
     concentration_dif_femmes_65plus = if_else(genre_concentration == "femme" & (age_concentration >= 65), TRUE, FALSE)
   )
 
+concentration_agg <- raw_data_membre_concentration_difficile%>%
+  group_by(parent_index)%>%
+  mutate(across(starts_with("concentration_dif_"), as.numeric))%>%
+  summarise(across(starts_with("concentration_dif_"), sum, na.rm = T)) %>%
+  mutate(parent_index = as.character(parent_index))
 
-raw_data <- affect_loop_to_parent(loop = as.data.frame(raw_data_membre_concentration_difficile), parent = as.data.frame(raw_data), aggregate.function = sum,
-                                      variable.to.add = c(
-                                        sum_concentration_dif_garcons_moins5 = "concentration_dif_garcons_moins5",
-                                        sum_concentration_dif_filles_moins5 = "concentration_dif_filles_moins5",
-                                        sum_concentration_dif_garcons_5_18 = "concentration_dif_garcons_5_18",
-                                        sum_concentration_dif_filles_5_18 = "concentration_dif_filles_5_18",
-                                        sum_concentration_dif_hommes_18_64 = "concentration_dif_hommes_18_64",
-                                        sum_concentration_dif_femmes_18_64 = "concentration_dif_femmes_18_64",
-                                        sum_concentration_dif_hommes_65plus = "concentration_dif_hommes_65plus",
-                                        sum_concentration_dif_femmes_65plus = "concentration_dif_femmes_65plus"
-                                      ),
-                                      uuid.name.loop = "parent_index", uuid.name.parent = "index")
+raw_data <- raw_data%>%
+  left_join(concentration_agg, by = c("index" = "parent_index"))
 
 
 raw_data_membre_membre_vision_diffcile <- raw_data_membre_membre_vision_diffcile%>%
@@ -476,19 +471,14 @@ raw_data_membre_membre_vision_diffcile <- raw_data_membre_membre_vision_diffcile
     vision_dif_femmes_65plus = if_else(genre_vision == "femme" & (age_vision >= 65), TRUE, FALSE)
   )
 
+vision_agg <- raw_data_membre_membre_vision_diffcile%>%
+  group_by(parent_index)%>%
+  mutate(across(starts_with("vision_dif_"), as.numeric))%>%
+  summarise(across(starts_with("vision_dif_"), sum, na.rm = T)) %>%
+  mutate(parent_index = as.character(parent_index))
 
-raw_data <- affect_loop_to_parent(loop = as.data.frame(raw_data_membre_membre_vision_diffcile), parent = as.data.frame(raw_data), aggregate.function = sum,
-                                      variable.to.add = c(
-                                        sum_vision_dif_garcons_moins5 = "vision_dif_garcons_moins5",
-                                        sum_vision_dif_filles_moins5 = "vision_dif_filles_moins5",
-                                        sum_vision_dif_garcons_5_18 = "vision_dif_garcons_5_18",
-                                        sum_vision_dif_filles_5_18 = "vision_dif_filles_5_18",
-                                        sum_vision_dif_hommes_18_64 = "vision_dif_hommes_18_64",
-                                        sum_vision_dif_femmes_18_64 = "vision_dif_femmes_18_64",
-                                        sum_vision_dif_hommes_65plus = "vision_dif_hommes_65plus",
-                                        sum_vision_dif_femmes_65plus = "vision_dif_femmes_65plus"
-                                      ),
-                                      uuid.name.loop = "parent_index", uuid.name.parent = "index")
+raw_data <- raw_data%>%
+  left_join(vision_agg, by = c("index" = "parent_index"))
 
 
 raw_data_membre_membre_entendre_difficile <- raw_data_membre_membre_entendre_difficile%>%
@@ -503,19 +493,15 @@ raw_data_membre_membre_entendre_difficile <- raw_data_membre_membre_entendre_dif
     entendre_dif_femmes_65plus = if_else(genre_entendre == "femme" & (age_entendre >= 65), TRUE, FALSE)
   )
 
+entendre_agg <- raw_data_membre_membre_entendre_difficile%>%
+  group_by(parent_index)%>%
+  mutate(across(starts_with("entendre_dif_"), as.numeric))%>%
+  summarise(across(starts_with("entendre_dif_"), sum, na.rm = T)) %>%
+  mutate(parent_index = as.character(parent_index))
 
-raw_data <- affect_loop_to_parent(loop = as.data.frame(raw_data_membre_membre_entendre_difficile), parent = as.data.frame(raw_data), aggregate.function = sum,
-                                      variable.to.add = c(
-                                        sum_entendre_dif_garcons_moins5 = "entendre_dif_garcons_moins5",
-                                        sum_entendre_dif_filles_moins5 = "entendre_dif_filles_moins5",
-                                        sum_entendre_dif_garcons_5_18 = "entendre_dif_garcons_5_18",
-                                        sum_entendre_dif_filles_5_18 = "entendre_dif_filles_5_18",
-                                        sum_entendre_dif_hommes_18_64 = "entendre_dif_hommes_18_64",
-                                        sum_entendre_dif_femmes_18_64 = "entendre_dif_femmes_18_64",
-                                        sum_entendre_dif_hommes_65plus = "entendre_dif_hommes_65plus",
-                                        sum_entendre_dif_femmes_65plus = "entendre_dif_femmes_65plus"
-                                      ),
-                                      uuid.name.loop = "parent_index", uuid.name.parent = "index")
+raw_data <- raw_data%>%
+  left_join(entendre_agg, by = c("index" = "parent_index"))
+
 
 raw_data_membre_repeat_nbre_pers_decedes <- raw_data_membre_repeat_nbre_pers_decedes%>%
   mutate(
@@ -530,6 +516,16 @@ raw_data_membre_repeat_nbre_pers_decedes <- raw_data_membre_repeat_nbre_pers_dec
   )%>%
   levels_asBinaryColumns("raison_deces")
 
+decedes_agg <- raw_data_membre_repeat_nbre_pers_decedes%>%
+  group_by(parent_index)%>%
+  mutate(across(starts_with("deces_dif_"), as.numeric))%>%
+  mutate(across(starts_with("raison_deces."), as.numeric))%>%
+  summarise(across(matches("deces_dif_|raison_deces."), sum, na.rm = T)) %>%
+  mutate(parent_index = as.character(parent_index))
+
+raw_data <- raw_data%>%
+  left_join(decedes_agg, by = c("index" = "parent_index"))
+
 raw_data_membre_difficulte_communication <- raw_data_membre_difficulte_communication%>%
   mutate(
     communication_dif_garcons_moins5 = if_else(genre_difficulte_communication == "homme" & (age_difficulte_communication < 5), TRUE, FALSE),
@@ -542,45 +538,14 @@ raw_data_membre_difficulte_communication <- raw_data_membre_difficulte_communica
     communication_dif_femmes_65plus = if_else(genre_difficulte_communication == "femme" & (age_difficulte_communication >= 65), TRUE, FALSE)
   )
 
+communication_agg <- raw_data_membre_difficulte_communication%>%
+  group_by(parent_index)%>%
+  mutate(across(starts_with("communication_dif_"), as.numeric))%>%
+  summarise(across(matches("communication_dif_"), sum, na.rm = T)) %>%
+  mutate(parent_index = as.character(parent_index))
 
-raw_data <- affect_loop_to_parent(loop = as.data.frame(raw_data_membre_difficulte_communication), parent = as.data.frame(raw_data), aggregate.function = sum,
-                                  variable.to.add = c(
-                                    sum_communication_dif_garcons_moins5 = "communication_dif_garcons_moins5",
-                                    sum_communication_dif_filles_moins5 = "communication_dif_filles_moins5",
-                                    sum_communication_dif_garcons_5_18 = "communication_dif_garcons_5_18",
-                                    sum_communication_dif_filles_5_18 = "communication_dif_filles_5_18",
-                                    sum_communication_dif_hommes_18_64 = "communication_dif_hommes_18_64",
-                                    sum_communication_dif_femmes_18_64 = "communication_dif_femmes_18_64",
-                                    sum_communication_dif_hommes_65plus = "communication_dif_hommes_65plus",
-                                    sum_communication_dif_femmes_65plus = "communication_dif_femmes_65plus"
-                                  ),
-                                  uuid.name.loop = "parent_index", uuid.name.parent = "index")
-
-
-raw_data <- affect_loop_to_parent(loop = as.data.frame(raw_data_membre_repeat_nbre_pers_decedes), parent = as.data.frame(raw_data), aggregate.function = sum,
-                                      variable.to.add = c(
-                                        sum_deces_dif_garcons_moins5 = "deces_dif_garcons_moins5",
-                                        sum_deces_dif_filles_moins5 = "deces_dif_filles_moins5",
-                                        sum_deces_dif_garcons_5_18 = "deces_dif_garcons_5_18",
-                                        sum_deces_dif_filles_5_18 = "deces_dif_filles_5_18",
-                                        sum_deces_dif_hommes_18_64 = "deces_dif_hommes_18_64",
-                                        sum_deces_dif_femmes_18_64 = "deces_dif_femmes_18_64",
-                                        sum_deces_dif_hommes_65plus = "deces_dif_hommes_65plus",
-                                        sum_deces_dif_femmes_65plus = "deces_dif_femmes_65plus",
-                                        sum_raison_deces_diarrhee = "raison_deces.diarrhee",
-                                        sum_raison_deces_autre_maladie = "raison_deces.autre_maladie",
-                                        sum_raison_deces_morsure = "raison_deces.morsure",
-                                        sum_raison_deces_deces_natu = "raison_deces.deces_natu",
-                                        sum_raison_deces_faim = "raison_deces.faim",
-                                        sum_raison_deces_accident_travail = "raison_deces.accident_travail",
-                                        sum_raison_deces_problemes_respi = "raison_deces.problemes_respi",
-                                        sum_raison_deces_autre = "raison_deces.autre",
-                                        sum_raison_deces_catastrophe_natu = "raison_deces.catastrophe_natu",
-                                        sum_raison_deces_accident_conflit = "raison_deces.accident_conflit",
-                                        sum_raison_deces_en_couche = "raison_deces.en_couche",
-                                        sum_raison_deces_accident_route = "raison_deces.accident_route"
-                                      ),
-                                      uuid.name.loop = "parent_index", uuid.name.parent = "index")
+raw_data <- raw_data%>%
+  left_join(communication_agg, by = c("index" = "parent_index"))
 
 
 ### removing deleted from loops
@@ -818,7 +783,7 @@ admin2_wght <- map_to_weighting(sampling.frame = samplingFrame_adm2,
                                          data.stratum.column = "sampling_id"
 )
 
-
+raw_data_adm2$weights_sampling <- admin2_wght(raw_data_adm2)
 ### Weighting for admin1 ###
 
 #### Weighting admin1 cluster ####
