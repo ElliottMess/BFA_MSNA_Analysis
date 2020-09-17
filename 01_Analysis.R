@@ -3,7 +3,7 @@ source("analysisplan_factory.R")
 
 source("utils.R")
 
-source("00_loadCleanWeight.R", encoding = "UTF-8")
+# source("00_loadCleanWeight.R", encoding = "UTF-8")
 
 start_analysis_process <- Sys.time()
 
@@ -78,11 +78,11 @@ analysisplan_admin_1_grp <- analysisplan_admin_1_grp[!is.na(analysisplan_admin_1
 
 start_time_admin1_grp <- Sys.time()
 
-final_result_admin_1_grp <- from_analysisplan_map_to_output(data = cleaned_data_adm1, 
-                                                            analysisplan = analysisplan_admin_1_grp, 
-                                                            weighting = sf_wght_admin1, 
-                                                            questionnaire = questionnaire)
-
+# final_result_admin_1_grp <- from_analysisplan_map_to_output(data = cleaned_data_adm1, 
+#                                                             analysisplan = analysisplan_admin_1_grp, 
+#                                                             weighting = sf_wght_admin1, 
+#                                                             questionnaire = questionnaire)
+final_result_admin_1_grp <- readRDS("final_result_admin_1_grp.RDS")
 
 end_time_admin1_grp <- Sys.time()
 
@@ -301,27 +301,36 @@ bfa_admin1 <- read_csv("data/shapes/bfa_pplp_1m_nga_ocha/bfa_pplp_1m_nga_ocha.cs
 target_research_question_order <- unique(dico$research.question_label)
 target_sub_research_question_order <- unique(dico$sub.research.question_label)
 
-summary_stats_admin_1_grp_final <- bind_rows(summary_stats_admin_1_grp, freq_admin1_grp)%>%
+which_skipLogic_adm1_var <- which_skipLogic_adm1 %>%
+  group_by(variable) %>%
+  summarise(Skipped = sum(Skipped, na.rm = T),
+            perc_Skipped = sum(perc_Skipped, na.rm = T)) %>%
+  mutate(subset = if_else(perc_Skipped > 0, "Sous-ensemble de donnée", NA_character_))
+
+summary_stats_admin_1_grp_final2 <- bind_rows(summary_stats_admin_1_grp, freq_admin1_grp)%>%
   left_join(which_subsets_adm1, by = c("admin1", "status", "variable"))%>%
-  left_join(which_skipLogic_adm1, by = c("admin1", "status", "variable"))%>%
+  # left_join(which_skipLogic_adm1, by = c("admin1", "status", "variable"))%>%
   mutate(question_choice = case_when(is.na(variable_value) ~ variable,
-                                     TRUE ~ paste0(variable, ".", variable_value)),
-         subset = if_else(perc_Skipped > 0, "Sous-ensemble de donnée", NA_character_))%>%
+                                     TRUE ~ paste0(variable, ".", variable_value))) %>%
+  # ,
+  # subset = if_else(perc_Skipped > 0, "Sous-ensemble de donnée", NA_character_))%>%
   left_join(dico, by = "question_choice")%>%
   mutate(status = case_when(status == "pdi" ~ "PDI",
-                                     status == "host" ~ "Communauté hôte",
-                                     TRUE ~ NA_character_))%>%
+                            status == "host" ~ "Communauté hôte",
+                            TRUE ~ NA_character_))%>%
   mutate(numbers = case_when(grepl("%.*?ayant de la difficulté à.*", label_indicator) & dependent.variable.type == "categorical"  ~ round(numbers*100,1),
                              !grepl("%.*?ayant de la difficulté à.*", label_indicator) & dependent.variable.type == "categorical" ~ round(numbers*100,0),
                              dependent.variable.type == "numerical"  ~ round(numbers,1)
-                            )
+  )
   )%>%
-  select(research.question_label, sub.research.question_label, admin1, status, label_indicator, label_choice, numbers, subset)%>%
+  select(research.question_label, sub.research.question_label, admin1, status, label_indicator, label_choice, numbers, variable)%>%
+  # select(research.question_label, sub.research.question_label, admin1, status, label_indicator, label_choice, numbers, subset)%>%
   left_join(bfa_admin1, by = c("admin1" = "admin1name"))%>%
   distinct()%>%
   mutate(label_choice = case_when(is.na(label_choice) ~ label_indicator, 
                                   TRUE ~ paste(label_indicator, label_choice, sep = ": ")))%>%
-  select(research.question_label, sub.research.question_label, admin1Name, status, label_choice,subset, numbers)%>%
+  select(research.question_label, sub.research.question_label, admin1Name, status, label_choice, numbers, variable)%>%
+  # select(research.question_label, sub.research.question_label, admin1Name, status, label_choice,subset, numbers)%>%
   distinct()%>%
   filter(!is.na(label_choice))%>%
   group_by(research.question_label, sub.research.question_label, admin1Name, status, label_choice)%>%
@@ -331,9 +340,8 @@ summary_stats_admin_1_grp_final <- bind_rows(summary_stats_admin_1_grp, freq_adm
   mutate(sub.research.question_label = factor(sub.research.question_label, levels = target_sub_research_question_order ),
          research.question_label = factor(research.question_label, levels = target_research_question_order))%>%
   arrange(research.question_label,sub.research.question_label,status,label_choice)%>%
-  filter(!is.na(label_choice))%>%
-  group_by(research.question_label,sub.research.question_label,status, label_choice)%>%
-  summarise(across(where(is.numeric), sum, na.rm=T))
+  filter(!is.na(label_choice)) %>%
+  left_join(select(which_skipLogic_adm1_var, variable,subset) , by = "variable") 
 
 
 
@@ -355,10 +363,12 @@ analysisplan_admin_2_grp_reduced <- analysisplan_admin_2_grp%>%
 
 start_time_admin2_grp <- Sys.time()
 
-final_result_admin_2_grp <- from_analysisplan_map_to_output(data = cleaned_data_adm2, 
-                                                            analysisplan = analysisplan_admin_2_grp_reduced, 
-                                                            weighting = admin2_wght, 
-                                                            questionnaire = questionnaire)
+# final_result_admin_2_grp <- from_analysisplan_map_to_output(data = cleaned_data_adm2, 
+#                                                             analysisplan = analysisplan_admin_2_grp_reduced, 
+#                                                             weighting = admin2_wght, 
+#                                                             questionnaire = questionnaire)
+
+final_result_admin_2_grp <- readRDS("final_result_admin_2_grp.RDS")
 
 end_time_admin2_grp <- Sys.time()
 
