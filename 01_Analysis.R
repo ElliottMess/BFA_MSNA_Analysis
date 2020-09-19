@@ -81,7 +81,8 @@ final_result_admin_1_grp <- from_analysisplan_map_to_output(data = cleaned_data_
                                                             analysisplan = analysisplan_admin_1_grp,
                                                             weighting = combined_weights_adm1,
                                                             questionnaire = questionnaire)
-# final_result_admin_1_grp <- readRDS("final_result_admin_1_grp.RDS")
+
+ saveRDS(final_result_admin_1_grp, "final_result_admin_1_grp.RDS")
 
 summary_stats_admin_1_grp <- final_result_admin_1_grp$results %>%
   lapply(function(x){x$summary.statistic}) %>% do.call(rbind, .)%>%
@@ -361,7 +362,7 @@ final_result_admin_2_grp <- from_analysisplan_map_to_output(data = cleaned_data_
                                                             weighting = combined_weights_adm2,
                                                             questionnaire = questionnaire)
 
-final_result_admin_2_grp <- readRDS("final_result_admin_2_grp.RDS")
+saveRDS(final_result_admin_2_grp, "final_result_admin_2_grp.rds")
 
 end_time_admin2_grp <- Sys.time()
 
@@ -605,13 +606,8 @@ summary_stats_admin_2_grp_final <- bind_rows(summary_stats_admin_2_grp, freq_adm
   select(research.question_label, sub.research.question_label, status, label_choice,subset,everything())%>%
   select(-variable)
 
-names(summary_stats_admin_2_grp_final_grp)[1:5] <- c("Question de recherche", "Sous-question de recherche", "Groupe de population", "Indicator", "Sous-ensemble de donnée")
+names(summary_stats_admin_2_grp_final)[1:5] <- c("Question de recherche", "Sous-question de recherche", "Groupe de population", "Indicator", "Sous-ensemble de donnée")
 names(summary_stats_admin_1_grp_final)[1:5] <- c("Question de recherche", "Sous-question de recherche", "Groupe de population", "Indicator", "Sous-ensemble de donnée")
 
 write_csv(summary_stats_admin_1_grp_final, "outputs/tables/summary_stats_admin_1_grp.csv")
-write_csv(summary_stats_admin_2_grp_final_grp, "outputs/tables/summary_stats_admin_2_grp.csv")
-
-end_analysis_process <- Sys.time()
-
-end_analysis_process - start_analysis_process
-
+write_csv(summary_stats_admin_2_grp_final, "outputs/tables/summary_stats_admin_2_grp.csv")
