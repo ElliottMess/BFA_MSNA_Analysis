@@ -845,11 +845,14 @@ raw_data <-raw_data%>%
 
 weights_adm2 <- raw_data_adm2%>%
   select(sampling_id, weights_sampling)%>%
-  rename(weights_sampling_adm2 = weights_sampling)
+  rename(weights_sampling_adm2 = weights_sampling)%>%
+  mutate(weights_sampling_adm2 = as.vector(weights_sampling_adm2))
 
 raw_data_adm1 <- raw_data_adm1%>%
+  mutate(weights_sampling = as.vector(weights_sampling))%>%
   select(-contains("gps"), -DFERWF)%>%
-  left_join(weights_adm2, by = "sampling_id")
+  left_join(weights_adm2, by = "sampling_id")%>%
+  distinct()
 
 raw_data_adm2 <- raw_data_adm2%>%
   select(-contains("gps"), -DFERWF)
@@ -867,8 +870,8 @@ cleaning_log_change <- cleaning_log_change%>%
 
 write_csv(cleaning_log_change, "outputs/logs/cleaning_log_missingPcodes.csv")
 write_csv(raw_data_adm1, "outputs/datasets/BFA_MSNA_2020_dataset_cleanedWeighted_ADM1.csv")
-write_csv(raw_data_representative, "outputs/datasets/BFA_MSNA_2020_dataset_cleanedWeighted_representativeData.csv")
-write_csv(raw_data_adm2_quota, "outputs/datasets/BFA_MSNA_2020_dataset_cleanedWeighted_quota_ADM2affected.csv")
+# write_csv(raw_data_representative, "outputs/datasets/BFA_MSNA_2020_dataset_cleanedWeighted_representativeData.csv")
+# write_csv(raw_data_adm2_quota, "outputs/datasets/BFA_MSNA_2020_dataset_cleanedWeighted_quota_ADM2affected.csv")
 write_csv(raw_data_adm2, "outputs/datasets/BFA_MSNA_2020_dataset_cleanedWeighted_ADM2_all.csv")
 
 loopsFiles.names <- paste0("./outputs/datasets/loops/BFA_MSNA_2020_dataset_cleanedWeighted_",unlist(loop_frames_names), ".csv")
