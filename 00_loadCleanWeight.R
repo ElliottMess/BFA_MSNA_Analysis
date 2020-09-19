@@ -136,42 +136,6 @@ raw_data <- left_join(raw_data, bfa_admin2, by = c("admin3" = "admin3Name"))
 # create_objects_from_df(list_remove_data)
 
 
-### Running cleaninginspectoR and other checks on data
-
-# cleaninginspectoR_results <- cleaninginspectoR::inspect_all(raw_data, uuid.column.name = "uuid")%>%
-#   index_toUUID(raw_data, uuid.column.name = "uuid")
-# 
-# 
-# cleaninginspectoR_results_info_menage <- cleaninginspectoR::inspect_all(raw_data_info_menage,uuid.column.name = "submission_uuid" )%>%
-#   filter(issue_type != "duplicate in "submission_uuid")
-# 
-# 
-# cleaninginspectoR_results_maladie_moins_5ans_rpt <- cleaninginspectoR::inspect_all(raw_data_maladie_moins_5ans_rpt, uuid.column.name = "_submission__uuid...2" )%>%
-#   filter(issue_type != "duplicate in _submission__uuid...2")
-# 
-# cleaninginspectoR_results_naissances <- cleaninginspectoR::inspect_all(raw_data_naissances, uuid.column.name = "_submission__uuid...2" )%>%
-#   filter(issue_type != "duplicate in _submission__uuid...2")
-# 
-# cleaninginspectoR_results_membre_marche_dificile <- cleaninginspectoR::inspect_all(raw_data_membre_marche_dificile, uuid.column.name = "_submission__uuid...2" )%>%
-#   filter(issue_type != "duplicate in _submission__uuid...2")
-# 
-# cleaninginspectoR_results_membre_soins_difficile <- cleaninginspectoR::inspect_all(raw_data_membre_soins_difficile, uuid.column.name = "_submission__uuid...2" )%>%
-#   filter(issue_type != "duplicate in _submission__uuid...2")
-# 
-# cleaninginspectoR_results_concentration_difficile <- cleaninginspectoR::inspect_all(raw_data_membre_concentration_difficile, uuid.column.name = "_submission__uuid...2" )%>%
-#   filter(issue_type != "duplicate in _submission__uuid...2")
-# 
-# cleaninginspectoR_results_concentration_difficile <- cleaninginspectoR::inspect_all(raw_data_membre_concentration_difficile , uuid.column.name = "_submission__uuid...2" )%>%
-#   filter(issue_type != "duplicate in _submission__uuid...2")
-# 
-# cleaninginspectoR_results_membre_vision_diffcile <- cleaninginspectoR::inspect_all(raw_data_membre_membre_vision_diffcile, uuid.column.name = "_submission__uuid...2" )%>%
-#   filter(issue_type != "duplicate in _submission__uuid...2")
-# 
-# cleaninginspectoR_results_membre_entendre_difficile <- cleaninginspectoR::inspect_all(raw_data_membre_membre_entendre_difficile , uuid.column.name = "_submission__uuid...2" )%>%
-#   filter(issue_type != "duplicate in _submission__uuid...2")
-# 
-# cleaninginspectoR_results_membre_repeat_nbre_pers_decedes <- cleaninginspectoR::inspect_all(raw_data_membre_repeat_nbre_pers_decedes, uuid.column.name = "_submission__uuid...2" )%>%
-#   filter(issue_type != "duplicate in _submission__uuid...2")
 
 
 ### Loading sampling strategies 
@@ -687,6 +651,11 @@ raw_data <- raw_data%>%
   )
 
 
+raw_data <- raw_data%>%
+  group_by(sampling_id)%>%
+  filter(n() >2)%>%
+  ungroup()
+
 ### Loading 2stage sampling frame
 
 samplingFrame_raw <- read_excel("data/REACH_BFA_Pop_for_weighting_20201308.xlsx", sheet = "Population")%>%
@@ -882,7 +851,7 @@ raw_data_adm1 <- raw_data_adm1%>%
   select(-contains("gps"), -DFERWF)%>%
   left_join(weights_adm2, by = "sampling_id")
 
-raw_data_adm2 <- raw_data%>%
+raw_data_adm2 <- raw_data_adm2%>%
   select(-contains("gps"), -DFERWF)
 
 

@@ -5,7 +5,6 @@ source("utils.R")
 
 source("00_loadCleanWeight.R", encoding = "UTF-8")
 
-start_analysis_process <- Sys.time()
 
 ### Loading necessary files
 
