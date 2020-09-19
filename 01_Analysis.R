@@ -5,7 +5,6 @@ source("utils.R")
 
 source("00_loadCleanWeight.R", encoding = "UTF-8")
 
-start_analysis_process <- Sys.time()
 
 ### Loading necessary files
 
@@ -76,17 +75,13 @@ analysisplan_admin_1_grp <- make_analysis_plan_template(df= cleaned_data_adm1,
 
 analysisplan_admin_1_grp <- analysisplan_admin_1_grp[!is.na(analysisplan_admin_1_grp$dependent.variable.type),]
 
-start_time_admin1_grp <- Sys.time()
 
-# final_result_admin_1_grp <- from_analysisplan_map_to_output(data = cleaned_data_adm1, 
-#                                                             analysisplan = analysisplan_admin_1_grp, 
-#                                                             weighting = sf_wght_admin1, 
-#                                                             questionnaire = questionnaire)
-final_result_admin_1_grp <- readRDS("final_result_admin_1_grp.RDS")
 
-end_time_admin1_grp <- Sys.time()
-
-end_time_admin1_grp - start_time_admin1_grp
+final_result_admin_1_grp <- from_analysisplan_map_to_output(data = cleaned_data_adm1,
+                                                            analysisplan = analysisplan_admin_1_grp,
+                                                            weighting = combined_weights_adm1,
+                                                            questionnaire = questionnaire)
+# final_result_admin_1_grp <- readRDS("final_result_admin_1_grp.RDS")
 
 summary_stats_admin_1_grp <- final_result_admin_1_grp$results %>%
   lapply(function(x){x$summary.statistic}) %>% do.call(rbind, .)%>%
@@ -363,7 +358,7 @@ start_time_admin2_grp <- Sys.time()
 
 final_result_admin_2_grp <- from_analysisplan_map_to_output(data = cleaned_data_adm2,
                                                             analysisplan = analysisplan_admin_2_grp,
-                                                            weighting = admin2_wght,
+                                                            weighting = combined_weights_adm2,
                                                             questionnaire = questionnaire)
 
 final_result_admin_2_grp <- readRDS("final_result_admin_2_grp.RDS")

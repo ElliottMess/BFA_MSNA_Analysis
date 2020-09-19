@@ -110,45 +110,32 @@ list_remove_data <- lapply(loop_frames, remove_delParents_fromLoop, raw_data, uu
 
 names(list_remove_data) <- loop_frames_names
 
+### Loading OCHA's settlement layer
+
+bfa_admin2 <- read_csv("data/shapes/bfa_pplp_1m_nga_ocha/bfa_pplp_1m_nga_ocha.csv")%>%
+  select(admin3Name, admin3Pcod)%>%
+  distinct()%>%
+  mutate(admin3Name = tolower(admin3Name),
+         admin3Name = case_when(
+           admin3Name == "karangasso - sambla" ~ "karangasso_sambla",
+           admin3Name == "karangasso - vigue" ~ "karangasso_vigue",
+           admin3Name == "fada n'gourma"  ~ "fada_n_gourma",
+           admin3Name == "n'dorola" ~ "n_dorola",
+           admin3Name == "tin-akoff" ~ "tin_akoff",
+           admin3Name == "gorom-gorom" ~ "gorom_gorom",
+           admin3Name == "la-todin" ~ "la_todin",
+           admin3Name == "pobe-mangao" ~ "pobe_mangao",
+           admin3Name == "bobo-dioulasso" ~ "bobo_dioulasso",
+           TRUE ~ admin3Name
+         ))
+
+
+raw_data <- left_join(raw_data, bfa_admin2, by = c("admin3" = "admin3Name"))
+
+
 # create_objects_from_df(list_remove_data)
 
 
-### Running cleaninginspectoR and other checks on data
-
-# cleaninginspectoR_results <- cleaninginspectoR::inspect_all(raw_data, uuid.column.name = "uuid")%>%
-#   index_toUUID(raw_data, uuid.column.name = "uuid")
-# 
-# 
-# cleaninginspectoR_results_info_menage <- cleaninginspectoR::inspect_all(raw_data_info_menage,uuid.column.name = "submission_uuid" )%>%
-#   filter(issue_type != "duplicate in "submission_uuid")
-# 
-# 
-# cleaninginspectoR_results_maladie_moins_5ans_rpt <- cleaninginspectoR::inspect_all(raw_data_maladie_moins_5ans_rpt, uuid.column.name = "_submission__uuid...2" )%>%
-#   filter(issue_type != "duplicate in _submission__uuid...2")
-# 
-# cleaninginspectoR_results_naissances <- cleaninginspectoR::inspect_all(raw_data_naissances, uuid.column.name = "_submission__uuid...2" )%>%
-#   filter(issue_type != "duplicate in _submission__uuid...2")
-# 
-# cleaninginspectoR_results_membre_marche_dificile <- cleaninginspectoR::inspect_all(raw_data_membre_marche_dificile, uuid.column.name = "_submission__uuid...2" )%>%
-#   filter(issue_type != "duplicate in _submission__uuid...2")
-# 
-# cleaninginspectoR_results_membre_soins_difficile <- cleaninginspectoR::inspect_all(raw_data_membre_soins_difficile, uuid.column.name = "_submission__uuid...2" )%>%
-#   filter(issue_type != "duplicate in _submission__uuid...2")
-# 
-# cleaninginspectoR_results_concentration_difficile <- cleaninginspectoR::inspect_all(raw_data_membre_concentration_difficile, uuid.column.name = "_submission__uuid...2" )%>%
-#   filter(issue_type != "duplicate in _submission__uuid...2")
-# 
-# cleaninginspectoR_results_concentration_difficile <- cleaninginspectoR::inspect_all(raw_data_membre_concentration_difficile , uuid.column.name = "_submission__uuid...2" )%>%
-#   filter(issue_type != "duplicate in _submission__uuid...2")
-# 
-# cleaninginspectoR_results_membre_vision_diffcile <- cleaninginspectoR::inspect_all(raw_data_membre_membre_vision_diffcile, uuid.column.name = "_submission__uuid...2" )%>%
-#   filter(issue_type != "duplicate in _submission__uuid...2")
-# 
-# cleaninginspectoR_results_membre_entendre_difficile <- cleaninginspectoR::inspect_all(raw_data_membre_membre_entendre_difficile , uuid.column.name = "_submission__uuid...2" )%>%
-#   filter(issue_type != "duplicate in _submission__uuid...2")
-# 
-# cleaninginspectoR_results_membre_repeat_nbre_pers_decedes <- cleaninginspectoR::inspect_all(raw_data_membre_repeat_nbre_pers_decedes, uuid.column.name = "_submission__uuid...2" )%>%
-#   filter(issue_type != "duplicate in _submission__uuid...2")
 
 
 ### Loading sampling strategies 
@@ -200,21 +187,6 @@ clusterSample <- read_excel("data/Sampling_RU.xlsx", sheet = "sample_admin2_clus
   slice(1) %>% # takes the first occurrence if there is a tie
   ungroup()
 
-### Loading 2stage sampling frame
-
-samplingFrame <- read_excel("data/REACH_BFA_Pop_for_weighting_20201308.xlsx", sheet = "Population")%>%
-  group_by(Admin1, Admin1Pcod, Admin2, Admin2Pcod)%>%
-  summarise(host = sum(`Total local`, na.rm = TRUE),
-            pdi = sum(`Total PDI`, na.rm = TRUE), .groups = "drop")%>%
-  pivot_longer(cols = c("host", "pdi"), names_to = "strata", values_to = "Population")%>%
-  mutate(strata = paste(Admin2Pcod, strata, sep = "_"))%>%
-  filter(!is.na(Population), Population >0)
-
-
-samplingFrame_adm2 <- samplingFrame%>%
-  filter(Admin1 %in% c("Est", "Centre-Nord","Sahel","Boucle du Mouhoun","Nord"))%>%
-  filter(!is.na(Population))
-
 
 ### Creating spatial objects for missingPcodes and clusters centers
 # cluster_sf <- sf::st_as_sf(clusterSample, coords = c("X", "Y"), crs = 4326)%>%
@@ -224,27 +196,6 @@ samplingFrame_adm2 <- samplingFrame%>%
 # missingPoints_sf <- sf::st_as_sf(pcodes_probs, coords = c("gpsmenage_longitude", "gpsmenage_latitude"), crs = 4326)%>%
 #   st_set_crs("EPSG:4326")
 
-### Loading OCHA's settlement layer
-
-bfa_admin2 <- read_csv("data/shapes/bfa_pplp_1m_nga_ocha/bfa_pplp_1m_nga_ocha.csv")%>%
-  select(admin3Name, admin3Pcod)%>%
-  distinct()%>%
-  mutate(admin3Name = tolower(admin3Name),
-         admin3Name = case_when(
-           admin3Name == "karangasso - sambla" ~ "karangasso_sambla",
-           admin3Name == "karangasso - vigue" ~ "karangasso_vigue",
-           admin3Name == "fada n'gourma"  ~ "fada_n_gourma",
-           admin3Name == "n'dorola" ~ "n_dorola",
-           admin3Name == "tin-akoff" ~ "tin_akoff",
-           admin3Name == "gorom-gorom" ~ "gorom_gorom",
-           admin3Name == "la-todin" ~ "la_todin",
-           admin3Name == "pobe-mangao" ~ "pobe_mangao",
-           admin3Name == "bobo-dioulasso" ~ "bobo_dioulasso",
-           TRUE ~ admin3Name
-         ))
-  
-
-raw_data <- left_join(raw_data, bfa_admin2, by = c("admin3" = "admin3Name"))
 
 # bfa_settlments <- read_csv("data/shapes/bfa_pplp_1m_nga_ocha/bfa_pplp_1m_nga_ocha.csv")%>%
 #   sf::st_as_sf(coords = c("Coord_X", "Coord_Y"), crs = 4326)
@@ -585,11 +536,12 @@ invisible(create_objects_from_df(list_remove_data))
 #   ))
 #   
 # 
+
 raw_data <- raw_data%>%
   mutate(admin1Pcode = gsub(".{4}$", "", admin3Pcod),
          admin2Pcode = gsub(".{2}$", "", admin3Pcod),
          admin3Pcode = admin3Pcod,
-         sampling_id = paste(admin2Pcode, status, sep = "_")
+         sampling_id = paste(admin3Pcode, status, sep = "_")
   )%>%
   select(-admin3Pcod)
 
@@ -698,6 +650,41 @@ raw_data <- raw_data%>%
       
   )
 
+
+raw_data <- raw_data%>%
+  group_by(sampling_id)%>%
+  filter(n() >2)%>%
+  ungroup()
+
+### Loading 2stage sampling frame
+
+samplingFrame_raw <- read_excel("data/REACH_BFA_Pop_for_weighting_20201308.xlsx", sheet = "Population")%>%
+  filter(Admin3Pcod %in% raw_data$admin3Pcode,
+         Admin3 != "Nassoumbou")
+
+  samplingFrameADM3 <- samplingFrame_raw%>%
+  group_by(Admin1, Admin1Pcod, Admin2, Admin2Pcod,Admin3, Admin3Pcod)%>%
+  summarise(host = sum(`Total local`, na.rm = TRUE),
+            pdi = sum(`Total PDI`, na.rm = TRUE), .groups = "drop")%>%
+  pivot_longer(cols = c("host", "pdi"), names_to = "pop_grp", values_to = "Population_adm3")%>%
+  mutate(strata_adm3 = paste(Admin3Pcod, pop_grp, sep = "_"))%>%
+  filter(!is.na(Population_adm3), Population_adm3 >0)
+
+samplingFrameADM2 <- samplingFrame_raw%>%
+  group_by(Admin1, Admin1Pcod, Admin2, Admin2Pcod)%>%
+  summarise(host = sum(`Total local`, na.rm = TRUE),
+            pdi = sum(`Total PDI`, na.rm = TRUE), .groups = "drop")%>%
+  pivot_longer(cols = c("host", "pdi"), names_to = "pop_grp", values_to = "Population_adm2")%>%
+  mutate(strata_adm2 = paste(Admin2Pcod, pop_grp, sep = "_"))%>%
+  filter(!is.na(Population_adm2), Population_adm2 >0)
+
+samplingFrame <- left_join(samplingFrameADM2,samplingFrameADM3, by = c("Admin2Pcod", "Admin1", "Admin1Pcod", "Admin2", "pop_grp"))
+
+samplingFrame_adm2 <- samplingFrame%>%
+  filter(Admin1 %in% c("Est", "Centre-Nord","Sahel","Boucle du Mouhoun","Nord"))%>%
+  filter(!is.na(Population_adm3))
+
+
 ### Weighting cluster sample
 
 
@@ -725,65 +712,77 @@ raw_data <- raw_data%>%
 #                                               data.stratum.column = "id_sampl"
 # )
 
-raw_data$sampling_strat <- paste(raw_data$status, raw_data$modalite, sep = "_")
-
-raw_data_representative <- raw_data%>%
-  filter(admin1Pcode %in% c("BF46", "BF49", "BF52", "BF54", "BF56"),
-         sampling_id %in% samplingFrame_adm2$strata,
-         sampling_strat == "host_direct",
-         sampling_id != "BF5002_host")
-
-admin2_repesentative_wght <- map_to_weighting(sampling.frame = samplingFrame_adm2, 
-                                              data = raw_data_representative,
-                                              sampling.frame.population.column = "Population",
-                                              sampling.frame.stratum.column = "strata",
-                                              data.stratum.column = "sampling_id")
+# raw_data$sampling_strat <- paste(raw_data$status, raw_data$modalite, sep = "_")
+# 
+# raw_data_representative <- raw_data%>%
+#   filter(admin1Pcode %in% c("BF46", "BF49", "BF52", "BF54", "BF56"),
+#          sampling_id %in% samplingFrame_adm2$strata,
+#          sampling_strat == "host_direct",
+#          sampling_id != "BF5002_host")
+# 
+# admin2_repesentative_wght <- map_to_weighting(sampling.frame = samplingFrame_adm2, 
+#                                               data = raw_data_representative,
+#                                               sampling.frame.population.column = "Population",
+#                                               sampling.frame.stratum.column = "strata",
+#                                               data.stratum.column = "sampling_id")
 
 # combined_weights_representative <- combine_weighting_functions(cluster_wght_representative, admin2_repesentative_wght)
 
 # raw_data_representative$weights <- combined_weights_representative(raw_data_representative)
 
-raw_data_representative$weights_sampling <- admin2_repesentative_wght(raw_data_representative)
+# raw_data_representative$weights_sampling <- admin2_repesentative_wght(raw_data_representative)
 
 
 
-### Weighting for quota admin 2 only
-
-raw_data_adm2_quota <- raw_data%>%
-  filter(admin1Pcode %in% c("BF46", "BF49", "BF52", "BF54", "BF56"),
-         sampling_strat != "host_direct",
-         sampling_id %in% samplingFrame_adm2$strata
-         )
-
-
-admin2_affected_wght <- map_to_weighting(sampling.frame = samplingFrame_adm2, 
-                                                    data = raw_data_adm2_quota,
-                                                    sampling.frame.population.column = "Population",
-                                                    sampling.frame.stratum.column = "strata",
-                                                    data.stratum.column = "sampling_id"
-                                                    )
-
-raw_data_adm2_quota$weights_sampling <- admin2_affected_wght(raw_data_adm2_quota)
-
-
-
-### Combining cluster weights with admin2 quota weights for 5 most affected regions
-
-raw_data_adm2_affected_all <- rbind(raw_data_representative, raw_data_adm2_quota)
+# ### Weighting for quota admin 2 only
+# 
+# raw_data_adm2_quota <- raw_data%>%
+#   filter(admin1Pcode %in% c("BF46", "BF49", "BF52", "BF54", "BF56"),
+#          sampling_strat != "host_direct",
+#          sampling_id %in% samplingFrame_adm2$strata
+#          )
+# 
+# 
+# admin2_affected_wght <- map_to_weighting(sampling.frame = samplingFrame_adm2, 
+#                                                     data = raw_data_adm2_quota,
+#                                                     sampling.frame.population.column = "Population",
+#                                                     sampling.frame.stratum.column = "strata",
+#                                                     data.stratum.column = "sampling_id"
+#                                                     )
+# 
+# raw_data_adm2_quota$weights_sampling <- admin2_affected_wght(raw_data_adm2_quota)
+# 
+# 
+# 
+# ### Combining cluster weights with admin2 quota weights for 5 most affected regions
+# 
+# raw_data_adm2_affected_all <- rbind(raw_data_representative, raw_data_adm2_quota)
 
 raw_data_adm2 <- raw_data%>%
+  mutate(sampling_id_adm2 = paste(admin2Pcode, status, sep="_"))%>%
   filter(admin1Pcode %in% c("BF46", "BF49", "BF52", "BF54", "BF56"),
-         sampling_id %in% samplingFrame_adm2$strata
+         sampling_id %in% samplingFrame_adm2$strata_adm3
   )
 
-admin2_wght <- map_to_weighting(sampling.frame = samplingFrame_adm2, 
+admin2_wght_adm2 <- map_to_weighting(sampling.frame = samplingFrame_adm2, 
                                          data = raw_data_adm2,
-                                         sampling.frame.population.column = "Population",
-                                         sampling.frame.stratum.column = "strata",
-                                         data.stratum.column = "sampling_id"
+                                         sampling.frame.population.column = "Population_adm2",
+                                         sampling.frame.stratum.column = "strata_adm2",
+                                         data.stratum.column = "sampling_id_adm2"
 )
 
-raw_data_adm2$weights_sampling <- admin2_wght(raw_data_adm2)
+admin2_wght_adm3 <- map_to_weighting(sampling.frame = samplingFrame_adm2, 
+                                     data = raw_data_adm2,
+                                     sampling.frame.population.column = "Population_adm3",
+                                     sampling.frame.stratum.column = "strata_adm3",
+                                     data.stratum.column = "sampling_id"
+)
+
+combined_weights_adm2 <- combine_weighting_functions(admin2_wght_adm2,admin2_wght_adm3)
+
+raw_data_adm2$weights_sampling <- combined_weights_adm2(raw_data_adm2)
+
+
 ### Weighting for admin1 ###
 
 #### Weighting admin1 cluster ####
@@ -813,27 +812,54 @@ raw_data_adm2$weights_sampling <- admin2_wght(raw_data_adm2)
 
 #### Weighting admin1 quotas ####
 
+
 raw_data_adm1 <- raw_data%>%
-  filter(sampling_id %in% samplingFrame$strata,
-         !sampling_id %in%  c("NA_host", "NA_pdi"))
+  mutate(sampling_id_adm2 = paste(admin2Pcode, status, sep="_"))%>%
+  filter(sampling_id %in% samplingFrame$strata_adm3)
 
-sf_wght_admin1 <- map_to_weighting(sampling.frame = samplingFrame, 
-                                              data = raw_data_adm1,
-                                              sampling.frame.population.column = "Population",
-                                              sampling.frame.stratum.column = "strata",
-                                              data.stratum.column = "sampling_id")
+admin1_wght_adm2 <- map_to_weighting(sampling.frame = samplingFrame, 
+                                     data = raw_data_adm1,
+                                     sampling.frame.population.column = "Population_adm2",
+                                     sampling.frame.stratum.column = "strata_adm2",
+                                     data.stratum.column = "sampling_id_adm2"
+)
 
-raw_data_adm1$weights_sampling <- sf_wght_admin1(raw_data_adm1)
+admin1_wght_adm3 <- map_to_weighting(sampling.frame = samplingFrame, 
+                                     data = raw_data_adm1,
+                                     sampling.frame.population.column = "Population_adm3",
+                                     sampling.frame.stratum.column = "strata_adm3",
+                                     data.stratum.column = "sampling_id"
+)
+
+combined_weights_adm1 <- combine_weighting_functions(admin1_wght_adm2,admin1_wght_adm3)
+
+raw_data_adm1$weights_sampling <- combined_weights_adm1(raw_data_adm1)
 
 
 ### Removing from main data frames surveys with no sampling ID attriuable
 
 not_in_raw_data_adm1 <- raw_data[!raw_data$uuid %in% raw_data_adm1$uuid, ]
 
+raw_data <-raw_data%>%
+  select(-contains("gps"), -DFERWF)
+
+weights_adm2 <- raw_data_adm2%>%
+  select(sampling_id, weights_sampling)%>%
+  rename(weights_sampling_adm2 = weights_sampling)
+
+raw_data_adm1 <- raw_data_adm1%>%
+  select(-contains("gps"), -DFERWF)%>%
+  left_join(weights_adm2, by = "sampling_id")
+
+raw_data_adm2 <- raw_data_adm2%>%
+  select(-contains("gps"), -DFERWF)
+
+
+
 if(nrow(not_in_raw_data_adm1)>0){
 cleaning_log_change <- cleaning_log_change%>%
-  add_row(Auteur = "Elliott Messeiller", uuid = not_in_raw_data_adm1$uuid, Date = Sys.Date(), Enqueteur = not_in_raw_data_adm1$enumerator_id, Question = "Localite",
-          `Probl.me` = "Localité introuvable dans base de données des localités COD OCHA. Impossible d'attribuer au bon PSU.",
+  add_row(Auteur = "Elliott Messeiller", uuid = not_in_raw_data_adm1$uuid, Date = as.character(Sys.Date()), Enqueteur = NA, Question = "Localite",
+          `Probl.me` = "Localité introuvable dans le sampling frame. Impossible d'attribuer au bon PSU.",
           `Anciennes.valeurs` = not_in_raw_data_adm1$uuid, Action = "Enquêtes supprimées")
 }
 
