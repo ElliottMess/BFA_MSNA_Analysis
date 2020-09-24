@@ -77,12 +77,20 @@ analysisplan_admin_1_grp <- analysisplan_admin_1_grp[!is.na(analysisplan_admin_1
 
 
 
-final_result_admin_1_grp <- from_analysisplan_map_to_output(data = cleaned_data_adm1,
-                                                            analysisplan = analysisplan_admin_1_grp,
-                                                            weighting = combined_weights_adm1,
-                                                            questionnaire = questionnaire)
+# final_result_admin_1_grp <- from_analysisplan_map_to_output(data = cleaned_data_adm1,
+#                                                             analysisplan = analysisplan_admin_1_grp,
+#                                                             weighting = combined_weights_adm1,
+#                                                             questionnaire = questionnaire)
+# 
+#  saveRDS(final_result_admin_1_grp, "final_result_admin_1_grp.RDS")
 
- saveRDS(final_result_admin_1_grp, "final_result_admin_1_grp.RDS")
+# final_result_admin_1_grp_weight_adm2 <- from_analysisplan_map_to_output(data = cleaned_data_adm1,
+#                                                             analysisplan = analysisplan_admin_1_grp,
+#                                                             weighting = admin1_wght_adm2,
+#                                                             questionnaire = questionnaire)
+# 
+# saveRDS(final_result_admin_1_grp_weight_adm2, "final_result_admin_1_grp_weight_adm2.RDS")
+
 
 summary_stats_admin_1_grp <- final_result_admin_1_grp$results %>%
   lapply(function(x){x$summary.statistic}) %>% do.call(rbind, .)%>%
@@ -355,18 +363,21 @@ analysisplan_admin_2_grp <- make_analysis_plan_template(df= cleaned_data_adm2,
 analysisplan_admin_2_grp <- analysisplan_admin_2_grp[!is.na(analysisplan_admin_2_grp$dependent.variable.type),]
 
 
-start_time_admin2_grp <- Sys.time()
 
-final_result_admin_2_grp <- from_analysisplan_map_to_output(data = cleaned_data_adm2,
-                                                            analysisplan = analysisplan_admin_2_grp,
-                                                            weighting = combined_weights_adm2,
-                                                            questionnaire = questionnaire)
+# final_result_admin_2_grp <- from_analysisplan_map_to_output(data = cleaned_data_adm2,
+#                                                             analysisplan = analysisplan_admin_2_grp,
+#                                                             weighting = combined_weights_adm2,
+#                                                             questionnaire = questionnaire)
+# 
+# saveRDS(final_result_admin_2_grp, "final_result_admin_2_grp.rds")
 
-saveRDS(final_result_admin_2_grp, "final_result_admin_2_grp.rds")
+# final_result_admin_2_grp_weights_adm2 <- from_analysisplan_map_to_output(data = cleaned_data_adm2,
+#                                                             analysisplan = analysisplan_admin_2_grp,
+#                                                             weighting = admin2_wght_adm2,
+#                                                             questionnaire = questionnaire)
+# 
+# saveRDS(final_result_admin_2_grp_weights_adm2, "final_result_admin_2_grp_weights_adm2.rds")
 
-end_time_admin2_grp <- Sys.time()
-
-end_time_admin2_grp - start_time_admin2_grp
 
 summary_stats_admin_2_grp <- final_result_admin_2_grp$results %>%
   lapply(function(x){x$summary.statistic}) %>% do.call(rbind, .)%>%

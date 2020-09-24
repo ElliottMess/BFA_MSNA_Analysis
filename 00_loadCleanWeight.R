@@ -5,7 +5,7 @@
 source("utils.R")
 
 ## Creating list of packages to load
-package_list <- c("oliviercecchi/butteR", "ElliottMess/hypegrammaR","ellieallien/cleaninginspectoR","hunzikp/rtree", "impact-initiatives/koboloops",
+package_list <- c("elliottmess/butteR", "ElliottMess/hypegrammaR","ellieallien/cleaninginspectoR","hunzikp/rtree", "impact-initiatives/koboloops",
                   "tidyr","dplyr", "ggplot2", "readr", "stringr", "lubridate", "readxl", "rgdal", "sf", "purrr")
 
 ## Running the packaging loading function
@@ -30,11 +30,10 @@ raw_data <- read_csv(raw_data_csv)%>%
       group_pop %in% c("pop_local", "migrant_burkina", "rapatrie", "refugie", "migrant_int", "retourne") ~ "host",
       TRUE ~ NA_character_
       )
-    )%>%
-  rename("risque_fem/enlevements" ="risque_fem/enlèvements",
-         "risque_hom/enlevements" = "risque_hom/enlèvements",
-         "risque_fille/enlevements" = "risque_fille/enlèvements",
-         "risque_garcon/enlevements" = "risque_garcon/enlèvements")%>%
+    )
+names(raw_data) <- gsub("è", "e", names(raw_data))
+
+raw_data <- raw_data%>%
   mutate(across(where(is.character), str_remove_all, pattern = fixed("\n")))%>%
   mutate(across(where(is.character), str_remove_all, pattern = fixed("\r")))%>%
   mutate(across(where(is.character), str_remove_all, pattern = fixed(";")))
@@ -59,6 +58,7 @@ write_csv(choices,"data/choices.csv")
 raw_data_info_menage <- read_csv(raw_data_info_menage_csv)%>%
   rename(submission_uuid = `_submission__uuid`,
          parent_index = `_parent_index`)
+  
 
 raw_data_maladie_moins_5ans_rpt <- read_excel(raw_data_excel, sheet = "maladie_moins_5ans_rpt")%>%
   rename(submission_uuid = `_submission__uuid...2`,
@@ -66,7 +66,7 @@ raw_data_maladie_moins_5ans_rpt <- read_excel(raw_data_excel, sheet = "maladie_m
 
 raw_data_naissances <- read_excel(raw_data_excel, sheet = "naissances")%>%
   rename(parent_index = `_parent_index...1`,
-         submission_uuid = `_submission__id`)
+         submission_uuid = `_submission__uuid...2`)
 
 raw_data_membre_marche_dificile <- read_excel(raw_data_excel, sheet = "membre_marche_dificile")
 # %>%
@@ -573,9 +573,11 @@ raw_data <- raw_data%>%
                                     TRUE ~ ic_genre),
       taille_abri = case_when(taille_abri == "NSP" ~ NA_integer_, TRUE ~ as.integer(taille_abri)),
       personne_m2 = taille_abri/taille_menage,
-      fcs2 = sum(jr_consom_cereale*2 + jr_consom_noix*3 + jr_consom_lait*4 + jr_consom_viande*4 + jr_consom_legume*1 + jr_consom_fruit*1 + jr_consom_huile*0.5+
-                   jr_consom_sucre*0.5 + jr_consom_epice*0, na.rm = T),
-      fcs2_thresholds = case_when(fcs2>=0 & fcs2 <=21 ~ "pauvre",
+      fcs2 =sum(jr_consom_cereale*2, jr_consom_noix*3, jr_consom_lait*4, jr_consom_viande*4, jr_consom_legume*1, jr_consom_fruit*1, jr_consom_huile*0.5,
+                   jr_consom_sucre*0.5, jr_consom_epice*0, na.rm = T),
+      fcs2 = case_when(fcs2 == 0 ~ NA_integer_,
+                       TRUE ~ as.integer(fcs2)),
+      fcs2_thresholds = case_when(fcs2 > 0 & fcs2 <=21 ~ "pauvre",
                                   fcs2 > 21 & fcs2 <= 35 ~ "limite",
                                   fcs2 > 35 ~ "acceptable",
                                   TRUE ~ NA_character_),
@@ -658,13 +660,44 @@ raw_data <- raw_data%>%
 
 ### Loading 2stage sampling frame
 
-samplingFrame_raw <- read_excel("data/REACH_BFA_Pop_for_weighting_20201308.xlsx", sheet = "Population")%>%
-  filter(Admin3Pcod %in% raw_data$admin3Pcode,
-         Admin3 != "Nassoumbou")
+# bfa_admin3_polygon <- st_read("data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm3_igb_20200323.shp", crs = 4326)
+# 
+# popData_fb <- read_csv("data/population_bfa_2018-10-01.csv")
+# 
+# popData_fb_sf <- popData_fb%>%
+#   st_as_sf(coords = c("Lon", "Lat"), crs = 4326)
+# 
+# pop_data_fb_withAdmin3 <- st_join(bfa_admin3_polygon,popData_fb_sf)
+# 
+# pop_data_fb_withAdmin3<- pop_data_fb_withAdmin3%>%
+#   as.data.frame()%>%
+#   group_by(ADM1_FR,ADM1_PCODE, ADM2_FR,ADM2_PCODE, ADM3_REF,ADM3_PCODE)%>%
+#   summarise(fb_pop = sum(Population))
+# 
+# write_csv(pop_data_fb_withAdmin3, "data/popData_fb.csv")
 
-  samplingFrameADM3 <- samplingFrame_raw%>%
+popData_fb_byAdmins <- read_csv("data/popData_fb.csv")%>%
+  select(ADM3_PCODE, fb_pop)
+
+census2006_data <- read_csv("data/popData_recensement2006.csv")%>%
+  rename(PCODE_ADMIN1 = PCODE_ADMIN2, PCODE_ADMIN2 = PCODE_ADMIN2_1, pop2006 = `Total 2006`, pop2019 = `Total 2019`)%>%
+  select(PCODE_ADMIN3, pop2006, pop2019, Croissance)
+
+samplingFrame_raw <- read_excel("data/REACH_BFA_Pop_for_weighting_20201308.xlsx", sheet = "Population")%>%
+  filter(Admin3Pcod %in% raw_data$admin3Pcode)%>%
+  left_join(census2006_data, by = c("Admin3Pcod" = "PCODE_ADMIN3"))%>%
+  left_join(popData_fb_byAdmins, by = c("Admin3Pcod" ="ADM3_PCODE"))
+
+# check_newPops <- samplingFrame_raw%>%
+#   group_by(Admin2, Admin2Pcod)%>%
+#   summarise(freq_popCOD = round(`Total local`/sum(`Total local`)*100), freq_census2006 = round(pop2006/sum(pop2006)*100), freq_pop2019 = round(pop2019/sum(pop2019)*100), freq_fb = round(fb_pop/sum(fb_pop)*100))%>%
+#   mutate(diff_COD_2006 = freq_popCOD-freq_census2006, diff_COD_2009 = freq_popCOD-freq_pop2019, diff_COD_FB = freq_popCOD - freq_fb)
+  
+
+
+samplingFrameADM3 <- samplingFrame_raw%>%
   group_by(Admin1, Admin1Pcod, Admin2, Admin2Pcod,Admin3, Admin3Pcod)%>%
-  summarise(host = sum(`Total local`, na.rm = TRUE),
+  summarise(host = sum(pop2006, na.rm = TRUE),
             pdi = sum(`Total PDI`, na.rm = TRUE), .groups = "drop")%>%
   pivot_longer(cols = c("host", "pdi"), names_to = "pop_grp", values_to = "Population_adm3")%>%
   mutate(strata_adm3 = paste(Admin3Pcod, pop_grp, sep = "_"))%>%
@@ -672,7 +705,7 @@ samplingFrame_raw <- read_excel("data/REACH_BFA_Pop_for_weighting_20201308.xlsx"
 
 samplingFrameADM2 <- samplingFrame_raw%>%
   group_by(Admin1, Admin1Pcod, Admin2, Admin2Pcod)%>%
-  summarise(host = sum(`Total local`, na.rm = TRUE),
+  summarise(host = sum(pop2006, na.rm = TRUE),
             pdi = sum(`Total PDI`, na.rm = TRUE), .groups = "drop")%>%
   pivot_longer(cols = c("host", "pdi"), names_to = "pop_grp", values_to = "Population_adm2")%>%
   mutate(strata_adm2 = paste(Admin2Pcod, pop_grp, sep = "_"))%>%
@@ -782,6 +815,7 @@ combined_weights_adm2 <- combine_weighting_functions(admin2_wght_adm2,admin2_wgh
 
 raw_data_adm2$weights_sampling <- combined_weights_adm2(raw_data_adm2)
 
+raw_data_adm2$weights_sampling_AT_adm2 <- admin2_wght_adm2(raw_data_adm2)
 
 ### Weighting for admin1 ###
 
@@ -834,6 +868,7 @@ admin1_wght_adm3 <- map_to_weighting(sampling.frame = samplingFrame,
 combined_weights_adm1 <- combine_weighting_functions(admin1_wght_adm2,admin1_wght_adm3)
 
 raw_data_adm1$weights_sampling <- combined_weights_adm1(raw_data_adm1)
+raw_data_adm1$weights_sampling_AT_adm2 <- admin1_wght_adm2(raw_data_adm1)
 
 
 ### Removing from main data frames surveys with no sampling ID attriuable
@@ -844,8 +879,9 @@ raw_data <-raw_data%>%
   select(-contains("gps"), -DFERWF)
 
 weights_adm2 <- raw_data_adm2%>%
-  select(sampling_id, weights_sampling)%>%
-  rename(weights_sampling_adm2 = weights_sampling)%>%
+  select(sampling_id, weights_sampling, weights_sampling_AT_adm2)%>%
+  rename(weights_sampling_adm2 = weights_sampling,
+         weights_sampling_adm2_AT_adm2 = weights_sampling_AT_adm2)%>%
   mutate(weights_sampling_adm2 = as.vector(weights_sampling_adm2))
 
 raw_data_adm1 <- raw_data_adm1%>%
@@ -873,6 +909,20 @@ write_csv(raw_data_adm1, "outputs/datasets/BFA_MSNA_2020_dataset_cleanedWeighted
 # write_csv(raw_data_representative, "outputs/datasets/BFA_MSNA_2020_dataset_cleanedWeighted_representativeData.csv")
 # write_csv(raw_data_adm2_quota, "outputs/datasets/BFA_MSNA_2020_dataset_cleanedWeighted_quota_ADM2affected.csv")
 write_csv(raw_data_adm2, "outputs/datasets/BFA_MSNA_2020_dataset_cleanedWeighted_ADM2_all.csv")
+
+
+loop_frames <- list(raw_data_info_menage, raw_data_maladie_moins_5ans_rpt, raw_data_naissances, raw_data_membre_marche_dificile,
+                    raw_data_membre_soins_difficile, raw_data_membre_concentration_difficile, raw_data_membre_membre_vision_diffcile,
+                    raw_data_membre_membre_entendre_difficile, raw_data_membre_difficulte_communication, raw_data_membre_repeat_nbre_pers_decedes)
+
+loop_frames_names <- list("raw_data_info_menage", "raw_data_maladie_moins_5ans_rpt", "raw_data_naissances", "raw_data_membre_marche_dificile",
+                          "raw_data_membre_soins_difficile", "raw_data_membre_concentration_difficile", "raw_data_membre_membre_vision_diffcile",
+                          "raw_data_membre_membre_entendre_difficile", "raw_data_membre_difficulte_communication", "raw_data_membre_repeat_nbre_pers_decedes")
+
+
+list_remove_data <- lapply(loop_frames, remove_delParents_fromLoop, raw_data_adm1, uuid.name.parent = "uuid", uuid.name.loop = "submission_uuid")
+
+names(list_remove_data) <- loop_frames_names
 
 loopsFiles.names <- paste0("./outputs/datasets/loops/BFA_MSNA_2020_dataset_cleanedWeighted_",unlist(loop_frames_names), ".csv")
 
