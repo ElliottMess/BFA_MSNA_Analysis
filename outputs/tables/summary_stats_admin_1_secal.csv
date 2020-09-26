@@ -1,0 +1,1130 @@
+Question de recherche,Sous-question de recherche,Groupe de population,Indicator,Sous-ensemble de donnée,Centre-Est,Sahel,Centre-Nord,Centre-Ouest,Nord,Boucle du Mouhoun,Hauts-Bassins,Est,Cascades,Plateau Central,Centre-Sud,Sud-Ouest,Centre
+Information générale,Modalité,Total,Modalité d’enquête: Face à face,NA,100,32,77,100,80,77,97,50,71,100,100,83,100
+Information générale,Modalité,Total,Modalité d’enquête: Telephone,NA,NA,68,23,NA,20,23,3,50,29,NA,NA,17,NA
+Information générale,Démographie,Total,Genre du chef de ménage: Femme,Sous-ensemble de donnée,41,18,28,25,25,33,55,26,29,30,23,43,50
+Information générale,Démographie,Total,Genre du chef de ménage: Homme,Sous-ensemble de donnée,59,82,72,75,75,67,45,74,71,70,77,57,50
+Information générale,Démographie,Total,Genre répondant: Femme,NA,41,18,28,25,25,33,55,26,29,30,23,43,50
+Information générale,Démographie,Total,Genre répondant: Homme,NA,59,82,72,75,75,67,45,74,71,70,77,57,50
+Information générale,Socio-économique,Total,Profession chef de ménage: Agriculteur,NA,63,61,73,64,75,77,44,76,62,82,87,77,9
+Information générale,Socio-économique,Total,Profession chef de ménage: Autre,NA,0,1,0,NA,0,1,2,NA,3,1,1,NA,2
+Information générale,Socio-économique,Total,Profession chef de ménage: Chef communautaire,NA,NA,0,0,1,1,0,NA,NA,NA,NA,NA,NA,NA
+Information générale,Socio-économique,Total,Profession chef de ménage: Chômeur,NA,0,0,1,1,0,1,1,1,0,0,NA,NA,1
+Information générale,Socio-économique,Total,Profession chef de ménage: Commerçant,NA,15,11,7,9,5,5,12,4,9,4,5,4,24
+Information générale,Socio-économique,Total,Profession chef de ménage: Eleveur,NA,2,5,2,3,2,2,2,3,1,2,1,1,1
+Information générale,Socio-économique,Total,Profession chef de ménage: Etudiant/Elève,NA,0,0,0,3,0,1,0,1,1,0,0,NA,NA
+Information générale,Socio-économique,Total,Profession chef de ménage: Fonctionnaire (sauf professeur),NA,NA,2,1,4,2,3,5,3,4,1,1,2,12
+Information générale,Socio-économique,Total,Profession chef de ménage: Pas de profession,NA,4,1,3,3,1,1,6,2,4,1,1,5,8
+Information générale,Socio-économique,Total,Profession chef de ménage: Pas de réponse / ne souhaite pas répondre,NA,NA,0,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Information générale,Socio-économique,Total,Profession chef de ménage: Pêcheur / chasseur,NA,NA,NA,NA,NA,NA,NA,NA,NA,0,NA,NA,NA,NA
+Information générale,Socio-économique,Total,Profession chef de ménage: Professeur / maître d'école,NA,2,0,4,3,2,3,2,3,2,2,2,1,3
+Information générale,Socio-économique,Total,Profession chef de ménage: Transporteur,NA,3,1,0,1,0,0,1,1,5,NA,NA,NA,5
+Information générale,Socio-économique,Total,Profession chef de ménage: Travailleur du secteur privé,NA,NA,5,1,2,2,1,6,3,1,1,1,NA,6
+Information générale,Socio-économique,Total,"Profession chef de ménage: Travailleur indépendant (artisan, ouvrier, manœuvre etc.)",NA,12,12,6,8,9,4,20,6,7,4,0,11,29
+Information générale,Socio-économique,Total,Situation matrimonial: Celibataire,NA,0,0,0,6,1,2,1,2,1,1,2,1,4
+Information générale,Socio-économique,Total,"Situation matrimonial: Concubinage (en couple, pas marie)",NA,5,0,8,21,1,7,3,0,10,1,32,8,3
+Information générale,Socio-économique,Total,Situation matrimonial: Divorcé/e,NA,1,0,0,1,0,0,NA,1,1,NA,NA,1,1
+Information générale,Socio-économique,Total,Situation matrimonial: Marié - Monogame,NA,50,61,47,44,47,58,57,63,39,57,47,52,73
+Information générale,Socio-économique,Total,Situation matrimonial: Marié - Polygame,NA,33,36,42,23,46,27,33,30,47,34,12,25,7
+Information générale,Socio-économique,Total,Situation matrimonial: Veuf/veuve,NA,11,2,3,5,4,6,6,4,2,8,8,13,11
+Information générale,Déplacement,Total,Condition retour déplacés: Autres (merci de préciser),NA,0,0,0,NA,0,0,0,0,0,0,NA,NA,NA
+Information générale,Déplacement,Total,Condition retour déplacés: Je ne sais pas / préfère ne pas répondre,NA,0,0,0,NA,0,0,0,0,0,0,NA,NA,NA
+Information générale,Déplacement,Total,Condition retour déplacés: La capacité de regagner la maison initiale,NA,21,23,37,NA,16,20,9,9,8,16,NA,NA,NA
+Information générale,Déplacement,Total,Condition retour déplacés: Présence d’autres membres de la famille (regroupement familiale),NA,6,11,8,NA,21,6,37,7,24,9,NA,NA,NA
+Information générale,Déplacement,Total,Condition retour déplacés: Présence d’autres membres de la famille (regroupement familiale),NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Information générale,Déplacement,Total,Condition retour déplacés: Un accès à des abris,NA,42,5,27,NA,21,19,10,25,6,47,NA,NA,NA
+Information générale,Déplacement,Total,"Condition retour déplacés: Un accès à des moyens de subsistance (champs, nourriture, marché, …)",NA,35,40,42,NA,37,37,27,36,14,31,NA,NA,NA
+Information générale,Déplacement,Total,Condition retour déplacés: Un accès à l'emploi / opportunité économique,NA,52,25,15,NA,13,20,22,15,8,15,NA,NA,NA
+Information générale,Déplacement,Total,"Condition retour déplacés: Un accès aux services (santé, éducation)",NA,8,5,6,NA,22,11,0,13,7,10,NA,NA,NA
+Information générale,Déplacement,Total,Condition retour déplacés: Un rétablissement de la sécurité,NA,76,82,81,NA,92,78,95,94,82,94,NA,NA,NA
+Information générale,Déplacement,Total,Condition retour déplacés: Une meilleure aide d'assistance humanitaire,NA,5,4,15,NA,18,9,20,7,0,8,NA,NA,NA
+Information générale,Déplacement,Total,Durée déplacement: Entre 1 et 2 mois,Sous-ensemble de donnée,NA,1,NA,NA,1,4,7,20,3,0,NA,NA,NA
+Information générale,Déplacement,Total,Durée déplacement: Entre 3 et 5 mois,Sous-ensemble de donnée,16,3,7,NA,15,14,22,23,6,7,NA,NA,NA
+Information générale,Déplacement,Total,Durée déplacement: Entre 6 mois et 1 ans,Sous-ensemble de donnée,81,52,47,NA,59,43,48,52,81,76,NA,NA,NA
+Information générale,Déplacement,Total,Durée déplacement: Moins de 1 mois,Sous-ensemble de donnée,1,0,0,NA,1,5,NA,3,NA,1,NA,NA,NA
+Information générale,Déplacement,Total,Durée déplacement: Plus de 1 an,Sous-ensemble de donnée,2,44,45,NA,24,34,22,1,9,16,NA,NA,NA
+Information générale,Déplacement,Total,Groupe de population: Population déplacée interne – toutes les personnes originaire du Burkina Faso qui ont dû quitter leur lieu de résidence habituel et sont présentement déplacés à l’intérieur de leur pays en raison de la crise,NA,2,26,25,NA,5,1,1,2,1,2,NA,NA,NA
+Information générale,Déplacement,Total,"Groupe de population: Population locale – toutes les personnes qui, au moment de l'enquête, ne sont pas dans une situation de migration, de déplacement forcé en raison de la crise ou de retour suite à un déplacement forcé",NA,95,73,75,97,92,95,91,98,76,97,98,92,92
+Information générale,Déplacement,Total,Groupe de population: Population migrante burkinabé - tous les ménages qui sont originaires du Burkina Faso mais qui vivent à l'extérieur de leur zone d'origine par choix (par exemple pour des opportunités d'emploi),NA,1,0,NA,3,0,2,7,NA,21,1,2,8,8
+Information générale,Déplacement,Total,Groupe de population: Population migrante internationale - tous les ménages qui ne sont pas originaire du Burkina Faso mais qui se trouvent au Burkina Faso par choix (par exemple pour la recherche d'emploi).,NA,NA,NA,NA,NA,NA,0,NA,0,NA,NA,NA,NA,NA
+Information générale,Déplacement,Total,"Groupe de population: Population rapatriée – toutes les populations burkinabées qui, après avoir été réfugiés dans un autre pays en raison de la crise, sont retournées dans leur lieu de résidence habituel au Burkina Faso, ou sont en cours de retour",NA,NA,NA,NA,NA,NA,NA,1,NA,2,NA,NA,NA,NA
+Information générale,Déplacement,Total,"Groupe de population: Population réfugiée - toutes les personnes qui ne sont pas originaires du Burkina Faso, qui ont été déplacées d'un autre pays en raison de la crise et qui résident actuellement au Burkina Faso.",NA,NA,NA,NA,NA,0,1,NA,NA,NA,NA,NA,NA,NA
+Information générale,Déplacement,Total,"Groupe de population: Population retournée – toutes les personnes burkinabées qui sont retournées récemment dans leur lieu de résidence habituelle après avoir été déplacé par la crise à l’intérieur de leur pays. Cela ne signifie pas nécessairement qu’elles ont rejoint / retrouvé leurs maisons d’origine, ni qu’elles sont exactement dans la même localité.",NA,2,1,NA,NA,2,NA,NA,NA,NA,NA,NA,NA,NA
+Information générale,Déplacement,Total,Ménage accueil déplacés: Je ne sais pas / préfère ne pas répondre,Sous-ensemble de donnée,1,NA,0,NA,NA,0,NA,0,NA,NA,NA,NA,NA
+Information générale,Déplacement,Total,Ménage accueil déplacés: Non,Sous-ensemble de donnée,98,67,69,96,93,96,96,84,100,97,100,99,99
+Information générale,Déplacement,Total,Ménage accueil déplacés: Oui,Sous-ensemble de donnée,2,33,31,4,7,4,4,15,0,3,0,1,1
+Information générale,Déplacement,Total,Nombre ménages accueillis,Sous-ensemble de donnée,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Information générale,Déplacement,Total,Pays rapatriés: Mali,Sous-ensemble de donnée,NA,NA,NA,NA,NA,100,NA,NA,NA,NA,NA,NA,NA
+Information générale,Déplacement,Total,Possibilité retour déplacés: Je ne sais pas / préfère ne pas répondre,Sous-ensemble de donnée,17,0,0,NA,2,1,4,0,NA,9,NA,NA,NA
+Information générale,Déplacement,Total,Possibilité retour déplacés: Non,Sous-ensemble de donnée,48,5,7,NA,12,20,43,29,48,30,NA,NA,NA
+Information générale,Déplacement,Total,Possibilité retour déplacés: Oui,Sous-ensemble de donnée,35,95,93,NA,87,79,53,71,52,61,NA,NA,NA
+Information générale,Déplacement,Total,Province retournés: Gourma,Sous-ensemble de donnée,65,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Information générale,Déplacement,Total,Province retournés: Kouritenga,Sous-ensemble de donnée,35,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Information générale,Déplacement,Total,Province retournés: Loroum,Sous-ensemble de donnée,NA,NA,NA,NA,80,NA,NA,NA,NA,NA,NA,NA,NA
+Information générale,Déplacement,Total,Province retournés: Oudalan,Sous-ensemble de donnée,NA,28,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Information générale,Déplacement,Total,Province retournés: Seno,Sous-ensemble de donnée,NA,43,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Information générale,Déplacement,Total,Province retournés: Yagha,Sous-ensemble de donnée,NA,29,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Information générale,Déplacement,Total,Province retournés: Yatenga,Sous-ensemble de donnée,NA,NA,NA,NA,20,NA,NA,NA,NA,NA,NA,NA,NA
+Information générale,Déplacement,Total,Provinces origines PDI: Bale,Sous-ensemble de donnée,NA,NA,NA,NA,NA,NA,NA,NA,2,NA,NA,NA,NA
+Information générale,Déplacement,Total,Provinces origines PDI: Bam,Sous-ensemble de donnée,0,NA,11,NA,0,NA,1,NA,8,3,NA,NA,NA
+Information générale,Déplacement,Total,Provinces origines PDI: Banwa,Sous-ensemble de donnée,NA,NA,NA,NA,NA,5,NA,NA,6,NA,NA,NA,NA
+Information générale,Déplacement,Total,Provinces origines PDI: Bazega,Sous-ensemble de donnée,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,21
+Information générale,Déplacement,Total,Provinces origines PDI: Boulgou,Sous-ensemble de donnée,18,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,21
+Information générale,Déplacement,Total,Provinces origines PDI: Boulkiemde,Sous-ensemble de donnée,12,NA,NA,62,NA,3,NA,NA,2,NA,NA,NA,NA
+Information générale,Déplacement,Total,Provinces origines PDI: Comoe,Sous-ensemble de donnée,NA,NA,NA,NA,NA,NA,21,NA,7,NA,NA,NA,11
+Information générale,Déplacement,Total,Provinces origines PDI: Ganzourgou,Sous-ensemble de donnée,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,20
+Information générale,Déplacement,Total,Provinces origines PDI: Gnagna,Sous-ensemble de donnée,1,NA,0,NA,NA,NA,NA,0,NA,NA,NA,NA,NA
+Information générale,Déplacement,Total,Provinces origines PDI: Gourma,Sous-ensemble de donnée,23,0,1,NA,NA,NA,NA,57,NA,9,NA,NA,NA
+Information générale,Déplacement,Total,Provinces origines PDI: Houet,Sous-ensemble de donnée,NA,NA,NA,NA,NA,NA,NA,NA,7,NA,NA,NA,NA
+Information générale,Déplacement,Total,Provinces origines PDI: Ioba,Sous-ensemble de donnée,NA,NA,NA,NA,NA,NA,7,NA,NA,NA,NA,NA,NA
+Information générale,Déplacement,Total,Provinces origines PDI: Kadiogo,Sous-ensemble de donnée,NA,NA,NA,NA,4,6,9,NA,4,NA,NA,NA,NA
+Information générale,Déplacement,Total,Provinces origines PDI: Kenedougou,Sous-ensemble de donnée,NA,NA,NA,NA,NA,3,NA,NA,NA,NA,NA,NA,NA
+Information générale,Déplacement,Total,Provinces origines PDI: Komonjdjari,Sous-ensemble de donnée,NA,NA,NA,NA,NA,NA,NA,18,NA,1,NA,NA,NA
+Information générale,Déplacement,Total,Provinces origines PDI: Kompienga,Sous-ensemble de donnée,3,NA,NA,NA,NA,NA,NA,14,NA,1,NA,NA,NA
+Information générale,Déplacement,Total,Provinces origines PDI: Kossi,Sous-ensemble de donnée,NA,NA,NA,NA,NA,37,13,NA,NA,NA,NA,NA,NA
+Information générale,Déplacement,Total,Provinces origines PDI: Koulpelogo,Sous-ensemble de donnée,8,NA,NA,NA,NA,NA,NA,NA,NA,1,NA,NA,NA
+Information générale,Déplacement,Total,Provinces origines PDI: Kouritenga,Sous-ensemble de donnée,20,NA,NA,NA,NA,0,NA,NA,5,NA,NA,NA,NA
+Information générale,Déplacement,Total,Provinces origines PDI: Kourweogo,Sous-ensemble de donnée,1,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Information générale,Déplacement,Total,Provinces origines PDI: Loroum,Sous-ensemble de donnée,NA,NA,NA,NA,59,1,11,NA,1,NA,NA,NA,NA
+Information générale,Déplacement,Total,Provinces origines PDI: Mouhoun,Sous-ensemble de donnée,NA,NA,NA,NA,NA,7,6,NA,2,NA,NA,31,NA
+Information générale,Déplacement,Total,Provinces origines PDI: Namentenga,Sous-ensemble de donnée,4,NA,7,NA,NA,6,1,NA,NA,2,NA,41,NA
+Information générale,Déplacement,Total,Provinces origines PDI: Nayala,Sous-ensemble de donnée,NA,NA,NA,NA,NA,2,NA,NA,4,17,NA,NA,NA
+Information générale,Déplacement,Total,Provinces origines PDI: Noumbiel,Sous-ensemble de donnée,NA,0,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Information générale,Déplacement,Total,Provinces origines PDI: Oubritenga,Sous-ensemble de donnée,NA,NA,NA,19,NA,NA,NA,NA,1,NA,NA,10,NA
+Information générale,Déplacement,Total,Provinces origines PDI: Oudalan,Sous-ensemble de donnée,NA,10,0,NA,NA,3,1,NA,1,NA,NA,NA,NA
+Information générale,Déplacement,Total,Provinces origines PDI: Passore,Sous-ensemble de donnée,NA,NA,NA,NA,1,9,NA,NA,6,NA,NA,7,NA
+Information générale,Déplacement,Total,Provinces origines PDI: Sanguie,Sous-ensemble de donnée,NA,NA,NA,NA,NA,0,NA,NA,NA,NA,NA,NA,NA
+Information générale,Déplacement,Total,Provinces origines PDI: Sanmatenga,Sous-ensemble de donnée,8,0,63,19,NA,NA,1,NA,13,21,NA,NA,NA
+Information générale,Déplacement,Total,Provinces origines PDI: Seno,Sous-ensemble de donnée,NA,17,5,NA,NA,NA,1,NA,7,NA,NA,NA,NA
+Information générale,Déplacement,Total,Provinces origines PDI: Soum,Sous-ensemble de donnée,2,71,12,NA,14,5,3,NA,7,28,NA,NA,NA
+Information générale,Déplacement,Total,Provinces origines PDI: Sourou,Sous-ensemble de donnée,NA,NA,NA,NA,0,9,NA,NA,NA,18,NA,NA,NA
+Information générale,Déplacement,Total,Provinces origines PDI: Tapoa,Sous-ensemble de donnée,1,NA,NA,NA,NA,NA,NA,10,NA,NA,NA,NA,NA
+Information générale,Déplacement,Total,Provinces origines PDI: Yagha,Sous-ensemble de donnée,NA,1,0,NA,NA,0,0,NA,NA,NA,NA,NA,NA
+Information générale,Déplacement,Total,Provinces origines PDI: Yatenga,Sous-ensemble de donnée,NA,NA,NA,NA,22,4,25,NA,18,NA,NA,10,6
+Information générale,Déplacement,Total,Provinces origines PDI: Zoundweogo,Sous-ensemble de donnée,NA,NA,NA,NA,NA,0,NA,NA,NA,NA,NA,NA,21
+Information générale,Déplacement,Total,"Raison déplacement PDI (push factor): Absence de nourriture ou moyens de subsistance (emplois, revenus, etc.)",Sous-ensemble de donnée,12,0,NA,NA,NA,0,NA,NA,NA,NA,NA,NA,NA
+Information générale,Déplacement,Total,Raison déplacement PDI (push factor): Attaques armées (Attaques d'un groupe armé contre une population non armée ),Sous-ensemble de donnée,86,89,79,NA,82,77,80,76,83,93,NA,NA,NA
+Information générale,Déplacement,Total,Raison déplacement PDI (push factor): Conflits armés (conflit entre des groupes armés ),Sous-ensemble de donnée,2,3,19,NA,1,3,16,10,11,4,NA,NA,NA
+Information générale,Déplacement,Total,Raison déplacement PDI (push factor): Conflits communautaires,Sous-ensemble de donnée,0,0,0,NA,1,9,2,1,3,NA,NA,NA,NA
+Information générale,Déplacement,Total,"Raison déplacement PDI (push factor): Manque de services (santé, éducation, etc.)",Sous-ensemble de donnée,NA,NA,NA,NA,NA,1,NA,NA,NA,NA,NA,NA,NA
+Information générale,Déplacement,Total,Raison déplacement PDI (push factor): Peur de violences armées / menaces,Sous-ensemble de donnée,NA,7,2,NA,16,10,3,14,3,3,NA,NA,NA
+Information générale,Déplacement,Total,Raison installation PDI (pull factor): Autres (merci de préciser),Sous-ensemble de donnée,NA,0,NA,NA,1,2,NA,1,3,NA,NA,NA,NA
+Information générale,Déplacement,Total,Raison installation PDI (pull factor): Je ne sais pas / préfère ne pas répondre,Sous-ensemble de donnée,NA,NA,0,NA,NA,NA,NA,NA,NA,2,NA,NA,NA
+Information générale,Déplacement,Total,Raison installation PDI (pull factor): Possibilité d'accès à des abris,Sous-ensemble de donnée,12,0,5,NA,0,3,3,3,0,13,NA,NA,NA
+Information générale,Déplacement,Total,"Raison installation PDI (pull factor): Possibilité d'accès à des moyens de subsistance (champs, nourriture, marché, …)",Sous-ensemble de donnée,2,3,0,NA,2,7,13,2,15,1,NA,NA,NA
+Information générale,Déplacement,Total,Raison installation PDI (pull factor): Possibilité d'accès à l'emploi / opportunité économique,Sous-ensemble de donnée,NA,2,1,NA,1,8,5,NA,12,5,NA,NA,NA
+Information générale,Déplacement,Total,"Raison installation PDI (pull factor): Possibilité d'accès aux services (santé, éducation)",Sous-ensemble de donnée,NA,0,NA,NA,1,4,NA,0,0,NA,NA,NA,NA
+Information générale,Déplacement,Total,Raison installation PDI (pull factor): Présence d’autres membres de la famille (regroupement familial),Sous-ensemble de donnée,37,11,14,NA,28,10,53,8,50,12,NA,NA,NA
+Information générale,Déplacement,Total,Raison installation PDI (pull factor): Une meilleure aide d'assistance humanitaire,Sous-ensemble de donnée,NA,1,0,NA,2,1,NA,1,NA,NA,NA,NA,NA
+Information générale,Déplacement,Total,Raison installation PDI (pull factor): Une meilleure situation sécuritaire,Sous-ensemble de donnée,49,83,79,NA,65,64,27,85,18,66,NA,NA,NA
+Information générale,Déplacement,Total,Région origines PDI: Boucle du Mouhoun,Sous-ensemble de donnée,NA,NA,NA,NA,0,61,19,NA,14,35,NA,31,NA
+Information générale,Déplacement,Total,Région origines PDI: Cascades,Sous-ensemble de donnée,NA,NA,NA,NA,NA,NA,21,NA,7,NA,NA,NA,11
+Information générale,Déplacement,Total,Région origines PDI: Centre,Sous-ensemble de donnée,NA,NA,NA,NA,4,6,9,NA,4,NA,NA,NA,NA
+Information générale,Déplacement,Total,Région origines PDI: Centre-Est,Sous-ensemble de donnée,46,NA,NA,NA,NA,0,NA,NA,5,1,NA,NA,21
+Information générale,Déplacement,Total,Région origines PDI: Centre-Nord,Sous-ensemble de donnée,12,0,81,19,0,6,3,NA,21,25,NA,41,NA
+Information générale,Déplacement,Total,Région origines PDI: Centre-Ouest,Sous-ensemble de donnée,12,NA,NA,62,NA,3,NA,NA,2,NA,NA,NA,NA
+Information générale,Déplacement,Total,Région origines PDI: Centre-Sud,Sous-ensemble de donnée,NA,NA,NA,NA,NA,0,NA,NA,NA,NA,NA,NA,43
+Information générale,Déplacement,Total,Région origines PDI: Est,Sous-ensemble de donnée,28,0,1,NA,NA,NA,NA,100,NA,11,NA,NA,NA
+Information générale,Déplacement,Total,Région origines PDI: Hauts-Bassins,Sous-ensemble de donnée,NA,NA,NA,NA,NA,3,NA,NA,7,NA,NA,NA,NA
+Information générale,Déplacement,Total,Région origines PDI: Nord,Sous-ensemble de donnée,NA,NA,NA,NA,81,14,35,NA,25,NA,NA,17,6
+Information générale,Déplacement,Total,Région origines PDI: Plateau Central,Sous-ensemble de donnée,1,NA,NA,19,NA,NA,NA,NA,1,NA,NA,10,20
+Information générale,Déplacement,Total,Région origines PDI: Sahel,Sous-ensemble de donnée,2,99,17,NA,14,8,5,NA,15,28,NA,NA,NA
+Information générale,Déplacement,Total,Région origines PDI: Sud-Ouest,Sous-ensemble de donnée,NA,0,NA,NA,NA,NA,7,NA,NA,NA,NA,NA,NA
+Information générale,Déplacement,Total,Région retournés: Centre-Est,Sous-ensemble de donnée,35,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Information générale,Déplacement,Total,Région retournés: Est,Sous-ensemble de donnée,65,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Information générale,Déplacement,Total,Région retournés: Nord,Sous-ensemble de donnée,NA,NA,NA,NA,100,NA,NA,NA,NA,NA,NA,NA,NA
+Information générale,Déplacement,Total,Région retournés: Sahel,Sous-ensemble de donnée,NA,100,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Information générale,Washington Group,Total,% ayant de la difficulté  à entendre: Femmes de 18 à 64 ans,NA,0,0,0,0,0,0,0,0,0,0,0,0,0
+Information générale,Washington Group,Total,% ayant de la difficulté  à entendre: Femmes de plus de 65 ans,NA,0,3,2,0,4,1,2,0,0,0,0,0,0
+Information générale,Washington Group,Total,% ayant de la difficulté  à entendre: Filles de 5 à 17 ans,NA,0,0,0,0,0,0,0,0,0,1,0,0,0
+Information générale,Washington Group,Total,% ayant de la difficulté  à entendre: Filles de moins de 5 ans,NA,0,0,0,0,0,0,0,1,0,0,0,0,0
+Information générale,Washington Group,Total,% ayant de la difficulté  à entendre: Garçons de 5 à 17 ans,NA,1,0,0,1,0,0,0,0,0,0,2,0,0
+Information générale,Washington Group,Total,% ayant de la difficulté  à entendre: Garçons de moins de 5 ans,NA,0,0,0,0,0,0,0,1,0,0,0,0,0
+Information générale,Washington Group,Total,% ayant de la difficulté  à entendre: Hommes de 18 à 64 ans,NA,0,0,0,0,0,0,0,0,0,0,1,0,0
+Information générale,Washington Group,Total,% ayant de la difficulté  à entendre: Hommes de plus de 65 ans,NA,0,1,0,0,5,2,0,2,0,8,0,11,7
+Information générale,Washington Group,Total,% ayant de la difficulté  à voir: Femmes de 18 à 64 ans,NA,1,0,1,0,0,0,0,0,0,0,0,0,0
+Information générale,Washington Group,Total,% ayant de la difficulté  à voir: Femmes de plus de 65 ans,NA,18,8,11,3,4,1,13,2,0,8,4,8,0
+Information générale,Washington Group,Total,% ayant de la difficulté  à voir: Filles de 5 à 17 ans,NA,0,0,0,0,0,0,0,0,0,0,0,0,0
+Information générale,Washington Group,Total,% ayant de la difficulté  à voir: Filles de moins de 5 ans,NA,0,0,0,0,0,0,0,0,0,0,0,0,0
+Information générale,Washington Group,Total,% ayant de la difficulté  à voir: Garçons de 5 à 17 ans,NA,0,0,0,0,0,0,0,0,0,0,0,0,1
+Information générale,Washington Group,Total,% ayant de la difficulté  à voir: Garçons de moins de 5 ans,NA,0,0,0,0,0,0,0,0,0,0,0,0,0
+Information générale,Washington Group,Total,% ayant de la difficulté  à voir: Hommes de 18 à 64 ans,NA,1,0,0,1,0,0,0,0,0,1,2,1,0
+Information générale,Washington Group,Total,% ayant de la difficulté  à voir: Hommes de plus de 65 ans,NA,14,6,10,0,3,4,0,10,6,5,3,0,0
+Information générale,Washington Group,Total,% ayant de la difficulté à communiquer: Femmes de 18 à 64 ans,NA,0,0.1,0,0,0.4,0.1,0,0.1,0,0.3,0,0,0
+Information générale,Washington Group,Total,% ayant de la difficulté à communiquer: Femmes de plus de 65 ans,NA,3.8,0,0,0,0.1,0.7,0,1.4,0,0,0,0,0
+Information générale,Washington Group,Total,% ayant de la difficulté à communiquer: Filles de 5 à 17 ans,NA,0,0.3,0.1,0,0.5,0.1,0,0.2,0,0.9,0,0,0
+Information générale,Washington Group,Total,% ayant de la difficulté à communiquer: Filles de moins de 5 ans,NA,0,0,0.2,0,0,0,0,0,0,0,0,1.4,0
+Information générale,Washington Group,Total,% ayant de la difficulté à communiquer: Garçons de 5 à 17 ans,NA,0,0.1,0.1,0.4,0.1,0.1,0,0,0,0,0.9,0.4,0
+Information générale,Washington Group,Total,% ayant de la difficulté à communiquer: Garçons de moins de 5 ans,NA,0,0,0.2,0,0,0,0,0,0,0,0,0.9,0
+Information générale,Washington Group,Total,% ayant de la difficulté à communiquer: Hommes de 18 à 64 ans,NA,0,0.1,0.3,0.4,0.2,0,0,0.1,0,0,0,1.4,0
+Information générale,Washington Group,Total,% ayant de la difficulté à communiquer: Hommes de plus de 65 ans,NA,0,0.2,0,0,0.4,0,0,0,0,0,0,0,0
+Information générale,Washington Group,Total,% ayant de la difficulté à marcher/monter des marches: Femmes de 18 à 64 ans,NA,1.8,0.5,0.3,0.7,0.8,0.4,0.1,0.3,0,0.6,0.3,0.4,0.6
+Information générale,Washington Group,Total,% ayant de la difficulté à marcher/monter des marches: Femmes de plus de 65 ans,NA,10.6,4.4,5,3,8,5.2,13.4,9,8.6,18.8,0,0,11.5
+Information générale,Washington Group,Total,% ayant de la difficulté à marcher/monter des marches: Filles de 5 à 17 ans,NA,0,0.5,0,0.5,0.2,0.3,0,0.1,0,0,0,0,0
+Information générale,Washington Group,Total,% ayant de la difficulté à marcher/monter des marches: Filles de moins de 5 ans,NA,0,0.2,0,0,0.2,0,0,0,0,0,0,0,0
+Information générale,Washington Group,Total,% ayant de la difficulté à marcher/monter des marches: Garçons de 5 à 17 ans,NA,0,0.3,0.3,0.4,0.3,0.2,0.6,0.1,0,0,0,0.4,0
+Information générale,Washington Group,Total,% ayant de la difficulté à marcher/monter des marches: Garçons de moins de 5 ans,NA,0,0.4,0,0,1.9,0.1,0,0.3,0,0,0,0.9,0
+Information générale,Washington Group,Total,% ayant de la difficulté à marcher/monter des marches: Hommes de 18 à 64 ans,NA,2.1,0.5,0.6,2,1.2,0.3,0.7,0.4,0,0,0,5.1,1.3
+Information générale,Washington Group,Total,% ayant de la difficulté à marcher/monter des marches: Hommes de plus de 65 ans,NA,3,2.5,5,0,3.5,1.9,0,3.9,0,9,0,10.2,6.7
+Information générale,Washington Group,Total,% ayant de la difficulté à se concentrer/se souvenir: Femmes de 18 à 64 ans,NA,0,0,0.1,0,0.2,0.1,0,0.1,0,0.8,0.7,0,0
+Information générale,Washington Group,Total,% ayant de la difficulté à se concentrer/se souvenir: Femmes de plus de 65 ans,NA,4.6,0,0.6,0,0.1,0.7,0,0.7,0,0,0,0,0
+Information générale,Washington Group,Total,% ayant de la difficulté à se concentrer/se souvenir: Filles de 5 à 17 ans,NA,0.8,0,0,0,0.6,0,0,0.2,0,0,0,0,0.9
+Information générale,Washington Group,Total,% ayant de la difficulté à se concentrer/se souvenir: Filles de moins de 5 ans,NA,0,0,0,0,0,0,0,0,0,0,0,1.4,0
+Information générale,Washington Group,Total,% ayant de la difficulté à se concentrer/se souvenir: Garçons de 5 à 17 ans,NA,0.6,0.1,0,0.4,0.3,0,0,0.2,0,0,0,0.4,0.9
+Information générale,Washington Group,Total,% ayant de la difficulté à se concentrer/se souvenir: Garçons de moins de 5 ans,NA,0,0,0,0,0,0,0,0,0,0,0,0.9,0
+Information générale,Washington Group,Total,% ayant de la difficulté à se concentrer/se souvenir: Hommes de 18 à 64 ans,NA,0,0.1,0.2,0,0.3,0,0.7,0.2,0,0,0,0.5,0
+Information générale,Washington Group,Total,% ayant de la difficulté à se concentrer/se souvenir: Hommes de plus de 65 ans,NA,0,0,0.8,0,1.2,0.6,0,2,0,0,0,4.9,0
+Information générale,Washington Group,Total,% n'arrivant pas à prendre soin d’eux-mêmes: Femmes de 18 à 64 ans,NA,0,0,1,0,0,0,0,0,0,0,1,1,0
+Information générale,Washington Group,Total,% n'arrivant pas à prendre soin d’eux-mêmes: Femmes de plus de 65 ans,NA,11,4,7,0,1,3,0,9,0,0,4,0,0
+Information générale,Washington Group,Total,% n'arrivant pas à prendre soin d’eux-mêmes: Filles de 5 à 17 ans,NA,0,0,0,1,0,0,0,0,0,0,0,0,0
+Information générale,Washington Group,Total,% n'arrivant pas à prendre soin d’eux-mêmes: Filles de moins de 5 ans,NA,0,0,0,0,0,0,0,0,0,0,0,1,0
+Information générale,Washington Group,Total,% n'arrivant pas à prendre soin d’eux-mêmes: Garçons de 5 à 17 ans,NA,0,0,0,0,0,0,0,0,0,0,0,0,0
+Information générale,Washington Group,Total,% n'arrivant pas à prendre soin d’eux-mêmes: Garçons de moins de 5 ans,NA,0,0,0,0,0,0,0,0,0,0,0,1,0
+Information générale,Washington Group,Total,% n'arrivant pas à prendre soin d’eux-mêmes: Hommes de 18 à 64 ans,NA,2,0,0,0,0,0,0,0,0,0,0,2,1
+Information générale,Washington Group,Total,% n'arrivant pas à prendre soin d’eux-mêmes: Hommes de plus de 65 ans,NA,17,1,3,0,0,1,0,2,0,0,3,5,0
+Information générale,Washington Group,Total,Au moins une personne ayant des difficulté à marcher (Washington Group): N'y parvient par du tout,NA,NA,1,1,1,2,0,NA,0,NA,0,NA,1,NA
+Information générale,Washington Group,Total,Au moins une personne ayant des difficulté à marcher (Washington Group): Non aucune difficulté,NA,73,86,84,83,76,88,77,88,90,79,75,75,91
+Information générale,Washington Group,Total,Au moins une personne ayant des difficulté à marcher (Washington Group): Oui beaucoup de difficultés,NA,7,3,3,5,6,2,4,3,1,6,1,8,5
+Information générale,Washington Group,Total,Au moins une personne ayant des difficulté à marcher (Washington Group): Oui quelques difficultés,NA,20,10,12,11,17,10,19,9,9,15,24,16,5
+Information générale,Washington Group,Total,Au moins une personne ayant des difficultés à prendre soin d’elle-même (Washington Group): N'y parvient par du tout,NA,NA,1,0,NA,0,0,NA,0,NA,NA,NA,0,NA
+Information générale,Washington Group,Total,Au moins une personne ayant des difficultés à prendre soin d’elle-même (Washington Group): Non aucune difficulté,NA,86,93,91,85,94,94,93,94,98,96,94,92,97
+Information générale,Washington Group,Total,Au moins une personne ayant des difficultés à prendre soin d’elle-même (Washington Group): Oui beaucoup de difficultés,NA,6,2,3,2,1,1,0,3,0,NA,1,5,1
+Information générale,Washington Group,Total,Au moins une personne ayant des difficultés à prendre soin d’elle-même (Washington Group): Oui quelques difficultés,NA,7,5,5,12,5,5,7,3,2,4,5,3,2
+Information générale,Washington Group,Total,Au moins une personne ayant des difficultés à voir (Washington Group): N'y parvient par du tout,NA,2,1,2,NA,1,0,0,0,1,2,0,NA,NA
+Information générale,Washington Group,Total,Au moins une personne ayant des difficultés à voir (Washington Group): Non aucune difficulté,NA,81,88,85,76,78,86,78,88,85,84,75,86,83
+Information générale,Washington Group,Total,Au moins une personne ayant des difficultés à voir (Washington Group): Oui beaucoup de difficultés,NA,5,2,3,2,2,1,2,2,1,3,1,1,1
+Information générale,Washington Group,Total,Au moins une personne ayant des difficultés à voir (Washington Group): Oui quelques difficultés,NA,11,9,10,23,19,12,19,9,13,12,24,13,16
+Information générale,Washington Group,Total,Au moins une personne ayant des difficultés pour communiquer (Washington Group): N'y parvient par du tout,NA,NA,0,1,1,0,NA,NA,1,NA,NA,NA,1,NA
+Information générale,Washington Group,Total,Au moins une personne ayant des difficultés pour communiquer (Washington Group): Non aucune difficulté,NA,94,94,96,94,90,97,95,96,96,91,95,95,98
+Information générale,Washington Group,Total,Au moins une personne ayant des difficultés pour communiquer (Washington Group): Oui beaucoup de difficultés,NA,1,1,0,1,3,0,0,0,0,2,1,2,NA
+Information générale,Washington Group,Total,Au moins une personne ayant des difficultés pour communiquer (Washington Group): Oui quelques difficultés,NA,5,5,3,5,7,2,5,4,4,8,4,2,2
+Information générale,Washington Group,Total,Au moins une personne ayant des difficultés pour entendre (Washington Group): N'y parvient par du tout,NA,NA,1,0,NA,0,0,0,0,NA,NA,3,NA,NA
+Information générale,Washington Group,Total,Au moins une personne ayant des difficultés pour entendre (Washington Group): Non aucune difficulté,NA,79,91,90,87,82,91,94,90,92,79,77,88,91
+Information générale,Washington Group,Total,Au moins une personne ayant des difficultés pour entendre (Washington Group): Oui beaucoup de difficultés,NA,2,1,2,1,5,1,1,2,NA,3,NA,3,1
+Information générale,Washington Group,Total,Au moins une personne ayant des difficultés pour entendre (Washington Group): Oui quelques difficultés,NA,19,7,8,12,13,7,5,8,8,18,20,10,8
+Information générale,Washington Group,Total,Au moins une personne ayant des difficultés pour se concentrer (Washington Group): N'y parvient par du tout,NA,NA,0,NA,NA,0,NA,NA,NA,NA,NA,NA,NA,NA
+Information générale,Washington Group,Total,Au moins une personne ayant des difficultés pour se concentrer (Washington Group): Non aucune difficulté,NA,88,94,95,87,87,97,88,90,92,91,95,90,94
+Information générale,Washington Group,Total,Au moins une personne ayant des difficultés pour se concentrer (Washington Group): Oui beaucoup de difficultés,NA,3,NA,1,2,2,0,1,2,NA,1,1,2,1
+Information générale,Washington Group,Total,Au moins une personne ayant des difficultés pour se concentrer (Washington Group): Oui quelques difficultés,NA,9,6,4,12,11,3,11,8,8,7,4,7,6
+Information générale,Washington Group,Total,Nombre de personnes ayant des difficultés à entendre (Washington Group),Sous-ensemble de donnée,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Information générale,Washington Group,Total,Nombre de personnes ayant des difficultés à marcher (Washington Group),Sous-ensemble de donnée,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Information générale,Washington Group,Total,Nombre de personnes ayant des difficultés pour communiquer (Washington Group),Sous-ensemble de donnée,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Information générale,Washington Group,Total,Nombre de personnes ayant des difficultés pour se concentrer (Washington Group),Sous-ensemble de donnée,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Information générale,Washington Group,Total,Nombre de personnes ayant du mal à prendre soin d’elles-mêmes (Washington Group),Sous-ensemble de donnée,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Education,Scolarisation,Total,Pourcentage Aucune instruction: Enfants de 13 à 17 ans,NA,26,46,26,11,26,23,25,31,18,26,12,20,11
+Education,Scolarisation,Total,Pourcentage Aucune instruction: Enfants de 3 à 5 ans,NA,88,90,81,54,92,67,67,91,79,97,32,80,70
+Education,Scolarisation,Total,Pourcentage Aucune instruction: Enfants de 6 à 12 ans,NA,29,47,30,12,29,24,18,40,30,32,13,23,7
+Education,Scolarisation,Total,Pourcentage Aucune instruction: Filles de 13 à 17 ans,NA,31,50,27,16,26,25,30,33,24,24,14,21,14
+Education,Scolarisation,Total,Pourcentage Aucune instruction: Filles de 3 à 5 ans,NA,92,90,82,59,93,62,74,93,77,96,43,82,64
+Education,Scolarisation,Total,Pourcentage Aucune instruction: Filles de 6 à 12 ans,NA,30,48,33,11,33,26,18,41,23,32,10,29,9
+Education,Scolarisation,Total,Pourcentage Aucune instruction: Garçons de 13 à 17 ans,NA,19,42,25,8,26,20,20,29,11,29,8,18,8
+Education,Scolarisation,Total,Pourcentage Aucune instruction: Garçons de 3 à 5 ans,NA,83,89,81,50,91,72,61,90,82,98,14,79,78
+Education,Scolarisation,Total,Pourcentage Aucune instruction: Garçons de 6 à 12 ans,NA,28,46,28,14,26,22,18,38,36,33,15,18,5
+Education,Scolarisation,Total,Pourcentage des enfants non scolarisés,NA,35,60,43,24,37,31,34,43,36,43,19,31,21
+Education,Scolarisation,Total,Pourcentage des enfants scolarisés,NA,54,28,45,69,55,55,54,46,52,51,70,54,75
+Education,Scolarisation,Total,Pourcentage Éducation formelle: Enfants de 13 à 17 ans,NA,67,37,58,84,69,70,66,64,68,60,82,70,82
+Education,Scolarisation,Total,Pourcentage Éducation formelle: Enfants de 3 à 5 ans,NA,5,4,6,14,5,4,13,5,5,2,11,5,27
+Education,Scolarisation,Total,Pourcentage Éducation formelle: Enfants de 6 à 12 ans,NA,66,36,58,84,68,69,73,57,61,64,83,71,91
+Education,Scolarisation,Total,Pourcentage Éducation formelle: Filles de 13 à 17 ans,NA,61,36,57,82,71,68,67,61,62,73,82,70,80
+Education,Scolarisation,Total,Pourcentage Éducation formelle: Filles de 3 à 5 ans,NA,2,4,5,7,4,5,12,5,4,4,7,5,33
+Education,Scolarisation,Total,Pourcentage Éducation formelle: Filles de 6 à 12 ans,NA,64,37,57,83,66,68,74,57,67,64,83,68,89
+Education,Scolarisation,Total,Pourcentage Éducation formelle: Garçons de 13 à 17 ans,NA,74,39,59,86,68,71,66,66,74,46,82,71,84
+Education,Scolarisation,Total,Pourcentage Éducation formelle: Garçons de 3 à 5 ans,NA,8,5,7,20,6,4,14,6,6,0,17,5,18
+Education,Scolarisation,Total,Pourcentage Éducation formelle: Garçons de 6 à 12 ans,NA,69,34,60,84,70,70,71,58,56,64,83,73,93
+Education,Scolarisation,Total,Pourcentage Éducation informelle: Enfants de 13 à 17 ans,NA,1,11,5,1,4,3,3,1,8,10,1,3,1
+Education,Scolarisation,Total,Pourcentage Éducation informelle: Enfants de 3 à 5 ans,NA,3,5,12,12,1,4,1,2,0,1,21,0,0
+Education,Scolarisation,Total,Pourcentage Éducation informelle: Enfants de 6 à 12 ans,NA,3,10,6,1,2,2,2,1,4,3,1,0,0
+Education,Scolarisation,Total,Pourcentage Éducation informelle: Filles de 13 à 17 ans,NA,2,10,5,0,3,3,1,1,8,3,0,0,2
+Education,Scolarisation,Total,Pourcentage Éducation informelle: Filles de 3 à 5 ans,NA,5,5,12,14,1,6,1,1,0,0,13,0,0
+Education,Scolarisation,Total,Pourcentage Éducation informelle: Filles de 6 à 12 ans,NA,5,9,5,3,1,2,3,1,3,4,1,0,0
+Education,Scolarisation,Total,Pourcentage Éducation informelle: Garçons de 13 à 17 ans,NA,0,11,5,2,5,3,6,1,8,17,2,6,0
+Education,Scolarisation,Total,Pourcentage Éducation informelle: Garçons de 3 à 5 ans,NA,0,5,12,10,1,2,1,3,0,2,33,0,0
+Education,Scolarisation,Total,Pourcentage Éducation informelle: Garçons de 6 à 12 ans,NA,1,11,7,0,3,2,1,1,6,3,0,1,0
+Education,Scolarisation,Total,Pourcentage Éducation non formelle: Enfants de 13 à 17 ans,NA,0,4,2,2,0,2,2,4,1,0,4,4,3
+Education,Scolarisation,Total,Pourcentage Éducation non formelle: Enfants de 3 à 5 ans,NA,0,1,0,0,0,0,0,1,0,0,1,0,2
+Education,Scolarisation,Total,Pourcentage Éducation non formelle: Enfants de 6 à 12 ans,NA,1,4,0,0,0,1,1,2,0,0,0,0,0
+Education,Scolarisation,Total,Pourcentage Éducation non formelle: Filles de 13 à 17 ans,NA,0,3,2,3,0,2,0,4,1,0,1,5,0
+Education,Scolarisation,Total,Pourcentage Éducation non formelle: Filles de 3 à 5 ans,NA,0,0,0,0,0,0,0,1,0,0,0,0,0
+Education,Scolarisation,Total,Pourcentage Éducation non formelle: Filles de 6 à 12 ans,NA,0,3,0,1,0,0,0,1,0,0,0,0,0
+Education,Scolarisation,Total,Pourcentage Éducation non formelle: Garçons de 13 à 17 ans,NA,0,5,3,2,0,1,5,3,1,0,7,2,6
+Education,Scolarisation,Total,Pourcentage Éducation non formelle: Garçons de 3 à 5 ans,NA,0,1,0,0,0,1,0,1,0,0,2,0,4
+Education,Scolarisation,Total,Pourcentage Éducation non formelle: Garçons de 6 à 12 ans,NA,1,4,0,0,0,1,2,2,0,0,0,0,0
+Education,Barrières,Total,Barrières à l’éducation: Aucune barrière,Sous-ensemble de donnée,56,24,54,45,27,42,38,45,31,50,16,39,56
+Education,Barrières,Total,Barrières à l’éducation: Autre,Sous-ensemble de donnée,15,16,5,35,25,18,11,13,14,9,47,11,23
+Education,Barrières,Total,"Barrières à l’éducation: Des groupes armés occupent l'école (militaires, G)groupes armés non étatiques",Sous-ensemble de donnée,NA,4,NA,NA,0,0,NA,0,NA,NA,NA,NA,NA
+Education,Barrières,Total,Barrières à l’éducation: Il n'y a pas suffisamment d'enseignants,Sous-ensemble de donnée,NA,0,NA,NA,1,1,NA,NA,NA,NA,NA,NA,NA
+Education,Barrières,Total,Barrières à l’éducation: Je ne sais pas,Sous-ensemble de donnée,2,0,0,2,NA,1,NA,NA,NA,NA,NA,NA,NA
+Education,Barrières,Total,Barrières à l’éducation: Je préfère ne pas répondre,Sous-ensemble de donnée,NA,NA,NA,NA,NA,NA,NA,0,NA,1,NA,NA,NA
+Education,Barrières,Total,Barrières à l’éducation: L'école n'est pas fonctionnelle (destruction),Sous-ensemble de donnée,0,17,7,NA,6,1,0,12,NA,0,NA,NA,NA
+Education,Barrières,Total,Barrières à l’éducation: L'école n'est pas une priorité,Sous-ensemble de donnée,NA,2,0,NA,6,1,6,1,0,1,1,NA,2
+Education,Barrières,Total,Barrières à l’éducation: L'école ne dispose pas de latrine adéquate (latrine non fonctionnelle ou pas de latrine du tout),Sous-ensemble de donnée,NA,0,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Education,Barrières,Total,Barrières à l’éducation: L'école se situe trop loin,Sous-ensemble de donnée,0,1,1,NA,1,1,1,3,2,0,5,5,NA
+Education,Barrières,Total,Barrières à l’éducation: L'enfant ne parle pas la langue d'enseignement,Sous-ensemble de donnée,NA,NA,NA,NA,NA,0,NA,NA,NA,NA,NA,NA,NA
+Education,Barrières,Total,Barrières à l’éducation: L'enfant s'est marié avant la fin du cycle scolaire,Sous-ensemble de donnée,0,NA,NA,NA,NA,0,NA,NA,0,NA,NA,NA,NA
+Education,Barrières,Total,Barrières à l’éducation: L'insécurité sur le trajet de l'école,Sous-ensemble de donnée,0,5,0,NA,3,2,0,0,0,0,NA,NA,NA
+Education,Barrières,Total,"Barrières à l’éducation: L'insécurité, nos enfants risquent d'être enlevés",Sous-ensemble de donnée,7,18,0,NA,5,5,0,5,0,0,NA,NA,NA
+Education,Barrières,Total,Barrières à l’éducation: Le mode de vie nomade ne permet pas une fréquentation régulière,Sous-ensemble de donnée,0,1,1,NA,0,0,6,0,NA,NA,1,NA,NA
+Education,Barrières,Total,Barrières à l’éducation: Le ou les enfants sont porteurs d'un handicap que l'école ne peut pas prendre en charge,Sous-ensemble de donnée,NA,1,0,NA,1,1,NA,0,NA,NA,10,1,NA
+Education,Barrières,Total,Barrières à l’éducation: Les classes de l'école sont pleines et ne peuvent accueillir plus d'élèves,Sous-ensemble de donnée,NA,0,0,NA,2,2,0,0,NA,NA,NA,2,NA
+Education,Barrières,Total,Barrières à l’éducation: Les enfants doivent mendier,Sous-ensemble de donnée,NA,0,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Education,Barrières,Total,Barrières à l’éducation: Les enfants doivent travailler à la maison (corvée),Sous-ensemble de donnée,4,0,0,NA,0,1,7,1,1,2,NA,NA,NA
+Education,Barrières,Total,Barrières à l’éducation: Les enfants doivent travailler aux champs pendant la saison des plantations ou récoltes.,Sous-ensemble de donnée,0,0,1,NA,0,0,NA,1,5,NA,NA,2,NA
+Education,Barrières,Total,Barrières à l’éducation: Les enfants ont été hors de l'école trop longtemps pour y retourner,Sous-ensemble de donnée,NA,1,1,NA,0,4,1,1,4,0,1,2,NA
+Education,Barrières,Total,Barrières à l’éducation: Les enfants travaille en dehors de la maison,Sous-ensemble de donnée,0,1,NA,NA,0,1,NA,0,1,NA,3,1,NA
+Education,Barrières,Total,Barrières à l’éducation: Ne peux pas assumer les frais de scolarité,Sous-ensemble de donnée,14,8,28,19,23,17,29,17,40,36,16,37,19
+Education,Barrières,Total,Barrières à l’éducation: Nous ne sommes pas d'accord avec les enseignements de l'école,Sous-ensemble de donnée,1,0,NA,NA,1,0,NA,0,2,NA,NA,NA,NA
+BNA/Abri,Abri,Total,Abri adapté: Je ne sais pas / préfère ne pas répondre,Sous-ensemble de donnée,3,NA,1,NA,NA,NA,NA,NA,NA,7,4,NA,NA
+BNA/Abri,Abri,Total,Abri adapté: Non,Sous-ensemble de donnée,59,50,46,53,44,44,68,51,67,57,54,69,27
+BNA/Abri,Abri,Total,Abri adapté: Oui,Sous-ensemble de donnée,38,50,53,47,56,56,32,49,33,36,42,31,73
+BNA/Abri,Abri,Total,Conditions adéquates pour auto-isolement: Je ne sais pas / préfère ne pas répondre,Sous-ensemble de donnée,4,NA,1,0,NA,1,1,NA,NA,4,1,1,2
+BNA/Abri,Abri,Total,Conditions adéquates pour auto-isolement: Non,Sous-ensemble de donnée,69,96,90,87,83,86,81,98,91,76,89,92,69
+BNA/Abri,Abri,Total,Conditions adéquates pour auto-isolement: Oui,Sous-ensemble de donnée,27,4,10,13,17,13,18,2,9,20,10,8,29
+BNA/Abri,Abri,Total,"État abri: Bon état - porte, fenêtre et toit en bon état",Sous-ensemble de donnée,72,65,81,80,86,83,96,72,93,74,67,94,92
+BNA/Abri,Abri,Total,État abri: Complètement détruit,Sous-ensemble de donnée,2,0,NA,3,NA,1,0,0,NA,NA,5,NA,NA
+BNA/Abri,Abri,Total,"État abri: Dégâts lourd - plus de portes, fenêtre et toit",Sous-ensemble de donnée,0,1,1,NA,NA,0,NA,5,1,NA,2,NA,NA
+BNA/Abri,Abri,Total,État abri: Endommagé - pas de portes ou fenêtre mais présence de toit,Sous-ensemble de donnée,27,34,18,17,14,16,4,23,6,26,25,6,8
+BNA/Abri,Abri,Total,Problème abri: Aucun problème,Sous-ensemble de donnée,35,13,26,15,30,40,39,21,46,35,14,48,55
+BNA/Abri,Abri,Total,Problème abri: Autre,Sous-ensemble de donnée,1,0,0,0,0,0,0,0,0,0,0,0,0
+BNA/Abri,Abri,Total,Problème abri: Débris ou ordures visibles autour de la maison (ne pouvant pas être retirées),Sous-ensemble de donnée,10,19,10,25,11,9,13,12,11,4,21,8,5
+BNA/Abri,Abri,Total,Problème abri: Débris ou ordures visibles autour de la maison (pouvant être retirées),Sous-ensemble de donnée,18,4,9,29,13,14,5,15,4,2,26,5,7
+BNA/Abri,Abri,Total,Problème abri: Fuites d'eau lors de pluies fortes seulement,Sous-ensemble de donnée,57,81,65,67,64,48,49,71,51,64,72,47,43
+BNA/Abri,Abri,Total,Problème abri: Fuites d'eau lors de pluies légères,Sous-ensemble de donnée,32,52,37,31,40,23,22,42,18,37,41,20,18
+BNA/Abri,Abri,Total,Problème abri: Je ne sais pas/Je ne souhaite pas répondre,Sous-ensemble de donnée,0,0,0,0,0,0,0,0,0,0,0,0,0
+BNA/Abri,Abri,Total,Problème abri: Problèmes d'isolation faisant en sorte que les membres du ménage ont froid,Sous-ensemble de donnée,20,7,13,19,8,6,10,20,6,23,22,6,8
+BNA/Abri,Abri,Total,Problème abri: Problèmes de ventilation dû à un espace restreint,Sous-ensemble de donnée,10,11,13,10,13,10,10,17,4,15,11,3,11
+BNA/Abri,Abri,Total,Problème abri: Problèmes structurels liés à des inondations,Sous-ensemble de donnée,10,19,10,25,11,9,13,12,11,4,21,8,5
+BNA/Abri,Abri,Total,Situation ménage logement: Famille d'accueil (logement partagé),Sous-ensemble de donnée,0,0,2,NA,1,0,2,0,0,0,NA,2,NA
+BNA/Abri,Abri,Total,Situation ménage logement: Location,Sous-ensemble de donnée,6,19,5,7,6,9,12,6,15,9,3,7,20
+BNA/Abri,Abri,Total,Situation ménage logement: Logement prêtée,Sous-ensemble de donnée,2,9,13,3,4,2,4,3,1,1,1,1,6
+BNA/Abri,Abri,Total,Situation ménage logement: Occupation (Sans accord du propriétaire),Sous-ensemble de donnée,NA,0,1,3,NA,1,6,0,NA,0,NA,1,NA
+BNA/Abri,Abri,Total,Situation ménage logement: Propriétaire,Sous-ensemble de donnée,92,71,80,86,89,88,76,91,83,89,95,88,74
+BNA/Abri,Abri,Total,Type abri communautaire: Autres bâtiments qui offrent des services publics de basse,Sous-ensemble de donnée,34,NA,NA,NA,100,NA,NA,NA,NA,NA,NA,NA,NA
+BNA/Abri,Abri,Total,Type abri communautaire: École,Sous-ensemble de donnée,66,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+BNA/Abri,Abri,Total,Type abri logement: En banco,Sous-ensemble de donnée,42,85,76,71,86,79,63,75,60,67,81,77,32
+BNA/Abri,Abri,Total,Type abri logement: En bois/ en planche,Sous-ensemble de donnée,NA,0,NA,NA,0,0,NA,0,NA,NA,NA,NA,NA
+BNA/Abri,Abri,Total,Type abri logement: En dur,Sous-ensemble de donnée,56,13,22,29,13,20,37,17,40,33,19,23,68
+BNA/Abri,Abri,Total,Type abri logement: En paille,Sous-ensemble de donnée,3,1,2,NA,0,0,NA,9,NA,0,NA,NA,NA
+BNA/Abri,Abri,Total,Type d’abri: Abri d'urgence (recu lors d'une distribution),NA,0,2,10,NA,0,0,0,0,0,NA,NA,NA,NA
+BNA/Abri,Abri,Total,Type d’abri: Abris de fortune,NA,0,6,3,3,0,2,8,2,3,1,NA,NA,NA
+BNA/Abri,Abri,Total,Type d’abri: Bâtiment inachevé,NA,1,1,0,3,0,1,NA,0,0,0,1,NA,NA
+BNA/Abri,Abri,Total,Type d’abri: Bâtiments communautaires,NA,0,0,0,NA,0,0,NA,NA,NA,NA,NA,NA,NA
+BNA/Abri,Abri,Total,"Type d’abri: Constructions non destinées au logement (Hangars, dépôts, constructions auxiliaires des fermes, …)",NA,12,0,1,NA,0,0,0,0,0,0,NA,NA,NA
+BNA/Abri,Abri,Total,Type d’abri: Logement/ Maison construite,NA,87,90,86,94,99,96,92,98,97,99,99,100,100
+BNA/Abri,Abri,Total,Type d’abri: Pas d'abris,NA,NA,0,NA,NA,NA,NA,0,0,NA,NA,NA,NA,NA
+BNA/Abri,BNA,Total,BNA les plus demandés: Articles d'hygiène pour femmes,NA,19,8,9,10,13,12,5,15,5,13,19,2,12
+BNA/Abri,BNA,Total,BNA les plus demandés: Articles pour les soins des bébés,NA,15,22,14,15,20,19,18,18,14,10,25,17,15
+BNA/Abri,BNA,Total,BNA les plus demandés: Aucun,NA,20,6,7,22,13,25,23,15,15,14,19,12,33
+BNA/Abri,BNA,Total,BNA les plus demandés: Autre,NA,0,1,0,1,0,1,6,0,0,0,0,0,0
+BNA/Abri,BNA,Total,BNA les plus demandés: Bidon,NA,7,14,18,4,7,7,4,22,10,8,5,5,3
+BNA/Abri,BNA,Total,BNA les plus demandés: Casserole,NA,42,38,39,33,37,23,28,37,31,48,24,33,37
+BNA/Abri,BNA,Total,BNA les plus demandés: Corde,NA,1,1,0,0,1,5,1,1,1,0,2,1,0
+BNA/Abri,BNA,Total,BNA les plus demandés: Couverture,NA,41,59,60,45,51,36,38,39,50,54,46,47,38
+BNA/Abri,BNA,Total,BNA les plus demandés: Je ne sais pas,NA,0,0,0,0,0,0,0,0,0,0,0,0,0
+BNA/Abri,BNA,Total,BNA les plus demandés: Moustiquaire,NA,30,42,36,39,34,30,37,30,35,27,29,41,17
+BNA/Abri,BNA,Total,BNA les plus demandés: Natte de couchage,NA,45,56,59,44,40,37,28,40,41,48,57,46,24
+BNA/Abri,BNA,Total,BNA les plus demandés: Savon,NA,27,25,26,27,45,34,36,30,41,28,22,47,31
+BNA/Abri,BNA,Total,BNA les plus demandés: Seau,NA,10,16,14,15,11,14,18,19,25,15,13,18,12
+Santé,Naissance,Total,Lieu naissance :: Autre,NA,0,0,0,0,0,0,0,0,0,0,0,0,0
+Santé,Naissance,Total,Lieu naissance :: Centre De Santé,NA,100,88,96,100,100,98,100,93,100,98,94,81,100
+Santé,Naissance,Total,Lieu naissance :: Maison,NA,0,12,4,0,2,2,0,7,0,2,0,19,0
+Santé,Naissance,Total,Ménage ayant eu une naissance dans la dernière année: Je ne sais pas / préfère ne pas répondre,Sous-ensemble de donnée,NA,NA,NA,NA,NA,0,NA,NA,NA,NA,NA,NA,NA
+Santé,Naissance,Total,Ménage ayant eu une naissance dans la dernière année: Non,Sous-ensemble de donnée,23,27,21,22,32,28,24,20,22,40,21,34,25
+Santé,Naissance,Total,Ménage ayant eu une naissance dans la dernière année: Oui,Sous-ensemble de donnée,77,73,79,78,68,72,76,80,78,60,79,66,75
+Santé,Naissance,Total,Raison accouchement à domicile :: Assistance Personnel De Santé À Domicile,NA,0,0,0,0,0,0,0,0,0,0,0,0,0
+Santé,Naissance,Total,Raison accouchement à domicile :: Centre De Santé/Maternité Fermé,NA,0,3,1,0,1,1,0,3,0,0,0,0,0
+Santé,Naissance,Total,Raison accouchement à domicile :: Centre De Santé/Maternité Financièrement Inaccessible,NA,0,0,0,0,0,0,0,0,0,0,0,0,0
+Santé,Naissance,Total,Raison accouchement à domicile :: Centre De Santé/Maternité Surpeuplé,NA,0,0,0,0,0,0,0,0,0,0,0,0,0
+Santé,Naissance,Total,Raison accouchement à domicile :: Coutumes/Tradition/Pas Nécessaire D’Aller Au Centre De Santé/Maternité,NA,0,0,0,0,0,0,0,0,0,0,0,0,0
+Santé,Naissance,Total,Raison accouchement à domicile :: Maternité/Centre De Santé Par Sûr,NA,0,5,2,0,0,1,0,1,0,0,0,3,0
+Santé,Naissance,Total,Raison accouchement à domicile :: Ne Sait Pas / Ne Veut Pas Répondre,NA,0,0,0,0,0,0,0,0,0,0,0,0,0
+Santé,Naissance,Total,Raison accouchement à domicile :: Physiquement Impossible Pour La Mère De Se Rendre Au Centre De Santé/Maternité,NA,0,3,1,0,0,0,0,3,0,2,0,16,0
+Santé,Services,Total,Accès service de santé: Je ne sais pas / préfère ne pas répondre,NA,0,NA,NA,NA,0,NA,NA,NA,0,NA,NA,1,NA
+Santé,Services,Total,Accès service de santé: Non,NA,15,5,3,19,6,20,18,8,15,14,15,21,9
+Santé,Services,Total,Accès service de santé: Oui,NA,85,95,97,81,94,80,82,92,84,86,85,78,91
+Santé,Services,Total,Raison manque accès service de santé: Autre,Sous-ensemble de donnée,NA,NA,NA,9,3,NA,NA,NA,NA,NA,NA,NA,NA
+Santé,Services,Total,Raison manque accès service de santé: Il n'y a jamais eu d'infrastructures de santé à proximité,Sous-ensemble de donnée,27,NA,21,64,31,33,55,63,39,18,60,49,17
+Santé,Services,Total,Raison manque accès service de santé: Il n'y a pas de médicaments disponibles,Sous-ensemble de donnée,NA,3,NA,NA,NA,4,NA,NA,NA,NA,NA,4,NA
+Santé,Services,Total,Raison manque accès service de santé: Il n'y a pas de travailleurs de santé dans la zone,Sous-ensemble de donnée,NA,1,NA,NA,11,7,14,2,3,NA,NA,15,NA
+Santé,Services,Total,Raison manque accès service de santé: Je ne sais pas / ne souhaite pas répondre,Sous-ensemble de donnée,NA,NA,NA,NA,NA,NA,0,3,11,NA,NA,2,NA
+Santé,Services,Total,Raison manque accès service de santé: L'insécurité est trop forte dans la zone,Sous-ensemble de donnée,NA,77,NA,NA,35,8,NA,9,3,8,NA,NA,NA
+Santé,Services,Total,Raison manque accès service de santé: Le ménage estime que la qualité des soins fournis n’est pas suffisante,Sous-ensemble de donnée,NA,NA,NA,7,NA,2,6,NA,NA,2,NA,NA,NA
+Santé,Services,Total,Raison manque accès service de santé: Le ménage n’a pas les ressources financières pour s’octroyer des soins médicaux,Sous-ensemble de donnée,0,NA,NA,NA,3,5,0,0,NA,NA,NA,NA,NA
+Santé,Services,Total,Raison manque accès service de santé: Les infrastructures ont été détruites durant les combats,Sous-ensemble de donnée,NA,10,NA,NA,NA,1,0,NA,3,NA,NA,NA,NA
+Santé,Services,Total,"Raison manque accès service de santé: Les infrastructures ont été détruites par des catastrophes naturelles (inondation, incendie, etc.)",Sous-ensemble de donnée,7,NA,NA,NA,0,NA,NA,NA,NA,NA,NA,NA,NA
+Santé,Services,Total,Raison manque accès service de santé: Les infrastructures sont trop éloignées,Sous-ensemble de donnée,66,10,79,20,17,42,25,22,40,72,40,30,83
+Santé,Services,Total,Temps nécessaire pour aller au service de santé le plus proche: Entre 15 et moins 30 minutes,Sous-ensemble de donnée,47,37,33,30,28,31,27,25,31,58,30,22,62
+Santé,Services,Total,Temps nécessaire pour aller au service de santé le plus proche: Entre 30 minutes et moins d'une heure,Sous-ensemble de donnée,24,25,28,22,28,24,27,32,18,17,20,34,14
+Santé,Services,Total,Temps nécessaire pour aller au service de santé le plus proche: Entre une heure moins de 3 heures,Sous-ensemble de donnée,8,11,12,10,17,14,9,18,7,5,13,8,6
+Santé,Services,Total,Temps nécessaire pour aller au service de santé le plus proche: Moins de 15 minutes,Sous-ensemble de donnée,19,26,25,36,25,27,37,21,43,20,35,34,18
+Santé,Services,Total,Temps nécessaire pour aller au service de santé le plus proche: Plus de 3h,Sous-ensemble de donnée,2,1,2,1,2,2,0,4,2,NA,2,3,NA
+Santé,Malade de moins de 5 ans,Total,Enfants de moins de 5 ans avec :: Autre,NA,2,3,3,1,4,4,6,3,4,2,0,6,4
+Santé,Malade de moins de 5 ans,Total,Enfants de moins de 5 ans avec :: Diarrhée,NA,17,12,9,4,11,6,1,15,4,14,9,11,12
+Santé,Malade de moins de 5 ans,Total,Enfants de moins de 5 ans avec :: Infections respiratoires,NA,0,4,1,4,3,1,1,6,0,0,1,1,1
+Santé,Malade de moins de 5 ans,Total,Enfants de moins de 5 ans avec :: Ne sait pas,NA,0,0,0,0,0,0,2,0,0,1,0,1,1
+Santé,Malade de moins de 5 ans,Total,Enfants de moins de 5 ans avec :: Paludisme,NA,25,33,21,33,30,26,18,47,30,31,38,21,19
+Santé,Décès,Total,% de décès: Femmes de 18 à 64 ans,NA,0,1,1,0,1,0,0,0,0,0,0,0,1
+Santé,Décès,Total,% de décès: Femmes de plus de 65 ans,NA,2,8,4,0,3,3,0,5,0,0,0,0,0
+Santé,Décès,Total,% de décès: Filles de 5 à 17 ans,NA,0,0,0,0,0,0,0,0,0,0,0,0,0
+Santé,Décès,Total,% de décès: Filles de moins de 5 ans,NA,3,3,1,1,2,2,0,4,1,0,0,3,0
+Santé,Décès,Total,% de décès: Garçons de 5 à 17 ans,NA,0,0,0,0,0,0,0,0,0,0,0,0,0
+Santé,Décès,Total,% de décès: Garçons de moins de 5 ans,NA,2,3,1,1,2,1,0,4,1,0,0,2,0
+Santé,Décès,Total,% de décès: Hommes de 18 à 64 ans,NA,1,1,2,1,1,1,0,1,0,0,0,1,0
+Santé,Décès,Total,% de décès: Hommes de plus de 65 ans,NA,0,4,4,12,4,5,0,21,6,0,3,11,0
+Santé,Décès,Total,Décès dans le ménage durant 30 derniers jours: Non,NA,98,94,95,98,94,98,99,94,98,100,100,97,99
+Santé,Décès,Total,Décès dans le ménage durant 30 derniers jours: Oui,NA,2,6,5,2,6,2,1,6,2,0,NA,3,1
+Santé,Décès,Total,Nombre de décès dans les 30 derniers jours,Sous-ensemble de donnée,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Santé,Décès,Total,Raison du décès:: Accident De La Route,NA,0,1,7,0,0,0,0,5,0,0,NaN,24,0
+Santé,Décès,Total,Raison du décès:: Accident De Travail,NA,30,8,5,0,5,0,0,1,0,0,NaN,0,0
+Santé,Décès,Total,Raison du décès:: Accident/Conflit,NA,1,9,3,0,1,0,0,7,0,100,NaN,0,0
+Santé,Décès,Total,Raison du décès:: Autre,NA,0,0,5,0,2,2,45,0,0,0,NaN,11,0
+Santé,Décès,Total,Raison du décès:: Autre Maladie,NA,32,52,63,40,54,77,39,43,25,0,Inf,65,100
+Santé,Décès,Total,Raison du décès:: Catastrophe Naturelle,NA,1,0,0,0,0,0,0,1,0,0,NaN,0,0
+Santé,Décès,Total,Raison du décès:: Cause Naturelle,NA,0,14,5,41,14,5,0,19,25,0,NaN,0,0
+Santé,Décès,Total,Raison du décès:: Diarrhée,NA,36,11,4,20,6,8,16,12,51,0,NaN,0,0
+Santé,Décès,Total,Raison du décès:: En Couche,NA,0,0,3,0,0,0,0,1,0,0,NaN,0,0
+Santé,Décès,Total,Raison du décès:: Faim,NA,0,0,0,0,0,0,0,2,0,0,NaN,0,0
+Santé,Décès,Total,Raison du décès:: Morsure,NA,0,5,1,0,0,3,0,6,0,0,NaN,0,0
+Santé,Décès,Total,Raison du décès:: Problèmes Respiratoires,NA,0,1,0,0,18,5,0,5,0,0,NaN,0,0
+Santé,Nutrition,Total,Accès centres nutritionnels: Aucun service nutritionnel,NA,82,18,19,83,12,73,88,51,83,88,79,87,88
+Santé,Nutrition,Total,Accès centres nutritionnels: Des services mobiles de nutrition,NA,3,13,11,3,20,5,1,7,1,0,5,4,0
+Santé,Nutrition,Total,Accès centres nutritionnels: Un centre qui offre des services nutritionnels,NA,18,79,79,14,86,24,11,49,16,12,17,12,12
+Santé,Nutrition,Total,Formation d’un membre au dépistage du MUAC: Je ne sais pas / préfère ne pas répondre,NA,8,1,1,5,0,1,2,NA,0,11,4,3,2
+Santé,Nutrition,Total,Formation d’un membre au dépistage du MUAC: Non,NA,82,80,84,85,76,92,97,86,100,85,95,93,91
+Santé,Nutrition,Total,Formation d’un membre au dépistage du MUAC: Oui,NA,10,19,15,10,23,7,0,14,0,4,1,4,6
+Santé,Nutrition,Total,Possède un ruban MUAC: Je ne sais pas / préfère ne pas répondre,NA,3,1,0,2,1,1,2,0,1,5,2,NA,3
+Santé,Nutrition,Total,Possède un ruban MUAC: Non,NA,94,90,90,95,90,96,98,84,99,92,97,97,95
+Santé,Nutrition,Total,Possède un ruban MUAC: Oui,NA,3,9,10,3,10,3,0,16,0,3,1,3,2
+Santé,Nutrition,Total,Services nutritionnels disponibles: Aucun,Sous-ensemble de donnée,0,0,0,13,0,1,0,0,0,26,0,0,0
+Santé,Nutrition,Total,Services nutritionnels disponibles: Autre,Sous-ensemble de donnée,0,0,0,1,0,0,10,0,0,0,0,0,0
+Santé,Nutrition,Total,Services nutritionnels disponibles: Groupe de soutien pour les femmes enceintes et les mères allaitantes,Sous-ensemble de donnée,3,6,16,5,19,16,0,34,0,0,0,0,2
+Santé,Nutrition,Total,Services nutritionnels disponibles: Ne sait pas,Sous-ensemble de donnée,4,4,1,2,1,1,0,0,1,3,4,0,7
+Santé,Nutrition,Total,Services nutritionnels disponibles: Présence d'une personne capable de faire le dépistage précoce de la malnutrition à l'aide d'un ruban,Sous-ensemble de donnée,25,26,72,37,56,18,0,60,7,0,33,0,0
+Santé,Nutrition,Total,Services nutritionnels disponibles: Prise en charge de la malnutrition modérée des enfants,Sous-ensemble de donnée,64,54,79,64,80,68,88,90,53,18,72,98,51
+Santé,Nutrition,Total,Services nutritionnels disponibles: Prise en charge de la malnutrition modérée des femmes enceintes et allaitantes,Sous-ensemble de donnée,26,24,62,7,56,7,3,79,4,9,11,0,20
+Santé,Nutrition,Total,Services nutritionnels disponibles: Prise en charge de la malnutrition sévère des enfants,Sous-ensemble de donnée,36,78,59,47,70,63,58,60,72,51,38,49,75
+Santé,Nutrition,Total,Services nutritionnels disponibles: Prise en charge de la malnutrition sévère des femmes enceintes et allaitantes,Sous-ensemble de donnée,18,28,45,21,49,28,31,51,4,9,21,25,7
+Santé,Nutrition,Total,Temps pour accéder au service nutritionnels: Moins de 15 minutes,Sous-ensemble de donnée,27,27,21,28,28,34,59,16,29,17,42,61,7
+Santé,Nutrition,Total,Temps pour accéder au service nutritionnels: Moins de 1h,Sous-ensemble de donnée,16,25,25,29,24,22,10,28,17,31,18,26,51
+Santé,Nutrition,Total,Temps pour accéder au service nutritionnels: Moins de 30 minutes,Sous-ensemble de donnée,41,37,43,35,28,26,27,35,46,18,27,NA,30
+Santé,Nutrition,Total,Temps pour accéder au service nutritionnels: Moins de 3h,Sous-ensemble de donnée,17,10,9,9,17,15,4,17,8,33,13,13,13
+Santé,Nutrition,Total,Temps pour accéder au service nutritionnels: Plus de 3h,Sous-ensemble de donnée,0,1,1,NA,3,3,NA,4,NA,NA,NA,NA,NA
+Sécurité alimentaire,Revenus,Total,Deuxième source de revenu: Agriculture ou maraîchage et vente des produits d'agriculture,Sous-ensemble de donnée,14,8,9,8,15,12,11,12,15,9,3,7,3
+Sécurité alimentaire,Revenus,Total,Deuxième source de revenu: Aucune,Sous-ensemble de donnée,28,25,33,12,20,20,20,29,31,28,19,31,54
+Sécurité alimentaire,Revenus,Total,Deuxième source de revenu: Autre (à préciser),Sous-ensemble de donnée,NA,NA,NA,NA,NA,0,2,NA,NA,NA,NA,NA,NA
+Sécurité alimentaire,Revenus,Total,Deuxième source de revenu: Commerce,Sous-ensemble de donnée,9,2,4,9,1,5,4,2,5,1,6,8,7
+Sécurité alimentaire,Revenus,Total,"Deuxième source de revenu: Élevage et vente de produits d’élevage et de bétail (lait, œufs, volailles)",Sous-ensemble de donnée,24,14,26,36,27,31,11,16,16,33,37,35,2
+Sécurité alimentaire,Revenus,Total,Deuxième source de revenu: Fonctionnaires et/ou salariés (y compris pension),Sous-ensemble de donnée,0,0,0,NA,1,1,2,1,2,2,NA,NA,NA
+Sécurité alimentaire,Revenus,Total,Deuxième source de revenu: Je ne sais pas / préfère ne pas répondre,Sous-ensemble de donnée,NA,0,NA,NA,NA,NA,1,NA,NA,NA,NA,NA,NA
+Sécurité alimentaire,Revenus,Total,"Deuxième source de revenu: Pêche/Chasse/cueillette et vente des produits de la pêche/chasse/cueillette (miel, gibier, champignons, chenilles)",Sous-ensemble de donnée,2,1,1,4,2,2,2,4,1,NA,5,1,1
+Sécurité alimentaire,Revenus,Total,Deuxième source de revenu: Petit commerce,Sous-ensemble de donnée,13,17,12,19,10,13,34,18,15,15,12,7,18
+Sécurité alimentaire,Revenus,Total,"Deuxième source de revenu: Petits métiers (menuisier, maçons, plombier, tailleur etc.))",Sous-ensemble de donnée,4,8,5,3,6,8,8,4,9,8,6,4,4
+Sécurité alimentaire,Revenus,Total,Deuxième source de revenu: Propriétaires terriens (vente ou location de terres ou logement),Sous-ensemble de donnée,3,NA,NA,3,0,1,NA,0,1,NA,NA,NA,1
+Sécurité alimentaire,Revenus,Total,Deuxième source de revenu: Transferts d'argent/Aides/Dons sociaux (fait par la communauté/famille et/ou des tierces personnes)/Aides/Dons humanitaire (fait par l’Etat ou des organisations)/Mendicité/Emprunts/Dettes,Sous-ensemble de donnée,0,11,3,1,11,3,3,6,1,0,4,1,2
+Sécurité alimentaire,Revenus,Total,Deuxième source de revenu: Transformation produits naturels/Exploitation/vente de la production minière,Sous-ensemble de donnée,0,4,4,NA,5,1,1,1,2,2,4,6,1
+Sécurité alimentaire,Revenus,Total,"Deuxième source de revenu: Transport (chauffeur, activités connexes)",Sous-ensemble de donnée,1,1,NA,1,0,0,NA,0,NA,NA,NA,NA,1
+Sécurité alimentaire,Revenus,Total,Deuxième source de revenu: Travail journalier rémunéré agricole (en nature ou en espèces),Sous-ensemble de donnée,1,1,1,NA,0,1,NA,2,0,1,1,NA,NA
+Sécurité alimentaire,Revenus,Total,Deuxième source de revenu: Travail journalier rémunéré non agricole,Sous-ensemble de donnée,1,7,2,3,1,1,3,4,1,2,3,1,6
+Sécurité alimentaire,Revenus,Total,Première source de revenu: Agriculture ou maraîchage et vente des produits d'agriculture,NA,44,20,38,61,34,62,35,49,55,66,86,72,6
+Sécurité alimentaire,Revenus,Total,Première source de revenu: Aucune,NA,4,0,2,4,0,1,4,0,0,1,1,1,NA
+Sécurité alimentaire,Revenus,Total,Première source de revenu: Commerce,NA,20,7,9,5,5,4,11,4,10,5,2,1,21
+Sécurité alimentaire,Revenus,Total,"Première source de revenu: Élevage et vente de produits d’élevage et de bétail (lait, œufs, volailles)",NA,4,12,9,5,24,9,3,14,2,9,2,NA,3
+Sécurité alimentaire,Revenus,Total,Première source de revenu: Fonctionnaires et/ou salariés (y compris pension),NA,1,5,4,6,5,8,12,5,7,4,4,3,22
+Sécurité alimentaire,Revenus,Total,Première source de revenu: Je ne sais pas / préfère ne pas répondre,NA,NA,NA,0,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Sécurité alimentaire,Revenus,Total,"Première source de revenu: Pêche/Chasse/cueillette et vente des produits de la pêche/chasse/cueillette (miel, gibier, champignons, chenilles)",NA,1,0,1,NA,NA,NA,0,1,NA,4,NA,NA,NA
+Sécurité alimentaire,Revenus,Total,Première source de revenu: Petit commerce,NA,11,11,10,3,6,6,9,5,9,2,1,8,6
+Sécurité alimentaire,Revenus,Total,"Première source de revenu: Petits métiers (menuisier, maçons, plombier, tailleur etc.))",NA,6,15,9,7,10,8,17,7,5,6,1,10,30
+Sécurité alimentaire,Revenus,Total,Première source de revenu: Propriétaires terriens (vente ou location de terres ou logement),NA,NA,NA,NA,NA,0,NA,NA,NA,NA,NA,NA,NA,NA
+Sécurité alimentaire,Revenus,Total,Première source de revenu: Transferts d'argent/Aides/Dons sociaux (fait par la communauté/famille et/ou des tierces personnes)/Aides/Dons humanitaire (fait par l’Etat ou des organisations)/Mendicité/Emprunts/Dettes,NA,3,13,9,4,6,3,2,4,3,0,2,3,3
+Sécurité alimentaire,Revenus,Total,Première source de revenu: Transformation produits naturels/Exploitation/vente de la production minière,NA,3,7,3,2,7,1,3,2,2,1,NA,1,NA
+Sécurité alimentaire,Revenus,Total,"Première source de revenu: Transport (chauffeur, activités connexes)",NA,1,1,1,2,0,0,3,1,4,NA,NA,1,7
+Sécurité alimentaire,Revenus,Total,Première source de revenu: Travail journalier rémunéré agricole (en nature ou en espèces),NA,2,1,1,NA,1,1,0,1,0,0,NA,1,2
+Sécurité alimentaire,Revenus,Total,Première source de revenu: Travail journalier rémunéré non agricole,NA,1,7,4,2,2,0,0,5,3,1,2,NA,2
+Sécurité alimentaire,Revenus,Total,Revenu couvrent: Je ne sais pas / préfère ne pas répondre,NA,1,0,NA,NA,0,0,NA,NA,NA,4,NA,NA,4
+Sécurité alimentaire,Revenus,Total,Revenu couvrent: Non,NA,78,94,93,75,87,77,79,86,86,81,74,90,64
+Sécurité alimentaire,Revenus,Total,Revenu couvrent: Oui,NA,22,6,7,25,13,23,21,14,14,14,26,10,33
+Sécurité alimentaire,Revenus,Total,Troisième source de revenu: Agriculture ou maraîchage et vente des produits d'agriculture,NA,5,6,2,3,7,8,3,4,3,2,NA,1,NA
+Sécurité alimentaire,Revenus,Total,Troisième source de revenu: Aucune,NA,53,51,58,59,57,53,76,58,68,69,70,63,88
+Sécurité alimentaire,Revenus,Total,Troisième source de revenu: Commerce,NA,2,0,2,2,1,2,1,NA,3,0,NA,NA,1
+Sécurité alimentaire,Revenus,Total,"Troisième source de revenu: Élevage et vente de produits d’élevage et de bétail (lait, œufs, volailles)",NA,11,8,8,6,9,8,8,11,8,5,9,8,NA
+Sécurité alimentaire,Revenus,Total,Troisième source de revenu: Fonctionnaires et/ou salariés (y compris pension),NA,NA,0,0,NA,0,1,3,1,NA,NA,NA,NA,NA
+Sécurité alimentaire,Revenus,Total,Troisième source de revenu: Je ne sais pas / préfère ne pas répondre,NA,0,1,1,4,NA,1,1,NA,NA,NA,2,NA,NA
+Sécurité alimentaire,Revenus,Total,"Troisième source de revenu: Pêche/Chasse/cueillette et vente des produits de la pêche/chasse/cueillette (miel, gibier, champignons, chenilles)",NA,NA,1,0,1,NA,1,0,0,0,NA,NA,1,NA
+Sécurité alimentaire,Revenus,Total,Troisième source de revenu: Petit commerce,NA,18,9,16,17,5,10,6,11,10,14,10,18,7
+Sécurité alimentaire,Revenus,Total,"Troisième source de revenu: Petits métiers (menuisier, maçons, plombier, tailleur etc.))",NA,1,5,5,5,4,7,1,4,NA,4,3,2,NA
+Sécurité alimentaire,Revenus,Total,Troisième source de revenu: Propriétaires terriens (vente ou location de terres ou logement),NA,NA,0,NA,NA,0,NA,NA,NA,1,NA,NA,NA,NA
+Sécurité alimentaire,Revenus,Total,Troisième source de revenu: Transferts d'argent/Aides/Dons sociaux (fait par la communauté/famille et/ou des tierces personnes)/Aides/Dons humanitaire (fait par l’Etat ou des organisations)/Mendicité/Emprunts/Dettes,NA,1,10,2,0,9,3,0,4,2,3,3,1,4
+Sécurité alimentaire,Revenus,Total,Troisième source de revenu: Transformation produits naturels/Exploitation/vente de la production minière,NA,NA,2,3,NA,5,1,NA,3,3,1,2,2,NA
+Sécurité alimentaire,Revenus,Total,"Troisième source de revenu: Transport (chauffeur, activités connexes)",NA,4,1,0,NA,0,0,NA,0,NA,NA,1,4,NA
+Sécurité alimentaire,Revenus,Total,Troisième source de revenu: Travail journalier rémunéré agricole (en nature ou en espèces),NA,0,2,0,2,0,2,NA,0,1,1,NA,NA,NA
+Sécurité alimentaire,Revenus,Total,Troisième source de revenu: Travail journalier rémunéré non agricole,NA,4,4,2,2,1,3,NA,3,1,1,NA,NA,NA
+Sécurité alimentaire,Food consumption score,Total,"Moyens d’acquisition des céréales, racines et tubercules: Achats (marché, boutique)",NA,45,70,55,34,48,35,60,51,53,29,18,32,95
+Sécurité alimentaire,Food consumption score,Total,"Moyens d’acquisition des céréales, racines et tubercules: Aides alimentaires de la société civile, d’ONG, du gouvernement, du PAM, etc.",NA,1,19,21,NA,2,1,0,2,0,0,NA,NA,NA
+Sécurité alimentaire,Food consumption score,Total,"Moyens d’acquisition des céréales, racines et tubercules: Autre (à préciser)",NA,NA,NA,NA,2,NA,NA,NA,NA,NA,1,NA,NA,NA
+Sécurité alimentaire,Food consumption score,Total,"Moyens d’acquisition des céréales, racines et tubercules: Chasse/cueillette/pêche/collecte",NA,NA,0,NA,NA,0,0,NA,0,NA,NA,NA,NA,NA
+Sécurité alimentaire,Food consumption score,Total,"Moyens d’acquisition des céréales, racines et tubercules: Dons d’amis/de voisins/parents",NA,9,2,1,NA,1,1,0,2,0,4,NA,NA,5
+Sécurité alimentaire,Food consumption score,Total,"Moyens d’acquisition des céréales, racines et tubercules: Echanges d’aliments contre du travail ou biens",NA,NA,NA,NA,NA,NA,0,NA,0,NA,NA,NA,NA,NA
+Sécurité alimentaire,Food consumption score,Total,"Moyens d’acquisition des céréales, racines et tubercules: Emprunt, (crédit  de la boutique)",NA,0,1,0,2,0,NA,0,0,0,NA,NA,NA,NA
+Sécurité alimentaire,Food consumption score,Total,"Moyens d’acquisition des céréales, racines et tubercules: Je ne sais pas / préfère ne pas répondre",NA,NA,0,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Sécurité alimentaire,Food consumption score,Total,"Moyens d’acquisition des céréales, racines et tubercules: Propre production (cultivation, jardin, etc)",NA,45,7,23,63,48,63,39,44,47,66,82,68,NA
+Sécurité alimentaire,Food consumption score,Total,"Moyens d’acquisition des épices/condiments: Achats (marché, boutique)",Sous-ensemble de donnée,98,98,99,100,99,98,100,93,100,98,100,98,100
+Sécurité alimentaire,Food consumption score,Total,"Moyens d’acquisition des épices/condiments: Aides alimentaires de la société civile, d’ONG, du gouvernement, du PAM, etc.",Sous-ensemble de donnée,0,1,0,NA,0,0,NA,0,NA,NA,NA,NA,NA
+Sécurité alimentaire,Food consumption score,Total,Moyens d’acquisition des épices/condiments: Chasse/cueillette/pêche/collecte,Sous-ensemble de donnée,NA,NA,NA,NA,NA,NA,NA,4,NA,NA,NA,NA,NA
+Sécurité alimentaire,Food consumption score,Total,Moyens d’acquisition des épices/condiments: Dons d’amis/de voisins/parents,Sous-ensemble de donnée,1,1,0,NA,0,0,0,1,NA,0,NA,NA,NA
+Sécurité alimentaire,Food consumption score,Total,Moyens d’acquisition des épices/condiments: Echanges d’aliments contre du travail ou biens,Sous-ensemble de donnée,NA,NA,NA,NA,NA,NA,NA,0,NA,NA,NA,NA,NA
+Sécurité alimentaire,Food consumption score,Total,"Moyens d’acquisition des épices/condiments: Emprunt, (crédit  de la boutique)",Sous-ensemble de donnée,NA,1,NA,NA,0,0,NA,0,NA,0,NA,NA,NA
+Sécurité alimentaire,Food consumption score,Total,Moyens d’acquisition des épices/condiments: Je ne sais pas / préfère ne pas répondre,Sous-ensemble de donnée,NA,NA,NA,NA,NA,NA,NA,NA,NA,0,NA,NA,NA
+Sécurité alimentaire,Food consumption score,Total,"Moyens d’acquisition des épices/condiments: Propre production (cultivation, jardin, etc)",Sous-ensemble de donnée,1,NA,1,NA,1,1,NA,1,NA,1,NA,2,NA
+Sécurité alimentaire,Food consumption score,Total,"Moyens d’acquisition des fruits: Achats (marché, boutique)",Sous-ensemble de donnée,61,89,86,64,71,41,79,36,65,49,89,57,100
+Sécurité alimentaire,Food consumption score,Total,"Moyens d’acquisition des fruits: Aides alimentaires de la société civile, d’ONG, du gouvernement, du PAM, etc.",Sous-ensemble de donnée,NA,NA,NA,NA,NA,1,NA,NA,NA,NA,NA,NA,NA
+Sécurité alimentaire,Food consumption score,Total,Moyens d’acquisition des fruits: Chasse/cueillette/pêche/collecte,Sous-ensemble de donnée,21,2,12,25,26,52,13,60,24,34,11,37,NA
+Sécurité alimentaire,Food consumption score,Total,Moyens d’acquisition des fruits: Dons d’amis/de voisins/parents,Sous-ensemble de donnée,3,2,NA,NA,NA,2,0,4,NA,NA,NA,NA,NA
+Sécurité alimentaire,Food consumption score,Total,Moyens d’acquisition des fruits: Echanges d’aliments contre du travail ou biens,Sous-ensemble de donnée,NA,NA,NA,NA,0,NA,NA,NA,NA,NA,NA,NA,NA
+Sécurité alimentaire,Food consumption score,Total,"Moyens d’acquisition des fruits: Emprunt, (crédit  de la boutique)",Sous-ensemble de donnée,NA,1,0,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Sécurité alimentaire,Food consumption score,Total,"Moyens d’acquisition des fruits: Propre production (cultivation, jardin, etc)",Sous-ensemble de donnée,14,7,1,12,3,5,9,1,11,17,NA,6,NA
+Sécurité alimentaire,Food consumption score,Total,"Moyens d’acquisition des huile, gras et beurre: Achats (marché, boutique)",Sous-ensemble de donnée,97,79,80,99,96,90,93,91,96,99,99,82,100
+Sécurité alimentaire,Food consumption score,Total,"Moyens d’acquisition des huile, gras et beurre: Aides alimentaires de la société civile, d’ONG, du gouvernement, du PAM, etc.",Sous-ensemble de donnée,1,17,19,NA,2,1,0,2,NA,0,NA,NA,NA
+Sécurité alimentaire,Food consumption score,Total,"Moyens d’acquisition des huile, gras et beurre: Chasse/cueillette/pêche/collecte",Sous-ensemble de donnée,NA,NA,NA,NA,NA,1,3,2,NA,1,NA,1,NA
+Sécurité alimentaire,Food consumption score,Total,"Moyens d’acquisition des huile, gras et beurre: Dons d’amis/de voisins/parents",Sous-ensemble de donnée,2,2,0,NA,0,0,0,0,NA,0,NA,NA,NA
+Sécurité alimentaire,Food consumption score,Total,"Moyens d’acquisition des huile, gras et beurre: Emprunt, (crédit  de la boutique)",Sous-ensemble de donnée,NA,1,0,NA,1,0,NA,0,NA,0,NA,NA,NA
+Sécurité alimentaire,Food consumption score,Total,"Moyens d’acquisition des huile, gras et beurre: Je ne sais pas / préfère ne pas répondre",Sous-ensemble de donnée,NA,NA,NA,NA,NA,NA,NA,0,NA,0,NA,NA,NA
+Sécurité alimentaire,Food consumption score,Total,"Moyens d’acquisition des huile, gras et beurre: Propre production (cultivation, jardin, etc)",Sous-ensemble de donnée,0,1,0,1,0,8,5,3,4,NA,1,17,NA
+Sécurité alimentaire,Food consumption score,Total,"Moyens d’acquisition des légumes et feuilles vertes: Achats (marché, boutique)",Sous-ensemble de donnée,69,80,77,71,43,61,87,54,82,50,85,74,93
+Sécurité alimentaire,Food consumption score,Total,"Moyens d’acquisition des légumes et feuilles vertes: Aides alimentaires de la société civile, d’ONG, du gouvernement, du PAM, etc.",Sous-ensemble de donnée,0,0,1,NA,0,0,NA,0,NA,NA,NA,NA,NA
+Sécurité alimentaire,Food consumption score,Total,Moyens d’acquisition des légumes et feuilles vertes: Chasse/cueillette/pêche/collecte,Sous-ensemble de donnée,11,11,10,8,32,18,1,42,1,15,NA,7,4
+Sécurité alimentaire,Food consumption score,Total,Moyens d’acquisition des légumes et feuilles vertes: Dons d’amis/de voisins/parents,Sous-ensemble de donnée,5,1,0,3,3,3,0,1,0,0,NA,NA,NA
+Sécurité alimentaire,Food consumption score,Total,"Moyens d’acquisition des légumes et feuilles vertes: Emprunt, (crédit  de la boutique)",Sous-ensemble de donnée,NA,0,NA,NA,0,NA,1,0,NA,NA,NA,NA,NA
+Sécurité alimentaire,Food consumption score,Total,Moyens d’acquisition des légumes et feuilles vertes: Je ne sais pas / préfère ne pas répondre,Sous-ensemble de donnée,NA,NA,NA,NA,NA,NA,NA,NA,NA,0,NA,NA,NA
+Sécurité alimentaire,Food consumption score,Total,"Moyens d’acquisition des légumes et feuilles vertes: Propre production (cultivation, jardin, etc)",Sous-ensemble de donnée,15,9,12,19,22,18,12,3,17,35,15,19,3
+Sécurité alimentaire,Food consumption score,Total,"Moyens d’acquisition des légumineuses/noix: Achats (marché, boutique)",Sous-ensemble de donnée,48,64,61,41,39,54,81,71,71,48,34,65,96
+Sécurité alimentaire,Food consumption score,Total,"Moyens d’acquisition des légumineuses/noix: Aides alimentaires de la société civile, d’ONG, du gouvernement, du PAM, etc.",Sous-ensemble de donnée,2,25,18,NA,4,1,0,3,NA,NA,NA,NA,NA
+Sécurité alimentaire,Food consumption score,Total,Moyens d’acquisition des légumineuses/noix: Chasse/cueillette/pêche/collecte,Sous-ensemble de donnée,NA,NA,NA,NA,NA,1,NA,1,NA,NA,NA,NA,NA
+Sécurité alimentaire,Food consumption score,Total,Moyens d’acquisition des légumineuses/noix: Dons d’amis/de voisins/parents,Sous-ensemble de donnée,4,5,1,0,1,0,0,1,0,0,NA,NA,4
+Sécurité alimentaire,Food consumption score,Total,Moyens d’acquisition des légumineuses/noix: Echanges d’aliments contre du travail ou biens,Sous-ensemble de donnée,NA,0,NA,NA,NA,NA,NA,0,NA,NA,NA,NA,NA
+Sécurité alimentaire,Food consumption score,Total,"Moyens d’acquisition des légumineuses/noix: Emprunt, (crédit  de la boutique)",Sous-ensemble de donnée,0,0,0,NA,0,0,NA,0,NA,NA,NA,NA,NA
+Sécurité alimentaire,Food consumption score,Total,"Moyens d’acquisition des légumineuses/noix: Propre production (cultivation, jardin, etc)",Sous-ensemble de donnée,46,5,20,59,56,44,19,24,29,51,66,35,NA
+Sécurité alimentaire,Food consumption score,Total,"Moyens d’acquisition des sucre ou produits sucrés: Achats (marché, boutique)",Sous-ensemble de donnée,98,96,98,97,100,99,100,96,99,96,100,100,100
+Sécurité alimentaire,Food consumption score,Total,"Moyens d’acquisition des sucre ou produits sucrés: Aides alimentaires de la société civile, d’ONG, du gouvernement, du PAM, etc.",Sous-ensemble de donnée,0,1,1,NA,0,0,NA,0,NA,0,NA,NA,NA
+Sécurité alimentaire,Food consumption score,Total,Moyens d’acquisition des sucre ou produits sucrés: Chasse/cueillette/pêche/collecte,Sous-ensemble de donnée,NA,0,NA,NA,NA,NA,NA,0,NA,NA,NA,NA,NA
+Sécurité alimentaire,Food consumption score,Total,Moyens d’acquisition des sucre ou produits sucrés: Dons d’amis/de voisins/parents,Sous-ensemble de donnée,2,1,1,3,0,0,0,3,0,4,NA,NA,NA
+Sécurité alimentaire,Food consumption score,Total,Moyens d’acquisition des sucre ou produits sucrés: Echanges d’aliments contre du travail ou biens,Sous-ensemble de donnée,NA,NA,NA,NA,NA,NA,NA,0,NA,NA,NA,NA,NA
+Sécurité alimentaire,Food consumption score,Total,"Moyens d’acquisition des sucre ou produits sucrés: Emprunt, (crédit  de la boutique)",Sous-ensemble de donnée,NA,2,0,NA,0,0,NA,0,0,NA,NA,NA,NA
+Sécurité alimentaire,Food consumption score,Total,"Moyens d’acquisition des sucre ou produits sucrés: Propre production (cultivation, jardin, etc)",Sous-ensemble de donnée,NA,0,0,0,0,0,NA,1,1,NA,NA,NA,NA
+Sécurité alimentaire,Food consumption score,Total,"Moyens d’acquisition des viande, poisson et oeufs: Achats (marché, boutique)",Sous-ensemble de donnée,94,82,94,86,80,91,99,79,95,89,88,96,92
+Sécurité alimentaire,Food consumption score,Total,"Moyens d’acquisition des viande, poisson et oeufs: Aides alimentaires de la société civile, d’ONG, du gouvernement, du PAM, etc.",Sous-ensemble de donnée,NA,0,0,NA,NA,0,NA,0,NA,NA,NA,NA,NA
+Sécurité alimentaire,Food consumption score,Total,"Moyens d’acquisition des viande, poisson et oeufs: Autre (à préciser)",Sous-ensemble de donnée,NA,0,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Sécurité alimentaire,Food consumption score,Total,"Moyens d’acquisition des viande, poisson et oeufs: Chasse/cueillette/pêche/collecte",Sous-ensemble de donnée,NA,0,2,NA,4,1,NA,5,4,3,NA,1,1
+Sécurité alimentaire,Food consumption score,Total,"Moyens d’acquisition des viande, poisson et oeufs: Dons d’amis/de voisins/parents",Sous-ensemble de donnée,5,5,1,2,6,1,NA,5,0,2,NA,1,3
+Sécurité alimentaire,Food consumption score,Total,"Moyens d’acquisition des viande, poisson et oeufs: Emprunt, (crédit  de la boutique)",Sous-ensemble de donnée,NA,0,NA,NA,NA,0,NA,1,NA,NA,NA,NA,NA
+Sécurité alimentaire,Food consumption score,Total,"Moyens d’acquisition des viande, poisson et oeufs: Propre production (cultivation, jardin, etc)",Sous-ensemble de donnée,2,12,4,12,10,7,1,10,1,6,12,2,4
+Sécurité alimentaire,Food consumption score,Total,"Moyens d’acquisition du lait et autres produits laitiers: Achats (marché, boutique)",Sous-ensemble de donnée,92,78,89,77,89,90,91,63,91,89,100,91,100
+Sécurité alimentaire,Food consumption score,Total,"Moyens d’acquisition du lait et autres produits laitiers: Aides alimentaires de la société civile, d’ONG, du gouvernement, du PAM, etc.",Sous-ensemble de donnée,0,2,4,NA,0,0,NA,NA,NA,NA,NA,NA,NA
+Sécurité alimentaire,Food consumption score,Total,Moyens d’acquisition du lait et autres produits laitiers: Chasse/cueillette/pêche/collecte,Sous-ensemble de donnée,NA,NA,NA,NA,1,1,NA,0,NA,NA,NA,2,NA
+Sécurité alimentaire,Food consumption score,Total,Moyens d’acquisition du lait et autres produits laitiers: Dons d’amis/de voisins/parents,Sous-ensemble de donnée,4,2,1,NA,0,1,NA,6,3,NA,NA,NA,NA
+Sécurité alimentaire,Food consumption score,Total,"Moyens d’acquisition du lait et autres produits laitiers: Emprunt, (crédit  de la boutique)",Sous-ensemble de donnée,NA,0,NA,NA,NA,0,NA,NA,NA,NA,NA,NA,NA
+Sécurité alimentaire,Food consumption score,Total,Moyens d’acquisition du lait et autres produits laitiers: Je ne sais pas / préfère ne pas répondre,Sous-ensemble de donnée,NA,0,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Sécurité alimentaire,Food consumption score,Total,"Moyens d’acquisition du lait et autres produits laitiers: Propre production (cultivation, jardin, etc)",Sous-ensemble de donnée,4,18,6,23,9,7,9,30,5,11,NA,7,NA
+Sécurité alimentaire,Household hunger scale,Total,Aucune nourriture dans le ménage à un moment durant les 30 derniers jours: Je ne sais pas / préfère ne pas répondre,NA,1,0,NA,NA,NA,0,NA,NA,NA,NA,NA,NA,NA
+Sécurité alimentaire,Household hunger scale,Total,Aucune nourriture dans le ménage à un moment durant les 30 derniers jours: Non,NA,77,67,93,63,87,84,88,68,89,87,58,85,88
+Sécurité alimentaire,Household hunger scale,Total,Aucune nourriture dans le ménage à un moment durant les 30 derniers jours: Oui,NA,23,33,7,37,13,16,12,32,11,13,42,15,12
+Sécurité alimentaire,Household hunger scale,Total,Dormir affamé à un moment durant les 30 derniers jours: Je ne sais pas / préfère ne pas répondre,NA,2,NA,0,NA,NA,NA,NA,NA,0,NA,NA,NA,NA
+Sécurité alimentaire,Household hunger scale,Total,Dormir affamé à un moment durant les 30 derniers jours: Non,NA,78,64,90,67,83,83,84,78,90,89,61,89,93
+Sécurité alimentaire,Household hunger scale,Total,Dormir affamé à un moment durant les 30 derniers jours: Oui,NA,20,36,10,33,17,17,16,22,10,11,39,11,7
+Sécurité alimentaire,Household hunger scale,Total,Nombre de fois aucune nourriture durant les 30 derniers jours: Je ne sais pas / préfère ne pas répondre,Sous-ensemble de donnée,NA,NA,NA,NA,NA,0,NA,NA,NA,NA,NA,NA,NA
+Sécurité alimentaire,Household hunger scale,Total,Nombre de fois aucune nourriture durant les 30 derniers jours: Parfois (3 à 10 fois),Sous-ensemble de donnée,39,31,29,34,34,41,44,26,11,61,38,44,68
+Sécurité alimentaire,Household hunger scale,Total,Nombre de fois aucune nourriture durant les 30 derniers jours: Rarement (1 à 2 fois),Sous-ensemble de donnée,49,67,71,57,65,55,47,73,89,33,60,56,24
+Sécurité alimentaire,Household hunger scale,Total,Nombre de fois aucune nourriture durant les 30 derniers jours: Souvent (plus que 10 fois),Sous-ensemble de donnée,12,1,0,9,1,4,9,0,1,6,3,NA,8
+Sécurité alimentaire,Household hunger scale,Total,Nombre de fois dormir affamé durant les 30 derniers jours: Je ne sais pas / préfère ne pas répondre,Sous-ensemble de donnée,NA,NA,NA,NA,NA,0,NA,NA,NA,NA,NA,NA,NA
+Sécurité alimentaire,Household hunger scale,Total,Nombre de fois dormir affamé durant les 30 derniers jours: Parfois (3 à 10 fois),Sous-ensemble de donnée,34,37,40,22,34,38,49,23,62,68,38,83,50
+Sécurité alimentaire,Household hunger scale,Total,Nombre de fois dormir affamé durant les 30 derniers jours: Rarement (1 à 2 fois),Sous-ensemble de donnée,52,62,60,70,66,58,51,76,37,32,61,17,50
+Sécurité alimentaire,Household hunger scale,Total,Nombre de fois dormir affamé durant les 30 derniers jours: Souvent (plus que 10 fois),Sous-ensemble de donnée,14,1,NA,8,0,4,0,1,1,0,1,NA,NA
+Sécurité alimentaire,Household hunger scale,Total,Nombre de fois où un membre du ménage a passé 24 heures sans rien manger dû au manque de nourriture durant les 30 derniers jours: Je ne sais pas / préfère ne pas répondre,Sous-ensemble de donnée,NA,0,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Sécurité alimentaire,Household hunger scale,Total,Nombre de fois où un membre du ménage a passé 24 heures sans rien manger dû au manque de nourriture durant les 30 derniers jours: Parfois (3 à 10 fois),Sous-ensemble de donnée,50,23,14,46,17,41,43,9,54,50,36,73,NA
+Sécurité alimentaire,Household hunger scale,Total,Nombre de fois où un membre du ménage a passé 24 heures sans rien manger dû au manque de nourriture durant les 30 derniers jours: Rarement (1 à 2 fois),Sous-ensemble de donnée,50,74,86,43,82,55,57,91,45,50,62,27,NA
+Sécurité alimentaire,Household hunger scale,Total,Nombre de fois où un membre du ménage a passé 24 heures sans rien manger dû au manque de nourriture durant les 30 derniers jours: Souvent (plus que 10 fois),Sous-ensemble de donnée,0,2,NA,11,1,4,0,NA,1,NA,2,NA,NA
+Sécurité alimentaire,Household hunger scale,Total,Un membre du ménage a passé 24 heures sans rien manger dû au manque de nourriture à un moment durant les 30 derniers jours: Je ne sais pas / préfère ne pas répondre,NA,NA,NA,1,NA,NA,NA,NA,0,NA,NA,NA,NA,NA
+Sécurité alimentaire,Household hunger scale,Total,Un membre du ménage a passé 24 heures sans rien manger dû au manque de nourriture à un moment durant les 30 derniers jours: Non,NA,83,90,97,82,92,91,92,91,92,94,77,89,100
+Sécurité alimentaire,Household hunger scale,Total,Un membre du ménage a passé 24 heures sans rien manger dû au manque de nourriture à un moment durant les 30 derniers jours: Oui,NA,17,10,3,18,8,9,8,9,8,6,23,11,NA
+Sécurité alimentaire,Agriculture,Total,Pratique optimale de l’agriculture: Non,NA,35,66,34,31,64,35,52,39,31,30,31,34,39
+Sécurité alimentaire,Agriculture,Total,Pratique optimale de l’agriculture: Non pertinent / non applicable (le ménage ne pratique pas l'agriculture),NA,3,3,2,4,4,8,8,3,12,6,5,5,40
+Sécurité alimentaire,Agriculture,Total,Pratique optimale de l’agriculture: Oui,NA,61,31,64,65,31,57,40,58,58,64,64,61,22
+Sécurité alimentaire,Agriculture,Total,Raison pratique non-optimale de l’agriculture: Autre (à préciser),Sous-ensemble de donnée,10,1,0,8,1,1,7,0,0,0,7,9,0
+Sécurité alimentaire,Agriculture,Total,Raison pratique non-optimale de l’agriculture: Inondation,Sous-ensemble de donnée,5,2,3,0,1,8,0,7,0,2,0,0,0
+Sécurité alimentaire,Agriculture,Total,Raison pratique non-optimale de l’agriculture: Insécurité lors de la culture ou la récolte,Sous-ensemble de donnée,0,48,18,1,22,5,0,18,0,0,0,0,0
+Sécurité alimentaire,Agriculture,Total,Raison pratique non-optimale de l’agriculture: Jamais cultivé / Autres sources de revenu,Sous-ensemble de donnée,13,6,15,9,4,2,14,3,4,9,4,2,61
+Sécurité alimentaire,Agriculture,Total,Raison pratique non-optimale de l’agriculture: Je ne sais pas / préfère ne pas répondre,Sous-ensemble de donnée,0,0,2,0,0,0,2,0,0,0,0,0,0
+Sécurité alimentaire,Agriculture,Total,Raison pratique non-optimale de l’agriculture: Manque / Insuffisance de main d’œuvre,Sous-ensemble de donnée,1,7,10,26,17,17,12,19,31,6,41,50,3
+Sécurité alimentaire,Agriculture,Total,Raison pratique non-optimale de l’agriculture: Manque / Insuffisance de pluie,Sous-ensemble de donnée,39,22,22,28,53,45,24,40,31,63,24,22,2
+Sécurité alimentaire,Agriculture,Total,Raison pratique non-optimale de l’agriculture: Manque de moyens financiers,Sous-ensemble de donnée,33,4,14,17,45,34,15,21,30,40,40,42,3
+Sécurité alimentaire,Agriculture,Total,Raison pratique non-optimale de l’agriculture: Manque de semences / outils,Sous-ensemble de donnée,19,6,9,13,15,12,6,22,16,7,28,18,3
+Sécurité alimentaire,Agriculture,Total,Raison pratique non-optimale de l’agriculture: Pas d’accès à la terre / Parcelle trop loin / Manque de terre,Sous-ensemble de donnée,30,41,38,30,24,18,39,51,39,20,19,23,38
+Sécurité alimentaire,Agriculture,Total,Raison pratique non-optimale de l’agriculture: Sols trop pauvres,Sous-ensemble de donnée,15,5,10,19,14,6,2,18,7,3,18,1,2
+Sécurité alimentaire,Marché,Total,Marché fonctionnel à distance de marche durant les 7 derniers jours: Autre (à préciser),NA,3,NA,NA,NA,0,NA,NA,NA,NA,NA,NA,NA,NA
+Sécurité alimentaire,Marché,Total,Marché fonctionnel à distance de marche durant les 7 derniers jours: Il n'y a pas de marchés à distance de marche dans la zone (aller-retour impossible dans la journée) ;,NA,4,3,2,6,4,17,8,1,8,3,2,10,3
+Sécurité alimentaire,Marché,Total,"Marché fonctionnel à distance de marche durant les 7 derniers jours: Il y a un marché dans la zone, mais je ne peux m'y rendre car j'ai des difficultés à me déplacer",NA,4,0,2,1,0,0,0,1,NA,1,2,2,NA
+Sécurité alimentaire,Marché,Total,"Marché fonctionnel à distance de marche durant les 7 derniers jours: Il y a un marché dans la zone, mais je ne peux m'y rendre pour cause d'absence de moyens de transport",NA,9,1,2,6,1,4,3,3,5,1,2,3,2
+Sécurité alimentaire,Marché,Total,"Marché fonctionnel à distance de marche durant les 7 derniers jours: Il y a un marché dans la zone, mais je ne peux m'y rendre pour cause d'insécurité sur la route",NA,1,2,1,NA,4,2,0,3,NA,0,NA,1,NA
+Sécurité alimentaire,Marché,Total,"Marché fonctionnel à distance de marche durant les 7 derniers jours: J'ai accès à un marché, mais les prix sont trop élevés, et je ne peux m'y approvisionner complètement par conséquent ;",NA,17,52,33,35,32,26,33,58,41,29,37,48,11
+Sécurité alimentaire,Marché,Total,Marché fonctionnel à distance de marche durant les 7 derniers jours: Je ne sais pas / préfère ne pas répondre,NA,1,NA,0,1,0,1,NA,NA,0,2,NA,1,1
+Sécurité alimentaire,Marché,Total,Marché fonctionnel à distance de marche durant les 7 derniers jours: Le marché a été fermé dans le cadre de mesures de confinement liées au COVID-19,NA,NA,NA,NA,NA,0,NA,NA,0,NA,NA,NA,1,NA
+Sécurité alimentaire,Marché,Total,"Marché fonctionnel à distance de marche durant les 7 derniers jours: Le marché est accessible, approvisionné, et à prix abordable pour mon ménage",NA,53,27,50,34,45,37,44,13,32,61,36,19,77
+Sécurité alimentaire,Marché,Total,"Marché fonctionnel à distance de marche durant les 7 derniers jours: Le marché est accessible, mais il n'est pas correctement approvisionné en biens alimentaires ;",NA,3,10,6,17,8,5,7,15,7,2,16,6,6
+Sécurité alimentaire,Reduced Coping Strategies Index,Total,Consommer aliments moins préférés: Je ne sais pas / préfère ne pas répondre,NA,NA,0,1,NA,NA,1,0,0,NA,NA,NA,NA,NA
+Sécurité alimentaire,Reduced Coping Strategies Index,Total,Consommer aliments moins préférés: Non,NA,56,44,59,43,38,62,60,35,59,58,52,50,55
+Sécurité alimentaire,Reduced Coping Strategies Index,Total,Consommer aliments moins préférés: Oui,NA,44,56,39,57,62,37,40,65,41,42,48,50,45
+Sécurité alimentaire,Reduced Coping Strategies Index,Total,Diminuer la quantité consommée pendant les repas: Je ne sais pas / préfère ne pas répondre,NA,NA,0,NA,NA,NA,1,NA,NA,NA,NA,NA,1,NA
+Sécurité alimentaire,Reduced Coping Strategies Index,Total,Diminuer la quantité consommée pendant les repas: Non,NA,68,47,60,55,51,80,82,54,84,68,61,84,74
+Sécurité alimentaire,Reduced Coping Strategies Index,Total,Diminuer la quantité consommée pendant les repas: Oui,NA,32,53,40,45,49,20,18,46,16,32,39,16,26
+Sécurité alimentaire,Reduced Coping Strategies Index,Total,Diminuer le nombre de repas par jour: Je ne sais pas / préfère ne pas répondre,NA,0,0,0,NA,NA,1,1,NA,1,2,1,1,NA
+Sécurité alimentaire,Reduced Coping Strategies Index,Total,Diminuer le nombre de repas par jour: Non,NA,65,61,73,69,68,86,88,56,88,73,65,86,80
+Sécurité alimentaire,Reduced Coping Strategies Index,Total,Diminuer le nombre de repas par jour: Oui,NA,35,39,26,31,32,13,11,44,11,26,34,13,20
+Sécurité alimentaire,Reduced Coping Strategies Index,Total,Emprunter de la nourriture: Je ne sais pas / préfère ne pas répondre,NA,0,0,0,NA,0,0,NA,NA,NA,NA,NA,1,NA
+Sécurité alimentaire,Reduced Coping Strategies Index,Total,Emprunter de la nourriture: Non,NA,83,64,84,71,84,88,86,71,89,95,79,88,95
+Sécurité alimentaire,Reduced Coping Strategies Index,Total,Emprunter de la nourriture: Oui,NA,17,36,16,29,15,11,14,29,11,5,21,11,5
+Sécurité alimentaire,Reduced Coping Strategies Index,Total,Restreindre la consommation des adultes pour permettre aux plus jeunes de manger davantage: Je ne sais pas / préfère ne pas répondre,NA,NA,NA,0,NA,NA,0,NA,NA,NA,NA,NA,0,NA
+Sécurité alimentaire,Reduced Coping Strategies Index,Total,Restreindre la consommation des adultes pour permettre aux plus jeunes de manger davantage: Non,NA,81,54,78,62,69,83,83,63,83,93,65,85,92
+Sécurité alimentaire,Reduced Coping Strategies Index,Total,Restreindre la consommation des adultes pour permettre aux plus jeunes de manger davantage: Oui,NA,19,46,22,38,31,17,17,37,17,7,35,15,8
+Sécurité alimentaire,Livelihood Coping Strategies,Total,Ménages ayant consommé des semences  dans 30 derniers jours: Non pertinent / non applicable,NA,31,9,6,6,11,10,14,10,17,17,2,18,53
+Sécurité alimentaire,Livelihood Coping Strategies,Total,"Ménages ayant consommé des semences  dans 30 derniers jours: Non, parce que j’ai déjà épuisé cette option / stratégie et je ne peux pas continuer à le faire",NA,1,7,14,1,2,0,NA,1,NA,0,NA,NA,NA
+Sécurité alimentaire,Livelihood Coping Strategies,Total,"Ménages ayant consommé des semences  dans 30 derniers jours: Non, parce que je n’en ai pas eu besoin",NA,55,73,70,76,67,73,83,79,83,66,70,80,45
+Sécurité alimentaire,Livelihood Coping Strategies,Total,Ménages ayant consommé des semences  dans 30 derniers jours: Oui,NA,13,12,10,17,19,17,3,9,0,17,28,2,2
+Sécurité alimentaire,Livelihood Coping Strategies,Total,Ménages ayant dépenser l’épargne dans 30 derniers jours: Non pertinent / non applicable,NA,23,4,5,6,20,15,8,14,7,14,3,12,6
+Sécurité alimentaire,Livelihood Coping Strategies,Total,"Ménages ayant dépenser l’épargne dans 30 derniers jours: Non, parce que j’ai déjà épuisé cette option / stratégie et je ne peux pas continuer à le faire",NA,1,10,12,1,4,3,4,3,4,1,3,5,1
+Sécurité alimentaire,Livelihood Coping Strategies,Total,"Ménages ayant dépenser l’épargne dans 30 derniers jours: Non, parce que je n’en ai pas eu besoin",NA,34,54,59,36,43,57,73,42,72,59,49,59,57
+Sécurité alimentaire,Livelihood Coping Strategies,Total,Ménages ayant dépenser l’épargne dans 30 derniers jours: Oui,NA,42,31,24,56,33,26,16,41,18,26,44,24,36
+Sécurité alimentaire,Livelihood Coping Strategies,Total,Ménages ayant emprunter argent/nourriture  dans 30 derniers jours: Non pertinent / non applicable,NA,37,3,5,7,21,10,11,10,14,25,2,14,15
+Sécurité alimentaire,Livelihood Coping Strategies,Total,"Ménages ayant emprunter argent/nourriture  dans 30 derniers jours: Non, parce que j’ai déjà épuisé cette option / stratégie et je ne peux pas continuer à le faire",NA,1,1,5,1,0,0,1,1,0,0,1,NA,NA
+Sécurité alimentaire,Livelihood Coping Strategies,Total,"Ménages ayant emprunter argent/nourriture  dans 30 derniers jours: Non, parce que je n’en ai pas eu besoin",NA,50,68,77,70,68,73,78,62,85,69,85,84,73
+Sécurité alimentaire,Livelihood Coping Strategies,Total,Ménages ayant emprunter argent/nourriture  dans 30 derniers jours: Oui,NA,13,28,13,22,11,17,10,27,1,7,12,2,11
+Sécurité alimentaire,Livelihood Coping Strategies,Total,Ménages ayant mendié  dans 30 derniers jours: Non pertinent / non applicable,NA,37,1,4,15,21,7,5,10,3,26,2,7,14
+Sécurité alimentaire,Livelihood Coping Strategies,Total,"Ménages ayant mendié  dans 30 derniers jours: Non, parce que j’ai déjà épuisé cette option / stratégie et je ne peux pas continuer à le faire",NA,NA,0,0,NA,0,0,NA,0,NA,0,NA,NA,NA
+Sécurité alimentaire,Livelihood Coping Strategies,Total,"Ménages ayant mendié  dans 30 derniers jours: Non, parce que je n’en ai pas eu besoin",NA,61,97,95,83,76,91,91,85,93,72,98,91,86
+Sécurité alimentaire,Livelihood Coping Strategies,Total,Ménages ayant mendié  dans 30 derniers jours: Oui,NA,2,1,0,2,3,1,4,5,4,1,NA,1,NA
+Sécurité alimentaire,Livelihood Coping Strategies,Total,Ménages ayant réduit les dépenses non-alimentaires dans 30 derniers jours: Non pertinent / non applicable,NA,38,1,3,5,11,9,9,11,6,7,2,8,3
+Sécurité alimentaire,Livelihood Coping Strategies,Total,"Ménages ayant réduit les dépenses non-alimentaires dans 30 derniers jours: Non, parce que j’ai déjà épuisé cette option / stratégie et je ne peux pas continuer à le faire",NA,2,0,2,1,0,0,0,1,0,3,1,NA,1
+Sécurité alimentaire,Livelihood Coping Strategies,Total,"Ménages ayant réduit les dépenses non-alimentaires dans 30 derniers jours: Non, parce que je n’en ai pas eu besoin",NA,52,91,92,86,79,86,85,76,91,80,91,88,93
+Sécurité alimentaire,Livelihood Coping Strategies,Total,Ménages ayant réduit les dépenses non-alimentaires dans 30 derniers jours: Oui,NA,8,7,3,8,10,5,6,12,3,10,6,4,3
+Sécurité alimentaire,Livelihood Coping Strategies,Total,Ménages ayant retirer les enfants de l’école: Non pertinent / non applicable,NA,32,4,6,4,18,14,9,20,8,12,1,15,15
+Sécurité alimentaire,Livelihood Coping Strategies,Total,"Ménages ayant retirer les enfants de l’école: Non, parce que j’ai déjà épuisé cette option / stratégie et je ne peux pas continuer à le faire",NA,1,0,1,NA,0,0,NA,0,0,0,1,0,NA
+Sécurité alimentaire,Livelihood Coping Strategies,Total,"Ménages ayant retirer les enfants de l’école: Non, parce que je n’en ai pas eu besoin",NA,61,94,89,90,79,82,88,75,90,86,90,81,84
+Sécurité alimentaire,Livelihood Coping Strategies,Total,Ménages ayant retirer les enfants de l’école: Oui,NA,6,2,4,6,3,4,3,5,2,2,9,3,2
+Sécurité alimentaire,Livelihood Coping Strategies,Total,Ménages ayant un membre s’engageant dans activités risquées/illégales  dans 30 derniers jours: Non pertinent / non applicable,NA,47,4,14,14,21,14,9,12,8,34,2,9,22
+Sécurité alimentaire,Livelihood Coping Strategies,Total,"Ménages ayant un membre s’engageant dans activités risquées/illégales  dans 30 derniers jours: Non, parce que j’ai déjà épuisé cette option / stratégie et je ne peux pas continuer à le faire",NA,1,0,0,NA,NA,NA,NA,0,NA,NA,NA,NA,NA
+Sécurité alimentaire,Livelihood Coping Strategies,Total,"Ménages ayant un membre s’engageant dans activités risquées/illégales  dans 30 derniers jours: Non, parce que je n’en ai pas eu besoin",NA,52,96,86,86,78,86,91,88,92,66,98,91,78
+Sécurité alimentaire,Livelihood Coping Strategies,Total,Ménages ayant un membre s’engageant dans activités risquées/illégales  dans 30 derniers jours: Oui,NA,NA,0,NA,NA,0,0,0,0,0,0,NA,NA,NA
+Sécurité alimentaire,Livelihood Coping Strategies,Total,Ménages ayant vendu actifs non-productifs dans 30 derniers jours: Non pertinent / non applicable,NA,42,5,9,6,13,17,13,19,11,30,10,23,11
+Sécurité alimentaire,Livelihood Coping Strategies,Total,"Ménages ayant vendu actifs non-productifs dans 30 derniers jours: Non, parce que j’ai déjà épuisé cette option / stratégie et je ne peux pas continuer à le faire",NA,2,2,2,NA,2,0,1,1,0,NA,2,NA,NA
+Sécurité alimentaire,Livelihood Coping Strategies,Total,"Ménages ayant vendu actifs non-productifs dans 30 derniers jours: Non, parce que je n’en ai pas eu besoin",NA,52,82,88,90,80,78,85,75,86,70,88,77,86
+Sécurité alimentaire,Livelihood Coping Strategies,Total,Ménages ayant vendu actifs non-productifs dans 30 derniers jours: Oui,NA,3,12,1,4,6,4,2,6,3,NA,NA,NA,3
+Sécurité alimentaire,Livelihood Coping Strategies,Total,Ménages ayant vendu des actifs productifs dans 30 derniers jours: Non pertinent / non applicable,NA,42,4,5,9,12,14,12,14,9,21,8,14,12
+Sécurité alimentaire,Livelihood Coping Strategies,Total,"Ménages ayant vendu des actifs productifs dans 30 derniers jours: Non, parce que j’ai déjà épuisé cette option / stratégie et je ne peux pas continuer à le faire",NA,0,2,2,NA,1,0,1,1,0,NA,NA,1,1
+Sécurité alimentaire,Livelihood Coping Strategies,Total,"Ménages ayant vendu des actifs productifs dans 30 derniers jours: Non, parce que je n’en ai pas eu besoin",NA,55,84,90,91,80,80,86,76,90,79,92,82,84
+Sécurité alimentaire,Livelihood Coping Strategies,Total,Ménages ayant vendu des actifs productifs dans 30 derniers jours: Oui,NA,3,10,3,0,7,6,1,9,1,NA,NA,2,3
+Sécurité alimentaire,Livelihood Coping Strategies,Total,Ménages ayant vendu maison/parcelle/champ  dans 30 derniers jours: Non pertinent / non applicable,NA,48,16,21,8,34,15,13,24,17,23,9,19,27
+Sécurité alimentaire,Livelihood Coping Strategies,Total,"Ménages ayant vendu maison/parcelle/champ  dans 30 derniers jours: Non, parce que j’ai déjà épuisé cette option / stratégie et je ne peux pas continuer à le faire",NA,1,0,2,NA,NA,0,NA,0,0,NA,NA,NA,NA
+Sécurité alimentaire,Livelihood Coping Strategies,Total,"Ménages ayant vendu maison/parcelle/champ  dans 30 derniers jours: Non, parce que je n’en ai pas eu besoin",NA,51,83,78,92,66,84,87,75,83,75,91,81,73
+Sécurité alimentaire,Livelihood Coping Strategies,Total,Ménages ayant vendu maison/parcelle/champ  dans 30 derniers jours: Oui,NA,1,1,0,NA,NA,1,NA,1,NA,2,NA,NA,NA
+Sécurité alimentaire,Livelihood Coping Strategies,Total,Ménages ayant vendu plus d’animaux  dans 30 derniers jours: Non pertinent / non applicable,NA,33,10,19,12,13,11,11,9,14,17,9,23,60
+Sécurité alimentaire,Livelihood Coping Strategies,Total,"Ménages ayant vendu plus d’animaux  dans 30 derniers jours: Non, parce que j’ai déjà épuisé cette option / stratégie et je ne peux pas continuer à le faire",NA,0,9,10,1,5,2,1,5,0,2,NA,NA,1
+Sécurité alimentaire,Livelihood Coping Strategies,Total,"Ménages ayant vendu plus d’animaux  dans 30 derniers jours: Non, parce que je n’en ai pas eu besoin",NA,35,37,44,46,42,53,72,45,66,58,44,52,36
+Sécurité alimentaire,Livelihood Coping Strategies,Total,Ménages ayant vendu plus d’animaux  dans 30 derniers jours: Oui,NA,31,43,26,42,40,34,16,41,20,23,46,25,3
+EHA,Mécanisme d’adaptation,Total,Nombre de jours utiliser de l'eau non sûre d'une source non-améliorée,Sous-ensemble de donnée,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+EHA,Mécanisme d’adaptation,Total,"Réduire la quantité d'eau utilisée à  des fins domestiques (pour boire, laver, cuisiner, etc.): Je ne sais pas / préfère ne pas répondre",NA,0,0,0,1,NA,0,NA,0,0,1,1,NA,NA
+EHA,Mécanisme d’adaptation,Total,"Réduire la quantité d'eau utilisée à  des fins domestiques (pour boire, laver, cuisiner, etc.): Non",NA,87,73,88,77,88,95,86,79,93,75,87,91,89
+EHA,Mécanisme d’adaptation,Total,"Réduire la quantité d'eau utilisée à  des fins domestiques (pour boire, laver, cuisiner, etc.): Oui",NA,13,27,12,22,12,4,14,21,6,24,12,9,11
+EHA,Mécanisme d’adaptation,Total,Utiliser de l'eau non sûre (sans la bouillir ou la purifier) d'une source non-améliorée: Je ne sais pas / préfère ne pas répondre,NA,NA,0,0,0,0,1,NA,0,NA,0,NA,1,NA
+EHA,Mécanisme d’adaptation,Total,Utiliser de l'eau non sûre (sans la bouillir ou la purifier) d'une source non-améliorée: Non,NA,89,86,97,81,85,83,92,86,93,95,95,86,99
+EHA,Mécanisme d’adaptation,Total,Utiliser de l'eau non sûre (sans la bouillir ou la purifier) d'une source non-améliorée: Oui,NA,11,14,3,18,15,16,8,13,7,5,5,13,1
+EHA,Eau,Total,Accès à suffisamment d’eau pour répondre aux besoins: Insuffisant,NA,15,46,34,33,19,9,12,32,14,17,22,22,7
+EHA,Eau,Total,Accès à suffisamment d’eau pour répondre aux besoins: Juste assez suffisant,NA,29,29,22,19,15,17,23,12,27,22,21,40,18
+EHA,Eau,Total,Accès à suffisamment d’eau pour répondre aux besoins: Pas suffisant du tout,NA,1,2,1,4,1,1,2,8,1,3,2,1,1
+EHA,Eau,Total,Accès à suffisamment d’eau pour répondre aux besoins: Plus que suffisant,NA,13,1,6,3,14,5,5,5,2,19,NA,NA,17
+EHA,Eau,Total,Accès à suffisamment d’eau pour répondre aux besoins: Suffisant,NA,43,22,37,42,51,67,58,43,56,39,55,38,58
+EHA,Eau,Total,Accès à une source d’eau propre/améliorée en saison sèche: Je ne sais pas / préfère ne pas répondre,NA,0,NA,NA,NA,0,NA,0,0,0,0,NA,NA,NA
+EHA,Eau,Total,Accès à une source d’eau propre/améliorée en saison sèche: Non,NA,35,29,12,32,20,17,16,16,8,25,31,23,14
+EHA,Eau,Total,Accès à une source d’eau propre/améliorée en saison sèche: Oui,NA,65,71,88,68,80,83,84,84,92,75,69,77,86
+EHA,Eau,Total,Groupes n’ayant pas accès à l’eau: Les filLes (< 18ans),NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+EHA,Eau,Total,Personnes âgées/difficulté à se déplacer/voir ayant accès à la source d’eau principale: Je ne sais pas / préfère ne pas répondre,Sous-ensemble de donnée,4,NA,NA,NA,NA,NA,NA,NA,NA,6,15,NA,NA
+EHA,Eau,Total,Personnes âgées/difficulté à se déplacer/voir ayant accès à la source d’eau principale: Non,Sous-ensemble de donnée,60,61,62,78,50,41,79,59,66,51,19,91,23
+EHA,Eau,Total,Personnes âgées/difficulté à se déplacer/voir ayant accès à la source d’eau principale: Oui,Sous-ensemble de donnée,36,39,38,22,50,59,21,41,34,44,67,9,77
+EHA,Eau,Total,Principale raison pour manque d’eau: Autre (merci de préciser),Sous-ensemble de donnée,NA,NA,NA,NA,1,NA,NA,NA,NA,NA,NA,NA,NA
+EHA,Eau,Total,"Principale raison pour manque d’eau: Certains groupes (enfants, femmes, personnes âgées, minorités ethniques) n’ont pas accès aux sources d’eau",Sous-ensemble de donnée,NA,NA,0,NA,NA,NA,NA,NA,5,NA,NA,NA,NA
+EHA,Eau,Total,Principale raison pour manque d’eau: Je ne sais pas / préfère ne pas répondre,Sous-ensemble de donnée,NA,NA,NA,NA,0,0,NA,NA,NA,NA,NA,NA,NA
+EHA,Eau,Total,Principale raison pour manque d’eau: L'attente est trop longue / nombre insuffisant de sources d’eau,Sous-ensemble de donnée,43,80,80,43,66,45,16,64,43,71,53,45,90
+EHA,Eau,Total,Principale raison pour manque d’eau: L’eau n’est pas disponible au marché,Sous-ensemble de donnée,NA,0,0,NA,NA,NA,NA,NA,NA,0,NA,NA,NA
+EHA,Eau,Total,Principale raison pour manque d’eau: La distance au point d'eau est trop grande,Sous-ensemble de donnée,45,8,4,23,11,24,38,17,26,20,15,21,NA
+EHA,Eau,Total,"Principale raison pour manque d’eau: La qualité de l’eau n’est pas bonne (l'eau est brunâtre, odorante ou salée)",Sous-ensemble de donnée,7,1,2,9,6,4,4,3,3,8,20,9,NA
+EHA,Eau,Total,Principale raison pour manque d’eau: La route est difficile d’accès,Sous-ensemble de donnée,NA,0,0,NA,NA,1,NA,1,7,NA,NA,NA,10
+EHA,Eau,Total,Principale raison pour manque d’eau: La route ou le lieu de d'accès à l'eau est trop dangereux,Sous-ensemble de donnée,NA,0,NA,4,1,1,NA,NA,NA,NA,NA,NA,NA
+EHA,Eau,Total,Principale raison pour manque d’eau: La source d’eau ne fonctionne pas / est fermée,Sous-ensemble de donnée,NA,3,3,3,6,6,NA,7,3,NA,3,2,NA
+EHA,Eau,Total,Principale raison pour manque d’eau: Pas assez de récipients pour stocker l’eau,Sous-ensemble de donnée,0,4,6,3,4,0,0,2,0,0,NA,2,NA
+EHA,Eau,Total,Principale raison pour manque d’eau: Pas de moyens financiers / l’eau est trop cher,Sous-ensemble de donnée,1,2,1,3,3,6,8,3,8,0,NA,4,NA
+EHA,Eau,Total,Principale raison pour manque d’eau: Pas de ressources en eau,Sous-ensemble de donnée,4,1,3,11,3,12,34,3,3,0,9,19,NA
+EHA,Eau,Total,"Principale source d’eau pour boire: Autre, précisez",NA,0,NA,NA,NA,0,NA,NA,NA,1,NA,NA,NA,NA
+EHA,Eau,Total,Principale source d’eau pour boire: Borne Fontaine,NA,5,11,7,12,9,8,21,4,9,3,17,3,15
+EHA,Eau,Total,"Principale source d’eau pour boire: Cours d'eau (fleuve, rivière, ruisseau, eau de surface, etc.)",NA,0,2,1,NA,0,0,1,1,0,0,NA,2,NA
+EHA,Eau,Total,Principale source d’eau pour boire: Eau amenée par camion,NA,NA,3,2,NA,0,NA,NA,NA,NA,NA,NA,NA,NA
+EHA,Eau,Total,Principale source d’eau pour boire: Eau de pluie,NA,0,0,NA,NA,0,NA,0,NA,NA,0,NA,NA,NA
+EHA,Eau,Total,Principale source d’eau pour boire: Eau du robinet dans concession,NA,3,5,3,17,4,2,18,3,10,4,7,NA,50
+EHA,Eau,Total,Principale source d’eau pour boire: Eau en bouteille - sachet,NA,NA,0,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+EHA,Eau,Total,Principale source d’eau pour boire: Forage avec une PMH (Pompe à Motricité Humaine),NA,71,57,77,43,35,32,23,67,62,78,66,61,13
+EHA,Eau,Total,Principale source d’eau pour boire: Poste d'eau autonome (robinets publics),NA,14,17,6,2,2,4,12,12,10,8,5,6,20
+EHA,Eau,Total,Principale source d’eau pour boire: Puits aménagé / protégé,NA,3,2,3,9,22,17,6,4,2,1,2,10,1
+EHA,Eau,Total,Principale source d’eau pour boire: Puits traditionnel / non protégé,NA,3,3,3,18,26,37,15,6,5,5,3,13,NA
+EHA,Eau,Total,Principale source d’eau pour boire: Source aménagée,NA,NA,1,NA,NA,1,0,NA,0,NA,NA,0,NA,NA
+EHA,Eau,Total,Principale source d’eau pour boire: Source non aménagée,NA,NA,0,0,1,1,0,3,4,1,0,NA,5,NA
+EHA,Eau,Total,Temps de collecte de l‘eau à source principale (attente et collecte): 46 minutes ou plus,NA,10,50,29,15,22,6,13,21,11,10,21,14,4
+EHA,Eau,Total,Temps de collecte de l‘eau à source principale (attente et collecte): Eau dans la concession,NA,7,6,4,18,6,18,31,3,14,5,6,1,51
+EHA,Eau,Total,Temps de collecte de l‘eau à source principale (attente et collecte): Entre 16 et 30 minutes,NA,21,15,25,11,31,18,17,25,8,23,15,8,15
+EHA,Eau,Total,Temps de collecte de l‘eau à source principale (attente et collecte): Entre 31 et 45 minutes,NA,12,15,20,10,15,7,6,17,6,13,12,11,6
+EHA,Eau,Total,Temps de collecte de l‘eau à source principale (attente et collecte): Entre 5 et 15 minutes,NA,36,11,18,20,22,25,15,25,25,34,24,34,18
+EHA,Eau,Total,Temps de collecte de l‘eau à source principale (attente et collecte): Moins de 5 minutes,NA,14,3,4,26,3,26,19,8,35,15,22,32,5
+EHA,Eau,Total,Temps de collecte de l‘eau à source principale (attente et collecte): Ne sait pas,NA,1,1,NA,0,0,0,NA,0,NA,1,NA,NA,NA
+EHA,Eau,Total,Temps de trajet aller-retour vers source principale: 46 minutes ou plus,NA,4,12,6,11,1,2,6,4,6,2,3,1,1
+EHA,Eau,Total,Temps de trajet aller-retour vers source principale: Eau dans la concession,NA,7,6,4,18,6,17,31,3,14,5,6,1,51
+EHA,Eau,Total,Temps de trajet aller-retour vers source principale: Entre 16 et 30 minutes,NA,16,22,21,12,21,11,13,26,12,13,9,16,10
+EHA,Eau,Total,Temps de trajet aller-retour vers source principale: Entre 31 et 45 minutes,NA,5,10,10,2,5,2,3,10,3,2,3,7,1
+EHA,Eau,Total,Temps de trajet aller-retour vers source principale: Entre 5 et 15 minutes,NA,46,35,44,27,39,33,20,38,33,54,45,35,28
+EHA,Eau,Total,Temps de trajet aller-retour vers source principale: Moins de 5 minutes,NA,22,15,15,30,27,35,26,18,32,22,33,40,9
+EHA,Eau,Total,Temps de trajet aller-retour vers source principale: Ne sait pas,NA,1,0,NA,0,0,0,NA,0,NA,1,NA,NA,NA
+EHA,Assainissement,Total,Latrines hygiéniques: Je ne sais pas / préfère ne pas répondre,Sous-ensemble de donnée,2,NA,NA,NA,NA,0,NA,0,NA,0,NA,NA,NA
+EHA,Assainissement,Total,Latrines hygiéniques: Non,Sous-ensemble de donnée,21,40,34,34,34,44,30,47,36,21,37,47,6
+EHA,Assainissement,Total,Latrines hygiéniques: Oui,Sous-ensemble de donnée,76,60,66,66,66,55,70,53,64,79,63,53,94
+EHA,Assainissement,Total,Nombre de personnes partageant latrine: Latrines communautaires partagées par 21 à 50 personnes,Sous-ensemble de donnée,2,12,19,6,14,6,4,3,11,6,NA,7,NA
+EHA,Assainissement,Total,Nombre de personnes partageant latrine: Latrines communautaires partagées par moins de 20 personnes,Sous-ensemble de donnée,61,48,51,65,48,71,79,57,64,56,70,77,65
+EHA,Assainissement,Total,Nombre de personnes partageant latrine: Latrines communautaires partagées par plus de 50 personnes,Sous-ensemble de donnée,3,0,5,2,5,0,NA,NA,NA,0,NA,2,NA
+EHA,Assainissement,Total,Nombre de personnes partageant latrine: Latrines individuelles,Sous-ensemble de donnée,34,40,26,27,34,22,18,40,26,38,30,13,35
+EHA,Assainissement,Total,Personnes âgées/difficulté à se déplacer/voir ayant accès facilement aux latrines: Je ne sais pas / préfère ne pas répondre,Sous-ensemble de donnée,NA,0,NA,NA,NA,3,NA,NA,NA,NA,15,4,NA
+EHA,Assainissement,Total,Personnes âgées/difficulté à se déplacer/voir ayant accès facilement aux latrines: Non,Sous-ensemble de donnée,74,56,55,56,76,49,18,84,32,57,85,76,26
+EHA,Assainissement,Total,Personnes âgées/difficulté à se déplacer/voir ayant accès facilement aux latrines: Oui,Sous-ensemble de donnée,26,44,45,44,24,48,82,16,68,43,NA,20,74
+EHA,Assainissement,Total,Type latrine utilisée: Autres (merci de préciser),NA,NA,NA,0,NA,0,NA,NA,NA,NA,NA,NA,NA,NA
+EHA,Assainissement,Total,"Type latrine utilisée: Défécation à l'air libre (DAL) dans zone précise et aménagée (bâche, pelle, …)",NA,2,1,0,5,2,2,NA,2,NA,NA,8,NA,NA
+EHA,Assainissement,Total,Type latrine utilisée: Défécation à l'air libre dans un cours d’eau,NA,4,2,0,2,1,0,0,3,0,0,NA,1,NA
+EHA,Assainissement,Total,Type latrine utilisée: Défécation à l'air libre dans une zone précise non aménagée,NA,12,5,5,3,6,5,1,4,4,3,4,13,NA
+EHA,Assainissement,Total,Type latrine utilisée: Défécation à l'air libre sans zone précise,NA,28,19,25,30,25,23,12,39,12,37,25,41,7
+EHA,Assainissement,Total,Type latrine utilisée: Je ne sais pas / préfère ne pas répondre,NA,NA,NA,NA,NA,0,0,NA,0,NA,NA,NA,NA,NA
+EHA,Assainissement,Total,Type latrine utilisée: Latrine privée,NA,38,51,27,37,42,42,39,32,34,32,37,12,47
+EHA,Assainissement,Total,Type latrine utilisée: Latrine privée partagée,NA,10,17,28,11,17,19,32,19,34,23,6,20,46
+EHA,Assainissement,Total,Type latrine utilisée: Latrine publique,NA,6,3,14,9,7,6,16,1,16,5,20,14,NA
+EHA,Assainissement,Total,Type latrine utilisée: Toilette à chasse d'eau mécanique ou manuelle?,NA,NA,0,NA,1,NA,3,NA,NA,NA,NA,NA,NA,NA
+EHA,Hygiène,Total,% des enfants de moins de 5ans ayant diarrhée dans les 2 dernières semaines,NA,26,25,14,11,17,18,12,28,11,32,26,20,25
+EHA,Hygiène,Total,Accès au savon: Je ne sais pas / préfère ne pas répondre,NA,NA,0,0,0,1,NA,NA,0,NA,NA,NA,NA,NA
+EHA,Hygiène,Total,Accès au savon: Non,NA,34,21,27,20,30,32,15,48,12,36,24,28,13
+EHA,Hygiène,Total,Accès au savon: Oui,NA,66,79,73,79,69,68,85,52,88,64,76,72,87
+EHA,Hygiène,Total,"Dispositif de lavage des mains: Autre, préciser",NA,NA,NA,NA,NA,NA,0,NA,1,NA,NA,NA,NA,NA
+EHA,Hygiène,Total,Dispositif de lavage des mains: Bouilloire / arrosoir pour verser l'eau sur les mains,NA,61,70,80,67,69,71,69,58,69,68,70,63,71
+EHA,Hygiène,Total,Dispositif de lavage des mains: Evier avec eau courante,NA,2,NA,1,1,1,0,1,NA,NA,1,NA,NA,4
+EHA,Hygiène,Total,Dispositif de lavage des mains: Ne sait pas,NA,NA,NA,NA,NA,NA,NA,NA,1,NA,NA,NA,NA,NA
+EHA,Hygiène,Total,Dispositif de lavage des mains: Pas de dispositif particulier (pas de dispositif ou juste un seau ou similaire sans robinet),NA,31,28,9,27,24,27,29,38,29,27,29,34,11
+EHA,Hygiène,Total,Dispositif de lavage des mains: Seau avec robinet,NA,5,1,6,4,3,1,1,1,1,3,1,NA,14
+EHA,Hygiène,Total,"Dispositif de lavage des mains: Tippy tap (dispostif artisanal fabriqué avec du matériel local : poutre, seau et système de levier avec une corde)",NA,1,1,5,NA,3,1,0,2,0,0,NA,3,1
+EHA,Hygiène,Total,Méthode de lavage des mains hier: Autres (à préciser),NA,NA,NA,NA,NA,NA,0,1,NA,1,1,NA,NA,NA
+EHA,Hygiène,Total,Méthode de lavage des mains hier: Avec de l'eau simple,NA,48,38,33,44,44,47,22,47,27,51,47,44,18
+EHA,Hygiène,Total,Méthode de lavage des mains hier: Avec de la cendre,NA,1,2,5,NA,2,2,NA,11,1,NA,NA,NA,NA
+EHA,Hygiène,Total,Méthode de lavage des mains hier: Avec du savon,NA,50,60,62,56,53,52,77,43,71,48,53,56,82
+EHA,Hygiène,Total,Méthode de lavage des mains hier: Je ne sais pas ou je ne souhaite pas répondre,NA,0,NA,NA,NA,0,NA,NA,NA,NA,NA,NA,NA,NA
+EHA,Hygiène,Total,Moments du lavage des mains du ménage hier: Ablution et/ou après manger,NA,23,72,50,26,67,57,19,33,39,47,40,42,65
+EHA,Hygiène,Total,Moments du lavage des mains du ménage hier: Après la toilette ou la latrine,NA,41,63,66,45,51,49,69,59,66,49,44,47,83
+EHA,Hygiène,Total,Moments du lavage des mains du ménage hier: Après le nettoyage ou changement des couches de l’enfant,NA,8,8,8,3,11,4,8,14,1,3,2,1,6
+EHA,Hygiène,Total,Moments du lavage des mains du ménage hier: Au retour des champs,NA,22,13,25,24,41,35,20,49,28,43,26,32,4
+EHA,Hygiène,Total,Moments du lavage des mains du ménage hier: Aucun,NA,2,0,0,1,0,0,0,0,0,0,0,0,0
+EHA,Hygiène,Total,Moments du lavage des mains du ménage hier: Autres (à préciser),NA,1,1,0,0,1,2,0,1,2,2,1,1,0
+EHA,Hygiène,Total,Moments du lavage des mains du ménage hier: Avant de donner le sein à l’enfant,NA,7,7,11,4,5,2,5,11,2,4,4,3,10
+EHA,Hygiène,Total,Moments du lavage des mains du ménage hier: Avant de manger,NA,97,98,94,98,97,99,98,95,96,97,99,100,100
+EHA,Hygiène,Total,Moments du lavage des mains du ménage hier: Avant de préparer les aliments,NA,41,16,36,18,35,22,31,41,24,39,28,18,51
+EHA,Hygiène,Total,Moments du lavage des mains du ménage hier: Je ne sais pas / préfère ne pas répondre,NA,0,0,0,1,0,0,0,0,0,0,0,0,0
+Protection,Sécurité,Total,Au moins un membre du ménage affecté par incident sécuritaire: Je ne sais pas / préfère ne pas répondre,NA,NA,0,NA,NA,0,0,0,0,NA,NA,NA,1,NA
+Protection,Sécurité,Total,Au moins un membre du ménage affecté par incident sécuritaire: Non,NA,98,96,97,98,94,95,95,93,96,100,100,91,97
+Protection,Sécurité,Total,Au moins un membre du ménage affecté par incident sécuritaire: Oui,NA,2,4,3,2,6,4,4,7,4,0,NA,9,3
+Protection,Sécurité,Total,Préoccupation en matière de protection des femmes: Non,Sous-ensemble de donnée,91,37,81,94,45,87,93,73,85,86,100,90,90
+Protection,Sécurité,Total,Préoccupation en matière de protection des femmes: Oui,Sous-ensemble de donnée,9,63,19,6,55,13,7,27,15,14,NA,10,10
+Protection,Sécurité,Total,Préoccupation en matière de protection des filles (moins de 18 ans): Non,Sous-ensemble de donnée,89,46,86,88,50,87,92,77,83,85,96,82,89
+Protection,Sécurité,Total,Préoccupation en matière de protection des filles (moins de 18 ans): Oui,Sous-ensemble de donnée,11,54,14,12,50,13,8,23,17,15,4,18,11
+Protection,Sécurité,Total,Préoccupation en matière de protection des garçons (moins de 18 ans): Non,Sous-ensemble de donnée,91,43,86,85,54,90,95,74,79,81,94,82,85
+Protection,Sécurité,Total,Préoccupation en matière de protection des garçons (moins de 18 ans): Oui,Sous-ensemble de donnée,9,57,14,15,46,10,5,26,21,19,6,18,15
+Protection,Sécurité,Total,Préoccupation en matière de protection des hommes: Non,Sous-ensemble de donnée,85,27,77,91,44,90,95,61,86,85,100,86,92
+Protection,Sécurité,Total,Préoccupation en matière de protection des hommes: Oui,Sous-ensemble de donnée,15,73,23,9,56,10,5,39,14,15,NA,14,8
+Protection,Sécurité,Total,Risque femmes exposées: Accouchement forcé à domicile sans prise en charge,NA,13,6,2,0,6,5,0,9,0,15,NA,0,0
+Protection,Sécurité,Total,Risque femmes exposées: Autres (merci de préciser),NA,0,3,0,14,2,3,5,1,10,0,NA,0,9
+Protection,Sécurité,Total,Risque femmes exposées: Conflits fonciers,NA,0,0,0,0,1,0,0,11,3,0,NA,0,0
+Protection,Sécurité,Total,Risque femmes exposées: Enlèvements / kidnapping – général,NA,0,19,3,2,9,12,0,13,0,3,NA,0,0
+Protection,Sécurité,Total,Risque femmes exposées: Enlèvements / kidnapping pour du travail forcé (contre sa volonté),NA,0,4,4,0,3,10,0,0,0,0,NA,0,0
+Protection,Sécurité,Total,Risque femmes exposées: Harcèlement pour révéler des informations,NA,0,5,4,0,3,4,0,12,0,0,NA,0,0
+Protection,Sécurité,Total,Risque femmes exposées: Incident causé par la transhumance,NA,0,0,1,0,0,0,0,0,0,0,NA,0,0
+Protection,Sécurité,Total,Risque femmes exposées: Incident violent causé par une explosion / mine,NA,0,3,0,0,8,0,0,2,0,0,NA,0,0
+Protection,Sécurité,Total,Risque femmes exposées: Je ne sais pas ou je ne souhaite pas répondre,NA,0,0,0,50,0,1,0,0,0,10,NA,0,0
+Protection,Sécurité,Total,Risque femmes exposées: Mariage forcé (contre sa volonté),NA,0,10,2,0,0,3,0,2,0,0,NA,0,0
+Protection,Sécurité,Total,Risque femmes exposées: Meurtre / blessure au sein de la même communauté,NA,0,3,0,0,1,2,0,5,0,0,NA,0,0
+Protection,Sécurité,Total,Risque femmes exposées: Meurtre / blessure entre membre de différents groupes,NA,0,2,0,0,1,3,0,9,0,0,NA,0,0
+Protection,Sécurité,Total,Risque femmes exposées: Pillage / criminalité,NA,0,10,17,2,23,19,14,17,16,9,NA,28,9
+Protection,Sécurité,Total,Risque femmes exposées: Recrutement forcé,NA,0,1,0,0,0,0,0,0,0,0,NA,0,0
+Protection,Sécurité,Total,Risque femmes exposées: Rumeurs d'attaques,NA,7,51,43,4,51,32,0,7,0,4,NA,6,9
+Protection,Sécurité,Total,Risque femmes exposées: Séparation de la famille,NA,13,11,7,0,8,5,22,34,3,0,NA,0,0
+Protection,Sécurité,Total,Risque femmes exposées: Tensions entre communauté hôte / communauté déplacé,NA,0,1,1,0,2,0,0,0,0,0,NA,0,0
+Protection,Sécurité,Total,Risque femmes exposées: Tomber malade et ne pas pouvoir être pris en charge,NA,82,38,40,36,53,32,35,37,63,77,NA,36,82
+Protection,Sécurité,Total,Risque femmes exposées: Travail forcé (contre sa volonté),NA,0,3,0,0,0,2,0,2,0,0,NA,0,0
+Protection,Sécurité,Total,Risque femmes exposées: Violence entre voisins,NA,0,3,6,0,2,1,0,4,5,0,NA,0,0
+Protection,Sécurité,Total,Risque femmes exposées: Violences sexuelles,NA,0,22,7,0,9,17,24,11,2,0,NA,18,0
+Protection,Sécurité,Total,Risque femmes exposées: Vol de bétail,NA,13,0,7,0,1,4,0,1,0,0,NA,18,0
+Protection,Sécurité,Total,Risque femmes exposées: Vol de bétail,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Protection,Sécurité,Total,Risque filles (moins de 18 ans) exposées: Accouchement forcé à domicile sans prise en charge,NA,0,4,2,3,1,0,0,5,0,7,0,0,0
+Protection,Sécurité,Total,Risque filles (moins de 18 ans) exposées: Autres (merci de préciser),NA,0,1,5,0,2,2,0,0,10,0,0,5,24
+Protection,Sécurité,Total,Risque filles (moins de 18 ans) exposées: Conflits fonciers,NA,0,1,0,0,1,0,0,5,0,0,0,0,0
+Protection,Sécurité,Total,Risque filles (moins de 18 ans) exposées: Enlèvements / kidnapping – général,NA,0,19,3,0,13,23,0,8,0,0,0,0,0
+Protection,Sécurité,Total,Risque filles (moins de 18 ans) exposées: Enlèvements / kidnapping pour du travail forcé (contre sa volonté),NA,0,4,2,0,4,10,0,1,0,0,0,0,0
+Protection,Sécurité,Total,Risque filles (moins de 18 ans) exposées: Harcèlement pour révéler des informations,NA,0,4,0,0,2,5,0,2,0,0,0,0,0
+Protection,Sécurité,Total,Risque filles (moins de 18 ans) exposées: Incident causé par la transhumance,NA,0,0,0,0,1,0,0,0,0,0,0,0,0
+Protection,Sécurité,Total,Risque filles (moins de 18 ans) exposées: Incident violent causé par une explosion / mine,NA,0,3,0,0,4,1,0,0,0,0,0,2,0
+Protection,Sécurité,Total,Risque filles (moins de 18 ans) exposées: Je ne sais pas ou je ne souhaite pas répondre,NA,0,0,2,19,0,0,0,0,0,10,0,0,0
+Protection,Sécurité,Total,Risque filles (moins de 18 ans) exposées: Mariage avant 18 ans (mariage précoce) / Mariage forcé (contre sa volonté),NA,24,11,11,44,4,10,0,43,0,0,0,0,0
+Protection,Sécurité,Total,Risque filles (moins de 18 ans) exposées: Meurtre / blessure au sein de la même communauté,NA,0,1,0,0,0,0,0,1,0,0,0,0,0
+Protection,Sécurité,Total,Risque filles (moins de 18 ans) exposées: Meurtre / blessure entre membre de différents groupes,NA,0,1,0,0,0,1,0,6,0,0,0,12,0
+Protection,Sécurité,Total,Risque filles (moins de 18 ans) exposées: Pillage / criminalité,NA,0,6,6,5,16,7,15,0,15,8,0,2,0
+Protection,Sécurité,Total,Risque filles (moins de 18 ans) exposées: Recrutement forcé,NA,0,4,0,0,0,0,0,1,0,0,0,0,0
+Protection,Sécurité,Total,Risque filles (moins de 18 ans) exposées: Rumeurs d'attaques,NA,3,38,22,5,40,27,0,4,0,0,0,17,10
+Protection,Sécurité,Total,Risque filles (moins de 18 ans) exposées: Séparation de la famille,NA,0,16,7,0,11,4,0,31,0,0,0,0,0
+Protection,Sécurité,Total,Risque filles (moins de 18 ans) exposées: Tensions entre communauté hôte / communauté déplacé,NA,0,0,3,0,2,0,0,1,0,0,0,0,0
+Protection,Sécurité,Total,Risque filles (moins de 18 ans) exposées: Tomber malade et ne pas pouvoir être pris en charge,NA,78,40,31,34,42,34,16,18,74,83,100,56,90
+Protection,Sécurité,Total,Risque filles (moins de 18 ans) exposées: Travail forcé (contre sa volonté),NA,0,2,0,0,0,7,0,0,0,0,14,0,0
+Protection,Sécurité,Total,Risque filles (moins de 18 ans) exposées: Violence entre voisins,NA,0,2,4,0,1,5,0,1,6,0,0,0,0
+Protection,Sécurité,Total,Risque filles (moins de 18 ans) exposées: Violences sexuelles,NA,0,26,25,17,24,30,68,32,0,0,0,11,0
+Protection,Sécurité,Total,Risque filles (moins de 18 ans) exposées: Vol de bétail,NA,0,0,0,0,1,2,0,0,0,0,0,18,0
+Protection,Sécurité,Total,Risque garçons (moins de 18 ans) exposées: Accouchement forcé à domicile sans prise en charge,NA,0,0,0,0,0,0,0,0,0,6,0,0,0
+Protection,Sécurité,Total,Risque garçons (moins de 18 ans) exposées: Autres (merci de préciser),NA,0,2,1,0,3,2,0,0,8,23,0,0,20
+Protection,Sécurité,Total,Risque garçons (moins de 18 ans) exposées: Conflits fonciers,NA,0,2,0,0,0,3,0,1,0,0,0,2,0
+Protection,Sécurité,Total,Risque garçons (moins de 18 ans) exposées: Enlèvements / kidnapping – général,NA,0,22,3,20,15,26,0,24,5,0,0,0,0
+Protection,Sécurité,Total,Risque garçons (moins de 18 ans) exposées: Enlèvements / kidnapping pour du travail forcé (contre sa volonté),NA,11,8,2,0,2,13,0,4,0,0,0,0,0
+Protection,Sécurité,Total,Risque garçons (moins de 18 ans) exposées: Harcèlement pour révéler des informations,NA,0,6,1,0,2,2,0,13,0,0,0,0,0
+Protection,Sécurité,Total,Risque garçons (moins de 18 ans) exposées: Incident causé par la transhumance,NA,0,2,0,0,2,0,0,0,0,0,0,0,0
+Protection,Sécurité,Total,Risque garçons (moins de 18 ans) exposées: Incident violent causé par une explosion / mine,NA,0,3,5,0,7,3,0,5,0,0,0,0,0
+Protection,Sécurité,Total,Risque garçons (moins de 18 ans) exposées: Je ne sais pas ou je ne souhaite pas répondre,NA,0,0,0,13,0,0,0,0,0,8,0,0,0
+Protection,Sécurité,Total,Risque garçons (moins de 18 ans) exposées: Mariage avant 18 ans (mariage précoce) / Mariage forcé (contre sa volonté),NA,0,4,0,0,0,3,0,5,0,0,0,0,0
+Protection,Sécurité,Total,Risque garçons (moins de 18 ans) exposées: Meurtre / blessure au sein de la même communauté,NA,0,1,5,0,1,2,0,2,0,0,0,9,0
+Protection,Sécurité,Total,Risque garçons (moins de 18 ans) exposées: Meurtre / blessure entre membre de différents groupes,NA,0,4,7,0,0,5,0,14,0,0,0,23,0
+Protection,Sécurité,Total,Risque garçons (moins de 18 ans) exposées: Pillage / criminalité,NA,0,14,25,3,28,6,5,18,10,6,0,4,0
+Protection,Sécurité,Total,Risque garçons (moins de 18 ans) exposées: Recrutement forcé,NA,0,18,5,17,3,10,0,22,0,0,0,0,0
+Protection,Sécurité,Total,Risque garçons (moins de 18 ans) exposées: Rumeurs d'attaques,NA,3,48,23,5,47,34,0,15,0,0,0,31,8
+Protection,Sécurité,Total,Risque garçons (moins de 18 ans) exposées: Séparation de la famille,NA,4,14,3,0,10,3,0,34,0,0,0,0,0
+Protection,Sécurité,Total,Risque garçons (moins de 18 ans) exposées: Tensions entre communauté hôte / communauté déplacé,NA,0,0,6,0,0,4,0,1,0,0,0,0,0
+Protection,Sécurité,Total,Risque garçons (moins de 18 ans) exposées: Tomber malade et ne pas pouvoir être pris en charge,NA,81,33,39,23,36,33,95,15,76,83,75,56,92
+Protection,Sécurité,Total,Risque garçons (moins de 18 ans) exposées: Travail forcé (contre sa volonté),NA,0,5,3,28,2,9,0,7,0,0,0,0,0
+Protection,Sécurité,Total,Risque garçons (moins de 18 ans) exposées: Violence entre voisins,NA,0,3,3,35,4,4,0,6,10,0,0,2,0
+Protection,Sécurité,Total,Risque garçons (moins de 18 ans) exposées: Violences sexuelles,NA,0,2,0,0,0,0,0,4,0,0,0,0,0
+Protection,Sécurité,Total,Risque garçons (moins de 18 ans) exposées: Vol de bétail,NA,0,3,3,12,3,3,0,0,5,0,25,0,0
+Protection,Sécurité,Total,Risque hommes exposées: Accouchement forcé à domicile sans prise en charge,NA,0,0,0,0,1,1,0,1,0,0,NA,0,0
+Protection,Sécurité,Total,Risque hommes exposées: Autres (merci de préciser),NA,0,0,0,0,2,3,0,0,7,0,NA,12,0
+Protection,Sécurité,Total,Risque hommes exposées: Conflits fonciers,NA,0,2,0,0,1,2,0,12,6,0,NA,2,0
+Protection,Sécurité,Total,Risque hommes exposées: Enlèvements / kidnapping – général,NA,0,34,14,2,20,21,0,35,0,3,NA,0,0
+Protection,Sécurité,Total,Risque hommes exposées: Enlèvements / kidnapping pour du travail forcé (contre sa volonté),NA,0,10,4,0,5,1,0,15,0,0,NA,0,0
+Protection,Sécurité,Total,Risque hommes exposées: Harcèlement pour révéler des informations,NA,0,6,7,0,5,2,0,16,0,0,NA,0,0
+Protection,Sécurité,Total,Risque hommes exposées: Incident causé par la transhumance,NA,0,2,1,0,2,0,0,1,0,0,NA,0,0
+Protection,Sécurité,Total,Risque hommes exposées: Incident violent causé par une explosion / mine,NA,0,8,1,0,12,1,0,4,0,0,NA,0,0
+Protection,Sécurité,Total,Risque hommes exposées: Je ne sais pas ou je ne souhaite pas répondre,NA,3,0,0,23,0,0,0,0,0,10,NA,0,0
+Protection,Sécurité,Total,Risque hommes exposées: Mariage forcé (contre sa volonté),NA,0,1,0,0,0,1,0,0,0,0,NA,0,0
+Protection,Sécurité,Total,Risque hommes exposées: Meurtre / blessure au sein de la même communauté,NA,0,4,2,0,1,3,0,5,0,0,NA,0,0
+Protection,Sécurité,Total,Risque hommes exposées: Meurtre / blessure entre membre de différents groupes,NA,0,6,16,0,1,6,0,26,0,0,NA,0,0
+Protection,Sécurité,Total,Risque hommes exposées: Pillage / criminalité,NA,3,26,30,2,28,9,9,32,17,8,NA,18,12
+Protection,Sécurité,Total,Risque hommes exposées: Recrutement forcé,NA,0,12,2,0,6,4,0,11,0,0,NA,0,0
+Protection,Sécurité,Total,Risque hommes exposées: Rumeurs d'attaques,NA,16,69,51,4,58,36,0,17,3,4,NA,4,12
+Protection,Sécurité,Total,Risque hommes exposées: Séparation de la famille,NA,0,10,5,0,14,6,34,14,0,0,NA,0,0
+Protection,Sécurité,Total,Risque hommes exposées: Tensions entre communauté hôte / communauté déplacé,NA,0,1,2,0,2,2,0,2,0,0,NA,0,0
+Protection,Sécurité,Total,Risque hommes exposées: Tomber malade et ne pas pouvoir être pris en charge,NA,74,16,30,38,40,40,57,12,67,79,NA,43,76
+Protection,Sécurité,Total,Risque hommes exposées: Travail forcé (contre sa volonté),NA,0,4,2,0,1,2,0,3,0,0,NA,0,0
+Protection,Sécurité,Total,Risque hommes exposées: Violence entre voisins,NA,0,2,0,31,2,2,0,13,6,0,NA,0,0
+Protection,Sécurité,Total,Risque hommes exposées: Violences sexuelles,NA,0,1,0,0,0,0,0,0,0,0,NA,0,0
+Protection,Sécurité,Total,Risque hommes exposées: Vol de bétail,NA,10,10,10,8,10,10,0,8,0,0,NA,25,0
+Protection,Sécurité,Total,Risque hommes exposées: Vol de bétail,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Protection,Travail des enfants,Total,% de filles travaillant,NA,15,22,11,17,28,37,17,39,26,20,29,36,13
+Protection,Travail des enfants,Total,% de garçons travaillant,NA,14,34,15,25,37,43,27,38,37,17,37,40,17
+Protection,Travail des enfants,Total,Type de travail des enfants: Agriculture/Travaux champêtres,NA,51,46,44,73,72,89,36,70,67,82,80,90,13
+Protection,Travail des enfants,Total,"Type de travail des enfants: Artisanat (menuiserie, forge, soudure...)",NA,8,9,16,10,7,5,9,4,14,4,6,8,34
+Protection,Travail des enfants,Total,"Type de travail des enfants: Autre, préciser",NA,0,0,0,0,0,0,0,0,0,0,0,0,0
+Protection,Travail des enfants,Total,Type de travail des enfants: Carrière / Mines,NA,3,15,23,0,9,1,6,5,8,0,3,0,3
+Protection,Travail des enfants,Total,Type de travail des enfants: Construction / Bâtiment,NA,5,6,2,1,2,7,8,1,4,0,0,0,13
+Protection,Travail des enfants,Total,Type de travail des enfants: Elevage /chasse,NA,6,11,7,40,35,26,14,20,23,7,26,38,0
+Protection,Travail des enfants,Total,Type de travail des enfants: Je ne sais pas / préfère ne pas répondre,NA,0,0,0,0,0,0,0,0,0,0,0,0,0
+Protection,Travail des enfants,Total,Type de travail des enfants: Pêche,NA,0,0,0,0,2,0,0,0,1,0,0,1,0
+Protection,Travail des enfants,Total,Type de travail des enfants: Petit commerce,NA,55,22,19,52,18,17,26,21,32,5,31,9,31
+Protection,Travail des enfants,Total,Type de travail des enfants: Prostitution,NA,0,0,0,0,0,0,0,0,0,0,0,0,0
+Protection,Travail des enfants,Total,Type de travail des enfants: Recrutes,NA,0,0,0,0,0,0,0,0,0,0,0,0,0
+Protection,Travail des enfants,Total,Type de travail des enfants: Restauration,NA,2,3,3,0,1,5,5,5,2,4,0,0,4
+Protection,Travail des enfants,Total,Type de travail des enfants: Transport,NA,0,1,3,0,0,1,5,0,0,0,1,0,4
+Protection,Travail des enfants,Total,Type de travail des enfants: Travaux domestiques,NA,31,38,11,37,48,66,12,68,41,34,56,55,39
+Protection,Enfants,Total,Au moins un membre du ménage montrant signes de détresse psychologique: Je ne sais pas / préfère ne pas répondre,NA,5,0,2,NA,NA,0,NA,NA,NA,5,0,NA,NA
+Protection,Enfants,Total,Au moins un membre du ménage montrant signes de détresse psychologique: Non,NA,91,88,93,93,85,97,95,79,97,86,98,92,98
+Protection,Enfants,Total,Au moins un membre du ménage montrant signes de détresse psychologique: Oui,NA,4,11,6,7,15,2,5,21,3,9,1,8,2
+Protection,Détresse,Total,Nombre d’adultes montrant signes de détresse psychologique,Sous-ensemble de donnée,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Protection,Détresse,Total,Nombre d’enfants montrant signes de détresse psychologique,Sous-ensemble de donnée,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Protection,Documentation,Total,Documents d’identité possédés par le ménage: Pour aucun des membres de la famille,NA,2,1,1,1,1,1,3,1,1,0,NA,NA,2
+Protection,Documentation,Total,Documents d’identité possédés par le ménage: Pour tous les membres de la famille,NA,76,58,65,74,58,77,74,62,69,61,89,53,89
+Protection,Documentation,Total,Documents d’identité possédés par le ménage: Pour une partie des membres de la famille,NA,22,41,34,26,41,22,23,37,30,39,11,47,10
+Protection,Documentation,Total,"Titre de propriété possédé par le ménage: Non, aucun",NA,73,76,70,66,75,84,58,71,78,70,80,91,48
+Protection,Documentation,Total,"Titre de propriété possédé par le ménage: Oui, pour la terre seulement",NA,9,4,5,3,9,5,NA,2,1,12,3,NA,13
+Protection,Documentation,Total,"Titre de propriété possédé par le ménage: Oui, pour le logement et la terre",NA,7,10,16,25,10,7,24,21,12,8,16,2,29
+Protection,Documentation,Total,"Titre de propriété possédé par le ménage: Oui, pour le logement seulement",NA,11,10,9,6,5,4,18,7,8,11,1,7,11
+Protection,Relations communautaires,Total,Perception relation avec communauté hôte: Bonnes,Sous-ensemble de donnée,45,71,64,NA,57,49,59,61,77,52,NA,NA,NA
+Protection,Relations communautaires,Total,Perception relation avec communauté hôte: Fragiles,Sous-ensemble de donnée,4,4,11,NA,2,1,11,2,3,4,NA,NA,NA
+Protection,Relations communautaires,Total,Perception relation avec communauté hôte: Je ne sais pas / ne souhaite pas répondre,Sous-ensemble de donnée,NA,0,0,NA,NA,NA,NA,NA,NA,1,NA,NA,NA
+Protection,Relations communautaires,Total,Perception relation avec communauté hôte: Mauvaises,Sous-ensemble de donnée,1,0,0,NA,0,0,NA,1,NA,NA,NA,NA,NA
+Protection,Relations communautaires,Total,Perception relation avec communauté hôte: Neutre,Sous-ensemble de donnée,2,1,0,NA,1,0,1,4,NA,NA,NA,NA,NA
+Protection,Relations communautaires,Total,Perception relation avec communauté hôte: Très bonnes,Sous-ensemble de donnée,47,24,25,NA,40,50,29,32,17,43,NA,NA,NA
+Protection,Relations communautaires,Total,Perception relation avec communauté hôte: Très mauvaises,Sous-ensemble de donnée,NA,NA,NA,NA,NA,0,NA,NA,3,NA,NA,NA,NA
+Protection,Relations communautaires,Total,Perception relation avec personnes déplacées: Bonnes,Sous-ensemble de donnée,16,47,54,6,31,12,12,38,16,16,5,11,10
+Protection,Relations communautaires,Total,Perception relation avec personnes déplacées: Fragiles,Sous-ensemble de donnée,NA,3,4,NA,1,1,1,5,1,NA,1,0,NA
+Protection,Relations communautaires,Total,Perception relation avec personnes déplacées: Il n'y a pas de personnes déplacées dans la localité,Sous-ensemble de donnée,65,20,15,89,40,63,75,26,71,57,92,85,66
+Protection,Relations communautaires,Total,Perception relation avec personnes déplacées: Je ne sais pas / ne souhaite pas repondre,Sous-ensemble de donnée,3,2,1,3,1,7,4,1,5,6,NA,3,16
+Protection,Relations communautaires,Total,Perception relation avec personnes déplacées: Mauvaises,Sous-ensemble de donnée,NA,1,0,NA,0,NA,NA,1,NA,NA,NA,NA,NA
+Protection,Relations communautaires,Total,Perception relation avec personnes déplacées: Neutre,Sous-ensemble de donnée,3,3,3,2,12,8,6,14,2,6,NA,0,3
+Protection,Relations communautaires,Total,Perception relation avec personnes déplacées: Très bonnes,Sous-ensemble de donnée,13,24,23,NA,15,8,3,15,6,17,2,1,6
+Redevabilité aux personnes affectées,Information,Total,Ménage ayant accès à un réseau téléphonique stable à la maison: Je ne sais pas / préfère ne pas répondre,NA,NA,0,1,NA,0,0,1,0,NA,2,2,NA,NA
+Redevabilité aux personnes affectées,Information,Total,Ménage ayant accès à un réseau téléphonique stable à la maison: Non,NA,28,11,7,11,9,15,24,18,35,6,5,33,1
+Redevabilité aux personnes affectées,Information,Total,Ménage ayant accès à un réseau téléphonique stable à la maison: Oui,NA,72,89,93,89,91,85,76,82,65,92,94,67,99
+Redevabilité aux personnes affectées,Information,Total,Ménage possédant un téléphone fonctionnel: Je ne sais pas / préfère ne pas répondre,NA,NA,NA,NA,NA,NA,NA,2,NA,NA,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Information,Total,Ménage possédant un téléphone fonctionnel: Non,NA,8,2,1,2,2,5,3,3,3,3,3,5,3
+Redevabilité aux personnes affectées,Information,Total,Ménage possédant un téléphone fonctionnel: Oui,NA,92,98,99,98,98,95,95,97,97,97,97,95,97
+Redevabilité aux personnes affectées,Information,Total,Moyen préféré pour recevoir information: Appel téléphonique,NA,24,44,44,34,51,35,20,43,30,36,35,21,42
+Redevabilité aux personnes affectées,Information,Total,Moyen préféré pour recevoir information: Autres (Merci de préciser),NA,2,1,0,NA,1,1,NA,NA,1,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Information,Total,Moyen préféré pour recevoir information: Crieurs publics,NA,3,2,3,4,1,16,8,3,3,6,13,11,1
+Redevabilité aux personnes affectées,Information,Total,"Moyen préféré pour recevoir information: En personne, face à face (merci de préciser avec qui vous souhaiteriez en discuter)",NA,1,3,0,4,4,3,8,6,1,3,NA,2,2
+Redevabilité aux personnes affectées,Information,Total,Moyen préféré pour recevoir information: Je ne sais pas / préfère ne pas répondre,NA,4,0,NA,NA,NA,0,0,NA,NA,5,NA,NA,2
+Redevabilité aux personnes affectées,Information,Total,Moyen préféré pour recevoir information: Journaux,NA,2,0,0,NA,0,0,2,NA,0,NA,NA,NA,2
+Redevabilité aux personnes affectées,Information,Total,Moyen préféré pour recevoir information: Par des hauts parleurs,NA,NA,NA,1,1,NA,2,4,0,6,1,3,4,NA
+Redevabilité aux personnes affectées,Information,Total,Moyen préféré pour recevoir information: Radio,NA,57,41,49,43,38,34,40,39,49,45,38,59,23
+Redevabilité aux personnes affectées,Information,Total,Moyen préféré pour recevoir information: SMS,NA,NA,0,0,NA,0,1,1,3,1,0,NA,0,NA
+Redevabilité aux personnes affectées,Information,Total,Moyen préféré pour recevoir information: Sur des panneaux informatifs,NA,NA,NA,NA,NA,0,NA,NA,NA,NA,NA,1,NA,NA
+Redevabilité aux personnes affectées,Information,Total,Moyen préféré pour recevoir information: Sur des posters,NA,NA,NA,NA,NA,NA,0,NA,NA,NA,NA,0,NA,NA
+Redevabilité aux personnes affectées,Information,Total,Moyen préféré pour recevoir information: Télévision,NA,6,8,2,13,4,6,16,5,7,4,9,1,27
+Redevabilité aux personnes affectées,Information,Total,Moyen préféré pour recevoir information: Twitter,NA,NA,NA,NA,1,0,NA,1,0,2,NA,NA,2,2
+Redevabilité aux personnes affectées,Information,Total,Moyen préféré pour retour aux fournisseurs d’aide humanitaire: Autres (merci de préciser),NA,0,0,2,NA,0,NA,1,0,NA,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Information,Total,Moyen préféré pour retour aux fournisseurs d’aide humanitaire: Face à face à la maison avec le travailleur humanitaire,NA,42,23,39,55,32,32,32,32,24,43,34,30,37
+Redevabilité aux personnes affectées,Information,Total,Moyen préféré pour retour aux fournisseurs d’aide humanitaire: Face à face dans un bureau ou autre avec le travailleur humanitaire,NA,14,18,7,8,6,11,4,18,5,7,4,5,26
+Redevabilité aux personnes affectées,Information,Total,Moyen préféré pour retour aux fournisseurs d’aide humanitaire: Je ne sais pas / préfère ne pas répondre,NA,7,4,0,NA,0,0,NA,0,NA,4,NA,NA,2
+Redevabilité aux personnes affectées,Information,Total,Moyen préféré pour retour aux fournisseurs d’aide humanitaire: Lors de réunion communautaire dans les localités / du village,NA,9,8,11,4,13,12,7,20,11,13,19,15,2
+Redevabilité aux personnes affectées,Information,Total,Moyen préféré pour retour aux fournisseurs d’aide humanitaire: Par email,NA,NA,NA,0,NA,0,0,1,NA,NA,NA,NA,NA,2
+Redevabilité aux personnes affectées,Information,Total,"Moyen préféré pour retour aux fournisseurs d’aide humanitaire: Par lettre, courriel",NA,NA,NA,0,NA,0,0,1,NA,0,1,NA,NA,2
+Redevabilité aux personnes affectées,Information,Total,Moyen préféré pour retour aux fournisseurs d’aide humanitaire: Par radio,NA,7,4,2,2,4,3,7,2,9,11,5,10,7
+Redevabilité aux personnes affectées,Information,Total,Moyen préféré pour retour aux fournisseurs d’aide humanitaire: Par SMS,NA,NA,NA,NA,NA,NA,1,1,0,1,NA,NA,1,NA
+Redevabilité aux personnes affectées,Information,Total,Moyen préféré pour retour aux fournisseurs d’aide humanitaire: Par téléphone,NA,5,26,23,18,30,29,37,12,40,7,23,27,18
+Redevabilité aux personnes affectées,Information,Total,Moyen préféré pour retour aux fournisseurs d’aide humanitaire: Via les leaders communautaires,NA,14,17,14,12,14,12,7,16,12,12,15,14,3
+Redevabilité aux personnes affectées,Information,Total,"Moyen préféré pour retour aux fournisseurs d’aide humanitaire: Via un réseau social (Facebook, Twitter, etc.)",NA,2,0,NA,1,0,NA,2,NA,NA,1,NA,NA,1
+Redevabilité aux personnes affectées,Information,Total,Moyen préféré pour retour aux fournisseurs d’aide humanitaire: Via une boîte à plaintes / à suggestion,NA,NA,0,0,NA,0,NA,NA,0,NA,NA,NA,NA,1
+Redevabilité aux personnes affectées,Information,Total,Source de confiance pour recevoir information: Autres (merci de préciser),NA,5,1,2,1,0,2,3,0,2,5,NA,NA,2
+Redevabilité aux personnes affectées,Information,Total,Source de confiance pour recevoir information: De la part d'amis et de la famille,NA,2,31,8,8,18,11,9,19,11,10,9,19,20
+Redevabilité aux personnes affectées,Information,Total,Source de confiance pour recevoir information: De la part des fonctionnaires du gouvernement,NA,10,7,4,7,6,8,21,9,18,12,3,7,30
+Redevabilité aux personnes affectées,Information,Total,Source de confiance pour recevoir information: De la part des forces de sécurité,NA,3,6,5,1,2,1,2,8,5,2,0,NA,4
+Redevabilité aux personnes affectées,Information,Total,Source de confiance pour recevoir information: De la part des travailleurs humanitaires des Nations Unies / ONG,NA,9,10,13,8,7,5,1,16,0,6,4,NA,14
+Redevabilité aux personnes affectées,Information,Total,Source de confiance pour recevoir information: De la part du chef coutumier,NA,30,6,24,23,4,9,10,12,11,26,17,30,3
+Redevabilité aux personnes affectées,Information,Total,Source de confiance pour recevoir information: De la part du leader communautaire,NA,19,34,39,42,57,51,38,29,43,24,65,37,9
+Redevabilité aux personnes affectées,Information,Total,Source de confiance pour recevoir information: Je ne sais pas / préfère ne pas répondre,NA,6,1,0,0,1,1,2,1,NA,3,NA,NA,2
+Redevabilité aux personnes affectées,Information,Total,Source de confiance pour recevoir information: Sur les lieux de culte,NA,16,4,6,9,6,11,14,6,9,12,2,7,16
+Redevabilité aux personnes affectées,Information,Total,Type d’information nécessaire: Autres (merci de préciser),NA,1,0,0,0,0,1,1,0,1,1,0,4,3
+Redevabilité aux personnes affectées,Information,Total,Type d’information nécessaire: Avoir de l'information sur comment pouvoir retrouver un logement,NA,5,2,3,2,3,2,2,3,0,4,1,4,1
+Redevabilité aux personnes affectées,Information,Total,Type d’information nécessaire: Avoir de l'information sur la possibilité de retourner dans les lieux d'origine,NA,1,7,6,0,1,1,0,1,0,1,0,0,0
+Redevabilité aux personnes affectées,Information,Total,Type d’information nécessaire: Avoir de l'information sur les agences humanitaires qui leur fournissent de l'aide,NA,10,9,17,12,11,17,4,14,7,14,20,2,7
+Redevabilité aux personnes affectées,Information,Total,Type d’information nécessaire: Des nouvelles sur ce qu’il se passe dans la zone où vous habitiez avant (si PDI),NA,1,19,16,0,3,1,0,1,3,1,0,1,0
+Redevabilité aux personnes affectées,Information,Total,Type d’information nécessaire: Des nouvelles sur la situation sécuritaire dans la zone où vous vous situez,NA,37,82,51,45,56,44,47,63,47,44,12,47,38
+Redevabilité aux personnes affectées,Information,Total,Type d’information nécessaire: J'ai déjà accès à toute l'information dont j'ai besoin,NA,18,0,4,10,3,7,21,2,14,14,16,9,30
+Redevabilité aux personnes affectées,Information,Total,Type d’information nécessaire: Je ne sais pas / préfère ne pas répondre,NA,4,0,1,0,1,2,0,0,0,7,0,1,2
+Redevabilité aux personnes affectées,Information,Total,"Type d’information nécessaire: Savoir comment  accéder à des services de base (éducation, santé etc.)",NA,35,37,23,59,38,51,25,44,35,41,77,43,42
+Redevabilité aux personnes affectées,Information,Total,"Type d’information nécessaire: Savoir comment accéder à des distributions humanitaires (nourriture, articles ménagers, etc.)",NA,43,60,50,68,66,59,34,57,32,43,77,48,25
+Redevabilité aux personnes affectées,Information,Total,Type d’information nécessaire: Savoir comment obtenir de l'aide ou du soutien après avoir été victime de violences sexuelles,NA,2,2,1,2,3,1,0,3,2,1,0,2,0
+Redevabilité aux personnes affectées,Information,Total,"Type d’information nécessaire: Savoir comment obtenir de l’aide ou du soutien après avoir été attaqué, harcelé ou enlevé",NA,0,4,4,3,4,4,4,12,0,2,0,1,1
+Redevabilité aux personnes affectées,Information,Total,Type d’information nécessaire: Savoir comment pouvoir se plaindre sur  l'assistance humanitaire reçue,NA,0,2,1,3,2,2,1,2,0,1,1,2,2
+Redevabilité aux personnes affectées,Information,Total,Type d’information nécessaire: Savoir comment remplacer ses documents personnels (e.g. certificat de naissance / carte d'identité),NA,2,3,7,3,5,3,2,4,1,2,7,3,1
+Redevabilité aux personnes affectées,Information,Total,Type d’information nécessaire: Savoir comment trouver du travail,NA,18,14,33,26,27,19,23,29,34,11,28,27,23
+Redevabilité aux personnes affectées,Assistance,Total,Ménages ayant reçu de l’assistance humanitaire dans les 12 derniers mois: Je ne sais pas / préfère ne pas répondre,NA,1,NA,NA,NA,NA,1,NA,0,NA,NA,1,NA,1
+Redevabilité aux personnes affectées,Assistance,Total,Ménages ayant reçu de l’assistance humanitaire dans les 12 derniers mois: Non,NA,98,49,64,91,81,88,97,86,98,100,92,100,97
+Redevabilité aux personnes affectées,Assistance,Total,Ménages ayant reçu de l’assistance humanitaire dans les 12 derniers mois: Oui,NA,2,51,36,9,19,11,3,14,2,0,6,0,2
+Redevabilité aux personnes affectées,Assistance,Total,Principale raison d’insatisfaction face à l’aide reçue: Autre,NA,NA,NA,NA,NA,3,NA,NA,NA,NA,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Assistance,Total,Principale raison d’insatisfaction face à l’aide reçue: L'assistance est de trop courte durée,NA,1,2,18,NA,39,15,54,20,27,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Assistance,Total,Principale raison d’insatisfaction face à l’aide reçue: L'assistance n'était pas ce dont nous avions le plus besoin,NA,11,0,9,NA,1,NA,NA,2,2,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Assistance,Total,Principale raison d’insatisfaction face à l’aide reçue: La modalité de l'assistance n'était pas appropriée (cash / en nature / provision de services etc),NA,NA,5,NA,NA,1,NA,NA,3,NA,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Assistance,Total,Principale raison d’insatisfaction face à l’aide reçue: La qualité de l'assistance est insatisfaisante,NA,22,8,1,NA,6,32,NA,NA,NA,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Assistance,Total,Principale raison d’insatisfaction face à l’aide reçue: La quantité insuffisante d'assistance,NA,55,84,67,NA,21,53,46,75,71,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Assistance,Total,Principale raison d’insatisfaction face à l’aide reçue: Temps d'attente entre l'enregistrement et l'assistance,NA,11,2,5,NA,29,NA,NA,NA,NA,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Assistance,Total,Satisfaction par rapport à l’assistance reçue: Je ne sais pas,Sous-ensemble de donnée,1,NA,NA,NA,0,2,NA,NA,NA,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Assistance,Total,Satisfaction par rapport à l’assistance reçue: Moyennement,Sous-ensemble de donnée,14,27,22,13,19,14,3,17,44,69,NA,NA,33
+Redevabilité aux personnes affectées,Assistance,Total,Satisfaction par rapport à l’assistance reçue: Non,Sous-ensemble de donnée,11,22,11,6,9,3,2,23,18,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Assistance,Total,Satisfaction par rapport à l’assistance reçue: Oui,Sous-ensemble de donnée,74,51,66,82,71,81,95,60,38,31,100,NA,67
+Redevabilité aux personnes affectées,Redevabilité,Total,Barrières pour accéder aux mécanismes de plainte: Autre,NA,NA,0,1,NA,0,0,NA,0,NA,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Redevabilité,Total,Barrières pour accéder aux mécanismes de plainte: Dissuasion par d'autres personnes,NA,0,1,1,NA,3,2,NA,3,NA,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Redevabilité,Total,Barrières pour accéder aux mécanismes de plainte: Dissuasion par le personnel humanitaire,NA,NA,0,0,NA,NA,0,NA,0,NA,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Redevabilité,Total,Barrières pour accéder aux mécanismes de plainte: Inaccessibilité physique des mécanismes (trop loin),NA,NA,NA,0,NA,1,1,NA,3,NA,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Redevabilité,Total,Barrières pour accéder aux mécanismes de plainte: Je ne sais pas / ne souhaite pas répondre,NA,13,10,1,3,1,2,NA,1,NA,8,1,NA,9
+Redevabilité aux personnes affectées,Redevabilité,Total,Barrières pour accéder aux mécanismes de plainte: Je ne suis pas au courant de l'existence de mécanismes,NA,29,41,22,31,24,30,21,28,31,33,42,25,21
+Redevabilité aux personnes affectées,Redevabilité,Total,Barrières pour accéder aux mécanismes de plainte: Je ne suis pas au courant de la présence d'assistance sur la zone donc je n'ai jamais eu à  déposer de plaintes,NA,33,5,17,50,27,42,55,32,39,27,39,57,39
+Redevabilité aux personnes affectées,Redevabilité,Total,Barrières pour accéder aux mécanismes de plainte: Manque d'information sur comment déposer des plaintes,NA,0,9,14,6,15,3,1,11,1,0,3,NA,1
+Redevabilité aux personnes affectées,Redevabilité,Total,Barrières pour accéder aux mécanismes de plainte: Manque de sécurité pour accéder aux mécanismes de plaintes,NA,NA,2,1,NA,1,1,0,1,NA,NA,NA,1,NA
+Redevabilité aux personnes affectées,Redevabilité,Total,Barrières pour accéder aux mécanismes de plainte: Pas de contraintes,NA,25,33,43,10,27,20,23,21,29,31,15,17,31
+Redevabilité aux personnes affectées,Redevabilité,Total,Ménage ayant déjà faire une suggestion/plainte aux fournisseurs d’aide: Je ne sais pas / préfère ne pas répondre,NA,2,2,0,4,0,2,NA,0,NA,1,4,NA,NA
+Redevabilité aux personnes affectées,Redevabilité,Total,Ménage ayant déjà faire une suggestion/plainte aux fournisseurs d’aide: Non,NA,97,93,97,95,98,97,100,98,100,99,96,100,100
+Redevabilité aux personnes affectées,Redevabilité,Total,Ménage ayant déjà faire une suggestion/plainte aux fournisseurs d’aide: Oui,NA,1,6,3,1,2,1,0,2,NA,0,NA,NA,NA
+Redevabilité aux personnes affectées,Redevabilité,Total,Ménage ayant reçu une réponse à leur plainte: Non,Sous-ensemble de donnée,NA,65,75,NA,71,78,NA,91,NA,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Redevabilité,Total,Ménage ayant reçu une réponse à leur plainte: Oui,Sous-ensemble de donnée,NA,35,25,NA,29,22,NA,9,NA,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Redevabilité,Total,Ménages consultés sur le type d’assistance qu’ils voudraient recevoir: Je ne sais pas / préfère ne pas répondre,NA,1,2,0,1,0,1,NA,0,1,NA,3,NA,1
+Redevabilité aux personnes affectées,Redevabilité,Total,Ménages consultés sur le type d’assistance qu’ils voudraient recevoir: Non,NA,96,70,86,92,69,82,90,74,91,97,73,97,98
+Redevabilité aux personnes affectées,Redevabilité,Total,Ménages consultés sur le type d’assistance qu’ils voudraient recevoir: Oui,NA,3,28,14,7,31,16,10,26,9,3,24,3,1
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Deuxième besoin du ménage: Aucun besoin,Sous-ensemble de donnée,4,2,0,NA,1,1,4,0,7,1,NA,5,4
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Deuxième besoin du ménage: Autre,Sous-ensemble de donnée,2,0,0,2,0,3,6,NA,5,NA,NA,5,1
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Deuxième besoin du ménage: Avoir accès à de l'eau / à des latrines ou à une meilleure hygiène de vie,Sous-ensemble de donnée,9,13,31,19,19,20,12,16,19,18,24,16,9
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Deuxième besoin du ménage: Avoir accès à de la nourriture ou des moyens d'existence,Sous-ensemble de donnée,33,16,13,27,20,17,16,21,13,21,17,25,26
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,"Deuxième besoin du ménage: Avoir accès à des biens non-alimentaires (couvertures, moustiquaires, seaux, etc.)",Sous-ensemble de donnée,5,16,21,2,20,9,9,14,13,8,8,17,3
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Deuxième besoin du ménage: Avoir accès à des services de protection,Sous-ensemble de donnée,2,5,1,1,2,2,0,3,0,0,NA,1,5
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Deuxième besoin du ménage: Avoir accès à des services nutritionnels,Sous-ensemble de donnée,5,1,0,4,2,3,NA,1,1,2,6,NA,3
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Deuxième besoin du ménage: Avoir accès à l'éducation pour les enfants de ma famille,Sous-ensemble de donnée,7,6,6,9,6,10,7,10,8,16,14,4,21
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Deuxième besoin du ménage: Avoir accès à la santé,Sous-ensemble de donnée,27,33,17,32,23,27,33,27,27,21,27,20,20
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Deuxième besoin du ménage: Avoir accès à un abri sécurisé,Sous-ensemble de donnée,4,8,8,3,7,7,11,7,7,11,3,8,2
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Deuxième besoin du ménage: Avoir accès à un support particulier pour les personnes en situation de handicap,Sous-ensemble de donnée,NA,0,0,1,0,0,NA,0,NA,1,NA,NA,1
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Deuxième besoin du ménage: Je ne sais pas,Sous-ensemble de donnée,1,0,1,NA,NA,0,2,NA,NA,NA,NA,NA,2
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Deuxième besoin du ménage: Je préfère ne pas répondre,Sous-ensemble de donnée,NA,0,NA,NA,NA,0,NA,NA,NA,NA,NA,NA,2
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Deuxième besoin du ménage: Pouvoir rejoindre les membres de ma famille,Sous-ensemble de donnée,0,1,1,NA,0,0,0,0,NA,1,NA,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Deuxième besoin du ménage: Récupérer des documents légaux d'identité pour ma famille,Sous-ensemble de donnée,1,0,1,NA,0,0,0,1,0,NA,1,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance cash BNA: Autre,NA,NA,0,1,20,NA,6,18,NA,12,NA,NA,6,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance cash BNA: De l'argent pour acheter des articles non-alimentaires essentiels,NA,61,60,54,35,77,44,52,50,69,95,NA,59,44
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance cash BNA: De l'argent pour pouvoir acheter du matériel pour (re)construire / renforcer un logement,NA,39,24,26,35,15,29,19,42,13,2,NA,35,41
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance cash BNA: De l'argent pour pouvoir payer le loyer,NA,1,16,19,9,8,22,10,8,6,3,NA,NA,15
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance cash éducation: Aucun,NA,NA,NA,NA,NA,0,NA,NA,NA,NA,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance cash éducation: Autre,NA,NA,NA,NA,NA,0,NA,NA,NA,NA,2,NA,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance cash éducation: De l'argent pour acheter des livres scolaires,NA,NA,1,2,7,NA,NA,NA,1,NA,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,"Manière préférée de recevoir assistance cash éducation: De l'argent pour acheter les fournitures scolaires (sac, stylos, etc.)",NA,3,22,7,1,3,5,NA,3,10,12,9,9,5
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance cash éducation: De l'argent pour payer la nourriture à l'école,NA,NA,NA,NA,NA,NA,0,NA,1,NA,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance cash éducation: De l'argent pour payer le transport jusqu'à l'école,NA,NA,5,2,NA,1,0,NA,2,8,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance cash éducation: De l'argent pour payer les frais scolaires,NA,97,72,88,92,95,94,100,92,83,86,91,91,95
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,"Manière préférée de recevoir assistance cash EHA: De l'argent pour acheter des articles hygiéniques (savon, couches pour bébés, serviettes hygiéniques, brosse à dent ou dentifrices par exemple)",NA,NA,21,4,NA,18,4,NA,3,NA,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,"Manière préférée de recevoir assistance cash EHA: De l'argent pour acheter des articles pour aller chercher de l'eau (des récipients par exemple) ou pour acheter de l'eau, ,",NA,41,27,41,100,7,35,47,34,2,5,NA,58,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,"Manière préférée de recevoir assistance cash EHA: De l'argent pour acheter, pouvoir construire ou améliorer les infrastructures sanitaires (toilettes ou latrines)",NA,59,53,56,NA,75,60,53,63,98,95,NA,42,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance cash nutrition: Aucun,NA,NA,14,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance cash nutrition: Autre,NA,NA,NA,NA,41,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance cash nutrition: De l'argent pour payer les services nutritionnels ou les compléments alimentaires,NA,100,86,100,59,NA,100,NA,100,NA,100,NA,NA,100
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance cash santé: Autre,NA,2,1,1,5,2,2,4,NA,NA,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance cash santé: De l'argent pour payer les frais médicaux,NA,98,99,99,95,98,98,96,100,100,100,100,100,100
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance cash santé: Je ne sais/Je ne souhaite pas répondre,NA,NA,NA,NA,NA,NA,1,NA,NA,NA,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance cash sécurité alimentaire: Autre,NA,NA,NA,NA,NA,NA,1,NA,NA,NA,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance cash sécurité alimentaire: De l'argent pour pouvoir acheter d'autres bien sur le marché,NA,3,4,6,7,5,7,13,7,1,13,5,4,26
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance cash sécurité alimentaire: De l'argent pour pouvoir acheter de la nourriture,NA,89,87,86,93,79,61,62,70,46,76,65,33,74
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance cash sécurité alimentaire: De l'argent pour pouvoir acheter des intrants agricoles,NA,8,2,5,NA,7,28,23,14,47,6,30,45,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance cash sécurité alimentaire: De l'argent pour pouvoir acheter des intrants d'élevage,NA,NA,7,3,NA,9,3,2,9,7,4,NA,18,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance cash sécurité alimentaire: Je ne sais/Je ne souhaite pas répondre,NA,NA,NA,NA,NA,NA,1,NA,NA,NA,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind biens BNA: Autre,NA,NA,1,NA,NA,NA,3,NA,NA,NA,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind biens BNA: Je ne sais/Je ne souhaite pas répondre,NA,NA,NA,NA,NA,0,NA,NA,NA,NA,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind biens BNA: Provision direct d'articles non-alimentaires essentiels,NA,57,77,69,62,64,59,24,59,48,64,22,70,77
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind biens BNA: Provision direct de construction d'abri,NA,14,11,13,33,12,7,22,16,15,13,13,2,8
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind biens BNA: Provision direct de matériel pour (re)construire / renforcer un logement,NA,29,11,17,5,23,31,54,25,37,24,64,28,16
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind biens éducation: Aucun,NA,NA,NA,NA,NA,0,NA,NA,NA,NA,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind biens éducation: Autre,NA,NA,3,NA,NA,9,3,NA,1,NA,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind biens éducation: Je ne sais/Je ne souhaite pas répondre,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,2,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,"Manière préférée de recevoir assistance in-kind biens éducation: Provision direct de fournitures scolaires (sac, stylos, etc.)",NA,74,71,47,71,64,52,43,67,60,67,58,5,43
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,"Manière préférée de recevoir assistance in-kind biens éducation: Provision direct de livres scolaires, Provision direct d'uniforme scolaire",NA,26,27,53,29,26,45,57,31,40,33,39,95,57
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind biens EHA: Autre,NA,NA,NA,0,NA,0,0,NA,NA,NA,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind biens EHA: Construction / amélioration d'infrastructures sanitaires (toilettes ou latrines),NA,20,22,18,13,39,24,39,25,28,22,9,14,11
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind biens EHA: Construction / amélioration de points d'eau,NA,58,66,65,84,51,71,56,57,68,64,90,84,83
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,"Manière préférée de recevoir assistance in-kind biens EHA: Provision direct d'articles hygiéniques (savon, couches pour bébés, serviettes hygiéniques, brosse à dent ou dentifrices par exemple)",NA,NA,5,3,NA,6,1,NA,3,NA,3,NA,NA,6
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind biens EHA: Provision direct d'articles pour aller chercher de l'eau (des récipients par exemple),NA,7,3,8,NA,2,1,4,9,4,8,NA,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind biens EHA: Provision direct d'eau (par camion d'eau),NA,15,3,4,4,1,3,NA,5,NA,3,2,2,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind biens nutrition: Autre,NA,NA,NA,NA,NA,8,NA,NA,NA,NA,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind biens nutrition: Avoir accès à davantage de travailleurs du secteur de la nutrition qualifiés dans les établissements,NA,10,47,13,26,25,13,NA,13,NA,0,23,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind biens nutrition: Avoir accès à des transports jusqu'aux installations fournissant des services nutritionnels,NA,63,7,29,11,5,11,NA,35,NA,100,14,NA,40
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind biens nutrition: Avoir accès à des visites à domicile pour depistage de la malnutrition,NA,0,15,6,9,19,5,NA,16,NA,NA,NA,NA,20
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind biens nutrition: Avoir accès à un personnel du secteur de nutrition plus qualifié pour les visites à domicile,NA,7,31,15,15,7,17,29,23,NA,NA,15,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind biens nutrition: Avoir plus d'établissements de soins nutritionnels à proximité,NA,7,NA,25,37,16,42,43,6,NA,NA,45,NA,40
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind biens nutrition: Avoir plus de services / conseils pour les femmes enceintes ou allaitantes,NA,14,NA,13,1,20,9,29,6,NA,NA,3,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind biens nutrition: Je ne sais/Je ne souhaite pas répondre,NA,NA,NA,NA,NA,NA,2,NA,NA,NA,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind biens santé: Autre,NA,NA,NA,1,NA,8,1,8,NA,5,NA,NA,9,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind biens santé: Je ne sais/Je ne souhaite pas répondre,NA,NA,NA,NA,NA,0,NA,NA,NA,NA,0,NA,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind biens santé: Provision direct de médicaments,NA,99,91,94,100,90,99,92,94,82,92,95,76,96
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind biens santé: Provision direct de vaccins,NA,1,9,5,NA,2,0,NA,6,13,7,5,15,4
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind biens sécurité alimentaire: Autre,NA,NA,NA,NA,NA,0,1,NA,NA,2,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind biens sécurité alimentaire: Je ne sais/Je ne souhaite pas répondre,NA,NA,NA,NA,NA,0,NA,NA,0,NA,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind biens sécurité alimentaire: Provision direct d'intrants agricoles,NA,29,5,19,29,38,45,18,21,47,36,50,48,3
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind biens sécurité alimentaire: Provision direct d'intrants d'élevage,NA,3,5,6,3,11,7,7,8,15,4,2,1,3
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind biens sécurité alimentaire: Provision direct de nourriture,NA,68,90,75,68,51,47,75,71,36,60,48,50,93
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind services BNA: Aide pour améliorer le niveau de sécurité autour des abris,NA,NA,100,38,NA,58,61,NA,59,NA,29,NA,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind services BNA: Aide pour réparer des abris,NA,NA,NA,62,NA,42,35,NA,41,NA,28,NA,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind services BNA: Aucun,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,43,NA,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind services BNA: Autre,NA,NA,NA,NA,NA,NA,4,NA,NA,NA,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind services éducation: Avoir accès à des repas à l'école,NA,NA,NA,7,NA,NA,4,NA,0,NA,NA,11,NA,28
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind services éducation: Avoir accès à des services éducatifs,NA,100,93,93,100,98,94,NA,95,100,100,89,100,72
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind services éducation: Avoir accès à des transports jusqu'à l'école,NA,NA,7,NA,NA,2,2,NA,5,NA,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind services EHA: Conseils / renseignement sur l'hygiène personnelle,NA,NA,NA,4,NA,1,6,NA,4,25,NA,10,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind services EHA: Conseils sur comment assainir l'eau,NA,NA,NA,6,18,2,6,NA,16,2,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind services EHA: Conseils sur construction / améliorer des infrastructures sanitaires (toilettes ou latrines),NA,36,25,39,19,70,58,2,62,NA,62,23,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind services EHA: Conseils sur construction / améliorer les points d'eau,NA,64,75,51,63,27,30,98,18,72,38,67,NA,100
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind services santé: Autre,NA,NA,NA,NA,NA,NA,NA,NA,2,NA,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind services santé: Avoir accès à davantage de travailleurs de la santé qualifiés dans les établissements,NA,38,41,27,38,23,22,28,23,31,53,32,15,19
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind services santé: Avoir accès à des transports jusqu'aux installations de santé,NA,11,11,7,2,1,1,7,3,6,NA,2,2,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind services santé: Avoir accès à des visites à domicile pour les vaccinations,NA,3,2,NA,NA,1,0,NA,0,NA,NA,1,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind services santé: Avoir accès à un personnel de santé plus qualifié pour les visites à domicile,NA,18,10,4,5,9,5,14,5,5,NA,1,4,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind services santé: Avoir accès à un service de soins psychologiques / psychiatriques,NA,NA,NA,1,NA,NA,1,NA,1,NA,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind services santé: Avoir plus d'accès pour les personnes handicapées physiques/mentales,NA,NA,NA,NA,NA,0,0,NA,2,NA,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind services santé: Avoir plus d'établissements de soins de santé,NA,NA,18,11,13,25,29,9,26,9,4,26,44,43
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind services santé: Avoir plus d'établissements de soins de santé à proximité,NA,31,16,49,40,39,41,42,36,45,42,38,34,28
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind services santé: Avoir plus de services pour les femmes enceintes ou allaitantes,NA,NA,2,1,2,1,1,NA,2,5,NA,NA,NA,9
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind services sécurité alimentaire: Accès à un service de soins vétérinaire,NA,NA,9,7,NA,5,15,NA,13,NA,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind services sécurité alimentaire: Aucun,NA,NA,NA,NA,NA,NA,NA,NA,NA,35,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind services sécurité alimentaire: Autre,NA,NA,5,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind services sécurité alimentaire: Conseils sur comment gérer de manière optimale ses activités agraires,NA,100,74,87,NA,80,81,NA,41,65,100,NA,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Manière préférée de recevoir assistance in-kind services sécurité alimentaire: Conseils sur comment gérer son argent,NA,NA,12,6,NA,15,4,NA,46,0,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Principal besoin du ménage: Aucun besoin,NA,1,0,0,1,1,0,5,0,1,NA,NA,NA,8
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Principal besoin du ménage: Autre,NA,NA,NA,NA,1,0,2,4,NA,4,NA,NA,NA,2
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Principal besoin du ménage: Avoir accès à de l'eau / à des latrines ou à une meilleure hygiène de vie,NA,13,6,5,22,8,16,10,6,15,10,27,25,6
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Principal besoin du ménage: Avoir accès à de la nourriture ou des moyens d'existence,NA,45,72,73,39,63,49,54,57,59,48,36,43,24
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,"Principal besoin du ménage: Avoir accès à des biens non-alimentaires (couvertures, moustiquaires, seaux, etc.)",NA,2,0,3,1,4,4,2,3,8,2,2,10,9
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Principal besoin du ménage: Avoir accès à des services de protection,NA,0,8,NA,1,2,1,NA,2,NA,0,1,0,2
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Principal besoin du ménage: Avoir accès à des services nutritionnels,NA,0,0,0,2,0,1,2,0,NA,0,NA,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Principal besoin du ménage: Avoir accès à l'éducation pour les enfants de ma famille,NA,2,1,2,3,2,3,2,4,4,8,5,2,9
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Principal besoin du ménage: Avoir accès à la santé,NA,29,9,13,24,13,21,12,23,9,28,24,10,35
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Principal besoin du ménage: Avoir accès à un abri sécurisé,NA,5,2,2,3,7,3,6,4,2,3,4,9,4
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Principal besoin du ménage: Avoir accès à un support particulier pour les personnes en situation de handicap,NA,2,0,0,2,0,0,NA,0,NA,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Principal besoin du ménage: Je ne sais pas,NA,NA,NA,NA,NA,NA,0,NA,NA,NA,NA,NA,NA,1
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Principal besoin du ménage: Je préfère ne pas répondre,NA,NA,NA,NA,NA,NA,NA,2,NA,NA,NA,NA,NA,1
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Principal besoin du ménage: Pouvoir rejoindre les membres de ma famille,NA,NA,0,0,NA,0,NA,NA,0,NA,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Principal besoin du ménage: Récupérer des documents légaux d'identité pour ma famille,NA,NA,0,0,2,1,0,0,0,NA,1,NA,0,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Troisième besoin du ménage: Aucun besoin,Sous-ensemble de donnée,8,5,3,2,5,4,11,2,12,10,7,8,27
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Troisième besoin du ménage: Autre,Sous-ensemble de donnée,1,0,NA,1,NA,2,5,NA,3,NA,NA,3,1
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Troisième besoin du ménage: Avoir accès à de l'eau / à des latrines ou à une meilleure hygiène de vie,Sous-ensemble de donnée,9,14,14,10,14,18,12,14,9,14,10,10,5
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Troisième besoin du ménage: Avoir accès à de la nourriture ou des moyens d'existence,Sous-ensemble de donnée,9,5,8,18,6,13,8,9,6,13,24,9,13
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,"Troisième besoin du ménage: Avoir accès à des biens non-alimentaires (couvertures, moustiquaires, seaux, etc.)",Sous-ensemble de donnée,6,19,21,9,25,13,15,19,13,7,10,14,7
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Troisième besoin du ménage: Avoir accès à des services de protection,Sous-ensemble de donnée,3,10,2,2,8,4,4,6,0,6,0,NA,2
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Troisième besoin du ménage: Avoir accès à des services nutritionnels,Sous-ensemble de donnée,11,1,2,12,3,4,3,5,NA,9,9,NA,5
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Troisième besoin du ménage: Avoir accès à l'éducation pour les enfants de ma famille,Sous-ensemble de donnée,16,11,11,20,12,15,11,14,12,14,10,21,13
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Troisième besoin du ménage: Avoir accès à la santé,Sous-ensemble de donnée,21,21,25,22,16,17,21,16,31,13,20,25,14
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Troisième besoin du ménage: Avoir accès à un abri sécurisé,Sous-ensemble de donnée,8,9,12,3,10,7,6,9,14,8,7,9,6
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Troisième besoin du ménage: Avoir accès à un support particulier pour les personnes en situation de handicap,Sous-ensemble de donnée,4,1,1,NA,1,0,1,2,NA,1,1,1,1
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Troisième besoin du ménage: Je ne sais pas,Sous-ensemble de donnée,4,1,0,NA,0,3,2,1,1,5,2,NA,6
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Troisième besoin du ménage: Je préfère ne pas répondre,Sous-ensemble de donnée,0,1,NA,NA,0,0,1,NA,NA,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Troisième besoin du ménage: Pouvoir rejoindre les membres de ma famille,Sous-ensemble de donnée,0,1,1,NA,0,0,0,1,NA,0,NA,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Troisième besoin du ménage: Récupérer des documents légaux d'identité pour ma famille,Sous-ensemble de donnée,1,1,1,NA,2,0,0,2,1,1,0,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Type de réponse BNA préférés: Autre (merci de préciser),NA,NA,NA,NA,NA,NA,NA,4,NA,NA,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Type de réponse BNA préférés: Je ne sais pas / préfère ne pas répondre,NA,NA,0,NA,NA,NA,NA,NA,0,NA,5,NA,NA,9
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Type de réponse BNA préférés: Une réponse en cash,NA,23,33,58,53,25,38,45,49,66,25,4,52,30
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Type de réponse BNA préférés: Une réponse en provision direct de bien,NA,77,65,40,41,74,56,51,50,31,59,96,48,57
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Type de réponse BNA préférés: Une réponse en provision direct de services,NA,NA,1,1,6,1,6,NA,2,3,11,NA,NA,4
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Type de réponse éducation préférés: Autre (merci de préciser),NA,NA,NA,NA,NA,NA,NA,5,NA,NA,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Type de réponse éducation préférés: Je ne sais pas / préfère ne pas répondre,NA,NA,1,NA,NA,NA,1,NA,NA,NA,4,NA,NA,5
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Type de réponse éducation préférés: Une réponse en cash,NA,39,46,50,57,30,49,50,53,50,48,31,33,44
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Type de réponse éducation préférés: Une réponse en provision direct de bien,NA,46,37,24,30,50,27,39,17,31,43,54,32,43
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Type de réponse éducation préférés: Une réponse en provision direct de services,NA,15,16,26,13,20,24,6,29,15,5,15,35,7
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Type de réponse EHA préférés: Autre (merci de préciser),NA,NA,0,0,NA,NA,NA,NA,NA,1,NA,NA,1,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Type de réponse EHA préférés: Je ne sais pas / préfère ne pas répondre,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,4,NA,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Type de réponse EHA préférés: Une réponse en cash,NA,19,8,20,7,4,13,20,27,15,16,NA,6,4
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Type de réponse EHA préférés: Une réponse en provision direct de bien,NA,70,90,73,87,91,77,76,53,80,70,92,92,78
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Type de réponse EHA préférés: Une réponse en provision direct de services,NA,11,2,8,6,5,10,3,20,4,10,8,1,17
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Type de réponse nutrition préférés: Je ne sais pas / préfère ne pas répondre,NA,NA,NA,NA,NA,NA,1,NA,NA,NA,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Type de réponse nutrition préférés: Une réponse en cash,NA,65,51,48,17,7,35,15,45,NA,53,NA,NA,44
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Type de réponse nutrition préférés: Une réponse en provision direct de services,NA,35,49,52,83,93,65,85,55,NA,47,100,NA,56
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Type de réponse protection préférés: Autre,NA,0,28,NA,NA,11,4,NA,2,NA,0,NA,68,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Type de réponse protection préférés: Avoir accès à des services de prise en charge pour les victimes de violence basée sur le genre,NA,1,12,4,14,26,36,33,12,NA,0,NA,32,9
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Type de réponse protection préférés: Avoir accès à des services de protection de l'enfance,NA,NA,22,15,NA,42,26,1,24,3,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Type de réponse protection préférés: Avoir accès à la justice,NA,40,12,47,NA,5,9,16,20,97,78,NA,NA,73
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Type de réponse protection préférés: Avoir accès à un service de support psychosocial,NA,12,19,14,35,5,21,18,34,NA,21,NA,NA,9
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Type de réponse protection préférés: Avoir accès à un support particulier pour les personnes en situation de handicap,NA,47,1,10,16,7,2,33,4,NA,NA,NA,NA,9
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Type de réponse protection préférés: Je ne sais pas,NA,NA,2,NA,35,NA,1,NA,NA,NA,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Type de réponse protection préférés: Récupérer des documents légaux d'identité pour ma famille,NA,NA,4,9,NA,5,2,NA,4,NA,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Type de réponse santé préférés: Autre (merci de préciser),NA,NA,0,NA,NA,NA,1,NA,NA,1,NA,NA,3,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Type de réponse santé préférés: Je ne sais pas / préfère ne pas répondre,NA,2,NA,NA,NA,NA,1,NA,NA,NA,1,NA,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Type de réponse santé préférés: Une réponse en cash,NA,41,47,56,32,26,29,46,59,41,30,5,36,34
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Type de réponse santé préférés: Une réponse en provision direct de bien,NA,35,40,27,35,36,38,30,23,30,56,42,28,52
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Type de réponse santé préférés: Une réponse en provision direct de services,NA,21,12,18,33,38,32,24,17,28,13,54,33,14
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Type de réponse sécurité alimentaire préférés: Autre (merci de préciser),Sous-ensemble de donnée,NA,0,NA,NA,NA,0,1,NA,NA,NA,NA,NA,NA
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Type de réponse sécurité alimentaire préférés: Je ne sais pas / préfère ne pas répondre,Sous-ensemble de donnée,2,0,0,NA,NA,1,NA,NA,NA,3,NA,NA,1
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Type de réponse sécurité alimentaire préférés: Une réponse en cash,Sous-ensemble de donnée,39,45,48,21,19,30,42,50,42,33,12,36,21
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Type de réponse sécurité alimentaire préférés: Une réponse en provision direct de bien,Sous-ensemble de donnée,57,53,49,77,79,65,55,48,54,55,88,63,78
+Redevabilité aux personnes affectées,Besoins prioritaires,Total,Type de réponse sécurité alimentaire préférés: Une réponse en provision direct de services,Sous-ensemble de donnée,1,1,2,2,2,4,1,3,4,10,NA,1,NA

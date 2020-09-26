@@ -1,0 +1,43 @@
+Question de recherche,Sous-question de recherche,Groupe de population,Indicator,Sous-ensemble de donnée,Centre-Est,Sahel,Centre-Nord,Centre-Ouest,Nord,Boucle du Mouhoun,Hauts-Bassins,Est,Cascades,Plateau Central,Centre-Sud,Sud-Ouest,Centre
+Sécurité alimentaire,Food consumption score,Communauté hôte,FCS score,NA,40,49.1,45.4,43.9,36.7,44.4,52.8,36.1,49,41.1,43.3,41,55.7
+Sécurité alimentaire,Food consumption score,Communauté hôte,FCS seuils: Acceptable,NA,47,71,66,66,43,64,79,44,73,53,60,61,83
+Sécurité alimentaire,Food consumption score,Communauté hôte,FCS seuils: Limite,NA,44,23,31,26,44,31,17,39,26,40,25,32,17
+Sécurité alimentaire,Food consumption score,Communauté hôte,FCS seuils: Pauvre,NA,9,6,3,7,13,5,3,17,1,6,15,7,NA
+Sécurité alimentaire,Food consumption score,PDI,FCS score,NA,26.7,41.8,39.2,NA,35,34.2,30.9,29.5,35.6,33.2,NA,NA,NA
+Sécurité alimentaire,Food consumption score,PDI,FCS seuils: Acceptable,NA,7,56,56,NA,43,43,31,23,39,36,NA,NA,NA
+Sécurité alimentaire,Food consumption score,PDI,FCS seuils: Limite,NA,69,42,40,NA,41,47,45,52,43,52,NA,NA,NA
+Sécurité alimentaire,Food consumption score,PDI,FCS seuils: Pauvre,NA,24,2,4,NA,16,9,24,25,18,12,NA,NA,NA
+Sécurité alimentaire,Household hunger scale,Communauté hôte,HHS score,NA,0.5,0.8,0.2,0.8,0.4,0.4,0.4,0.6,0.3,0.3,0.7,0.4,0.2
+Sécurité alimentaire,Household hunger scale,Communauté hôte,HHS seuils: Faim modérée,NA,13,26,4,25,11,13,12,19,9,10,24,11,6
+Sécurité alimentaire,Household hunger scale,Communauté hôte,HHS seuils: Faim sévère,NA,2,1,NA,4,0,1,NA,0,NA,NA,0,NA,NA
+Sécurité alimentaire,Household hunger scale,Communauté hôte,HHS seuils: Peu ou pas de faim,NA,84,74,96,72,89,87,88,80,91,90,76,89,94
+Sécurité alimentaire,Household hunger scale,PDI,HHS score,NA,1,0.9,0.3,NA,0.6,0.6,1.3,1.3,1.7,0.9,NA,NA,NA
+Sécurité alimentaire,Household hunger scale,PDI,HHS seuils: Faim modérée,NA,34,31,7,NA,18,14,39,46,35,30,NA,NA,NA
+Sécurité alimentaire,Household hunger scale,PDI,HHS seuils: Faim sévère,NA,1,0,NA,NA,2,1,5,NA,12,1,NA,NA,NA
+Sécurité alimentaire,Household hunger scale,PDI,HHS seuils: Peu ou pas de faim,NA,65,69,93,NA,80,85,55,54,54,69,NA,NA,NA
+Sécurité alimentaire,Reduced Coping Strategies Index,Communauté hôte,rCSI score,NA,5.3,11,5.3,8.4,8.2,4.4,4.7,10.4,3.9,3.2,5.4,4.5,2.6
+Sécurité alimentaire,Reduced Coping Strategies Index,Communauté hôte,rCSI seuils: Basses,NA,18,26,32,27,40,27,27,27,40,31,21,44,27
+Sécurité alimentaire,Reduced Coping Strategies Index,Communauté hôte,rCSI seuils: Elevées,NA,13,31,9,25,19,8,10,30,3,4,17,7,4
+Sécurité alimentaire,Reduced Coping Strategies Index,Communauté hôte,rCSI seuils: Moyennes,NA,9,19,14,12,18,10,13,20,9,9,8,7,9
+Sécurité alimentaire,Reduced Coping Strategies Index,Communauté hôte,rCSI seuils: Pas de stratégie utilisée,NA,60,23,45,35,23,54,50,24,48,56,54,42,61
+Sécurité alimentaire,Reduced Coping Strategies Index,PDI,rCSI score,NA,14.5,14.6,9.5,NA,16.2,7.5,19.6,16.4,19.7,9.8,NA,NA,NA
+Sécurité alimentaire,Reduced Coping Strategies Index,PDI,rCSI seuils: Basses,NA,20,24,30,NA,22,23,14,19,10,27,NA,NA,NA
+Sécurité alimentaire,Reduced Coping Strategies Index,PDI,rCSI seuils: Elevées,NA,36,38,24,NA,46,17,45,50,50,26,NA,NA,NA
+Sécurité alimentaire,Reduced Coping Strategies Index,PDI,rCSI seuils: Moyennes,NA,21,31,12,NA,21,17,28,26,28,17,NA,NA,NA
+Sécurité alimentaire,Reduced Coping Strategies Index,PDI,rCSI seuils: Pas de stratégie utilisée,NA,23,7,33,NA,10,43,13,6,12,30,NA,NA,NA
+Sécurité alimentaire,Livelihood Coping Strategies,Communauté hôte,LCS crise,NA,0.2,0.3,0.3,0.2,0.3,0.2,0.1,0.2,0.1,0.2,0.2,0.1,0.1
+Sécurité alimentaire,Livelihood Coping Strategies,Communauté hôte,LCS minimal,NA,0.6,0.2,0.4,0.4,0.3,0.5,0.6,0.3,0.6,0.6,0.5,0.5,0.7
+Sécurité alimentaire,Livelihood Coping Strategies,Communauté hôte,LCS seuils: Aucune,NA,39,29,47,26,35,44,59,33,67,41,22,59,49
+Sécurité alimentaire,Livelihood Coping Strategies,Communauté hôte,LCS seuils: Crise,NA,30,21,17,30,25,24,11,20,6,29,41,10,19
+Sécurité alimentaire,Livelihood Coping Strategies,Communauté hôte,LCS seuils: Stresse,NA,28,46,36,41,36,29,26,42,23,27,37,30,31
+Sécurité alimentaire,Livelihood Coping Strategies,Communauté hôte,LCS seuils: Urgence,NA,2,3,1,2,4,2,4,5,4,3,NA,1,2
+Sécurité alimentaire,Livelihood Coping Strategies,Communauté hôte,LCS stress,NA,0.4,0.7,0.6,0.6,0.6,0.5,0.4,0.7,0.3,0.3,0.4,0.4,0.3
+Sécurité alimentaire,Livelihood Coping Strategies,Communauté hôte,LCS urgence,NA,0,0,0,0,0,0,0,0.1,0,0,0,0,0
+Sécurité alimentaire,Livelihood Coping Strategies,PDI,LCS crise,NA,0.4,0.4,0.4,NA,0.5,0.3,0.2,0.4,0.2,0.3,NA,NA,NA
+Sécurité alimentaire,Livelihood Coping Strategies,PDI,LCS minimal,NA,0.3,0.2,0.3,NA,0.2,0.3,0.6,0.1,0.6,0.4,NA,NA,NA
+Sécurité alimentaire,Livelihood Coping Strategies,PDI,LCS seuils: Aucune,NA,25,28,51,NA,33,30,67,19,62,30,NA,NA,NA
+Sécurité alimentaire,Livelihood Coping Strategies,PDI,LCS seuils: Crise,NA,40,24,21,NA,35,29,11,19,10,33,NA,NA,NA
+Sécurité alimentaire,Livelihood Coping Strategies,PDI,LCS seuils: Stresse,NA,27,47,27,NA,24,35,7,43,15,33,NA,NA,NA
+Sécurité alimentaire,Livelihood Coping Strategies,PDI,LCS seuils: Urgence,NA,8,1,1,NA,8,5,15,20,13,5,NA,NA,NA
+Sécurité alimentaire,Livelihood Coping Strategies,PDI,LCS stress,NA,0.6,0.8,0.6,NA,0.7,0.6,0.4,0.8,0.3,0.5,NA,NA,NA
+Sécurité alimentaire,Livelihood Coping Strategies,PDI,LCS urgence,NA,0.1,0,0,NA,0.1,0.1,0.1,0.2,0.1,0,NA,NA,NA

@@ -5,8 +5,8 @@
 source("utils.R")
 
 ## Creating list of packages to load
-package_list <- c("elliottmess/butteR", "ElliottMess/hypegrammaR","ellieallien/cleaninginspectoR","hunzikp/rtree", "impact-initiatives/koboloops",
-                  "tidyr","dplyr", "ggplot2", "readr", "stringr", "lubridate", "readxl", "rgdal", "sf", "purrr")
+package_list <- c("elliottmess/butteR", "hypegrammaR","ellieallien/cleaninginspectoR","hunzikp/rtree", "impact-initiatives/koboloops",
+                  "tidyr","dplyr", "ggplot2", "readr", "stringr", "lubridate", "readxl", "rgdal", "sf", "purrr", "sdcMicro")
 
 ## Running the packaging loading function
 loadInstall_package(package_list)
@@ -717,6 +717,13 @@ samplingFrame_adm2 <- samplingFrame%>%
   filter(Admin1 %in% c("Est", "Centre-Nord","Sahel","Boucle du Mouhoun","Nord"))%>%
   filter(!is.na(Population_adm3))
 
+samplingFrame_no_popGrp_adm3 <- samplingFrame%>%
+  group_by(Admin3Pcod)%>%
+  summarise(pop = sum(Population_adm3))
+
+samplingFrame_no_popGrp_adm2 <- samplingFrame%>%
+  group_by(Admin2Pcod)%>%
+  summarise(pop = sum(Population_adm2))
 
 ### Weighting cluster sample
 
@@ -797,6 +804,8 @@ raw_data_adm2 <- raw_data%>%
          sampling_id %in% samplingFrame_adm2$strata_adm3
   )
 
+
+
 admin2_wght_adm2 <- map_to_weighting(sampling.frame = samplingFrame_adm2, 
                                          data = raw_data_adm2,
                                          sampling.frame.population.column = "Population_adm2",
@@ -814,8 +823,10 @@ admin2_wght_adm3 <- map_to_weighting(sampling.frame = samplingFrame_adm2,
 combined_weights_adm2 <- combine_weighting_functions(admin2_wght_adm2,admin2_wght_adm3)
 
 raw_data_adm2$weights_sampling <- combined_weights_adm2(raw_data_adm2)
-
 raw_data_adm2$weights_sampling_AT_adm2 <- admin2_wght_adm2(raw_data_adm2)
+
+combined_weights_adm2_noGrp <- combine_weighting_functions(admin2_wght_no_popGrp_admin2, admin2_wght_no_popGrp_admin3)
+
 
 ### Weighting for admin1 ###
 
@@ -844,12 +855,13 @@ raw_data_adm2$weights_sampling_AT_adm2 <- admin2_wght_adm2(raw_data_adm2)
 # raw_data_ClusterSmpl_adm1$weights <- combined_weights_adm1_cluster(raw_data_ClusterSmpl_adm1)
 
 
-#### Weighting admin1 quotas ####
-
+#### Weighting admin1 ####
 
 raw_data_adm1 <- raw_data%>%
   mutate(sampling_id_adm2 = paste(admin2Pcode, status, sep="_"))%>%
   filter(sampling_id %in% samplingFrame$strata_adm3)
+
+
 
 admin1_wght_adm2 <- map_to_weighting(sampling.frame = samplingFrame, 
                                      data = raw_data_adm1,
@@ -866,6 +878,7 @@ admin1_wght_adm3 <- map_to_weighting(sampling.frame = samplingFrame,
 )
 
 combined_weights_adm1 <- combine_weighting_functions(admin1_wght_adm2,admin1_wght_adm3)
+
 
 raw_data_adm1$weights_sampling <- combined_weights_adm1(raw_data_adm1)
 raw_data_adm1$weights_sampling_AT_adm2 <- admin1_wght_adm2(raw_data_adm1)
@@ -903,6 +916,8 @@ cleaning_log_change <- cleaning_log_change%>%
 }
 
 ### Writing files
+
+# SDC_cleaned_data_adm1 <- sdcMicro::createSdcObj(cleaned_data_adm1, keyVars = c("admin1", "admin2", "admin3", "sampling_id", ""))
 
 write_csv(cleaning_log_change, "outputs/logs/cleaning_log_missingPcodes.csv")
 write_csv(raw_data_adm1, "outputs/datasets/BFA_MSNA_2020_dataset_cleanedWeighted_ADM1.csv")

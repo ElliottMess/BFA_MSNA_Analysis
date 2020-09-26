@@ -1,0 +1,118 @@
+map_to_datatypes<-function(df,questionnaire){
+  
+  types <- sapply(names(df),questionnaire$question_type,
+                  from.questionnaire = T,
+                  from.data = T,
+                  data = df)
+  
+  sm_choices <- purrr::map(names(df),
+                           questionnaire$question_is_sm_choice) %>% unlist
+  
+  raw_q <- questionnaire$raw_questionnaire()$questions
+  
+  types_raw <- raw_q[match(names(df),raw_q$name),"type"]   
+  types[types %in% c("select_one","select_multiple")]<-"categorical"
+  types[sm_choices]<-"sm_choice"
+  types[types=="numeric"] <- "numerical"
+  types[types_raw == "text"] <- "text"
+  types[types_raw == "calculate"] <- "numerical"
+  
+  return(types)
+}
+
+
+
+
+make_analysisplan_all_vars <- function(df,
+                                       questionnaire,
+                                       repeat.for.variable=NA,
+                                       independent.variable = NA,
+                                       hypothesis.type = "direct_reporting"){
+  
+  
+  if(!is.data.frame(df)){stop(" df must be a data frame")}
+
+  if(!(repeat.for.variable %in% names(df))){
+    stop("repeat.for.variable is not a data column header")
+  }
+  
+  if(!(repeat.for.variable %in% names(df))){
+    stop("independent.variable is not a data column header")
+  }
+  
+  types <- map_to_datatypes(df,questionnaire)
+  types <- types[!is.na(types)]
+
+  if(!is.na(independent.variable)){
+    if(any(types[names(types)==independent.variable]!="categorical")){stop("independent variable must be categorical (and can not be select_multiple TRUE/FALSE column")}
+    independent.variable.type<-types[names(types)==independent.variable]
+  }else{
+    independent.variable.type<-NA
+  }
+  good_dependent_variables<-names(types)[types %in% c("numerical","numeric","categorical")]
+  
+  analysisplan<-data.frame(research.question = "RQ: not specified (automatic analysisplan)",
+                           sub.research.question = "sub RQ not specified (automatic analysisplan)",
+                           repeat.for.variable=repeat.for.variable,
+                           independent.variable=independent.variable,
+                           independent.variable.type=independent.variable.type,
+                           dependent.variable=good_dependent_variables,
+                           dependent.variable.type = types[good_dependent_variables],
+                           hypothesis.type = hypothesis.type,
+                           stringsAsFactors = F)
+  
+}
+
+make_analysis_plan_template <- function(df,
+                                        template_file,                                        
+                                        questionnaire,
+                                        repeat.for.variable=NA,
+                                        independent.variable = NA,
+                                        hypothesis.type = "direct_reporting"){
+  
+  template <- read.csv(template_file, stringsAsFactors = F, check.names = F, encoding = "UTF-8")
+  if(!is.data.frame(df)){stop(" df must be a data frame")}
+  
+  if(!(repeat.for.variable %in% names(df))){
+    stop("repeat.for.variable is not a data column header")
+  }
+  
+  if(!(repeat.for.variable %in% names(df))){
+    stop("independent.variable is not a data column header")
+  }
+  
+  types <- map_to_datatypes(df,questionnaire)
+  types <- types[!is.na(types)]
+  
+  if(!is.na(independent.variable)){
+    if(any(types[names(types)==independent.variable]!="categorical")){stop("independent variable must be categorical (and can not be select_multiple TRUE/FALSE column")}
+    independent.variable.type<-types[names(types)==independent.variable]
+  }else{
+    independent.variable.type<-NA
+  }
+  good_dependent_variables<-names(types)[types %in% c("numerical","numeric","categorical")]
+  good_dependent_variables_template <- template$dependent.variable[template$dependent.variable %in% good_dependent_variables]
+  
+  research.question_template <- template$research.question[template$dependent.variable %in% good_dependent_variables]
+  sub.research.question <- template$sub.research.question[template$dependent.variable %in% good_dependent_variables]
+  
+  analysisplan<-data.frame(research.question = research.question_template,
+                           sub.research.question = sub.research.question,
+                           repeat.for.variable=repeat.for.variable,
+                           independent.variable=independent.variable,
+                           independent.variable.type=independent.variable.type,
+                           dependent.variable=good_dependent_variables_template,
+                           dependent.variable.type = types[good_dependent_variables_template],
+                           hypothesis.type = hypothesis.type,
+                           stringsAsFactors = F)
+  
+  
+}
+
+
+
+
+
+
+
+
