@@ -56,11 +56,10 @@ which_skipLogic <- map(names(cleaned_data_adm1%>%select(-eau_propre,-admin0, -ad
 names(which_skipLogic) <- c(names(cleaned_data_adm1%>%select(-eau_propre, -admin0, -admin1, -admin2)),"admin0", "admin1", "admin2")
 
 which_skipLogic_adm0 <- which_skipLogic%>%
-  select(-admin2)%>%
+  select(-admin2, -admin1)%>%
   group_by(admin0)%>%
   summarise_all(funs(sum(.)))%>%
   pivot_longer(c(-admin0), names_to = "variable", values_to = "Skipped")%>%
-  left_join(n_adm0, by = c("admin0"))%>%
   mutate(perc_Skipped = round(Skipped/nrow(cleaned_data_adm1)*100, 0))
 
 # summarise_subsets <- which_subsets_adm1%>%
@@ -249,7 +248,7 @@ which_skipLogic_adm1_var <- which_skipLogic_adm1 %>%
   mutate(subset = if_else(perc_Skipped > 0, "Sous-ensemble de donnée", NA_character_))
 
 summary_stats_admin_0_final <- bind_rows(summary_stats_admin_0, freq_admin0)%>%
-  left_join(which_subsets_adm1, by = c("admin0", "variable"))%>%
+  left_join(which_subsets_adm0, by = c("admin0", "variable"))%>%
   mutate(question_choice = case_when(is.na(variable_value) ~ variable,
                                      TRUE ~ paste0(variable, ".", variable_value))) %>%
   left_join(dico, by = "question_choice")%>%
@@ -263,11 +262,10 @@ summary_stats_admin_0_final <- bind_rows(summary_stats_admin_0, freq_admin0)%>%
   distinct()%>%
   mutate(label_choice = case_when(is.na(label_choice) ~ label_indicator, 
                                   TRUE ~ paste(label_indicator, label_choice, sep = ": ")))%>%
-  select(research.question_label, sub.research.question_label, admin0name, label_choice, numbers, variable)%>%
+  select(research.question_label, sub.research.question_label, admin0, label_choice, numbers, variable)%>%
   distinct()%>%
   filter(!is.na(label_choice))%>%
-  group_by(research.question_label, sub.research.question_label, admin0name, label_choice)%>%
-  pivot_wider(names_from = c(admin0name), values_from = numbers)%>%
+  group_by(research.question_label, sub.research.question_label, admin0, label_choice)%>%
   # summarise(across(everything(), sum, na.rm=T))%>%
   ungroup()%>%
   mutate(sub.research.question_label = factor(sub.research.question_label, levels = target_sub_research_question_order ),
@@ -277,9 +275,9 @@ summary_stats_admin_0_final <- bind_rows(summary_stats_admin_0, freq_admin0)%>%
   left_join(select(which_skipLogic_adm1_var, variable,subset) , by = "variable")%>%
   mutate(pop_group = "Total")%>%
   select(research.question_label, sub.research.question_label,pop_group, label_choice,subset,everything())%>%
-  select(-variable)
+  select(-variable, -admin0)
 
 
 names(summary_stats_admin_0_final)[1:5] <- c("Question de recherche", "Sous-question de recherche","Groupe de population", "Indicator", "Sous-ensemble de donnée")
 
-write_csv(summary_stats_admin_0_final, "outputs/tables/summary_stats_admin_0.csv")
+write_csv(summary_stats_admin_0_final, "outputs/tables/summary_stats_admin_0_grp.csv")
