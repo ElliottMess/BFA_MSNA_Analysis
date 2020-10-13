@@ -5,3 +5,32 @@
 outputs\tables\detresse_psy_frequence.csv
 data\analysis_plans\analysisplan_admin_0.csv
 outputs\datasets\loops\BFA_MSNA_2020_dataset_cleanedWeighted_raw_data_membre_membre_entendre_difficile.csv
+data\analysis_plans\analysisplan_admin_0.csv
+        01_dataLoadingCleaning.R
+        02_Analysis_Overall_HRP_admin1.R
+        02_Analysis_Overall_HRP_admin1_grp.R
+        data/analysis_plans/
+        data/bfa2002_msna_2020_final_cleaning_20200830.xlsx
+        data/bfa2002_msna_2020_final_cleaning_20200913_PH_MF.csv
+        data/bfa2002_msna_2020_final_cleaning_20200913_PH_MF.xlsx
+        data/bfa2002_msna_2020_final_cleaning_20200913_PH_MF_info_menage.csv
+        data/shapes/
+        data/survey.csv
+        destress.R
+        detresse_psy_frequence.csv
+        directSurveysNoPcodes.csv
+        final_result_admin_0.RDS
+        final_result_admin_0_hrp_admin1.RDS
+        final_result_admin_0_hrp_countries.RDS
+        outputs/datasets/
+        outputs/final_result_admin_0.RDS
+        outputs/final_result_admin_0_hrp_admin1.RDS
+        outputs/final_result_admin_0_hrp_admin1_grp.RDS
+        outputs/final_result_admin_0_hrp_countries.RDS
+        outputs/tables/detresse_psy_frequence.csv
+        outputs/tables/detresse_psy_frequence.xlsx
+        outputs/tables/summary_stats_admin_0_grp.csv
+        outputs/tables/summary_stats_admin_0_hrp_admin1.csv
+        outputs/tables/summary_stats_admin_0_hrp_admin1.xlsx
+        outputs/tables/summary_stats_admin_0_hrp_grp_grp.csv
+        outputs/tables/summary_stats_admin_0_hrp_grp_grp.xlsx
