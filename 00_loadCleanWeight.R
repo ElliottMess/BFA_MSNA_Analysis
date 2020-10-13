@@ -15,9 +15,9 @@ loadInstall_package(package_list)
 # Loading necessary data
 ## Loading raw_data
 
-raw_data_csv <- "data/bfa2002_msna_2020_final_cleaning_20200913_PH_MF.csv"
+raw_data_csv <- "data/bfa2002_msna_2020_final_cleaning_20200913_PH_MF.csv" # Using CSV rather than excel as the file is very heavy
 
-raw_data_info_menage_csv <- "data/bfa2002_msna_2020_final_cleaning_20200913_PH_MF_info_menage.csv"
+raw_data_info_menage_csv <- "data/bfa2002_msna_2020_final_cleaning_20200913_PH_MF_info_menage.csv" # Using CSV rather than excel as the file is very heavy
 
 raw_data_excel <- "data/bfa2002_msna_2020_final_cleaning_20200913_PH_MF.xlsx"
 
@@ -29,35 +29,40 @@ raw_data <- read_csv(raw_data_csv)%>%
       group_pop %in% c("pdi") ~ "pdi",
       group_pop %in% c("pop_local", "migrant_burkina", "rapatrie", "refugie", "migrant_int", "retourne") ~ "host",
       TRUE ~ NA_character_
-      )
+      ) # standardising pop groups names
     )
 names(raw_data) <- gsub("è", "e", names(raw_data))
 
+# Remove linebreaks, carriage returns, and semi-colomns from the dataset to avoid CSV exports issues
 raw_data <- raw_data%>%
   mutate(across(where(is.character), str_remove_all, pattern = fixed("\n")))%>%
   mutate(across(where(is.character), str_remove_all, pattern = fixed("\r")))%>%
   mutate(across(where(is.character), str_remove_all, pattern = fixed(";")))
 
+# Replacing the separator between choices and main question for select_multiple questions
 names(raw_data) <- gsub("\\/", "\\.", names(raw_data))
 
+
+#Loading survey sheet from the form
 survey <- read_excel("data/reach_bfa_msna_outil_V2.xlsx", sheet = "survey")%>%
-  mutate(across(where(is.character), str_remove_all, pattern = fixed("\n")))%>%
-  mutate(across(where(is.character), str_remove_all, pattern = fixed("\r")))%>%
-  mutate(name = str_replace_all(name, pattern = fixed("è"), replacement = "e"))
+  mutate(across(where(is.character), str_remove_all, pattern = fixed("\n")))%>% # Removing all \n (linebreaks) to avoid import issues
+  mutate(across(where(is.character), str_remove_all, pattern = fixed("\r")))%>% # Removing all \r (carriers return) to avoid import issues
+  mutate(name = str_replace_all(name, pattern = fixed("è"), replacement = "e")) # Replacing è in "name" of survey (error in the form)
 
-write_csv(survey,"data/survey.csv")
+write_csv(survey,"data/survey.csv") # writing it for easier retrieval
 
-choices <- read_excel("data/reach_bfa_msna_outil_V2.xlsx", sheet = "choices")%>%
-  mutate(name = str_replace_all(name, pattern = "[è|é]", replacement = "e"))%>%
-  mutate(across(where(is.character), str_remove_all, pattern = fixed("\n")))%>%
-  mutate(across(where(is.character), str_remove_all, pattern = fixed("\r")))
+#Loading choices sheet from the form
+choices <- read_excel("data/reach_bfa_msna_outil_V2.xlsx", sheet = "choices")%>% 
+  mutate(name = str_replace_all(name, pattern = "[è|é]", replacement = "e"))%>% # Removing all é or è from "name"
+  mutate(across(where(is.character), str_remove_all, pattern = fixed("\n")))%>% # Removing all \n (linebreaks) to avoid import issues
+  mutate(across(where(is.character), str_remove_all, pattern = fixed("\r"))) # Removing all \r (carriers return) to avoid import issues
 
-write_csv(choices,"data/choices.csv")
+write_csv(choices,"data/choices.csv") # writing it for easier retrieval
 
 ### Loading repeat loops
-raw_data_info_menage <- read_csv(raw_data_info_menage_csv)%>%
-  rename(submission_uuid = `_submission__uuid`,
-         parent_index = `_parent_index`)
+raw_data_info_menage <- read_csv(raw_data_info_menage_csv)%>% # Here I am using read_csv rather than read_excel because the file is very heavy
+  rename(submission_uuid = `_submission__uuid`, 
+         parent_index = `_parent_index`) # Loading the replace spaces by _ so harmonising
   
 
 raw_data_maladie_moins_5ans_rpt <- read_excel(raw_data_excel, sheet = "maladie_moins_5ans_rpt")%>%
@@ -99,16 +104,16 @@ raw_data_membre_repeat_nbre_pers_decedes <- read_excel(raw_data_excel, sheet = "
 
 loop_frames <- list(raw_data_info_menage, raw_data_maladie_moins_5ans_rpt, raw_data_naissances, raw_data_membre_marche_dificile,
                  raw_data_membre_soins_difficile, raw_data_membre_concentration_difficile, raw_data_membre_membre_vision_diffcile,
-                 raw_data_membre_membre_entendre_difficile, raw_data_membre_difficulte_communication, raw_data_membre_repeat_nbre_pers_decedes)
+                 raw_data_membre_membre_entendre_difficile, raw_data_membre_difficulte_communication, raw_data_membre_repeat_nbre_pers_decedes) # list of all loop dataframes
 
 loop_frames_names <- list("raw_data_info_menage", "raw_data_maladie_moins_5ans_rpt", "raw_data_naissances", "raw_data_membre_marche_dificile",
                     "raw_data_membre_soins_difficile", "raw_data_membre_concentration_difficile", "raw_data_membre_membre_vision_diffcile",
-                    "raw_data_membre_membre_entendre_difficile", "raw_data_membre_difficulte_communication", "raw_data_membre_repeat_nbre_pers_decedes")
+                    "raw_data_membre_membre_entendre_difficile", "raw_data_membre_difficulte_communication", "raw_data_membre_repeat_nbre_pers_decedes") # loops names
 
 
-list_remove_data <- lapply(loop_frames, remove_delParents_fromLoop, raw_data, uuid.name.parent = "uuid", uuid.name.loop = "submission_uuid")
+list_remove_data <- lapply(loop_frames, remove_delParents_fromLoop, raw_data, uuid.name.parent = "uuid", uuid.name.loop = "submission_uuid") # using the custom function remove_delParents_fromLoop (see utils.R)
 
-names(list_remove_data) <- loop_frames_names
+names(list_remove_data) <- loop_frames_names #naming the lists
 
 ### Loading OCHA's settlement layer
 
@@ -127,10 +132,10 @@ bfa_admin2 <- read_csv("data/shapes/bfa_pplp_1m_nga_ocha/bfa_pplp_1m_nga_ocha.cs
            admin3Name == "pobe-mangao" ~ "pobe_mangao",
            admin3Name == "bobo-dioulasso" ~ "bobo_dioulasso",
            TRUE ~ admin3Name
-         ))
+         )) # harmonising admin3 names
 
 
-raw_data <- left_join(raw_data, bfa_admin2, by = c("admin3" = "admin3Name"))
+raw_data <- left_join(raw_data, bfa_admin2, by = c("admin3" = "admin3Name")) # Joining dataset to incorporate the admin3 names and pcodes
 
 
 # create_objects_from_df(list_remove_data)
@@ -139,14 +144,14 @@ raw_data <- left_join(raw_data, bfa_admin2, by = c("admin3" = "admin3Name"))
 
 
 ### Loading sampling strategies 
-samplingStrategies <- read_excel("data/Sampling_RU.xlsx", sheet = "Tableau Sampling Total", n_max = 663)%>%
-  select(!starts_with("..."))%>%
-  mutate_at(c("host_direct", "host_remote","idp_direct", "idp_telephone"), as.double)%>%
-  pivot_longer(cols = c("host_direct", "host_remote","idp_direct", "idp_telephone"), names_to = "sampling_strat", values_to ="surveys_toBeDone")%>%
-  filter(surveys_toBeDone >0, !is.na(surveys_toBeDone))%>%
-  select(village_P_code, sampling_strat)%>%
-  mutate(pcode_popGrp = paste(village_P_code, sampling_strat, sep = "_")
-  )
+# samplingStrategies <- read_excel("data/Sampling_RU.xlsx", sheet = "Tableau Sampling Total", n_max = 663)%>%
+#   select(!starts_with("..."))%>%
+#   mutate_at(c("host_direct", "host_remote","idp_direct", "idp_telephone"), as.double)%>%
+#   pivot_longer(cols = c("host_direct", "host_remote","idp_direct", "idp_telephone"), names_to = "sampling_strat", values_to ="surveys_toBeDone")%>%
+#   filter(surveys_toBeDone >0, !is.na(surveys_toBeDone))%>%
+#   select(village_P_code, sampling_strat)%>%
+#   mutate(pcode_popGrp = paste(village_P_code, sampling_strat, sep = "_")
+#   )
 
 
 ### Cleaning pcodes for other localites
@@ -173,19 +178,18 @@ samplingStrategies <- read_excel("data/Sampling_RU.xlsx", sheet = "Tableau Sampl
 
 
 ### Loading clusters sampling frame and cleaning centers of clusters
-
-clusterSample <- read_excel("data/Sampling_RU.xlsx", sheet = "sample_admin2_cluster_hexa500m_")%>%
-  mutate(X = case_when(is.na(POINT_X) ~ as.double(NEAR_X),
-                       TRUE ~ as.double(POINT_X)),
-         Y = case_when(is.na(POINT_Y) ~ as.double(NEAR_Y),
-                       TRUE ~ as.double(POINT_Y))
-  )%>%
-  select(-FID)%>%
-  mutate(rowID = row_number())%>%
-  group_by(id_sampl)%>%
-  filter(rowID == min(rowID))%>%
-  slice(1) %>% # takes the first occurrence if there is a tie
-  ungroup()
+# clusterSample <- read_excel("data/Sampling_RU.xlsx", sheet = "sample_admin2_cluster_hexa500m_")%>%
+#   mutate(X = case_when(is.na(POINT_X) ~ as.double(NEAR_X),
+#                        TRUE ~ as.double(POINT_X)),
+#          Y = case_when(is.na(POINT_Y) ~ as.double(NEAR_Y),
+#                        TRUE ~ as.double(POINT_Y))
+#   )%>%
+#   select(-FID)%>%
+#   mutate(rowID = row_number())%>%
+#   group_by(id_sampl)%>%
+#   filter(rowID == min(rowID))%>%
+#   slice(1) %>% # takes the first occurrence if there is a tie
+#   ungroup()
 
 
 ### Creating spatial objects for missingPcodes and clusters centers
@@ -272,8 +276,8 @@ raw_data_info_menage <- koboloops::add_parent_to_loop(loop = as.data.frame(raw_d
 #                                   uuid.name.loop = "parent_index", uuid.name.parent = "index")
 
 
-raw_data_naissances <- levels_asBinaryColumns(raw_data_naissances, "lieu_accouchement")
-raw_data_naissances <- levels_asBinaryColumns(raw_data_naissances, "raison_dominicile")
+raw_data_naissances <- levels_asBinaryColumns(raw_data_naissances, "lieu_accouchement") # Using custom function levels_asBinaryColumns see utils.R
+raw_data_naissances <- levels_asBinaryColumns(raw_data_naissances, "raison_dominicile")# Using custom function levels_asBinaryColumns see utils.R
 
 naissance_aggre <- raw_data_naissances %>%
   group_by(parent_index) %>%
@@ -506,7 +510,7 @@ list_remove_data <- lapply(loop_frames, remove_delParents_fromLoop, raw_data, uu
 names(list_remove_data) <- loop_frames_names
 
 
-invisible(create_objects_from_df(list_remove_data))
+invisible(create_objects_from_df(list_remove_data)) # create R objects from the list of DFs
 
 
 # WEIGHTING #
@@ -543,9 +547,11 @@ raw_data <- raw_data%>%
          admin3Pcode = admin3Pcod,
          sampling_id = paste(admin3Pcode, status, sep = "_")
   )%>%
-  select(-admin3Pcod)
+  select(-admin3Pcod) # Creating pcodes and sampling id
 
 ### Adding useful columns for calculations
+
+# adding some changes to the cleaning log
 add_to_changeLog_ic_age <- raw_data%>%
   select(uuid, age_chef_menage, ic_age)%>%
   filter(is.na(age_chef_menage))
@@ -564,6 +570,8 @@ cleaning_log_change <- cleaning_log_change%>%
           Question = "Genre du chef menage", "Probl.me" = "Manque genre du chef de ménage quand il est le répondant",
           Anciennes.valeurs = NA, Nouvelles.valeurs = add_to_changeLog_ic_genre$ic_genre)
 
+
+# Additional calculations -- where the magic happens
 raw_data <- raw_data%>%
   rowwise()%>%
   mutate(
@@ -798,6 +806,7 @@ samplingFrame_no_popGrp_adm2 <- samplingFrame%>%
 # 
 # raw_data_adm2_affected_all <- rbind(raw_data_representative, raw_data_adm2_quota)
 
+## getting a smaller dataset for admin2s most affected
 raw_data_adm2 <- raw_data%>%
   mutate(sampling_id_adm2 = paste(admin2Pcode, status, sep="_"))%>%
   filter(admin1Pcode %in% c("BF46", "BF49", "BF52", "BF54", "BF56"),
@@ -823,9 +832,10 @@ admin2_wght_adm3 <- map_to_weighting(sampling.frame = samplingFrame_adm2,
 combined_weights_adm2 <- combine_weighting_functions(admin2_wght_adm2,admin2_wght_adm3)
 
 raw_data_adm2$weights_sampling <- combined_weights_adm2(raw_data_adm2)
-raw_data_adm2$weights_sampling_AT_adm2 <- admin2_wght_adm2(raw_data_adm2)
 
-combined_weights_adm2_noGrp <- combine_weighting_functions(admin2_wght_no_popGrp_admin2, admin2_wght_no_popGrp_admin3)
+# raw_data_adm2$weights_sampling_AT_adm2 <- admin2_wght_adm2(raw_data_adm2)
+# 
+# combined_weights_adm2_noGrp <- combine_weighting_functions(admin2_wght_no_popGrp_admin2, admin2_wght_no_popGrp_admin3)
 
 
 ### Weighting for admin1 ###
@@ -881,7 +891,7 @@ combined_weights_adm1 <- combine_weighting_functions(admin1_wght_adm2,admin1_wgh
 
 
 raw_data_adm1$weights_sampling <- combined_weights_adm1(raw_data_adm1)
-raw_data_adm1$weights_sampling_AT_adm2 <- admin1_wght_adm2(raw_data_adm1)
+# raw_data_adm1$weights_sampling_AT_adm2 <- admin1_wght_adm2(raw_data_adm1)
 
 
 ### Removing from main data frames surveys with no sampling ID attriuable
@@ -899,9 +909,7 @@ weights_adm2 <- raw_data_adm2%>%
 
 raw_data_adm1 <- raw_data_adm1%>%
   mutate(weights_sampling = as.vector(weights_sampling))%>%
-  select(-contains("gps"), -DFERWF)%>%
-  left_join(weights_adm2, by = "sampling_id")%>%
-  distinct()
+  select(-contains("gps"), -DFERWF)
 
 raw_data_adm2 <- raw_data_adm2%>%
   select(-contains("gps"), -DFERWF)
