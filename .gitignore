@@ -2,3 +2,5 @@
 .Rhistory
 .RData
 .Ruserdata
+outputs\tables\detresse_psy_frequence.csv
+data\analysis_plans\analysisplan_admin_0.csv
