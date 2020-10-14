@@ -1,39 +1,185 @@
-.Rproj.user
+
 .Rhistory
+*.pper
+.Rproj.user*?
+data/shapes/old_datafiles/bfa2002_msna_2020_final_cleaning_20200830.xlsx
+data/shapes/old_datafiles/bfa2002_msna_2020_final_cleaning_20200830_clean_data.csv
+data/shapes/old_datafiles/bfa2002_msna_2020_final_cleaning_20200830_info_menage.csv
+data/shapes/old_datafiles/bfa2002_msna_2020_final_cleaning_20200902.csv
+data/shapes/old_datafiles/bfa2002_msna_2020_final_cleaning_20200902.xlsx
+data/shapes/old_datafiles/bfa2002_msna_2020_final_cleaning_20200902_info_menage.csv
+data/shapes/old_datafiles/liste-des-villages-du-recensement-2006-burkina-faso_em.xls
+data/survey.csv
+data/
+# History files
+.Rhistory
+.Rapp.history
+
+# Session Data files
 .RData
+
+# User-specific files
 .Ruserdata
-outputs\tables\detresse_psy_frequence.csv
-data\analysis_plans\analysisplan_admin_0.csv
-outputs\datasets\loops\BFA_MSNA_2020_dataset_cleanedWeighted_raw_data_membre_membre_entendre_difficile.csv
-data\analysis_plans\analysisplan_admin_0.csv
-        01_dataLoadingCleaning.R
-        02_Analysis_Overall_HRP_admin1.R
-        02_Analysis_Overall_HRP_admin1_grp.R
-        data/analysis_plans/
-        data/bfa2002_msna_2020_final_cleaning_20200830.xlsx
-        data/bfa2002_msna_2020_final_cleaning_20200913_PH_MF.csv
-        data/bfa2002_msna_2020_final_cleaning_20200913_PH_MF.xlsx
-        data/bfa2002_msna_2020_final_cleaning_20200913_PH_MF_info_menage.csv
-        data/shapes/
-        data/survey.csv
-        destress.R
-        detresse_psy_frequence.csv
-        directSurveysNoPcodes.csv
-        final_result_admin_0.RDS
-        final_result_admin_0_hrp_admin1.RDS
-        final_result_admin_0_hrp_countries.RDS
-        outputs/datasets/
-        outputs/final_result_admin_0.RDS
-        outputs/final_result_admin_0_hrp_admin1.RDS
-        outputs/final_result_admin_0_hrp_admin1_grp.RDS
-        outputs/final_result_admin_0_hrp_countries.RDS
-        outputs/tables/detresse_psy_frequence.csv
-        outputs/tables/detresse_psy_frequence.xlsx
-        outputs/tables/summary_stats_admin_0_grp.csv
-        outputs/tables/summary_stats_admin_0_hrp_admin1.csv
-        outputs/tables/summary_stats_admin_0_hrp_admin1.xlsx
-        outputs/tables/summary_stats_admin_0_hrp_grp_grp.csv
-        outputs/tables/summary_stats_admin_0_hrp_grp_grp.xlsx
-data\shapes\
-data\shapes\BFA_ITOS_2020_03_24\bfa_admbnda_adm0_igb_20200323.CPG
-data\analysis_plans\analysisplan_admin_0.csv
+
+# Example code in package build process
+*-Ex.R
+
+# Output files from R CMD build
+/*.tar.gz
+
+# Output files from R CMD check
+/*.Rcheck/
+
+# RStudio files
+.Rproj.user/
+
+# produced vignettes
+vignettes/*.html
+vignettes/*.pdf
+
+# OAuth2 token, see https://github.com/hadley/httr/releases/tag/v0.3
+.httr-oauth
+
+# knitr and R markdown default cache directories
+*_cache/
+/cache/
+
+# Temporary files created by R markdown
+*.utf8.md
+*.knit.md
+
+# R Environment Variables
+.Renviron
+
+### R.Bookdown Stack ###
+# R package: bookdown caching files
+/*_files/
+data/analysis_plans/analysisplan_admin_0.csv
+data/bfa2002_msna_2020_final_cleaning_20200830.xlsx
+data/bfa2002_msna_2020_final_cleaning_20200913_PH_MF.csv
+data/bfa2002_msna_2020_final_cleaning_20200913_PH_MF.xlsx
+data/bfa2002_msna_2020_final_cleaning_20200913_PH_MF_info_menage.csv
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm0_igb_20200323.CPG
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm0_igb_20200323.dbf
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm0_igb_20200323.prj
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm0_igb_20200323.sbn
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm0_igb_20200323.sbx
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm0_igb_20200323.shp
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm0_igb_20200323.shp.xml
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm0_igb_20200323.shx
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm1_igb_20200323.CPG
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm1_igb_20200323.dbf
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm1_igb_20200323.prj
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm1_igb_20200323.sbn
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm1_igb_20200323.sbx
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm1_igb_20200323.shp
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm1_igb_20200323.shp.xml
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm1_igb_20200323.shx
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm2_igb_20200323.CPG
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm2_igb_20200323.dbf
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm2_igb_20200323.prj
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm2_igb_20200323.sbn
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm2_igb_20200323.sbx
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm2_igb_20200323.shp
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm2_igb_20200323.shp.xml
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm2_igb_20200323.shx
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm3_igb_20200323.CPG
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm3_igb_20200323.dbf
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm3_igb_20200323.prj
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm3_igb_20200323.qix
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm3_igb_20200323.shp
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm3_igb_20200323.shp.xml
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm3_igb_20200323.shx
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbndl_admALL_igb_itos_20200323.CPG
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbndl_admALL_igb_itos_20200323.dbf
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbndl_admALL_igb_itos_20200323.prj
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbndl_admALL_igb_itos_20200323.sbn
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbndl_admALL_igb_itos_20200323.sbx
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbndl_admALL_igb_itos_20200323.shp
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbndl_admALL_igb_itos_20200323.shp.xml
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbndl_admALL_igb_itos_20200323.shx
+data/shapes/bfa_pplp_1m_nga_ocha/bfa_pplp_1m_nga_ocha.cpg
+data/shapes/bfa_pplp_1m_nga_ocha/bfa_pplp_1m_nga_ocha.csv
+data/shapes/bfa_pplp_1m_nga_ocha/bfa_pplp_1m_nga_ocha.dbf
+data/shapes/bfa_pplp_1m_nga_ocha/bfa_pplp_1m_nga_ocha.prj
+data/shapes/bfa_pplp_1m_nga_ocha/bfa_pplp_1m_nga_ocha.sbn
+data/shapes/bfa_pplp_1m_nga_ocha/bfa_pplp_1m_nga_ocha.sbx
+data/shapes/bfa_pplp_1m_nga_ocha/bfa_pplp_1m_nga_ocha.shp
+data/shapes/bfa_pplp_1m_nga_ocha/bfa_pplp_1m_nga_ocha.shp.xml
+data/shapes/bfa_pplp_1m_nga_ocha/bfa_pplp_1m_nga_ocha.shx
+data/shapes/clusterSample.gpkg
+data/shapes/directSurveyNoPcodes.gpkg
+data/shapes/fb_data_extract.qgz
+data/shapes/old_datafiles/bfa2002_msna_2020_final_cleaning_20200830_clean_data.csv
+data/shapes/old_datafiles/bfa2002_msna_2020_final_cleaning_20200830_info_menage.csv
+data/shapes/old_datafiles/bfa2002_msna_2020_final_cleaning_20200902.csv
+data/shapes/old_datafiles/bfa2002_msna_2020_final_cleaning_20200902.xlsx
+data/shapes/old_datafiles/bfa2002_msna_2020_final_cleaning_20200902_info_menage.csv
+data/shapes/old_datafiles/liste-des-villages-du-recensement-2006-burkina-faso_em.xls
+data/survey.csv
+data/analysis_plans/analysisplan_admin_0.csv
+data/bfa2002_msna_2020_final_cleaning_20200830.xlsx
+data/bfa2002_msna_2020_final_cleaning_20200913_PH_MF.csv
+data/bfa2002_msna_2020_final_cleaning_20200913_PH_MF.xlsx
+data/bfa2002_msna_2020_final_cleaning_20200913_PH_MF_info_menage.csv
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm0_igb_20200323.CPG
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm0_igb_20200323.dbf
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm0_igb_20200323.prj
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm0_igb_20200323.sbn
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm0_igb_20200323.sbx
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm0_igb_20200323.shp
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm0_igb_20200323.shp.xml
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm0_igb_20200323.shx
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm1_igb_20200323.CPG
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm1_igb_20200323.dbf
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm1_igb_20200323.prj
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm1_igb_20200323.sbn
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm1_igb_20200323.sbx
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm1_igb_20200323.shp
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm1_igb_20200323.shp.xml
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm1_igb_20200323.shx
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm2_igb_20200323.CPG
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm2_igb_20200323.dbf
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm2_igb_20200323.prj
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm2_igb_20200323.sbn
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm2_igb_20200323.sbx
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm2_igb_20200323.shp
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm2_igb_20200323.shp.xml
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm2_igb_20200323.shx
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm3_igb_20200323.CPG
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm3_igb_20200323.dbf
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm3_igb_20200323.prj
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm3_igb_20200323.qix
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm3_igb_20200323.shp
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm3_igb_20200323.shp.xml
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm3_igb_20200323.shx
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbndl_admALL_igb_itos_20200323.CPG
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbndl_admALL_igb_itos_20200323.dbf
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbndl_admALL_igb_itos_20200323.prj
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbndl_admALL_igb_itos_20200323.sbn
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbndl_admALL_igb_itos_20200323.sbx
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbndl_admALL_igb_itos_20200323.shp
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbndl_admALL_igb_itos_20200323.shp.xml
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbndl_admALL_igb_itos_20200323.shx
+data/shapes/bfa_pplp_1m_nga_ocha/bfa_pplp_1m_nga_ocha.cpg
+data/shapes/bfa_pplp_1m_nga_ocha/bfa_pplp_1m_nga_ocha.csv
+data/shapes/bfa_pplp_1m_nga_ocha/bfa_pplp_1m_nga_ocha.dbf
+data/shapes/bfa_pplp_1m_nga_ocha/bfa_pplp_1m_nga_ocha.prj
+data/shapes/bfa_pplp_1m_nga_ocha/bfa_pplp_1m_nga_ocha.sbn
+data/shapes/bfa_pplp_1m_nga_ocha/bfa_pplp_1m_nga_ocha.sbx
+data/shapes/bfa_pplp_1m_nga_ocha/bfa_pplp_1m_nga_ocha.shp
+data/shapes/bfa_pplp_1m_nga_ocha/bfa_pplp_1m_nga_ocha.shp.xml
+data/shapes/bfa_pplp_1m_nga_ocha/bfa_pplp_1m_nga_ocha.shx
+data/shapes/clusterSample.gpkg
+data/shapes/directSurveyNoPcodes.gpkg
+data/shapes/fb_data_extract.qgz
+data/shapes/old_datafiles/bfa2002_msna_2020_final_cleaning_20200830_clean_data.csv
+data/shapes/old_datafiles/bfa2002_msna_2020_final_cleaning_20200830_info_menage.csv
+data/shapes/old_datafiles/bfa2002_msna_2020_final_cleaning_20200902.csv
+data/shapes/old_datafiles/bfa2002_msna_2020_final_cleaning_20200902.xlsx
+data/shapes/old_datafiles/bfa2002_msna_2020_final_cleaning_20200902_info_menage.csv
+data/shapes/old_datafiles/liste-des-villages-du-recensement-2006-burkina-faso_em.xls
+data/survey.csv
+data/shapes/old_datafiles/liste-des-villages-du-recensement-2006-burkina-faso_em.xls
+data/analysis_plans/analysisplan_admin_0.csv
+data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm0_igb_20200323.sbn
