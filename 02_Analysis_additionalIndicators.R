@@ -194,7 +194,7 @@ analysisplan_admin_2_grp <- analysisplan_admin_2_grp[!is.na(analysisplan_admin_2
 #                                                             questionnaire = questionnaire)
 # 
 # saveRDS(final_result_admin_2_grp_weights_adm2, "outputs/final_result_admin_2_grp_weights_adm2_secal.rds")
-final_result_admin_2_grp <- readRS("outputs/final_result_admin_2_grp_secal.rds")
+final_result_admin_2_grp <- readRDS("outputs/final_result_admin_2_grp_secal.rds")
 
 summary_stats_admin_2_grp <- final_result_admin_2_grp$results %>%
   lapply(function(x){x$summary.statistic}) %>% do.call(rbind, .)%>%
@@ -436,20 +436,20 @@ summary_stats_admin_1_final <- bind_rows(summary_stats_admin_1)%>%
 
 
 
-# analysisplan_admin_2 <- make_analysis_plan_template(df= cleaned_data_adm2,
-#                                                         questionnaire = questionnaire,
-#                                                         repeat.for.variable = "admin2",
-#                                                         hypothesis.type = "direct_reporting",
-#                                                         template_file = template_analysisplan_file
-# )
-# 
-# analysisplan_admin_2 <- analysisplan_admin_2[!is.na(analysisplan_admin_2$dependent.variable.type),]
-# 
-# analysisplan_admin_2_secal <- analysisplan_admin_2 %>%
-#   filter(dependent.variable %in% c("fcs2", "fcs2_thresholds", "hhs_score", "hhs_thresholds",
-#                                    "lcs_crise", "lcs_minimal", "lcs_stress", "lcs_total", "lcs_urgence", "lcsi",
-#                                    "hhs_thresholds", "hhs_score","rcsi_thresholds", "rcsi_score"))
-# 
+analysisplan_admin_2 <- make_analysis_plan_template(df= cleaned_data_adm2,
+                                                        questionnaire = questionnaire,
+                                                        repeat.for.variable = "admin2",
+                                                        hypothesis.type = "direct_reporting",
+                                                        template_file = template_analysisplan_file
+)
+
+analysisplan_admin_2 <- analysisplan_admin_2[!is.na(analysisplan_admin_2$dependent.variable.type),]
+
+analysisplan_admin_2_secal <- analysisplan_admin_2 %>%
+  filter(dependent.variable %in% c("fcs2", "fcs2_thresholds", "hhs_score", "hhs_thresholds",
+                                   "lcs_crise", "lcs_minimal", "lcs_stress", "lcs_total", "lcs_urgence", "lcsi",
+                                   "hhs_thresholds", "hhs_score","rcsi_thresholds", "rcsi_score"))
+
 # 
 # final_result_admin_2 <- from_analysisplan_map_to_output(data = cleaned_data_adm2,
 #                                                             analysisplan = analysisplan_admin_2_secal,
