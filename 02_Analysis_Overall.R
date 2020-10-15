@@ -12,17 +12,15 @@ cleaned_data_adm1$admin0 <- "BFA"
 #                                                     hypothesis.type = "direct_reporting",
 #                                                     template_file = template_analysisplan_file
 # )
-# 
-# 
 # analysisplan_admin_0 <- analysisplan_admin_0[!is.na(analysisplan_admin_0$dependent.variable.type),]
-
-
-
+# write_csv(analysisplan_admin_0, "data/analysis_plans/analysisplan_admin_0.csv")
+# 
+# 
+# 
 # final_result_admin_0 <- from_analysisplan_map_to_output(data = cleaned_data_adm1,
 #                                                             analysisplan = analysisplan_admin_0,
 #                                                             weighting = combined_weights_adm1,
 #                                                             questionnaire = questionnaire)
-# 
 # saveRDS(final_result_admin_0, "final_result_admin_0.RDS")
 
 final_result_admin_0 <- readRDS("outputs/final_result_admin_0.RDS")
@@ -82,6 +80,9 @@ which_skipLogic_adm0 <- which_skipLogic%>%
 freq_admin0 <- cleaned_data_adm1%>%
   group_by(admin0)%>%
   summarise(
+    #Détresse psy
+    freq_detres_adult = sum(detres_adult* weights_sampling, na.rm = T)/sum((femme + homme)*weights_sampling, na.rm = T),
+    freq_detres_enfants = sum(detres_enft*weights, na.rm = T)/sum((femme+homme)*weights_sampling, na.rm = T),
     #Naissances
     freq_lieu_accouchement.centre_sante = sum(lieu_accouchement.centre_sante * weights_sampling, na.rm = T)/sum(total_naissance * weights_sampling, na.rm = T),
     freq_lieu_accouchement.maison = sum(lieu_accouchement.maison * weights_sampling, na.rm = T)/sum(total_naissance * weights_sampling, na.rm = T),
