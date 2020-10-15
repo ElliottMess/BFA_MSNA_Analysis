@@ -1,7 +1,7 @@
 ### The commented lines below should be uncommented to run the script from scratch
 
 
-# source("01_PrepingAnalysis.R", encoding = "UTF-8")
+source("01_PrepingAnalysis.R", encoding = "UTF-8")
 
 cleaned_data_adm1$admin0 <- "BFA"
 
@@ -24,6 +24,16 @@ cleaned_data_adm1$admin0 <- "BFA"
 # saveRDS(final_result_admin_0, "final_result_admin_0.RDS")
 
 final_result_admin_0 <- readRDS("outputs/final_result_admin_0.RDS")
+
+analyse_format_data <- function(result, admin_lvl, pop_grp=){
+  
+  summary_stats_admin_0 <- result$results %>%
+    lapply(function(x){x$summary.statistic}) %>% do.call(rbind, .)%>%
+    select(repeat.var.value, dependent.var, dependent.var.value, numbers)%>%
+    rename(!!admin0 := repeat.var.value, variable = dependent.var, variable_value = dependent.var.value)
+  
+  
+}
 
 summary_stats_admin_0 <- final_result_admin_0$results %>%
   lapply(function(x){x$summary.statistic}) %>% do.call(rbind, .)%>%
