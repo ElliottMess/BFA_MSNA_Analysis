@@ -193,8 +193,8 @@ outputs/tables/summary_stats_admin_1.csv
 outputs/tables/summary_stats_admin_1.csv
 outputs/logs/cleaning_log_missingPcodes.csv
 detresse_psy_frequence.csv
-directSurveysNoPcodes.csv
-outputs/final_result_admin_0_grp.RDS
 outputs/tables/summary_stats_admin0.csv
 outputs/tables/summary_stats_admin0_grp.csv
 destress.R
+outputs/final_result_admin_0_grp.RDS
+directSurveysNoPcodes.csv

@@ -20,7 +20,6 @@ source("01_PrepingAnalysis.R", encoding = "UTF-8")
 # 
 # saveRDS(final_result_admin_1_grp, "outputs/final_result_admin_1_grp.RDS")
 
-
 final_result_admin_1_grp <- readRDS("outputs/final_result_admin_1_grp.RDS")
 
 
