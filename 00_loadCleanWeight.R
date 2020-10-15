@@ -901,11 +901,11 @@ not_in_raw_data_adm1 <- raw_data[!raw_data$uuid %in% raw_data_adm1$uuid, ]
 raw_data <-raw_data%>%
   select(-contains("gps"), -DFERWF)
 
-weights_adm2 <- raw_data_adm2%>%
-  select(sampling_id, weights_sampling, weights_sampling_AT_adm2)%>%
-  rename(weights_sampling_adm2 = weights_sampling,
-         weights_sampling_adm2_AT_adm2 = weights_sampling_AT_adm2)%>%
-  mutate(weights_sampling_adm2 = as.vector(weights_sampling_adm2))
+# weights_adm2 <- raw_data_adm2%>%
+#   select(sampling_id, weights_sampling, weights_sampling_AT_adm2)%>%
+#   rename(weights_sampling_adm2 = weights_sampling,
+#          weights_sampling_adm2_AT_adm2 = weights_sampling_AT_adm2)%>%
+#   mutate(weights_sampling_adm2 = as.vector(weights_sampling_adm2))
 
 raw_data_adm1 <- raw_data_adm1%>%
   mutate(weights_sampling = as.vector(weights_sampling))%>%
