@@ -188,3 +188,9 @@ data/shapes/BFA_ITOS_2020_03_24/bfa_admbnda_adm0_igb_20200323.sbn
 01_Analysis.R
 outputs/logs/cleaning_log_missingPcodes.csv
 outputs/logs/cleaning_log_missingPcodes.csv
+outputs/logs/cleaning_log_missingPcodes.csv
+outputs/tables/summary_stats_admin_1.csv
+outputs/tables/summary_stats_admin_1.csv
+outputs/logs/cleaning_log_missingPcodes.csv
+detresse_psy_frequence.csv
+directSurveysNoPcodes.csv
