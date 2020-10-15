@@ -24,14 +24,6 @@
 
 final_result_admin_1 <- readRDS("outputs/final_result_admin_1.RDS")
 
-# final_result_admin_1_grp_weight_adm2 <- from_analysisplan_map_to_output(data = cleaned_data_adm1,
-#                                                             analysisplan = analysisplan_admin_1_grp,
-#                                                             weighting = admin1_wght_adm2,
-#                                                             questionnaire = questionnaire)
-# 
-# saveRDS(final_result_admin_1_grp_weight_adm2, "outputs/final_result_admin_1_grp_weight_adm2.RDS")
-
-
 summary_stats_admin_1 <- final_result_admin_1$results %>%
   lapply(function(x){x$summary.statistic}) %>% do.call(rbind, .)%>%
   select(repeat.var.value, dependent.var, dependent.var.value, numbers)%>%
@@ -81,6 +73,9 @@ which_skipLogic_adm1 <- which_skipLogic%>%
 freq_admin1 <- cleaned_data_adm1%>%
   group_by(admin1)%>%
   summarise(
+    #Détresse psy
+    freq_detres_adult = sum(detres_adult* weights_sampling, na.rm = T)/sum(sum(femme,homme, na.rm = T)*weights_sampling, na.rm = T),
+    freq_detres_enfants = sum(detres_enft*weights_sampling, na.rm = T)/sum(enfant*weights_sampling, na.rm = T),
     #Naissances
     freq_lieu_accouchement.centre_sante = sum(lieu_accouchement.centre_sante * weights_sampling, na.rm = T)/sum(total_naissance * weights_sampling, na.rm = T),
     freq_lieu_accouchement.maison = sum(lieu_accouchement.maison * weights_sampling, na.rm = T)/sum(total_naissance * weights_sampling, na.rm = T),

@@ -5,55 +5,65 @@
 
 cleaned_data_adm1$admin0 <- "BFA"
 
+cleaned_data_adm1 <- cleaned_data_adm1%>%
+  filter(admin1%in% c("centre_est", "boucle_du_mouhoun", "est", "sahel", "cascades", "nord", "centre_nord"))
 
-# analysisplan_admin_0 <- make_analysis_plan_template(df= cleaned_data_adm1,
-#                                                     questionnaire = questionnaire,
-#                                                     repeat.for.variable = "admin0",
-#                                                     hypothesis.type = "direct_reporting",
-#                                                     template_file = template_analysisplan_file
+# analysisplan_admin_0_grp <- make_analysis_plan_template(df= cleaned_data_adm1,
+#                                                         questionnaire = questionnaire,
+#                                                         repeat.for.variable = "admin0",
+#                                                         independent.variable = "status",
+#                                                         hypothesis.type = "direct_reporting",
+#                                                         template_file = template_analysisplan_file
 # )
-# analysisplan_admin_0 <- analysisplan_admin_0[!is.na(analysisplan_admin_0$dependent.variable.type),]
-# write_csv(analysisplan_admin_0, "data/analysis_plans/analysisplan_admin_0.csv")
-# 
-# 
-# 
-# final_result_admin_0 <- from_analysisplan_map_to_output(data = cleaned_data_adm1,
+# analysisplan_admin_0_grp <- analysisplan_admin_0[!is.na(analysisplan_admin_0$dependent.variable.type),]
+# write_csv(analysisplan_admin_0_grp, "data/analysis_plans/analysisplan_admin_0_grp.csv")
+
+analysisplan_admin_0 <- read_csv("data/analysis_plans/analysisplan_admin_0.csv")
+
+# final_result_admin_0_hrp_admin1_grp <- from_analysisplan_map_to_output(data = cleaned_data_adm1,
 #                                                             analysisplan = analysisplan_admin_0,
 #                                                             weighting = combined_weights_adm1,
 #                                                             questionnaire = questionnaire)
-# saveRDS(final_result_admin_0, "final_result_admin_0.RDS")
+# 
+# saveRDS(final_result_admin_0_hrp_admin1_grp, "outputs/final_result_admin_0_hrp_admin1_grp.RDS")
 
-final_result_admin_0 <- readRDS("outputs/final_result_admin_0.RDS")
+final_result_admin_0_hrp_admin1_grp <- readRDS("outputs/final_result_admin_0_hrp_admin1_grp.RDS")
 
-summary_stats_admin_0 <- final_result_admin_0$results %>%
+# final_result_admin_0_grp_weight_adm2 <- from_analysisplan_map_to_output(data = cleaned_data_adm1,
+#                                                             analysisplan = analysisplan_admin_0_grp,
+#                                                             weighting = admin1_wght_adm2,
+#                                                             questionnaire = questionnaire)
+# 
+# saveRDS(final_result_admin_0_grp_weight_adm2, "outputs/final_result_admin_0_grp_weight_adm2.RDS")
+
+
+summary_stats_admin_0_hrp_grp <- final_result_admin_0_hrp_admin1_grp$results %>%
   lapply(function(x){x$summary.statistic}) %>% do.call(rbind, .)%>%
-  select(repeat.var.value, dependent.var, dependent.var.value, numbers)%>%
-  rename(admin0 = repeat.var.value, variable = dependent.var, variable_value = dependent.var.value)
+  select(repeat.var.value, dependent.var, dependent.var.value, independent.var.value, numbers)%>%
+  rename(admin0 = repeat.var.value, variable = dependent.var, variable_value = dependent.var.value, group_pop = independent.var.value)
 
 n_adm0 <- cleaned_data_adm1%>%
-  group_by(admin0)%>%
   summarise(n = n(), .groups="drop")%>%
-  pivot_longer(c(-admin0), names_to = "variable", values_to = "n")%>%
+  pivot_longer(everything(), names_to = "variable", values_to = "n")%>%
   select(-variable)
 
 which_subsets_adm0 <- cleaned_data_adm1%>%
+  group_by(admin0)%>%
   summarise_all(funs(sum(is.na(.))))%>%
-  pivot_longer(everything(), names_to = "variable", values_to = "NAs")%>%
-  # left_join(n_adm0, by = c("admin0"))%>%
+  pivot_longer(c(-admin0), names_to = "variable", values_to = "NAs")%>%
   mutate(perc_NAs = round(NAs/nrow(cleaned_data_adm1)*100, 0))
 
-which_skipLogic <- map(names(cleaned_data_adm1%>%select(-eau_propre, -admin0, -admin1, -admin2)), function(x)questionnaire$question_is_skipped(question.name = x, data = cleaned_data_adm1%>%select(-eau_propre)))%>%
+which_skipLogic <- map(names(cleaned_data_adm1%>%select(-eau_propre,-admin0, -admin1, -admin2)), function(x)questionnaire$question_is_skipped(question.name = x, data = cleaned_data_adm1%>%select(-eau_propre)))%>%
   as.data.frame()%>%
   mutate(admin0 = cleaned_data_adm1$admin0, admin1 = cleaned_data_adm1$admin1, admin2 = cleaned_data_adm1$admin2)
 
-names(which_skipLogic) <- c(names(cleaned_data_adm1%>%select(-eau_propre, -admin0, -admin1, -admin2)), "admin0", "admin1", "admin2")
+names(which_skipLogic) <- c(names(cleaned_data_adm1%>%select(-eau_propre, -admin0, -admin1, -admin2)),"admin0", "admin1", "admin2")
 
 which_skipLogic_adm0 <- which_skipLogic%>%
   select(-admin2, -admin1)%>%
   group_by(admin0)%>%
   summarise_all(funs(sum(.)))%>%
   pivot_longer(c(-admin0), names_to = "variable", values_to = "Skipped")%>%
-  # left_join(n_adm1, by = c("admin0"))%>%
   mutate(perc_Skipped = round(Skipped/nrow(cleaned_data_adm1)*100, 0))
 
 # summarise_subsets <- which_subsets_adm1%>%
@@ -71,8 +81,8 @@ freq_admin0 <- cleaned_data_adm1%>%
   group_by(admin0)%>%
   summarise(
     #Détresse psy
-    freq_detres_adult = sum(detres_adult* weights_sampling, na.rm = T)/sum((femme + homme)*weights_sampling, na.rm = T),
-    freq_detres_enfants = sum(detres_enft*weights, na.rm = T)/sum((femme+homme)*weights_sampling, na.rm = T),
+    freq_detres_adult = sum(detres_adult* weights_sampling, na.rm = T)/sum(sum(femme,homme, na.rm = T)*weights_sampling, na.rm = T),
+    freq_detres_enfants = sum(detres_enft*weights_sampling, na.rm = T)/sum(enfant*weights_sampling, na.rm = T),
     #Naissances
     freq_lieu_accouchement.centre_sante = sum(lieu_accouchement.centre_sante * weights_sampling, na.rm = T)/sum(total_naissance * weights_sampling, na.rm = T),
     freq_lieu_accouchement.maison = sum(lieu_accouchement.maison * weights_sampling, na.rm = T)/sum(total_naissance * weights_sampling, na.rm = T),
@@ -232,20 +242,20 @@ bfa_admin0 <- read_csv("data/shapes/bfa_pplp_1m_nga_ocha/bfa_pplp_1m_nga_ocha.cs
   mutate(admin1name = tolower(admin1Name),
          admin1name = gsub("-","_", admin1name),
          admin1name = gsub(" ", "_", admin1name),
-         admin0name = "Burkina Faso")%>%
+         admin0name = "BFA")%>%
   distinct()
 
 target_research_question_order <- unique(dico$research.question_label)
 target_sub_research_question_order <- unique(dico$sub.research.question_label)
 
-which_skipLogic_adm0_var <- which_skipLogic_adm0 %>%
+which_skipLogic_adm1_var <- which_skipLogic_adm1 %>%
   group_by(variable) %>%
   summarise(Skipped = sum(Skipped, na.rm = T),
             perc_Skipped = sum(perc_Skipped, na.rm = T)) %>%
   mutate(subset = if_else(perc_Skipped > 0, "Sous-ensemble de donnée", NA_character_))
 
-summary_stats_admin_0_final <- bind_rows(summary_stats_admin_0, freq_admin0)%>%
-  left_join(which_subsets_adm0, by = c( "variable"))%>%
+summary_stats_admin_0_hrp_grp_final <- bind_rows(summary_stats_admin_0_hrp_grp, freq_admin0)%>%
+  left_join(which_subsets_adm0, by = c("admin0", "variable"))%>%
   mutate(question_choice = case_when(is.na(variable_value) ~ variable,
                                      TRUE ~ paste0(variable, ".", variable_value))) %>%
   left_join(dico, by = "question_choice")%>%
@@ -254,16 +264,15 @@ summary_stats_admin_0_final <- bind_rows(summary_stats_admin_0, freq_admin0)%>%
                              dependent.variable.type == "numerical"  ~ round(numbers,1)
   )
   )%>%
-  select(research.question_label, sub.research.question_label, admin0, label_indicator, label_choice, numbers, variable)%>%
+  select(research.question_label, sub.research.question_label, admin0, label_indicator, label_choice, numbers, variable, group_pop)%>%
   left_join(bfa_admin0, by = c("admin0" = "admin0name"))%>%
   distinct()%>%
   mutate(label_choice = case_when(is.na(label_choice) ~ label_indicator, 
                                   TRUE ~ paste(label_indicator, label_choice, sep = ": ")))%>%
-  select(research.question_label, sub.research.question_label, admin0, label_choice, numbers, variable)%>%
+  select(research.question_label, sub.research.question_label, admin0, label_choice, numbers, variable, group_pop)%>%
   distinct()%>%
   filter(!is.na(label_choice))%>%
   group_by(research.question_label, sub.research.question_label, admin0, label_choice)%>%
-  pivot_wider(names_from = c(admin0), values_from = numbers)%>%
   # summarise(across(everything(), sum, na.rm=T))%>%
   ungroup()%>%
   mutate(sub.research.question_label = factor(sub.research.question_label, levels = target_sub_research_question_order ),
@@ -271,11 +280,11 @@ summary_stats_admin_0_final <- bind_rows(summary_stats_admin_0, freq_admin0)%>%
   arrange(research.question_label,sub.research.question_label,label_choice)%>%
   filter(!is.na(label_choice)) %>%
   left_join(select(which_skipLogic_adm1_var, variable,subset) , by = "variable")%>%
-  select(research.question_label, sub.research.question_label, label_choice,subset,everything())%>%
-  mutate(pop_grp = "Total")%>%
-  select(-variable)
+  select(research.question_label, sub.research.question_label,group_pop, label_choice,subset,everything())%>%
+  select(-variable, -admin0)%>%
+  mutate(group_pop = if_else(group_pop == "host", "Communauté hôte", "PDI") )
 
 
-names(summary_stats_admin_0_final)[1:5] <- c("Question de recherche", "Sous-question de recherche", "Groupe de population", "Indicator", "Sous-ensemble de donnée")
+names(summary_stats_admin_0_hrp_grp_final)[1:5] <- c("Question de recherche", "Sous-question de recherche","Groupe de population", "Indicator", "Sous-ensemble de donnée")
 
-write_csv(summary_stats_admin_0_final, "outputs/tables/summary_stats_admin_0.csv")
+write_csv(summary_stats_admin_0_hrp_grp_final, "outputs/tables/summary_stats_admin_0_hrp_grp_grp.csv")

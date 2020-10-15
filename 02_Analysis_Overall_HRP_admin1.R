@@ -1,10 +1,12 @@
 ### The commented lines below should be uncommented to run the script from scratch
 
 
-# source("01_PrepingAnalysis.R", encoding = "UTF-8")
+source("01_PrepingAnalysis.R", encoding = "UTF-8")
 
 cleaned_data_adm1$admin0 <- "BFA"
 
+cleaned_data_adm1 <- cleaned_data_adm1%>%
+  filter(admin1%in% c("centre_est", "boucle_du_mouhoun", "est", "sahel", "cascades", "nord", "centre_nord"))
 
 # analysisplan_admin_0 <- make_analysis_plan_template(df= cleaned_data_adm1,
 #                                                     questionnaire = questionnaire,
@@ -17,15 +19,15 @@ cleaned_data_adm1$admin0 <- "BFA"
 # 
 # 
 # 
-# final_result_admin_0 <- from_analysisplan_map_to_output(data = cleaned_data_adm1,
+# final_result_admin_0_hrp_admin1 <- from_analysisplan_map_to_output(data = cleaned_data_adm1,
 #                                                             analysisplan = analysisplan_admin_0,
 #                                                             weighting = combined_weights_adm1,
 #                                                             questionnaire = questionnaire)
-# saveRDS(final_result_admin_0, "final_result_admin_0.RDS")
+# saveRDS(final_result_admin_0_hrp_admin1, "outputs/final_result_admin_0_hrp_admin1.RDS")
 
-final_result_admin_0 <- readRDS("outputs/final_result_admin_0.RDS")
+final_result_admin_0_hrp_admin1 <- readRDS("outputs/final_result_admin_0_hrp_admin1.RDS")
 
-summary_stats_admin_0 <- final_result_admin_0$results %>%
+summary_stats_admin_0_hrp_admin1 <- final_result_admin_0_hrp_admin1$results %>%
   lapply(function(x){x$summary.statistic}) %>% do.call(rbind, .)%>%
   select(repeat.var.value, dependent.var, dependent.var.value, numbers)%>%
   rename(admin0 = repeat.var.value, variable = dependent.var, variable_value = dependent.var.value)
@@ -71,8 +73,8 @@ freq_admin0 <- cleaned_data_adm1%>%
   group_by(admin0)%>%
   summarise(
     #Détresse psy
-    freq_detres_adult = sum(detres_adult* weights_sampling, na.rm = T)/sum((femme + homme)*weights_sampling, na.rm = T),
-    freq_detres_enfants = sum(detres_enft*weights, na.rm = T)/sum((femme+homme)*weights_sampling, na.rm = T),
+    freq_detres_adult = sum(detres_adult* weights_sampling, na.rm = T)/sum(sum(femme,homme, na.rm = T)*weights_sampling, na.rm = T),
+    freq_detres_enfants = sum(detres_enft*weights_sampling, na.rm = T)/sum(enfant*weights_sampling, na.rm = T),
     #Naissances
     freq_lieu_accouchement.centre_sante = sum(lieu_accouchement.centre_sante * weights_sampling, na.rm = T)/sum(total_naissance * weights_sampling, na.rm = T),
     freq_lieu_accouchement.maison = sum(lieu_accouchement.maison * weights_sampling, na.rm = T)/sum(total_naissance * weights_sampling, na.rm = T),
@@ -244,7 +246,7 @@ which_skipLogic_adm0_var <- which_skipLogic_adm0 %>%
             perc_Skipped = sum(perc_Skipped, na.rm = T)) %>%
   mutate(subset = if_else(perc_Skipped > 0, "Sous-ensemble de donnée", NA_character_))
 
-summary_stats_admin_0_final <- bind_rows(summary_stats_admin_0, freq_admin0)%>%
+summary_stats_admin_0_hrp_admin1_final <- bind_rows(summary_stats_admin_0_hrp_admin1, freq_admin0)%>%
   left_join(which_subsets_adm0, by = c( "variable"))%>%
   mutate(question_choice = case_when(is.na(variable_value) ~ variable,
                                      TRUE ~ paste0(variable, ".", variable_value))) %>%
@@ -276,6 +278,6 @@ summary_stats_admin_0_final <- bind_rows(summary_stats_admin_0, freq_admin0)%>%
   select(-variable)
 
 
-names(summary_stats_admin_0_final)[1:5] <- c("Question de recherche", "Sous-question de recherche", "Groupe de population", "Indicator", "Sous-ensemble de donnée")
+names(summary_stats_admin_0_hrp_admin1_final)[1:5] <- c("Question de recherche", "Sous-question de recherche", "Groupe de population", "Indicator", "Sous-ensemble de donnée")
 
-write_csv(summary_stats_admin_0_final, "outputs/tables/summary_stats_admin_0.csv")
+write_csv(summary_stats_admin_0_hrp_admin1_final, "outputs/tables/summary_stats_admin_0_hrp_admin1.csv")
