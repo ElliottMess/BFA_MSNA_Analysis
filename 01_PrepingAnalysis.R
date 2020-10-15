@@ -1,7 +1,10 @@
 
 source("analysisplan_factory.R")
+source("analysis_functions.R")
+
 
 source("utils.R")
+
 
 # source("00_loadCleanWeight.R", encoding = "UTF-8")
 
