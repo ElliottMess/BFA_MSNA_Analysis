@@ -623,10 +623,17 @@ raw_data <- raw_data%>%
       lcs_stress = if_else(sum(vente_actif_recoded, epargne_recoded, emprunt_nourritur_recoded, vente_animal_recoded, na.rm = T) >= 1, 1,0),
       lcs_minimal = if_else((lcs_urgence + lcs_crise + lcs_stress) == 0, 1, 0),
       lcs_total = if_else(lcs_urgence ==1, "urgence", if_else(lcs_crise == 1, "crise", if_else( lcs_stress ==1, "stress", "minimal"))),
-      auMoinsUneWG = if_else(sum(nombre_soins_difficile, nombre_difficulte_vision, nombre_difficulte_entendre,
-                                 nombre_difficulte_marche, nombre_difficulte_concentration, nombre_difficulte_communication, na.rm = T)>0,1,0),
-      auMoinsUnePersonneDortDehors = if_else(dorme_exterieur >0, 1,0),
-      auMoinsUnEnfantMalade = if_else(malade_5ans>0,1,0),
+      auMoinsUneWG = case_when(sum(nombre_soins_difficile, nombre_difficulte_vision, nombre_difficulte_entendre,
+                                 nombre_difficulte_marche, nombre_difficulte_concentration, nombre_difficulte_communication, na.rm = T)>0 ~ 1L,
+                               sum(nombre_soins_difficile, nombre_difficulte_vision, nombre_difficulte_entendre,
+                                   nombre_difficulte_marche, nombre_difficulte_concentration, nombre_difficulte_communication, na.rm = T)<=0 ~ 0L,
+                               TRUE ~ NA_integer_),
+      auMoinsUnePersonneDortDehors = case_when(dorme_exterieur >0 ~ 1L,
+                                               dorme_exterieur <= 0 ~ 0L,
+                                               TRUE ~ NA_integer_),
+      auMoinsUnEnfantMalade = case_when(malade_5ans>0 ~ 1L,
+                                      malade_5ans<=0 ~ 0L,
+                                      TRUE ~ NA_integer_),
       typologie_source_eau = case_when(source_eau %in% c("pmh","poste_auto", "puit_protege","source_amenage","borne_fontaine",
                                                          "eau _robi_conce","eau _bout","eau _camion") ~ "amelioree",
                                        source_eau %in% c("puit_tradi", "non_amenage") ~ "non_amelioree",
@@ -656,8 +663,48 @@ raw_data <- raw_data%>%
       aucune_educ.13_17an_total = sum(total_aucune_educ_13_17an_garcon, total_aucune_educ_13_17an_fille, na.rm = T),
       
       admin2 = case_when(admin3 == "solenzo" ~ "banwa", 
-                         TRUE ~ admin2)
-      
+                         TRUE ~ admin2),
+      pasEau_DAL_pasSavon = case_when(eau_suffi %in% c("insuffisant", "pas_suffisant") & infra_sanitaire %in% c("dal_zonep", "dal_precis", "dal_zonep_am", "dal_eau") & acces_savon == "non" ~ 1L,
+                                      !eau_suffi %in% c("insuffisant", "pas_suffisant") & !infra_sanitaire %in% c("dal_zonep", "dal_precis", "dal_zonep_am", "dal_eau") & acces_savon != "non" ~ 0L,
+                                      TRUE ~ NA_integer_),
+      auMoins_5moments_mains = case_when(sum(lave_main.apres_toilette, lave_main.avant_manger, lave_main.avant_prepare,
+                                             lave_main.apres_netto, lave_main.avant_sein, lave_main.retour_champ, lave_main.ablution, na.rm = TRUE) >=5 ~ 1L,
+                                         sum(lave_main.apres_toilette, lave_main.avant_manger, lave_main.avant_prepare,
+                                             lave_main.apres_netto, lave_main.avant_sein, lave_main.retour_champ, lave_main.ablution, na.rm = TRUE) < 5 ~ 0L,
+                                         TRUE ~ NA_integer_
+                                         ),
+      auMoins_aprLat_avantMan = case_when(sum(lave_main.apres_toilette,lave_main.avant_manger, na.rm = TRUE) >=2 ~ 1L,
+                                        sum(lave_main.apres_toilette,lave_main.avant_manger, na.rm = TRUE ) <2 ~ 0L,
+                                        TRUE ~ NA_integer_
+      ),
+      temps_total_eau = case_when(temps_eau == "eau_concession" ~ temps_collecte,
+                                  temps_collecte == "eau_concession" ~ temps_eau,
+                                  temps_eau == "plus_46mn"  ~ "plus_46mn",
+                                  temps_collecte == "plus_46mn" ~ "plus_46mn",
+                                  temps_eau == "moins_5mn" & temps_collecte == "moins_5mn" ~ "entre_5_15mn",
+                                  temps_eau == "moins_5mn" & temps_collecte == "entre_5_15mn" ~ "entre_16_30mn",
+                                  temps_eau == "moins_5mn" & temps_collecte == "entre_16_30mn" ~ "entre_31_45mn",
+                                  temps_eau == "moins_5mn" & temps_collecte == "entre_31_45mn" ~ "plus_46mn",
+
+                                  temps_eau == "entre_5_15mn" & temps_collecte == "moins_5mn" ~ "entre_16_30mn",
+                                  temps_eau == "entre_5_15mn" & temps_collecte == "entre_5_15mn" ~ "entre_16_30mn",
+                                  temps_eau == "entre_5_15mn" & temps_collecte == "entre_16_30mn" ~ "entre_31_45mn",
+                                  temps_eau == "entre_5_15mn" & temps_collecte == "entre_31_45mn" ~ "plus_46mn",
+                                  
+                                  temps_eau == "entre_16_30mn" & temps_collecte == "moins_5mn" ~ "entre_16_30mn",
+                                  temps_eau == "entre_16_30mn" & temps_collecte == "entre_5_15mn" ~ "entre_31_45mn",
+                                  temps_eau == "entre_16_30mn" & temps_collecte == "entre_16_30mn" ~ "plus_46mn",
+                                  temps_eau == "entre_16_30mn" & temps_collecte == "entre_31_45mn" ~ "plus_46mn",
+                                  
+                                  temps_eau == "entre_31_45mn" & temps_collecte == "moins_5mn" ~ "plus_46mn",
+                                  temps_eau == "entre_31_45mn" & temps_collecte == "entre_5_15mn" ~ "plus_46mn",
+                                  temps_eau == "entre_31_45mn" & temps_collecte == "entre_16_30mn" ~ "plus_46mn",
+                                  temps_eau == "entre_31_45mn" & temps_collecte == "entre_31_45mn" ~ "plus_46mn",
+                                  TRUE ~ NA_character_
+                                  ),
+      vbg = case_when(sum(risque_fem.violence_sex, risque_hom.violence_sex, risque_garcon.violence_sex, risque_fille.violence_sex, na.rm = TRUE) >0 ~ 1L,
+                              sum(risque_fem.violence_sex, risque_hom.violence_sex, risque_garcon.violence_sex, risque_fille.violence_sex, na.rm = TRUE) <= 0 ~ 0L, 
+                              TRUE ~ NA_integer_)
   )
 
 

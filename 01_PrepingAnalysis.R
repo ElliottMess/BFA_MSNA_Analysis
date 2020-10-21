@@ -5,7 +5,6 @@ source("analysis_functions.R")
 
 source("utils.R")
 
-
 # source("00_loadCleanWeight.R", encoding = "UTF-8")
 
 
@@ -32,10 +31,11 @@ questionnaire <- load_questionnaire(cleaned_data_adm1, choices = choices, questi
 # write_csv(analysisplan_all_vars, "analysis_plan_allVars_new.csv")
 
 added_indicators <- analysisplanTemplate%>%
-  filter(!dependent.variable %in% names(cleaned_data_adm1))%>%
+  filter(!dependent.variable %in% names(cleaned_data_adm1) | !dependent.variable %in% unique(survey$name))%>%
   mutate(choices = choices_name,
-    type = case_when(is.na(choices) & dependent.variable.type == "numerical" ~ "decimal",
-                          !is.na(choices) & dependent.variable.type == "categorical"~ paste0("select_multiple liste_", dependent.variable),
+    type = case_when(     !is.na(qtype) & !is.na(list_name) ~ paste(qtype, list_name),
+                          is.na(qtype) & is.na(choices) & dependent.variable.type == "numerical" ~ "decimal",
+                          is.na(qtype) & !is.na(choices) & dependent.variable.type == "categorical"~ paste0("select_multiple liste_", dependent.variable),
                           TRUE ~ choices
                           ))%>%
   separate(type, into=c("qtype", "list_name"), sep = " ", remove = FALSE)
@@ -56,9 +56,12 @@ survey_full <- rbind(survey, added_indicators_survey)
 added_indicators_choices <- added_indicators%>%
   rename(name = choices_name, label = choices_label )%>%
   mutate(info_admin3 = NA, info_admin2 = NA, info_admin1 = NA, info_base = NA)%>%
-  select(names(choices))
+  select(names(choices))%>%
+  distinct()
 
 choices_full <- rbind(choices, added_indicators_choices)
   
 
 dico <- form_dictionnary(cleaned_data_adm1, survey_full, choices_full, analysisplanTemplate)
+
+questionnaire <- load_questionnaire(cleaned_data_adm1, choices = choices_full, questions = survey_full)

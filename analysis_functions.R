@@ -220,7 +220,7 @@ format_results <- function(data, result, aggregate_level=NULL, pop_grp= NULL, we
     # left_join(n_adm0, by = c("admin0"))%>%
     mutate(perc_NAs = round(NAs/nrow(data)*100, 0))
   
-  which_skipLogic <- map(names(data%>%select(-eau_propre, -!!aggregate_level)), function(x)questionnaire$question_is_skipped(question.name = x, data = cleaned_data_adm1%>%select(-eau_propre, -!!aggregate_level)))%>%
+  which_skipLogic <- map(names(data%>%select(-eau_propre, -!!aggregate_level)), function(x)questionnaire$question_is_skipped(question.name = x, data = data%>%select(-eau_propre, -!!aggregate_level)))%>%
     as.data.frame()%>%
     mutate(!!aggregate_level := data[,aggregate_level])
   
