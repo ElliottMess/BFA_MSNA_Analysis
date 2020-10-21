@@ -707,11 +707,67 @@ raw_data <- raw_data%>%
                               TRUE ~ NA_integer_)
   )
 
+#final_cleaning: removing sampling IDs with too little survey + anonymisation
+
+text_cols <- survey%>%
+  filter(type == "text")%>%
+  select(name)%>%
+  unlist()
+text_cols <- text_cols[text_cols%in%names(raw_data)]
+
+cols_toRemove <- read.csv("data/colNames_toRemove.csv")%>%
+  filter(Remove == TRUE)%>%
+  select(x)%>%
+  unlist()
+
+uncool_names <- names(raw_data)[grepl("^_|_$", names(raw_data))]
 
 raw_data <- raw_data%>%
   group_by(sampling_id)%>%
   filter(n() >2)%>%
-  ungroup()
+  ungroup()%>%
+  select(-all_of(cols_toRemove), -all_of(uncool_names), -all_of(text_cols), -pcode)
+
+pers_idif_factor <- c("admin1", "admin2", "admin3", "sampling_id", "ic_genre",
+  "chef_menage", "status"
+)
+
+pers_idif_num <- c("ic_age", "taille_menage",	"total_moins_2ans",	"total_6_59m",	"total_moins_5ans",
+                   "total_5_17ans",	"total_18_59ans",	"total_60ans_plus",	"total_3_5_femmes",
+                   "total_3_5_hommes",	"total_6_12_femmes", "total_6_12_hommes",	"total_13_17_femmes",
+                   "total_13_17_hommes",	"total_0_17_femmes", "total_0_17_hommes", "enfant","femme",
+                   "homme")
+
+raw_data_sdc <- raw_data%>%
+  mutate(across(all_of(pers_idif_factor), as.factor),
+         across(all_of(pers_idif_num), as.numeric))
+
+obj <- NULL
+if (!exists("raw_data_sdc")) {
+  stop('object "raw_data_sdc" is missing; make sure it exists.`', call. = FALSE)
+}
+obj$inputdata <- readMicrodata(path="raw_data_sdc", type="rdf", convertCharToFac=FALSE, drop_all_missings=FALSE)
+inputdataB <- obj$inputdata
+
+## Set up sdcMicro object
+
+sdcObj <- createSdcObj(dat=obj$inputdata,
+                       keyVars=c("admin1","admin2", "admin3","ic_genre","chef_menage","status"),
+                       numVars=c("ic_age","taille_menage","total_moins_2ans","total_6_59m","total_moins_5ans","total_5_17ans","total_18_59ans","total_60ans_plus","total_3_5_femmes","total_3_5_hommes","total_6_12_femmes","total_6_12_hommes","total_13_17_femmes","total_13_17_hommes","total_0_17_femmes","total_0_17_hommes"),
+                       weightVar=NULL,
+                       hhId=c("sampling_id"),
+                       strataVar=NULL,
+                       pramVars=NULL,
+                       excludeVars=NULL,
+                       seed=0,
+                       randomizeRecords=TRUE,
+                       alpha=c(1))
+
+
+## Store name of uploaded file
+opts <- get.sdcMicroObj(sdcObj, type="options")
+opts$filename <- "raw_data_sdc"
+sdcObj <- set.sdcMicroObj(sdcObj, type="options", input=list(opts))
 
 ### Loading 2stage sampling frame
 
@@ -945,8 +1001,9 @@ raw_data_adm1$weights_sampling <- combined_weights_adm1(raw_data_adm1)
 
 not_in_raw_data_adm1 <- raw_data[!raw_data$uuid %in% raw_data_adm1$uuid, ]
 
-raw_data <-raw_data%>%
-  select(-contains("gps"), -DFERWF)
+weights_admin2 <- raw_data_adm2%>%
+  select(uuid, weights_sampling)%>%
+  rename(weights_sampling_admin2 = weights_sampling)
 
 # weights_adm2 <- raw_data_adm2%>%
 #   select(sampling_id, weights_sampling, weights_sampling_AT_adm2)%>%
@@ -956,11 +1013,9 @@ raw_data <-raw_data%>%
 
 raw_data_adm1 <- raw_data_adm1%>%
   mutate(weights_sampling = as.vector(weights_sampling))%>%
-  select(-contains("gps"), -DFERWF)
+  left_join(weights_admin2, by = "uuid")
 
-raw_data_adm2 <- raw_data_adm2%>%
-  select(-contains("gps"), -DFERWF)
-
+raw_data_adm2 <- raw_data_adm2
 
 
 if(nrow(not_in_raw_data_adm1)>0){
@@ -970,9 +1025,7 @@ cleaning_log_change <- cleaning_log_change%>%
           `Anciennes.valeurs` = not_in_raw_data_adm1$uuid, Action = "Enquêtes supprimées")
 }
 
-### Writing files
 
-# SDC_cleaned_data_adm1 <- sdcMicro::createSdcObj(cleaned_data_adm1, keyVars = c("admin1", "admin2", "admin3", "sampling_id", ""))
 
 write_csv(cleaning_log_change, "outputs/logs/cleaning_log_missingPcodes.csv")
 write_csv(raw_data_adm1, "outputs/datasets/BFA_MSNA_2020_dataset_cleanedWeighted_ADM1.csv")

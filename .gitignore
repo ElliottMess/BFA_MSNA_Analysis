@@ -1,4 +1,3 @@
-
 .RData
 .Rhistory
 .Rproj.user/2B8CB5A1/ctx/ctx-13087/console_actions
@@ -296,3 +295,8 @@ outputs/tables/summary_stats_admin2_grp.csv
 .Rproj.user/53952BA4/sources/prop/0C5AF586 [conflicted 2]
 .Rproj.user/53952BA4/sources/prop/0C5AF586 [conflicted]
 data/analysis_plan_allVars_template.csv
+.Rproj.user
+.RDataTmp
+nb_enquete_regionsHRP (2).csv
+nb_enquete_regionsHRP.csv
+weights_admin2.csv
