@@ -1,11 +1,21 @@
+source("utils.R")
+
+## Creating list of packages to load
+package_list <- c("elliottmess/butteR", "hypegrammaR","ellieallien/cleaninginspectoR","hunzikp/rtree", "impact-initiatives/koboloops",
+                  "tidyr","dplyr", "ggplot2", "readr", "stringr", "lubridate", "readxl", "rgdal", "sf", "purrr", "sdcMicro")
+
+## Running the packaging loading function
+loadInstall_package(package_list)
+
+
 source("01_PrepingAnalysis.R", encoding = "UTF-8")
+source("utils.R")
 source("analysisplan_factory.R", encoding = "UTF-8")
 source("analysis_functions.R", encoding = "UTF-8")
 
+
+## The commented lines below should be uncommented to run the script from scratch
 cleaned_data_adm1$admin0 <- "BFA"
-
-### The commented lines below should be uncommented to run the script from scratch
-
 # analysisplan_admin_0 <- make_analysis_plan_template(df= cleaned_data_adm1,
 #                                                     questionnaire = questionnaire,
 #                                                     repeat.for.variable = "admin0",

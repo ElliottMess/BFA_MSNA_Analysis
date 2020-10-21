@@ -1,3 +1,7 @@
+source("analysisplan_factory.R")
+source("analysis_functions.R")
+source("utils.R")
+
 source("01_PrepingAnalysis.R", encoding = "UTF-8")
 
 # 
@@ -10,9 +14,7 @@ source("01_PrepingAnalysis.R", encoding = "UTF-8")
 # )
 # 
 # analysisplan_admin_1_grp <- analysisplan_admin_1_grp[!is.na(analysisplan_admin_1_grp$dependent.variable.type),]
-# 
-# 
-# 
+# write.csv(analysisplan_admin_1_grp, "data/analysis_plans/analysisplan_admin_1_grp.csv")
 # final_result_admin_1_grp <- from_analysisplan_map_to_output(data = cleaned_data_adm1,
 #                                                             analysisplan = analysisplan_admin_1_grp,
 #                                                             weighting = combined_weights_adm1,
@@ -23,4 +25,5 @@ source("01_PrepingAnalysis.R", encoding = "UTF-8")
 final_result_admin_1_grp <- readRDS("outputs/final_result_admin_1_grp.RDS")
 
 
-summary_stats_admin_1_final_grp <- format_results(cleaned_data_adm1, final_result_admin_0_grp, aggregate_level = "admin1", pop_grp = "status", weights = "weights_sampling", csv = TRUE)
+summary_stats_admin_1_final_grp <- format_results(cleaned_data_adm1, final_result_admin_1_grp,
+                                                  aggregate_level = "admin1", pop_grp = "status", weights = "weights_sampling", csv = TRUE)
