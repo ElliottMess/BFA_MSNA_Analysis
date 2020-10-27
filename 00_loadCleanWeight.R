@@ -31,6 +31,7 @@ raw_data <- read_csv(raw_data_csv)%>%
       TRUE ~ NA_character_
       ) # standardising pop groups names
     )
+
 names(raw_data) <- gsub("è", "e", names(raw_data))
 
 # Remove linebreaks, carriage returns, and semi-colomns from the dataset to avoid CSV exports issues
@@ -637,7 +638,7 @@ raw_data <- raw_data%>%
       typologie_source_eau = case_when(source_eau %in% c("pmh","poste_auto", "puit_protege","source_amenage","borne_fontaine",
                                                          "eau _robi_conce","eau _bout","eau _camion") ~ "amelioree",
                                        source_eau %in% c("puit_tradi", "non_amenage") ~ "non_amelioree",
-                                       source_eau %in% c("course_eau", "eau_pluie") ~ "surface",
+                                       source_eau %in% c("cours_eau", "eau_pluie") ~ "surface",
                                        TRUE ~ NA_character_
       ),
       probleme_abri.inondation = case_when(str_detect(probleme_abri, "inondations") ~ TRUE,

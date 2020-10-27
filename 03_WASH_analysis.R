@@ -26,7 +26,27 @@ cleaned_data_adm1_hrp <- cleaned_data_adm1%>%
   mutate(
     pasEau_DAL = case_when(eau_suffi %in% c("insuffisant", "pas_suffisant") & infra_sanitaire %in% c("dal_zonep", "dal_precis", "dal_zonep_am", "dal_eau") ~ 1L,
                                   !eau_suffi %in% c("insuffisant", "pas_suffisant") & !infra_sanitaire %in% c("dal_zonep", "dal_precis", "dal_zonep_am", "dal_eau") ~ 0L,
-                                  TRUE ~ NA_integer_)
+                                  TRUE ~ NA_integer_),
+    latrine_shared = case_when(
+      infra_sanitaire  %in% c("lat_prive", "toilette") & is.na(type_latrine) ~ "ind",
+      type_latrine == "lat_ind" ~ "ind",
+      TRUE ~ type_latrine
+    ),
+    
+    latrine_moins20 = case_when(
+      infra_sanitaire %in% c("lat_publiq", "lat_prive", "lat_privep", "toilette") & latrine_shared %in% c("ind", "lat_com_20") ~ 0L,
+      infra_sanitaire %in% c("lat_publiq", "lat_prive", "lat_privep", "toilette") & latrine_shared == "lat_com_50" ~ 1L,
+      infra_sanitaire %in% c("lat_publiq", "lat_prive", "lat_privep", "toilette") & latrine_shared == "lat_com" ~ 1L,
+      infra_sanitaire %in% c("dal_zonep", "dal_precis", "dal_eau", "dal_zonep_am") ~ 1L,
+      TRUE ~ NA_integer_
+    ),
+
+    latrine_pashygenique_plusmoins20 =
+      case_when(latrine_moins20 == 0 & lat_hygiene == "oui" ~ 0L,
+                latrine_moins20 == 0 & lat_hygiene == "non" ~ 1L,
+                latrine_moins20 == 1 ~ 1L,
+                TRUE ~ NA_integer_
+      )
   )
 
 
@@ -270,7 +290,6 @@ distance_eau_vbg_freq <- cleaned_data_adm1_hrp%>%
   tabs(x = "temps_total_eau", y = "vbg", weight = "weights_sampling")
 write.csv(distance_eau_vbg_freq, "outputs/tables/EHA/distance_eau_vbg.csv")
 
-cor.test()
 
 titreProp_latrine <- cleaned_data_adm1_hrp%>%
   tabs(x = "titre_propriete", y = "infra_sanitaire", weight = "weights_sampling")
@@ -279,3 +298,42 @@ write.csv(titreProp_latrine, "outputs/tables/EHA/titreProp_latrine.csv")
 HHS_pointEau <- cleaned_data_adm1_hrp%>%
   tabs(x = "hhs_thresholds", y = "eau_suffi", weight = "weights_sampling")
 write.csv(HHS_pointEau, "outputs/tables/EHA/HHS_pointEau.csv")
+
+latrine_hygenique_moins20_grp  <- srv_cleaned_data_adm1_hrp%>%
+  group_by(status)%>%
+  summarise(latrine_hygenique_moins20 = survey_mean(latrine_hygenique_moins20, na.rm = T))
+latrine_hygenique_moins20  <- srv_cleaned_data_adm1_hrp%>%
+  summarise(latrine_hygenique_moins20 = survey_mean(latrine_hygenique_moins20, na.rm = T))
+
+# cleaned_data_adm1 <- 
+#   mutate(
+# WASH PIN Calculations
+# water_access = case_when(
+#                           typologie_source_eau == "amelioree" & temps_total_eau == "eau_concession" ~ "1",
+#                           typologie_source_eau == "amelioree" & temps_total_eau %in% c("moins_5mn", "entre_5_15mn", "entre_16_30mn") ~ "2",
+#                           typologie_source_eau == "amelioree" & temps_total_eau %in% c("entre_31_45mn", "plus_46mn") ~ "3",
+#                           typologie_source_eau == "non_amelioree" ~ "4",
+#                           typologie_source_eau == "surface" ~ "4+",
+#                           TRUE ~ NA_character_
+#                           ),
+#  latrine_shared = case_when(
+#                           infra_sanitaire,  %in% c("lat_prive", "toilette") & is.na(type_latrine) ~ "ind",
+#                           type_latrine == "lat_ind" ~ "ind",
+#                           TRUE ~ type_latrine
+#  ),
+#  sanitation_access = case_when(
+#                           infra_sanitaire %in% c("lat_publiq", "lat_prive", "lat_privep", "toilette") & latrine_shared == "ind" ~ "1",
+#                           infra_sanitaire %in% c("lat_publiq", "lat_prive", "lat_privep", "toilette") & latrine_shared == "lat_com_20" ~ "2",
+#                           infra_sanitaire %in% c("lat_publiq", "lat_prive", "lat_privep", "toilette") & latrine_shared == "lat_com_50" ~ "3",
+#                           infra_sanitaire %in% c("lat_publiq", "lat_prive", "lat_privep", "toilette") & latrine_shared == "lat_com" ~ "4",
+#                           infra_sanitaire %in% c("dal_zonep", "dal_precis", "dal_eau", "dal_zonep_am") ~ "4+",
+#                           TRUE ~ NA_character_
+#                           ),
+#  diarr_prevalence = case_when(
+#                           total_moins_5ans >= 1 & enfant_selle >= 1 ~ "3",
+#                           total_moins_5ans >= 1 & enfant_selle == 0 ~ "1",
+#                           total_moins_5ans == 0 ~ NA_integer_,
+#                           TRUE ~ NA_integer_ 
+#  )
+# )
+
