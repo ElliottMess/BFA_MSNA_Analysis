@@ -26,4 +26,4 @@ final_result_admin_1_grp <- readRDS("outputs/final_result_admin_1_grp.RDS")
 
 
 summary_stats_admin_1_final_grp <- format_results(cleaned_data_adm1, final_result_admin_1_grp,
-                                                  aggregate_level = "admin1", pop_grp = "status", weights = "weights_sampling", csv = TRUE)
+                                                  aggregate_level = "admin1", pop_grp = "status", weights = "weights_sampling", csv = TRUE, questionnaire = questionnaire)

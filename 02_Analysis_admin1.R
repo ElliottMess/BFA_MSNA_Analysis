@@ -21,4 +21,4 @@ source("01_PrepingAnalysis.R", encoding = "UTF-8")
 final_result_admin_1 <- readRDS("outputs/final_result_admin_1.RDS")
 
 summary_stats_admin_1_final <- format_results(cleaned_data_adm1, final_result_admin_1, 
-                                                  aggregate_level = "admin1", weights = "weights_sampling", csv = TRUE)
+                                                  aggregate_level = "admin1", weights = "weights_sampling", csv = TRUE, questionnaire = questionnaire)

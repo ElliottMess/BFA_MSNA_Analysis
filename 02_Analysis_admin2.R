@@ -29,7 +29,7 @@ source("analysis_functions.R", encoding = "UTF-8")
 #                                                         weighting = combined_weights_adm2,
 #                                                         questionnaire = questionnaire)
 # 
-saveRDS(final_result_admin_2, "outputs/final_result_admin_2.RDS")
+# saveRDS(final_result_admin_2, "outputs/final_result_admin_2.RDS")
 
 
 final_result_admin_2 <- readRDS("outputs/final_result_admin_2.rds")

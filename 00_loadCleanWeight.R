@@ -62,21 +62,21 @@ write_csv(choices,"data/choices.csv") # writing it for easier retrieval
 
 ### Loading repeat loops
 raw_data_info_menage <- read_csv(raw_data_info_menage_csv)%>% # Here I am using read_csv rather than read_excel because the file is very heavy
-  rename(submission_uuid = `_submission__uuid`, 
+  dplyr::rename(submission_uuid = `_submission__uuid`, 
          parent_index = `_parent_index`) # Loading the replace spaces by _ so harmonising
   
 
 raw_data_maladie_moins_5ans_rpt <- read_excel(raw_data_excel, sheet = "maladie_moins_5ans_rpt")%>%
-  rename(submission_uuid = `_submission__uuid...2`,
+  dplyr::rename(submission_uuid = `_submission__uuid...2`,
          parent_index = `_parent_index...1`)
 
 raw_data_naissances <- read_excel(raw_data_excel, sheet = "naissances")%>%
-  rename(parent_index = `_parent_index...1`,
+  dplyr::rename(parent_index = `_parent_index...1`,
          submission_uuid = `_submission__uuid...2`)
 
 raw_data_membre_marche_dificile <- read_excel(raw_data_excel, sheet = "membre_marche_dificile")
 # %>%
-#   rename(submission_uuid = `_submission__uuid...2`,
+#   dplyr::rename(submission_uuid = `_submission__uuid...2`,
 #          parent_index = `_parent_index...1`)
 
 raw_data_membre_soins_difficile <- read_excel(raw_data_excel, sheet = "soins_difficile")
@@ -85,22 +85,22 @@ raw_data_membre_concentration_difficile <- read_excel(raw_data_excel, sheet = "c
 
 raw_data_membre_membre_vision_diffcile <- read_excel(raw_data_excel, sheet = "membre_vision_diffcile")
 # %>%
-#   rename(submission_uuid = `_submission__uuid...13`,
+#   dplyr::rename(submission_uuid = `_submission__uuid...13`,
 #          parent_index = `_parent_index...1`)
 
 raw_data_membre_membre_entendre_difficile <- read_excel(raw_data_excel, sheet = "membre_entendre_difficile")
 # %>%
-#   rename(submission_uuid = `_submission__uuid...2`,
+#   dplyr::rename(submission_uuid = `_submission__uuid...2`,
 #          parent_index = `_parent_index...1`)
 
 raw_data_membre_difficulte_communication <- read_excel(raw_data_excel, sheet = "communication_difficile")
 # %>%
-#   rename(submission_uuid = `_submission__uuid...2`,
+#   dplyr::rename(submission_uuid = `_submission__uuid...2`,
 #          parent_index = `_parent_index...1`)
 
 raw_data_membre_repeat_nbre_pers_decedes <- read_excel(raw_data_excel, sheet = "repeat_nbre_pers_decedes")
 # %>%
-#   rename(submission_uuid = `_submission__uuid...2`,
+#   dplyr::rename(submission_uuid = `_submission__uuid...2`,
 #          parent_index = `_parent_index...1`)
 
 loop_frames <- list(raw_data_info_menage, raw_data_maladie_moins_5ans_rpt, raw_data_naissances, raw_data_membre_marche_dificile,
@@ -162,7 +162,7 @@ raw_data <- left_join(raw_data, bfa_admin2, by = c("admin3" = "admin3Name")) # J
 # 
 # pcodes_probs <- raw_data%>%
 #   select(admin1, admin2, admin3, pcode, localite, autre_localite, "_gpsmenage_latitude", "_gpsmenage_longitude", uuid)%>%
-#   rename("gpsmenage_latitude" = "_gpsmenage_latitude", "gpsmenage_longitude"= "_gpsmenage_longitude")%>%
+#   dplyr::rename("gpsmenage_latitude" = "_gpsmenage_latitude", "gpsmenage_longitude"= "_gpsmenage_longitude")%>%
 #   filter(localite == 'autre')%>%
 #   mutate(
 #     localite = case_when(localite == 'autre' ~ autre_localite,
@@ -519,7 +519,7 @@ invisible(create_objects_from_df(list_remove_data)) # create R objects from the 
 # coords <- c("gpsmenage_longitude", "gpsmenage_latitude")
 # 
 # raw_data_ClusterSmpl <- raw_data%>%
-#   rename("gpsmenage_latitude" = "_gpsmenage_latitude", "gpsmenage_longitude"= "_gpsmenage_longitude")%>%
+#   dplyr::rename("gpsmenage_latitude" = "_gpsmenage_latitude", "gpsmenage_longitude"= "_gpsmenage_longitude")%>%
 #   mutate_at(vars(all_of(coords)), as.numeric)%>%
 #   filter(!is.na(gpsmenage_latitude) & !is.na(gpsmenage_longitude), modalite == "direct" & status == "host")%>%
 #   sf::st_as_sf(coords = coords, crs = 4326)%>%
@@ -592,10 +592,9 @@ raw_data <- raw_data%>%
                                   TRUE ~ NA_character_),
       rcsi_score = sum(jr_moins_prefere*1, jr_emprunt_nourriture*2, jr_diminu_quantite*1, jr_rest_consommation*3, jr_nbr_repas*1, na.rm = T),
       rcsi_thresholds = case_when(
-        rcsi_score == 0 ~ "no_coping",
-        rcsi_score > 0 & rcsi_score <= 7 ~ "low",
-        rcsi_score > 7 & rcsi_score <= 15 ~ "medium",
-        rcsi_score > 15 ~ "high",
+        rcsi_score >= 0 & rcsi_score <= 3 ~ "low",
+        rcsi_score > 3 & rcsi_score <= 18 ~ "medium",
+        rcsi_score > 18 ~ "high",
         TRUE ~ NA_character_
       ),
       nbr_aucun_aliment_new = hhs_recoding(aucun_aliment, nbr_aucun_aliment),
@@ -705,8 +704,44 @@ raw_data <- raw_data%>%
                                   ),
       vbg = case_when(sum(risque_fem.violence_sex, risque_hom.violence_sex, risque_garcon.violence_sex, risque_fille.violence_sex, na.rm = TRUE) >0 ~ 1L,
                               sum(risque_fem.violence_sex, risque_hom.violence_sex, risque_garcon.violence_sex, risque_fille.violence_sex, na.rm = TRUE) <= 0 ~ 0L, 
-                              TRUE ~ NA_integer_)
+                              TRUE ~ NA_integer_),
+      taille_menage = as.factor(case_when(
+        taille_menage > 0 & taille_menage <= 2 ~ "1_2personnes",
+        taille_menage > 2 & taille_menage <= 5 ~ "3_5personnes",
+        taille_menage > 5 & taille_menage <= 8 ~ "6_8personnes",
+        taille_menage > 8 & taille_menage <= 10 ~ "9_10personnes",
+        taille_menage > 10 & taille_menage <= 12 ~ "10_12personnes",
+        taille_menage > 12 & taille_menage < Inf ~ "12plus_personnes",
+        TRUE ~ NA_character_
+        )
+      ),
+      revenu_mensuel = as.factor(
+        case_when(
+          revenu_mensuel > 0 & revenu_mensuel <= quantile(raw_data$revenu_mensuel, na.rm = T, .25) ~ paste0("0_", quantile(raw_data$revenu_mensuel, na.rm = T, .25)),
+          revenu_mensuel > quantile(raw_data$revenu_mensuel, na.rm = T, .25) & revenu_mensuel <= quantile(.$revenu_mensuel, na.rm = T, .5) ~ paste0(quantile(raw_data$revenu_mensuel, na.rm = T, .25), "_", quantile(raw_data$revenu_mensuel, na.rm = T, .5)),
+          revenu_mensuel > quantile(raw_data$revenu_mensuel, na.rm = T, .5) & revenu_mensuel <= quantile(.$revenu_mensuel, na.rm = T, .75) ~ paste0(quantile(raw_data$revenu_mensuel, na.rm = T, .5), "_", quantile(raw_data$revenu_mensuel, na.rm = T, .75)),
+          revenu_mensuel > quantile(raw_data$revenu_mensuel, na.rm = T, .75) & revenu_mensuel <= quantile(.$revenu_mensuel, na.rm = T, 1) ~ paste0(quantile(raw_data$revenu_mensuel, na.rm = T, .75), "_", quantile(raw_data$revenu_mensuel, na.rm = T, 1)),
+          TRUE ~ NA_character_
+        )
+      ),
+      ic_age = as.factor(
+        case_when(
+          ic_age > 0 & ic_age < 18 ~ "moins_18ans",
+          ic_age >= 18 & ic_age < 65 ~ "18_65ans",
+          ic_age >=65 & ic_age < Inf ~ "plus_65ans",
+          TRUE ~ NA_character_
+        )
+      ),
+      age_chef_menage = as.factor(
+        case_when(
+          age_chef_menage > 0 & age_chef_menage < 18 ~ "moins_18ans",
+          age_chef_menage >= 18 & age_chef_menage < 65 ~ "18_65ans",
+          age_chef_menage >=65 & age_chef_menage < Inf ~ "plus_65ans",
+          TRUE ~ NA_character_
+        )
+      )
   )
+  
 
 #final_cleaning: removing sampling IDs with too little survey + anonymisation
 
@@ -719,15 +754,24 @@ text_cols <- text_cols[text_cols%in%names(raw_data)]
 cols_toRemove <- read.csv("data/colNames_toRemove.csv")%>%
   filter(Remove == TRUE)%>%
   select(x)%>%
-  unlist()
+  unlist()%>%
+  as.character()
 
+for(i in 1:length(cols_toRemove)){
+  if(sum(grepl(cols_toRemove[i], survey$relevant))>0){
+    cols_toRemove[i] <- ""
+  }
+}
+
+cols_toRemove <- cols_toRemove[cols_toRemove != ""]
 uncool_names <- names(raw_data)[grepl("^_|_$", names(raw_data))]
 
 raw_data <- raw_data%>%
   group_by(sampling_id)%>%
   filter(n() >2)%>%
   ungroup()%>%
-  select(-all_of(cols_toRemove), -all_of(uncool_names), -all_of(text_cols), -pcode)
+  select(-all_of(cols_toRemove), -all_of(uncool_names), -all_of(text_cols), -pcode,
+         -localite, -iden_ortho )
 
 pers_idif_factor <- c("admin1", "admin2", "admin3", "sampling_id", "ic_genre",
   "chef_menage", "status"
@@ -753,8 +797,8 @@ inputdataB <- obj$inputdata
 ## Set up sdcMicro object
 
 sdcObj <- createSdcObj(dat=obj$inputdata,
-                       keyVars=c("admin1","admin2", "admin3","ic_genre","chef_menage","status"),
-                       numVars=c("ic_age","taille_menage","total_moins_2ans","total_6_59m","total_moins_5ans","total_5_17ans","total_18_59ans","total_60ans_plus","total_3_5_femmes","total_3_5_hommes","total_6_12_femmes","total_6_12_hommes","total_13_17_femmes","total_13_17_hommes","total_0_17_femmes","total_0_17_hommes"),
+                       keyVars=c("admin1","admin2", "admin3","ic_genre","chef_menage","status", "ic_age","taille_menage", "ic_age","taille_menage", "revenu_mensuel"),
+                       numVars=c("total_moins_2ans","total_6_59m","total_moins_5ans","total_5_17ans","total_18_59ans","total_60ans_plus","total_3_5_femmes","total_3_5_hommes","total_6_12_femmes","total_6_12_hommes","total_13_17_femmes","total_13_17_hommes","total_0_17_femmes","total_0_17_hommes"),
                        weightVar=NULL,
                        hhId=c("sampling_id"),
                        strataVar=NULL,
@@ -792,7 +836,7 @@ popData_fb_byAdmins <- read_csv("data/popData_fb.csv")%>%
   select(ADM3_PCODE, fb_pop)
 
 census2006_data <- read_csv("data/popData_recensement2006.csv")%>%
-  rename(PCODE_ADMIN1 = PCODE_ADMIN2, PCODE_ADMIN2 = PCODE_ADMIN2_1, pop2006 = `Total 2006`, pop2019 = `Total 2019`)%>%
+  dplyr::rename(PCODE_ADMIN1 = PCODE_ADMIN2, PCODE_ADMIN2 = PCODE_ADMIN2_1, pop2006 = `Total 2006`, pop2019 = `Total 2019`)%>%
   select(PCODE_ADMIN3, pop2006, pop2019, Croissance)
 
 samplingFrame_raw <- read_excel("data/REACH_BFA_Pop_for_weighting_20201308.xlsx", sheet = "Population")%>%
@@ -1004,11 +1048,11 @@ not_in_raw_data_adm1 <- raw_data[!raw_data$uuid %in% raw_data_adm1$uuid, ]
 
 weights_admin2 <- raw_data_adm2%>%
   select(uuid, weights_sampling)%>%
-  rename(weights_sampling_admin2 = weights_sampling)
+  dplyr::rename(weights_sampling_admin2 = weights_sampling)
 
 # weights_adm2 <- raw_data_adm2%>%
 #   select(sampling_id, weights_sampling, weights_sampling_AT_adm2)%>%
-#   rename(weights_sampling_adm2 = weights_sampling,
+#   dplyr::rename(weights_sampling_adm2 = weights_sampling,
 #          weights_sampling_adm2_AT_adm2 = weights_sampling_AT_adm2)%>%
 #   mutate(weights_sampling_adm2 = as.vector(weights_sampling_adm2))
 

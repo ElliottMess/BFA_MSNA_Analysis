@@ -45,20 +45,44 @@ added_indicators_survey <- added_indicators%>%
          hint = NA, required = NA, relevant = NA, choice_filter = NA, calculation = NA, constraint_message = NA,
          constraint = NA,`$given_name`  = NA, repeat_count = NA, default = NA, appearance = NA
          )%>%
-  rename(name = dependent.variable, label = label_indicator)%>%
+  dplyr::rename(name = dependent.variable, label = label_indicator)%>%
   select(type,name,label,hint,required,relevant,choice_filter,calculation,constraint_message,
          constraint,`$given_name`,repeat_count,default, appearance)%>%
   distinct()
 
+added_indicators_survey[grep("taille_menage", added_indicators_survey$name), "type"] <- "select_one liste_taille_menage"
+added_indicators_survey[grep("revenu_mensuel", added_indicators_survey$name), "type"] <- "select_one liste_revenu_mensuel"
+added_indicators_survey[grep("ic_age", added_indicators_survey$name), "type"] <- "select_one liste_ic_age"
+added_indicators_survey[grep("age_chef_menage", added_indicators_survey$name), "type"] <- "select_one liste_age_chef_menage"
+
 
 survey_full <- rbind(survey, added_indicators_survey)
 
+add_choices <- function(choices,data, question, name_list = NULL, type = "select_one"){
+  
+  unique_choices <- as.character(unique(as.data.frame(data)[, question]))
+  
+  choices%>%
+    add_row(list_name = rep(name_list, length(unique_choices)),
+            name = unique_choices,
+            label = unique_choices,
+            info_admin3 = NA, info_admin2 = NA,  info_admin1 = NA,  info_base = NA
+    )
+  
+}
+
+
 added_indicators_choices <- added_indicators%>%
-  rename(name = choices_name, label = choices_label )%>%
+  dplyr::rename(name = choices_name, label = choices_label )%>%
   mutate(info_admin3 = NA, info_admin2 = NA, info_admin1 = NA, info_base = NA)%>%
   select(names(choices))%>%
-  distinct()
+  distinct()%>%
+  add_choices( data = cleaned_data_adm1, question = "taille_menage",name_list = "liste_taille_menage", type = "select_one")%>%
+  add_choices( data = cleaned_data_adm1, question = "revenu_mensuel",name_list = "liste_revenu_mensuel", type = "select_one")%>%
+  add_choices( data = cleaned_data_adm1, question = "ic_age",name_list = "liste_ic_age", type = "select_one")%>%
+  add_choices( data = cleaned_data_adm1, question = "age_chef_menage",name_list = "liste_age_chef_menage", type = "select_one")
 
+  
 choices_full <- rbind(choices, added_indicators_choices)
   
 
