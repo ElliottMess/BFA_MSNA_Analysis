@@ -10,13 +10,14 @@ loadInstall_package(package_list)
 
 
 source("01_PrepingAnalysis.R", encoding = "UTF-8")
+
 source("utils.R")
 source("analysisplan_factory.R", encoding = "UTF-8")
 source("analysis_functions.R", encoding = "UTF-8")
 
 
 lsg_analysis <- function(data){
-  data%>%
+  df <- data%>%
     mutate(
           # Genera Capacity gaps
           rev_besoins = case_when(
@@ -28,6 +29,13 @@ lsg_analysis <- function(data){
             (rev_besoins) >= 1L ~ 1L,
             (rev_besoins) == 0L ~ 0L,
             TRUE ~ NA_integer_
+          ),
+          cap_gap_critique = case_when(
+            lcsi == "emergency" ~ "4+",
+            lcsi == "crisis" ~ "4",
+            lcsi == "stress" ~ "3",
+            lcsi == "none" ~ "1",
+            TRUE ~ NA_character_
           ),
           # Vulnerabilité
           depl_plus6m = case_when(
@@ -42,13 +50,13 @@ lsg_analysis <- function(data){
             TRUE ~ NA_integer_
           ),
           enfant_chef_menage = case_when(
-            age_chef_menage >= 0 & age_chef_menage < 18 ~ 1L,
-            age_chef_menage >= 18 ~ 0L,
+            age_chef_menage == "moins_18ans" ~ 1L,
+            age_chef_menage %in% c("18_65ans", "plus_65ans") ~ 0L,
             TRUE ~ NA_integer_
           ),
           pers_agee_chef_menage = case_when(
-            age_chef_menage >= 65 ~ 1L,
-            age_chef_menage < 65 ~ 0L,
+            age_chef_menage == "plus_65ans"  ~ 1L,
+            age_chef_menage %in% c("moins_18ans", "18_65ans") ~ 0L,
             TRUE ~ NA_integer_
           ),
           vulnerabilite = case_when(
@@ -81,12 +89,15 @@ lsg_analysis <- function(data){
             TRUE ~ NA_integer_
           ),
           surface_pers = case_when(
-            taille_abri/taille_menage >= 3.5 ~ 0L,
-            taille_abri/taille_menage < 3.5 ~ 1L,
+            personne_m2 >= 3.5 ~ 0L,
+            personne_m2 < 3.5 ~ 1L,
             TRUE ~ NA_integer_
             
-          ),
-          abna_NC_prop = rowSums(select(., dommage_abri, probleme_isolation, surface_pers, modalite_occup), na.rm = T)/4,
+          ))
+  
+      df <- df%>%
+        mutate(
+          abna_NC_prop = rowSums(dplyr::select(., dommage_abri, probleme_isolation, surface_pers, modalite_occup), na.rm = T)/4,
           abna_NC_score = case_when(
             abna_NC_prop >=0 & abna_NC_prop <=1/3 ~ 1L,
             abna_NC_prop >1/3 & abna_NC_prop <=2/3 ~ 2L,
@@ -95,8 +106,8 @@ lsg_analysis <- function(data){
           ),
           abna_DT = case_when(
             type_abri == "pas_abri" | etat_abri == "detruit" ~ 5L,
-            etat_abri == "degat" | type_abri == "fortune" ~ 4L,
-            etat_abri == "endommage" | type_abri %in% c("non_destine_au_logement", "communautaire", "urgence", "inacheve") ~ 3L,
+            etat_abri == "degat" | type_abri %in% c("fortune","inacheve") ~ 4L,
+            etat_abri == "endommage" | type_abri %in% c("non_destine_au_logement", "communautaire", "urgence") ~ 3L,
             etat_abri == "bonne_etat" & type_abri == "construit" ~ 1L,
             TRUE ~ NA_integer_
           ),
@@ -112,7 +123,6 @@ lsg_analysis <- function(data){
             abna_lsg == 0 | vulnerabilite == 0 ~ 1L,
             TRUE ~ NA_integer_
           ),
-
           #WASH
           latrine_shared = case_when(
              infra_sanitaire  %in% c("lat_prive", "toilette") & is.na(type_latrine) ~ "ind",
@@ -145,10 +155,9 @@ lsg_analysis <- function(data){
             dispo_lave_main %in% c("pas_dispositif") ~ 1L,
             TRUE ~ NA_integer_
           ),
-          latrine_pashygenique_plusmoins20 =
-            case_when(latrine_moins20 == 0 & lat_hygiene == "oui" ~ 0L,
-                      latrine_moins20 == 0 & lat_hygiene == "non" ~ 1L,
-                      latrine_moins20 == 1 ~ 1L,
+          latrine_pashygenique =
+            case_when(lat_hygiene == "oui" ~ 0L,
+                      lat_hygiene == "non" | infra_sanitaire %in% c("dal_eau", "dal_precis", "dal_zonep_am", "dal_zonep") ~ 1L,
                       TRUE ~ NA_integer_
                       ),
           strat_cop_eha = case_when(
@@ -161,8 +170,11 @@ lsg_analysis <- function(data){
             enfant_selle >0 ~ 1L,
             enfant_selle == 0 ~ 0L,
             TRUE ~ NA_integer_
-          ),
-          eha_NC_prop = rowSums(select(., latrine_moins20, suffisamment_eau, temps_eau, savon, dispo_lavageMain, auMoins_aprLat_avantMan, latrine_pashygenique_plusmoins20, diarr), na.rm = T)/8,
+          ))
+      
+      df <- df%>%
+        mutate(
+          eha_NC_prop = rowSums(select(., latrine_moins20, suffisamment_eau, temps_eau, savon, dispo_lavageMain, auMoins_aprLat_avantMan, latrine_pashygenique, diarr), na.rm = T)/8,
           eha_NC_score = case_when(
             eha_NC_prop >=0 & eha_NC_prop <=1/3 ~ 1L,
             eha_NC_prop >1/3 & eha_NC_prop <=2/3 ~ 2L,
@@ -207,7 +219,11 @@ lsg_analysis <- function(data){
               ) ~ 1L,
             barriere_edu == "barriere_non" ~ 0L,
             TRUE ~ NA_integer_
-          ),
+          )
+      )
+      
+      df <- df%>%
+          mutate(
           educ_NC_prop = rowSums(select(., barrieres_edu, enfants_scol), na.rm = T)/2,
           educ_NC_score = case_when(
             educ_NC_prop >=0 & educ_NC_prop <=1/3 ~ 1L,
@@ -217,7 +233,8 @@ lsg_analysis <- function(data){
           ),
           
           educ_DT = case_when(
-            enfants_scol == 1 ~ 3L,
+            enfants_scol == 1 & barriere_edu %in% c("insecurite_ecole", "insecurite_trajet","groupes_armes_ecole", "mariage_enfant", "mendicite") ~ 4L,
+            enfants_scol == 1 & barriere_edu %in% c("travail_champ", "travail_hors_maison") ~ 3L,
             enfants_scol == 0 ~ 1L,
             TRUE ~ NA_integer_
           ),
@@ -245,13 +262,12 @@ lsg_analysis <- function(data){
             temps_centre_sante %in% c("15_30mn", "moins_15mn", "30mn_1h") ~ 0L,
             temps_centre_sante %in% c("1h_3h", "3h_et_plus") ~ 1L,
             TRUE ~ NA_integer_
-          ),
-          temps_service_nut = case_when(
-            time_service_nut %in% c("moins_15mn","entre_15_30mn", "entre_31mn_1h" ) ~ 0L,
-            time_service_nut %in% c("plus_1h","plus_3h" ) ~ 1L,
-            TRUE ~ NA_integer_
-          ),
-          sante_nut_NC_prop = rowSums(select(., lieu_accouch, temps_service_sante, temps_service_nut), na.rm = T)/3,
+          )
+          )
+      
+      df <- df%>%
+        mutate(
+          sante_nut_NC_prop = rowSums(select(., lieu_accouch, temps_service_sante), na.rm = T)/3,
           sante_nut_NC_score = case_when(
             sante_nut_NC_prop >=0 & sante_nut_NC_prop <=1/3 ~ 1L,
             sante_nut_NC_prop >1/3 & sante_nut_NC_prop <=2/3 ~ 2L,
@@ -259,12 +275,13 @@ lsg_analysis <- function(data){
             TRUE ~ NA_integer_
           ),
           raison_deces_vieillesse = case_when(
-            raison_deces.deces_natu == 1 ~ "naturel",
-            (raison_deces.accident_conflit + raison_deces.accident_route + raison_deces.accident_travail + raison_deces.autre_maladie +
-            raison_deces.catastrophe_natu + raison_deces.diarrhee + raison_deces.en_couche + raison_deces.faim + raison_deces.morsure+
-            raison_deces.problemes_respi) > 0 ~ "autre_cause",
+            raison_deces.deces_natu == 1 ~ "naturelle",
+            rowSums(select(., raison_deces.accident_conflit , raison_deces.accident_route , raison_deces.accident_travail ,
+               raison_deces.catastrophe_natu , raison_deces.faim))  >0 ~ "violente",
+            rowSums(select(., raison_deces.autre_maladie , raison_deces.diarrhee , raison_deces.en_couche , raison_deces.morsure,
+            raison_deces.problemes_respi)) > 0 ~ "autre_cause",
             TRUE ~ NA_character_
-          ),
+            ),
           enfant_malade_struct_sante = case_when(
             malade_5ans > 0 & temps_centre_sante %in% c("15_30mn", "moins_15mn", "entre_31mn_1h") ~ "malade_m60",
             malade_5ans > 0 & temps_centre_sante %in% c("plus_1h","plus_3h") ~ "malade_p60",
@@ -272,8 +289,8 @@ lsg_analysis <- function(data){
             TRUE ~ NA_character_
           ),
           sante_nut_DT = case_when(
-            raison_deces_vieillesse == "autre_cause" & enfant_malade_struct_sante == "malade_p60" ~ 4L,
-            enfant_malade_struct_sante == "malade_m60" ~ 3L,
+            raison_deces_vieillesse == "violente" | enfant_malade_struct_sante == "malade_p60" ~ 4L,
+            raison_deces_vieillesse == "autre_cause" | enfant_malade_struct_sante == "malade_m60" ~ 3L,
             enfant_malade_struct_sante == "pas_malade" ~ 1L,
             TRUE ~ NA_integer_
           ),
@@ -315,7 +332,11 @@ lsg_analysis <- function(data){
             titre_propriete == "aucun"  ~ 1L,
             titre_propriete %in% c("all", "logement", "terre") ~ 0L,
             TRUE ~ NA_integer_
-          ),
+          )
+        )
+      
+      df <- df%>%
+        mutate(
           protection_NC_prop = rowSums(select(., membres_doc, expo_risqueSec, enfant_detress_psy, travail_enfant, vbg, titres), na.rm = T)/6,
           protection_NC_score = case_when(
             protection_NC_prop >=0 & protection_NC_prop <=1/3 ~ 1L,
@@ -323,10 +344,38 @@ lsg_analysis <- function(data){
             protection_NC_prop >2/3 & protection_NC_prop <= 1 ~ 3L,
             TRUE ~ NA_integer_
           ),
-          protection_final_score = protection_NC_score,
+          exp_mines_explosions = case_when(rowSums(select(., risque_fem.incident, risque_hom.incident, risque_garcon.incident,
+                                               risque_fille.incident), na.rm = TRUE) > 0 ~ 1L,
+                                           rowSums(select(., risque_fem.incident, risque_hom.incident, risque_garcon.incident,
+                                              risque_fille.incident), na.rm = TRUE) == 0 ~ 0L, 
+                                          TRUE ~ NA_integer_),
+          travail_enfant_mines_rectures = case_when(
+                                            rowSums(select(., type_trav_enft.carriere, type_trav_enft.recrue, type_trav_enft.prostitutiom), na.rm = TRUE) >0 ~ 1L,
+                                            rowSums(select(., type_trav_enft.carriere, type_trav_enft.recrue, type_trav_enft.prostitutiom), na.rm = TRUE) <= 0 ~ 0L, 
+                                            TRUE ~ NA_integer_
+          ),
+          exp_hardcore_stuff = case_when(
+            rowSums(select(., vbg, risque_fem.enlevements_gene,risque_fem.enlevements, risque_fem.meurtre_grp,risque_fem.meurtre,
+                risque_hom.enlevements_gene,risque_hom.enlevements, risque_hom.meurtre_grp,risque_hom.meurtre,
+                risque_fille.enlevements_gene,risque_fille.enlevements, risque_fille.meurtre_grp,risque_fille.meurtre,
+                risque_garcon.enlevements_gene,risque_garcon.enlevements, risque_garcon.meurtre_grp,risque_garcon.meurtre), na.rm = TRUE) >0 ~ 1L,
+            rowSums(select(., vbg, risque_fem.enlevements_gene,risque_fem.enlevements, risque_fem.meurtre_grp,risque_fem.meurtre,
+                risque_hom.enlevements_gene,risque_hom.enlevements, risque_hom.meurtre_grp,risque_hom.meurtre,
+                risque_fille.enlevements_gene,risque_fille.enlevements, risque_fille.meurtre_grp,risque_fille.meurtre,
+                risque_garcon.enlevements_gene,risque_garcon.enlevements, risque_garcon.meurtre_grp,risque_garcon.meurtre), na.rm = TRUE) <= 0 ~ 0L, 
+            TRUE ~ NA_integer_
+          ),
+          protection_DT = case_when(
+            exp_mines_explosions == 1 | travail_enfant_mines_rectures == 1 ~ 5L,
+            exp_hardcore_stuff == 1 ~ 4L,
+            expo_risqueSec == 1 ~ 3L,
+            expo_risqueSec == 0 ~ 1L,
+            TRUE ~ NA_integer_
+          ),
+          protection_final_score = pmax(protection_DT, protection_NC_score, na.rm = T),
           protection_lsg = case_when(
-            protection_final_score %in% c("4+", "4", "3") ~ 1L,
-            protection_final_score %in% c("2", "1") ~ 0L,
+            protection_final_score >= 3 ~ 1L,
+            protection_final_score < 3 ~ 0L,
             TRUE ~ NA_integer_
           ),
           protection_cg = cap_gap,
@@ -335,8 +384,6 @@ lsg_analysis <- function(data){
             protection_lsg == 0 | vulnerabilite == 0 ~ 1L,
             TRUE ~ NA_integer_
           ),
-          
-
           # Sec Al
           acces_marche = case_when(
             marche_fonctionel == "prix_abordable" ~ 0L,
@@ -364,7 +411,13 @@ lsg_analysis <- function(data){
             lcsi == "none" ~ 0L,
             lcsi %in% c("stress", "crisis", "emergency") ~ 1L,
             TRUE ~ NA_integer_
-          ),
+          )
+        )
+          
+          
+          
+        df <- df%>%
+          mutate(
           secal_NC_prop = rowSums(select(., acces_marche, principale_source_rev, fsc_acceptable), na.rm = T)/3,
           secal_NC_score = case_when(
             secal_NC_prop >=0 & secal_NC_prop <=1/3 ~ 1L,
@@ -439,16 +492,17 @@ lsg_analysis <- function(data){
             TRUE ~ NA_integer_
           )
         )
+    return(df)
 }
 
 cleaned_data_adm1 <- lsg_analysis(cleaned_data_adm1)
+# IICI
 
-
-non_critiques <- list(abna = list("dommage_abri", "probleme_isolation", "dorme_ext", "surface_pers", "modalite_occup"),
+non_critiques <- list(abna = list("dommage_abri", "probleme_isolation", "surface_pers", "modalite_occup"),
                    eha = list("latrine_moins20", "suffisamment_eau", "temps_eau", "savon", "dispo_lavageMain",
-                                      "auMoins_aprLat_avantMan", "latrine_pashygenique_plusmoins20", "diarr"),
+                                      "auMoins_aprLat_avantMan", "latrine_pashygenique", "diarr"),
                    educ = list("enfants_scol", "barrieres_edu"),
-                   sante_nut = list("lieu_accouch", "temps_service_sante", "temps_service_nut"),
+                   sante_nut = list("lieu_accouch", "temps_service_sante"),
                    protection = list("membres_doc", "expo_risqueSec", "enfant_detress_psy", "travail_enfant", "vbg","titres"),
                    secal = list("acces_marche", "principale_source_rev", "fsc_acceptable")
                    )
@@ -456,7 +510,7 @@ non_critiques <- list(abna = list("dommage_abri", "probleme_isolation", "dorme_e
 NC_scores <- c("abna_NC_score", "eha_NC_score", "educ_NC_score", "sante_nut_NC_score", "protection_NC_score", "secal_NC_score")
 DT_scores <- c("abna_DT", "eha_DT", "educ_DT", "sante_nut_DT", "secal_DT")
 final_scores <- c("abna_final_score", "eha_final_score", "educ_final_score", "sante_nut_final_score", "protection_final_score", "secal_final_score")
-final_scores_labels <- c("ABNA", "EHA", "Education", "SanteNutrition", "Protection", "SécuritéAlimentaire")
+final_scores_labels <- c("ABNA", "EHA", "Education", "Santé", "Protection", "SécuritéAlimentaire")
 
 sectors <- c("abna", "eha", "educ", "sante_nut", "protection", "secal")
 
@@ -608,7 +662,7 @@ results_sector <- function(data, sector, group = "status", lsgs_list = final_sco
 }
 
 
-lapply(sectors, results_sector, data = cleaned_data_adm1, write_files = T)
+a <- lapply(sectors, results_sector, data = cleaned_data_adm1, write_files = T)
 
 msni_analysis <- function(data, group = "status", lsgs_list = final_scores, lsgs_labels_list = final_scores_labels, list_indic = non_critiques,
                           weights = "weights_sampling", weights_fun = combined_weights_adm1, strata = "sampling_id", cap_gap_var = "has_cap_gap"){
@@ -650,7 +704,7 @@ msni_analysis <- function(data, group = "status", lsgs_list = final_scores, lsgs
                                         lsg_labels = lsgs_labels_list,
                                         weighting_function = weights_fun,
                                         print_plot = T,
-                                        plot_name = "radar_grp",
+                                        plot_name = "radar",
                                         path = "outputs/LSG/MSNI"
   )
   
