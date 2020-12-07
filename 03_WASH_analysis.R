@@ -21,8 +21,7 @@ source("analysis_functions.R", encoding = "UTF-8")
   
 cleaned_data_adm1$admin0 <- "BFA"
 
-cleaned_data_adm1_hrp <- cleaned_data_adm1%>%
-  filter(admin1%in% c("centre_est", "boucle_du_mouhoun", "est", "sahel", "cascades", "nord", "centre_nord"))%>%
+cleaned_data_adm1 <- cleaned_data_adm1%>%
   mutate(
     pasEau_DAL = case_when(eau_suffi %in% c("insuffisant", "pas_suffisant") & infra_sanitaire %in% c("dal_zonep", "dal_precis", "dal_zonep_am", "dal_eau") ~ 1L,
                                   !eau_suffi %in% c("insuffisant", "pas_suffisant") & !infra_sanitaire %in% c("dal_zonep", "dal_precis", "dal_zonep_am", "dal_eau") ~ 0L,
@@ -46,9 +45,30 @@ cleaned_data_adm1_hrp <- cleaned_data_adm1%>%
                 latrine_moins20 == 0 & lat_hygiene == "non" ~ 1L,
                 latrine_moins20 == 1 ~ 1L,
                 TRUE ~ NA_integer_
-      )
+      ),
+    latrine_hygienique = case_when(
+      infra_sanitaire %in% c("lat_publiq", "lat_prive", "lat_privep", "toilette") ~ paste("lat", lat_hygiene, sep = "_"),
+      infra_sanitaire %in% c("dal_zonep", "dal_precis", "dal_eau", "dal_zonep_am") ~ "dal",
+      TRUE ~ NA_character_
+    ),
+    lat_hyg_shared = case_when(
+      latrine_hygienique == "lat_oui" & latrine_shared == "ind" ~ "lat_hyg_ind",
+      latrine_hygienique == "lat_oui" & latrine_shared == "lat_com_20" ~ "lat_hyg_less20",
+      latrine_hygienique == "lat_oui" & latrine_shared == "lat_com_50" ~ "lat_hyg_20to50",
+      latrine_hygienique == "lat_oui" & latrine_shared == "lat_com" ~ "lat_hyg_20to50",
+      TRUE ~ NA_character_
+    ),
+    open_defecation = case_when(
+      infra_sanitaire %in% c("dal_zonep", "dal_precis", "dal_eau", "dal_zonep_am") ~ 1L,
+      infra_sanitaire %in% c("lat_publiq", "lat_prive", "lat_privep", "toilette") ~ 0L,
+      TRUE ~ NA_integer_
+    )
   )
 
+write.csv(cleaned_data_adm1, "outputs/datasets/BFA_MSNA_2020_dataset_cleanedWeighted_ADM1_addCalc.csv")
+
+cleaned_data_adm1_hrp <- cleaned_data_adm1%>%
+  filter(admin1%in% c("centre_est", "boucle_du_mouhoun", "est", "sahel", "cascades", "nord", "centre_nord"))
 
 # analysisplan_admin_0_wash <- analysisplanTemplate_wash%>%
 #   mutate(repeat.for.variable = "admin0",
@@ -304,6 +324,23 @@ latrine_hygenique_moins20_grp  <- srv_cleaned_data_adm1_hrp%>%
   summarise(latrine_hygenique_moins20 = survey_mean(latrine_hygenique_moins20, na.rm = T))
 latrine_hygenique_moins20  <- srv_cleaned_data_adm1_hrp%>%
   summarise(latrine_hygenique_moins20 = survey_mean(latrine_hygenique_moins20, na.rm = T))
+
+
+
+
+srv_cleaned_data_adm1 <- srvyr::as_survey_design(cleaned_data_adm1, weights = "weights_sampling")
+
+jmp_ladder <- cleaned_data_adm1%>%
+  mutate(jmp_ladder = as.factor(case_when(
+                              typologie_source_eau == "amelioree" & temps_total_eau == "eau_concession" ~ "safely_managed",
+                              typologie_source_eau == "amelioree" & temps_total_eau %in% c("moins_5mn", "entre_5_15mn", "entre_16_30mn") ~ "basic",
+                              typologie_source_eau == "amelioree" & temps_total_eau %in% c("entre_31_45mn", "plus_46mn") ~ "limited",
+                              typologie_source_eau == "non_amelioree" ~ "unimproved",
+                              typologie_source_eau == "surface" ~ "surface",
+                              TRUE ~ NA_character_
+    
+  )))%>%
+  tabs(x = "jmp_ladder", y = "admin0", weight = "weights_sampling")
 
 # cleaned_data_adm1 <- 
 #   mutate(

@@ -149,7 +149,7 @@ form_dictionnary <- function(data, survey, choices, analysisplanTemplate =NULL){
   
   dico <- left_join(survey_try, choices, by = "list_name")%>%
     distinct()%>%
-    rename(name_question = name.x, label_question = label.x, name_choice = name.y, label_choice = label.y)%>%
+    dplyr::rename(name_question = name.x, label_question = label.x, name_choice = name.y, label_choice = label.y)%>%
     mutate(question_choice = case_when(is.na(name_choice) ~ name_question,
                                        TRUE ~ paste0(name_question, ".", name_choice))
            )%>%

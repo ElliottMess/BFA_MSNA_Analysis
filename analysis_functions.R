@@ -189,7 +189,7 @@ freq_sum <- function(data, aggregate_level, pop_grp = NULL, weights = NULL){
 #' @export
 #'
 #' @examples
-format_results <- function(data, result, aggregate_level=NULL, pop_grp= NULL, weights = NULL, csv = FALSE){
+format_results <- function(data, result, aggregate_level=NULL, pop_grp= NULL, weights = NULL, csv = FALSE, questionnaire = questionnaire){
   
   if(!is.null(aggregate_level)){aggregate_level <- sym(aggregate_level)}
   if(!is.null(pop_grp)){pop_grp <- sym(pop_grp)}
@@ -199,12 +199,12 @@ format_results <- function(data, result, aggregate_level=NULL, pop_grp= NULL, we
     summary_stats <- result$results %>%
       lapply(function(x){x$summary.statistic}) %>% do.call(rbind, .)%>%
       select(repeat.var.value, dependent.var, dependent.var.value, independent.var.value, numbers)%>%
-      rename(!!aggregate_level := repeat.var.value, variable = dependent.var, variable_value = dependent.var.value, !!pop_grp := independent.var.value)
+      dplyr::rename(!!aggregate_level := repeat.var.value, variable = dependent.var, variable_value = dependent.var.value, !!pop_grp := independent.var.value)
   }else{
     summary_stats <- result$results %>%
       lapply(function(x){x$summary.statistic}) %>% do.call(rbind, .)%>%
       select(repeat.var.value, dependent.var, dependent.var.value, numbers)%>%
-      rename(!!aggregate_level := repeat.var.value, variable = dependent.var, variable_value = dependent.var.value)
+      dplyr::rename(!!aggregate_level := repeat.var.value, variable = dependent.var, variable_value = dependent.var.value)
     
   }
   
@@ -220,7 +220,9 @@ format_results <- function(data, result, aggregate_level=NULL, pop_grp= NULL, we
     # left_join(n_adm0, by = c("admin0"))%>%
     mutate(perc_NAs = round(NAs/nrow(data)*100, 0))
   
-  which_skipLogic <- map(names(data%>%select(-eau_propre, -!!aggregate_level)), function(x)questionnaire$question_is_skipped(question.name = x, data = data%>%select(-eau_propre, -!!aggregate_level)))%>%
+  which_skipLogic <- map(names(data%>%select(-eau_propre, -!!aggregate_level)), function(x){
+    questionnaire$question_is_skipped(question.name = x, data = data%>%select(-eau_propre, -!!aggregate_level))
+    })%>%
     as.data.frame()%>%
     mutate(!!aggregate_level := data[,aggregate_level])
   
@@ -257,12 +259,12 @@ format_results <- function(data, result, aggregate_level=NULL, pop_grp= NULL, we
   summary_stats_final <- bind_rows(summary_stats, freq_admin)%>%
     left_join(which_subsets_admin, by = c( "variable"))%>%
     mutate(question_choice = case_when(is.na(variable_value) ~ variable,
-                                       TRUE ~ paste0(variable, ".", variable_value))) %>%
+                                       TRUE ~ paste0(variable, ".", variable_value)))%>%
     left_join(dico, by = "question_choice")%>%
     mutate(numbers = case_when(grepl("%.*?ayant de la difficulté à.*", label_indicator) & dependent.variable.type == "categorical"  ~ round(numbers*100,1),
                                !grepl("%.*?ayant de la difficulté à.*", label_indicator) & dependent.variable.type == "categorical" ~ round(numbers*100,0),
                                dependent.variable.type == "numerical"  ~ round(numbers,1)
-    )
+      )
     )%>%
     select(research.question_label, sub.research.question_label, !!aggregate_level, label_indicator, label_choice, numbers, variable, !!pop_grp)%>%
     left_join(bfa_admin, by = as.character(aggregate_level))%>%

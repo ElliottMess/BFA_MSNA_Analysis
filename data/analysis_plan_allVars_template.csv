@@ -1,403 +1,403 @@
 research.question,research.question_label,sub.research.question,sub.research.question_label,repeat.for.variable,independent.variable,independent.variable.type,dependent.variable,dependent.variable.type,hypothesis.type,label_indicator,qtype,list_name,choices_name,choices_label
-general_info,Information gÃ©nÃ©rale,modalite,ModalitÃ©,NA,NA,NA,modalite,categorical,NA,ModalitÃ© dâ€™enquÃªte,,,,
-general_info,Information gÃ©nÃ©rale,demo,DÃ©mographie,NA,NA,NA,ic_genre,categorical,NA,Genre rÃ©pondant,,,,
-general_info,Information gÃ©nÃ©rale,demo,DÃ©mographie,NA,NA,NA,ic_age,numerical,NA,Age rÃ©pondant,,,,
-general_info,Information gÃ©nÃ©rale,demo,DÃ©mographie,NA,NA,NA,genre_chef_menage,categorical,NA,Genre du chef de mÃ©nage,,,,
-general_info,Information gÃ©nÃ©rale,demo,DÃ©mographie,NA,NA,NA,age_chef_menage,numerical,NA,Age du chef de mÃ©nage,,,,
-general_info,Information gÃ©nÃ©rale,socio_eco,Socio-Ã©conomique,NA,NA,NA,situation_matrimoniale,categorical,NA,Situation matrimonial,,,,
-general_info,Information gÃ©nÃ©rale,socio_eco,Socio-Ã©conomique,NA,NA,NA,profession_chef,categorical,NA,Profession chef de mÃ©nage,,,,
-general_info,Information gÃ©nÃ©rale,deplacement,DÃ©placement,NA,NA,NA,group_pop,categorical,NA,Groupe de population,,,,
-general_info,Information gÃ©nÃ©rale,deplacement,DÃ©placement,NA,NA,NA,region_pdi_mn,categorical,NA,RÃ©gion origines PDI,,,,
-general_info,Information gÃ©nÃ©rale,deplacement,DÃ©placement,NA,NA,NA,province_pdi_mn,categorical,NA,Provinces origines PDI,,,,
-general_info,Information gÃ©nÃ©rale,deplacement,DÃ©placement,NA,NA,NA,pays_rapatrie_mint,categorical,NA,Pays rapatriÃ©s,,,,
-general_info,Information gÃ©nÃ©rale,deplacement,DÃ©placement,NA,NA,NA,pays_rapatrie,categorical,NA,RÃ©gion rapatriÃ©s,,,,
-general_info,Information gÃ©nÃ©rale,deplacement,DÃ©placement,NA,NA,NA,region_retourne,categorical,NA,RÃ©gion retournÃ©s,,,,
-general_info,Information gÃ©nÃ©rale,deplacement,DÃ©placement,NA,NA,NA,province_retourne,categorical,NA,Province retournÃ©s,,,,
-general_info,Information gÃ©nÃ©rale,deplacement,DÃ©placement,NA,NA,NA,pdi_condition,categorical,NA,Condition dâ€™accueil PDI,,,,
-general_info,Information gÃ©nÃ©rale,deplacement,DÃ©placement,NA,NA,NA,raison_deplacement,categorical,NA,Raison dÃ©placement PDI (push factor),,,,
-general_info,Information gÃ©nÃ©rale,deplacement,DÃ©placement,NA,NA,NA,raison_installation,categorical,NA,Raison installation PDI (pull factor),,,,
-general_info,Information gÃ©nÃ©rale,deplacement,DÃ©placement,NA,NA,NA,duree_deplacement,categorical,NA,DurÃ©e dÃ©placement,,,,
-general_info,Information gÃ©nÃ©rale,deplacement,DÃ©placement,NA,NA,NA,retour,categorical,NA,PossibilitÃ© retour dÃ©placÃ©s,,,,
-general_info,Information gÃ©nÃ©rale,deplacement,DÃ©placement,NA,NA,NA,retour_condition,categorical,NA,Condition retour dÃ©placÃ©s,,,,
-general_info,Information gÃ©nÃ©rale,demo,DÃ©mographie,NA,NA,NA,taille_menage,numerical,NA,Taille totale du mÃ©nage,,,,
-general_info,Information gÃ©nÃ©rale,demo,DÃ©mographie,NA,NA,NA,total_moins_2ans,numerical,NA,Nombre moins de 2 ans,,,,
-general_info,Information gÃ©nÃ©rale,demo,DÃ©mographie,NA,NA,NA,total_6_59m,numerical,NA,Nombre 6 Ã  59 mois,,,,
-general_info,Information gÃ©nÃ©rale,demo,DÃ©mographie,NA,NA,NA,total_moins_5ans,numerical,NA,Nombre moins de 5 ans,,,,
-general_info,Information gÃ©nÃ©rale,demo,DÃ©mographie,NA,NA,NA,total_5_17ans,numerical,NA,Nombre 5 Ã  17 ans,,,,
-general_info,Information gÃ©nÃ©rale,demo,DÃ©mographie,NA,NA,NA,total_18_59ans,numerical,NA,Nombre 18 Ã  59 ans,,,,
-general_info,Information gÃ©nÃ©rale,demo,DÃ©mographie,NA,NA,NA,total_60ans_plus,numerical,NA,Nombre 60 ans et plus,,,,
-general_info,Information gÃ©nÃ©rale,demo,DÃ©mographie,NA,NA,NA,total_3_5_femmes,numerical,NA,Nombre femmes 3 Ã  5 ans,,,,
-general_info,Information gÃ©nÃ©rale,demo,DÃ©mographie,NA,NA,NA,total_3_5_hommes,numerical,NA,Nombre hommes 3 Ã  5 ans,,,,
-general_info,Information gÃ©nÃ©rale,demo,DÃ©mographie,NA,NA,NA,total_6_12_femmes,numerical,NA,Nombre femmes 6 Ã  12 ans,,,,
-general_info,Information gÃ©nÃ©rale,demo,DÃ©mographie,NA,NA,NA,total_6_12_hommes,numerical,NA,Nombre hommes 6 Ã  12 ans,,,,
-general_info,Information gÃ©nÃ©rale,demo,DÃ©mographie,NA,NA,NA,total_13_17_femmes,numerical,NA,Nombre femmes 13 Ã  17 ans,,,,
-general_info,Information gÃ©nÃ©rale,demo,DÃ©mographie,NA,NA,NA,total_13_17_hommes,numerical,NA,Nombre hommes 13 Ã  17 ans,,,,
-general_info,Information gÃ©nÃ©rale,demo,DÃ©mographie,NA,NA,NA,total_0_17_femmes,numerical,NA,Nombre femmes 0 Ã  17 ans,,,,
-general_info,Information gÃ©nÃ©rale,demo,DÃ©mographie,NA,NA,NA,total_0_17_hommes,numerical,NA,Nombre hommes 0 Ã  17 ans,,,,
-education,Education,demo,DÃ©mographie,NA,NA,NA,enfant_scolarisable,numerical,NA,Nombre enfants scolarisables (3 Ã  17 ans),,,,
-general_info,Information gÃ©nÃ©rale,demo,DÃ©mographie,NA,NA,NA,enfant,numerical,NA,Nombre enfants 0 Ã  17 ans,,,,
-general_info,Information gÃ©nÃ©rale,demo,DÃ©mographie,NA,NA,NA,femme,numerical,NA,Nombre femmes (18 ans et plus),,,,
-general_info,Information gÃ©nÃ©rale,demo,DÃ©mographie,NA,NA,NA,homme,numerical,NA,Nombre hommes (18 ans et plus),,,,
-education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_educ,categorical,NA,Pourcentage Ã‰ducation formelle,select_one,age_genre_categ_enfants,3_5an_garcon,GarÃ§ons de 3 Ã  5 ans
-education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_infor_educ,categorical,NA,Pourcentage Ã‰ducation informelle,select_one,age_genre_categ_enfants,3_5an_garcon,GarÃ§ons de 3 Ã  5 ans
-education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_non_for_educ,categorical,NA,Pourcentage Ã‰ducation non formelle,select_one,age_genre_categ_enfants,3_5an_garcon,GarÃ§ons de 3 Ã  5 ans
-education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_aucune_educ,categorical,NA,Pourcentage Aucune instruction,select_one,age_genre_categ_enfants,3_5an_garcon,GarÃ§ons de 3 Ã  5 ans
-education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_educ,categorical,NA,Pourcentage Ã‰ducation formelle,select_one,age_genre_categ_enfants,3_5an_fille,Filles de 3 Ã  5 ans
-education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_infor_educ,categorical,NA,Pourcentage Ã‰ducation informelle,select_one,age_genre_categ_enfants,3_5an_fille,Filles de 3 Ã  5 ans
-education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_non_for_educ,categorical,NA,Pourcentage Ã‰ducation non formelle,select_one,age_genre_categ_enfants,3_5an_fille,Filles de 3 Ã  5 ans
-education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_aucune_educ,categorical,NA,Pourcentage Aucune instruction,select_one,age_genre_categ_enfants,3_5an_fille,Filles de 3 Ã  5 ans
-education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_educ,categorical,NA,Pourcentage Ã‰ducation formelle,select_one,age_genre_categ_enfants,3_5an_total,Enfants de 3 Ã  5 ans
-education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_infor_educ,categorical,NA,Pourcentage Ã‰ducation informelle,select_one,age_genre_categ_enfants,3_5an_total,Enfants de 3 Ã  5 ans
-education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_non_for_educ,categorical,NA,Pourcentage Ã‰ducation non formelle,select_one,age_genre_categ_enfants,3_5an_total,Enfants de 3 Ã  5 ans
-education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_aucune_educ,categorical,NA,Pourcentage Aucune instruction,select_one,age_genre_categ_enfants,3_5an_total,Enfants de 3 Ã  5 ans
-education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_educ,categorical,NA,Pourcentage Ã‰ducation formelle,select_one,age_genre_categ_enfants,6_12an_garcon,GarÃ§ons de 6 Ã  12 ans
-education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_infor_educ,categorical,NA,Pourcentage Ã‰ducation informelle,select_one,age_genre_categ_enfants,6_12an_garcon,GarÃ§ons de 6 Ã  12 ans
-education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_non_for_educ,categorical,NA,Pourcentage Ã‰ducation non formelle,select_one,age_genre_categ_enfants,6_12an_garcon,GarÃ§ons de 6 Ã  12 ans
-education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_aucune_educ,categorical,NA,Pourcentage Aucune instruction,select_one,age_genre_categ_enfants,6_12an_garcon,GarÃ§ons de 6 Ã  12 ans
-education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_educ,categorical,NA,Pourcentage Ã‰ducation formelle,select_one,age_genre_categ_enfants,6_12an_fille,Filles de 6 Ã  12 ans
-education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_infor_educ,categorical,NA,Pourcentage Ã‰ducation informelle,select_one,age_genre_categ_enfants,6_12an_fille,Filles de 6 Ã  12 ans
-education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_non_for_educ,categorical,NA,Pourcentage Ã‰ducation non formelle,select_one,age_genre_categ_enfants,6_12an_fille,Filles de 6 Ã  12 ans
-education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_aucune_educ,categorical,NA,Pourcentage Aucune instruction,select_one,age_genre_categ_enfants,6_12an_fille,Filles de 6 Ã  12 ans
-education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_educ,categorical,NA,Pourcentage Ã‰ducation formelle,select_one,age_genre_categ_enfants,6_12an_total,Enfants de 6 Ã  12 ans
-education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_infor_educ,categorical,NA,Pourcentage Ã‰ducation informelle,select_one,age_genre_categ_enfants,6_12an_total,Enfants de 6 Ã  12 ans
-education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_non_for_educ,categorical,NA,Pourcentage Ã‰ducation non formelle,select_one,age_genre_categ_enfants,6_12an_total,Enfants de 6 Ã  12 ans
-education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_aucune_educ,categorical,NA,Pourcentage Aucune instruction,select_one,age_genre_categ_enfants,6_12an_total,Enfants de 6 Ã  12 ans
-education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_educ,categorical,NA,Pourcentage Ã‰ducation formelle,select_one,age_genre_categ_enfants,13_17an_garcon,GarÃ§ons de 13 Ã  17 ans
-education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_infor_educ,categorical,NA,Pourcentage Ã‰ducation informelle,select_one,age_genre_categ_enfants,13_17an_garcon,GarÃ§ons de 13 Ã  17 ans
-education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_non_for_educ,categorical,NA,Pourcentage Ã‰ducation non formelle,select_one,age_genre_categ_enfants,13_17an_garcon,GarÃ§ons de 13 Ã  17 ans
-education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_aucune_educ,categorical,NA,Pourcentage Aucune instruction,select_one,age_genre_categ_enfants,13_17an_garcon,GarÃ§ons de 13 Ã  17 ans
-education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_educ,categorical,NA,Pourcentage Ã‰ducation formelle,select_one,age_genre_categ_enfants,13_17an_fille,Filles de 13 Ã  17 ans
-education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_infor_educ,categorical,NA,Pourcentage Ã‰ducation informelle,select_one,age_genre_categ_enfants,13_17an_fille,Filles de 13 Ã  17 ans
-education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_non_for_educ,categorical,NA,Pourcentage Ã‰ducation non formelle,select_one,age_genre_categ_enfants,13_17an_fille,Filles de 13 Ã  17 ans
-education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_aucune_educ,categorical,NA,Pourcentage Aucune instruction,select_one,age_genre_categ_enfants,13_17an_fille,Filles de 13 Ã  17 ans
-education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_educ,categorical,NA,Pourcentage Ã‰ducation formelle,select_one,age_genre_categ_enfants,13_17an_total,Enfants de 13 Ã  17 ans
-education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_infor_educ,categorical,NA,Pourcentage Ã‰ducation informelle,select_one,age_genre_categ_enfants,13_17an_total,Enfants de 13 Ã  17 ans
-education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_non_for_educ,categorical,NA,Pourcentage Ã‰ducation non formelle,select_one,age_genre_categ_enfants,13_17an_total,Enfants de 13 Ã  17 ans
-education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_aucune_educ,categorical,NA,Pourcentage Aucune instruction,select_one,age_genre_categ_enfants,13_17an_total,Enfants de 13 Ã  17 ans
-education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_scolarise,categorical,NA,Pourcentage des enfants scolarisÃ©s,,,,
-education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_non_scolarise,categorical,NA,Pourcentage des enfants non scolarisÃ©s,,,,
-education,Education,scolarisation_nbr,Scolarisation,NA,NA,NA,total_educ_3_5an_garcon,numerical,NA,Nombre Ã‰ducation formelle des garÃ§ons de 3 Ã Â  5 ans,,,,
-education,Education,scolarisation_nbr,Scolarisation,NA,NA,NA,total_infor_educ_3_5an_garcon,numerical,NA,Nombre Ã‰ducation informelle des garÃ§ons de 3 Ã Â  5 ans,,,,
-education,Education,scolarisation_nbr,Scolarisation,NA,NA,NA,total_non_for_educ_3_5an_garcon,numerical,NA,Nombre Ã‰ducation non formelle des garÃ§ons de 3 Ã Â  5 ans,,,,
-education,Education,scolarisation_nbr,Scolarisation,NA,NA,NA,total_aucune_educ_3_5an_garcon,numerical,NA,Nombre Aucune instruction des garÃ§ons de 3 Ã Â  5 ans,,,,
-education,Education,scolarisation_nbr,Scolarisation,NA,NA,NA,total_educ_3_5an_fille,numerical,NA,Nombre Ã‰ducation formelle des filles de 3 Ã Â  5 ans,,,,
-education,Education,scolarisation_nbr,Scolarisation,NA,NA,NA,total_infor_educ_3_5an_fille,numerical,NA,Nombre Ã‰ducation informelle des filles de 3 Ã Â  5 ans,,,,
-education,Education,scolarisation_nbr,Scolarisation,NA,NA,NA,total_non_for_educ_3_5an_fille,numerical,NA,Nombre Ã‰ducation non formelle des fille de 3 Ã Â  5 ans,,,,
-education,Education,scolarisation_nbr,Scolarisation,NA,NA,NA,total_aucune_educ_3_5an_fille,numerical,NA,Nombre Ã‰ducation non formelle des filles de 3 Ã Â  5 ans,,,,
-education,Education,scolarisation_nbr,Scolarisation,NA,NA,NA,total_educ_6_12an_garcon,numerical,NA,Nombre Ã‰ducation formelle des garÃ§ons de 6 Ã Â  12 ans,,,,
-education,Education,scolarisation_nbr,Scolarisation,NA,NA,NA,total_infor_educ_6_12an_garcon,numerical,NA,Nombre Ã‰ducation informelle des garÃ§ons de 6 Ã Â  12 ans,,,,
-education,Education,scolarisation_nbr,Scolarisation,NA,NA,NA,total_non_for_educ_6_12an_garcon,numerical,NA,Nombre Ã‰ducation non formelle des garÃ§ons de 6 Ã Â  12 ans,,,,
-education,Education,scolarisation_nbr,Scolarisation,NA,NA,NA,total_aucune_educ_6_12an_garcon,numerical,NA,Nombre Aucune instruction des garÃ§ons de 6 Ã Â  12 ans,,,,
-education,Education,scolarisation_nbr,Scolarisation,NA,NA,NA,total_educ_6_12an_fille,numerical,NA,Nombre Ã‰ducation formelle,,,,
-education,Education,scolarisation_nbr,Scolarisation,NA,NA,NA,total_infor_educ_6_12an_fille,numerical,NA,Nombre Ã‰ducation informelle,,,,
-education,Education,scolarisation_nbr,Scolarisation,NA,NA,NA,total_non_for_educ_6_12an_fille,numerical,NA,Nombre Ã‰ducation non formelle des fille de 6 Ã Â  12 ans,,,,
+general_info,Information générale,modalite,Modalité,NA,NA,NA,modalite,categorical,NA,Modalité d'enquête,,,,
+general_info,Information générale,demo,Démographie,NA,NA,NA,ic_genre,categorical,NA,Genre répondant,,,,
+general_info,Information générale,demo,Démographie,NA,NA,NA,ic_age,categorical,NA,Age répondant,,,,
+general_info,Information générale,demo,Démographie,NA,NA,NA,genre_chef_menage,categorical,NA,Genre du chef de ménage,,,,
+general_info,Information générale,demo,Démographie,NA,NA,NA,age_chef_menage,numerical,NA,Age du chef de ménage,,,,
+general_info,Information générale,socio_eco,Socio-économique,NA,NA,NA,situation_matrimoniale,categorical,NA,Situation matrimonial,,,,
+general_info,Information générale,socio_eco,Socio-économique,NA,NA,NA,profession_chef,categorical,NA,Profession chef de ménage,,,,
+general_info,Information générale,deplacement,Déplacement,NA,NA,NA,group_pop,categorical,NA,Groupe de population,,,,
+general_info,Information générale,deplacement,Déplacement,NA,NA,NA,region_pdi_mn,categorical,NA,Région origines PDI,,,,
+general_info,Information générale,deplacement,Déplacement,NA,NA,NA,province_pdi_mn,categorical,NA,Provinces origines PDI,,,,
+general_info,Information générale,deplacement,Déplacement,NA,NA,NA,pays_rapatrie_mint,categorical,NA,Pays rapatriés,,,,
+general_info,Information générale,deplacement,Déplacement,NA,NA,NA,pays_rapatrie,categorical,NA,Région rapatriés,,,,
+general_info,Information générale,deplacement,Déplacement,NA,NA,NA,region_retourne,categorical,NA,Région retournés,,,,
+general_info,Information générale,deplacement,Déplacement,NA,NA,NA,province_retourne,categorical,NA,Province retournés,,,,
+general_info,Information générale,deplacement,Déplacement,NA,NA,NA,pdi_condition,categorical,NA,Condition d'accueil PDI,,,,
+general_info,Information générale,deplacement,Déplacement,NA,NA,NA,raison_deplacement,categorical,NA,Raison déplacement PDI (push factor),,,,
+general_info,Information générale,deplacement,Déplacement,NA,NA,NA,raison_installation,categorical,NA,Raison installation PDI (pull factor),,,,
+general_info,Information générale,deplacement,Déplacement,NA,NA,NA,duree_deplacement,categorical,NA,Durée déplacement,,,,
+general_info,Information générale,deplacement,Déplacement,NA,NA,NA,retour,categorical,NA,Possibilité retour déplacés,,,,
+general_info,Information générale,deplacement,Déplacement,NA,NA,NA,retour_condition,categorical,NA,Condition retour déplacés,,,,
+general_info,Information générale,demo,Démographie,NA,NA,NA,taille_menage,categorical,NA,Taille totale du ménage,,,,
+general_info,Information générale,demo,Démographie,NA,NA,NA,total_moins_2ans,numerical,NA,Nombre moins de 2 ans,,,,
+general_info,Information générale,demo,Démographie,NA,NA,NA,total_6_59m,numerical,NA,Nombre 6 à 59 mois,,,,
+general_info,Information générale,demo,Démographie,NA,NA,NA,total_moins_5ans,numerical,NA,Nombre moins de 5 ans,,,,
+general_info,Information générale,demo,Démographie,NA,NA,NA,total_5_17ans,numerical,NA,Nombre 5 à 17 ans,,,,
+general_info,Information générale,demo,Démographie,NA,NA,NA,total_18_59ans,numerical,NA,Nombre 18 à 59 ans,,,,
+general_info,Information générale,demo,Démographie,NA,NA,NA,total_60ans_plus,numerical,NA,Nombre 60 ans et plus,,,,
+general_info,Information générale,demo,Démographie,NA,NA,NA,total_3_5_femmes,numerical,NA,Nombre femmes 3 à 5 ans,,,,
+general_info,Information générale,demo,Démographie,NA,NA,NA,total_3_5_hommes,numerical,NA,Nombre hommes 3 à 5 ans,,,,
+general_info,Information générale,demo,Démographie,NA,NA,NA,total_6_12_femmes,numerical,NA,Nombre femmes 6 à 12 ans,,,,
+general_info,Information générale,demo,Démographie,NA,NA,NA,total_6_12_hommes,numerical,NA,Nombre hommes 6 à 12 ans,,,,
+general_info,Information générale,demo,Démographie,NA,NA,NA,total_13_17_femmes,numerical,NA,Nombre femmes 13 à 17 ans,,,,
+general_info,Information générale,demo,Démographie,NA,NA,NA,total_13_17_hommes,numerical,NA,Nombre hommes 13 à 17 ans,,,,
+general_info,Information générale,demo,Démographie,NA,NA,NA,total_0_17_femmes,numerical,NA,Nombre femmes 0 à 17 ans,,,,
+general_info,Information générale,demo,Démographie,NA,NA,NA,total_0_17_hommes,numerical,NA,Nombre hommes 0 à 17 ans,,,,
+education,Education,demo,Démographie,NA,NA,NA,enfant_scolarisable,numerical,NA,Nombre enfants scolarisables (3 à 17 ans),,,,
+general_info,Information générale,demo,Démographie,NA,NA,NA,enfant,numerical,NA,Nombre enfants 0 à 17 ans,,,,
+general_info,Information générale,demo,Démographie,NA,NA,NA,femme,numerical,NA,Nombre femmes (18 ans et plus),,,,
+general_info,Information générale,demo,Démographie,NA,NA,NA,homme,numerical,NA,Nombre hommes (18 ans et plus),,,,
+education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_educ,categorical,NA,Pourcentage éducation formelle,select_one,age_genre_categ_enfants,3_5an_garcon,Garçons de 3 à 5 ans
+education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_infor_educ,categorical,NA,Pourcentage éducation informelle,select_one,age_genre_categ_enfants,3_5an_garcon,Garçons de 3 à 5 ans
+education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_non_for_educ,categorical,NA,Pourcentage éducation non formelle,select_one,age_genre_categ_enfants,3_5an_garcon,Garçons de 3 à 5 ans
+education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_aucune_educ,categorical,NA,Pourcentage Aucune instruction,select_one,age_genre_categ_enfants,3_5an_garcon,Garçons de 3 à 5 ans
+education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_educ,categorical,NA,Pourcentage éducation formelle,select_one,age_genre_categ_enfants,3_5an_fille,Filles de 3 à 5 ans
+education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_infor_educ,categorical,NA,Pourcentage éducation informelle,select_one,age_genre_categ_enfants,3_5an_fille,Filles de 3 à 5 ans
+education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_non_for_educ,categorical,NA,Pourcentage éducation non formelle,select_one,age_genre_categ_enfants,3_5an_fille,Filles de 3 à 5 ans
+education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_aucune_educ,categorical,NA,Pourcentage Aucune instruction,select_one,age_genre_categ_enfants,3_5an_fille,Filles de 3 à 5 ans
+education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_educ,categorical,NA,Pourcentage éducation formelle,select_one,age_genre_categ_enfants,3_5an_total,Enfants de 3 à 5 ans
+education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_infor_educ,categorical,NA,Pourcentage éducation informelle,select_one,age_genre_categ_enfants,3_5an_total,Enfants de 3 à 5 ans
+education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_non_for_educ,categorical,NA,Pourcentage éducation non formelle,select_one,age_genre_categ_enfants,3_5an_total,Enfants de 3 à 5 ans
+education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_aucune_educ,categorical,NA,Pourcentage Aucune instruction,select_one,age_genre_categ_enfants,3_5an_total,Enfants de 3 à 5 ans
+education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_educ,categorical,NA,Pourcentage éducation formelle,select_one,age_genre_categ_enfants,6_12an_garcon,Garçons de 6 à 12 ans
+education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_infor_educ,categorical,NA,Pourcentage éducation informelle,select_one,age_genre_categ_enfants,6_12an_garcon,Garçons de 6 à 12 ans
+education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_non_for_educ,categorical,NA,Pourcentage éducation non formelle,select_one,age_genre_categ_enfants,6_12an_garcon,Garçons de 6 à 12 ans
+education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_aucune_educ,categorical,NA,Pourcentage Aucune instruction,select_one,age_genre_categ_enfants,6_12an_garcon,Garçons de 6 à 12 ans
+education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_educ,categorical,NA,Pourcentage éducation formelle,select_one,age_genre_categ_enfants,6_12an_fille,Filles de 6 à 12 ans
+education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_infor_educ,categorical,NA,Pourcentage éducation informelle,select_one,age_genre_categ_enfants,6_12an_fille,Filles de 6 à 12 ans
+education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_non_for_educ,categorical,NA,Pourcentage éducation non formelle,select_one,age_genre_categ_enfants,6_12an_fille,Filles de 6 à 12 ans
+education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_aucune_educ,categorical,NA,Pourcentage Aucune instruction,select_one,age_genre_categ_enfants,6_12an_fille,Filles de 6 à 12 ans
+education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_educ,categorical,NA,Pourcentage éducation formelle,select_one,age_genre_categ_enfants,6_12an_total,Enfants de 6 à 12 ans
+education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_infor_educ,categorical,NA,Pourcentage éducation informelle,select_one,age_genre_categ_enfants,6_12an_total,Enfants de 6 à 12 ans
+education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_non_for_educ,categorical,NA,Pourcentage éducation non formelle,select_one,age_genre_categ_enfants,6_12an_total,Enfants de 6 à 12 ans
+education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_aucune_educ,categorical,NA,Pourcentage Aucune instruction,select_one,age_genre_categ_enfants,6_12an_total,Enfants de 6 à 12 ans
+education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_educ,categorical,NA,Pourcentage éducation formelle,select_one,age_genre_categ_enfants,13_17an_garcon,Garçons de 13 à 17 ans
+education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_infor_educ,categorical,NA,Pourcentage éducation informelle,select_one,age_genre_categ_enfants,13_17an_garcon,Garçons de 13 à 17 ans
+education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_non_for_educ,categorical,NA,Pourcentage éducation non formelle,select_one,age_genre_categ_enfants,13_17an_garcon,Garçons de 13 à 17 ans
+education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_aucune_educ,categorical,NA,Pourcentage Aucune instruction,select_one,age_genre_categ_enfants,13_17an_garcon,Garçons de 13 à 17 ans
+education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_educ,categorical,NA,Pourcentage éducation formelle,select_one,age_genre_categ_enfants,13_17an_fille,Filles de 13 à 17 ans
+education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_infor_educ,categorical,NA,Pourcentage éducation informelle,select_one,age_genre_categ_enfants,13_17an_fille,Filles de 13 à 17 ans
+education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_non_for_educ,categorical,NA,Pourcentage éducation non formelle,select_one,age_genre_categ_enfants,13_17an_fille,Filles de 13 à 17 ans
+education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_aucune_educ,categorical,NA,Pourcentage Aucune instruction,select_one,age_genre_categ_enfants,13_17an_fille,Filles de 13 à 17 ans
+education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_educ,categorical,NA,Pourcentage éducation formelle,select_one,age_genre_categ_enfants,13_17an_total,Enfants de 13 à 17 ans
+education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_infor_educ,categorical,NA,Pourcentage éducation informelle,select_one,age_genre_categ_enfants,13_17an_total,Enfants de 13 à 17 ans
+education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_non_for_educ,categorical,NA,Pourcentage éducation non formelle,select_one,age_genre_categ_enfants,13_17an_total,Enfants de 13 à 17 ans
+education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_aucune_educ,categorical,NA,Pourcentage Aucune instruction,select_one,age_genre_categ_enfants,13_17an_total,Enfants de 13 à 17 ans
+education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_scolarise,categorical,NA,Pourcentage des enfants scolarisés,,,,
+education,Education,scolarisation_freq,Scolarisation,NA,NA,NA,freq_non_scolarise,categorical,NA,Pourcentage des enfants non scolarisés,,,,
+education,Education,scolarisation_nbr,Scolarisation,NA,NA,NA,total_educ_3_5an_garcon,numerical,NA,Nombre éducation formelle des garçons de 3 à  5 ans,,,,
+education,Education,scolarisation_nbr,Scolarisation,NA,NA,NA,total_infor_educ_3_5an_garcon,numerical,NA,Nombre éducation informelle des garçons de 3 à  5 ans,,,,
+education,Education,scolarisation_nbr,Scolarisation,NA,NA,NA,total_non_for_educ_3_5an_garcon,numerical,NA,Nombre éducation non formelle des garçons de 3 à  5 ans,,,,
+education,Education,scolarisation_nbr,Scolarisation,NA,NA,NA,total_aucune_educ_3_5an_garcon,numerical,NA,Nombre Aucune instruction des garçons de 3 à  5 ans,,,,
+education,Education,scolarisation_nbr,Scolarisation,NA,NA,NA,total_educ_3_5an_fille,numerical,NA,Nombre éducation formelle des filles de 3 à  5 ans,,,,
+education,Education,scolarisation_nbr,Scolarisation,NA,NA,NA,total_infor_educ_3_5an_fille,numerical,NA,Nombre éducation informelle des filles de 3 à  5 ans,,,,
+education,Education,scolarisation_nbr,Scolarisation,NA,NA,NA,total_non_for_educ_3_5an_fille,numerical,NA,Nombre éducation non formelle des fille de 3 à  5 ans,,,,
+education,Education,scolarisation_nbr,Scolarisation,NA,NA,NA,total_aucune_educ_3_5an_fille,numerical,NA,Nombre éducation non formelle des filles de 3 à  5 ans,,,,
+education,Education,scolarisation_nbr,Scolarisation,NA,NA,NA,total_educ_6_12an_garcon,numerical,NA,Nombre éducation formelle des garçons de 6 à  12 ans,,,,
+education,Education,scolarisation_nbr,Scolarisation,NA,NA,NA,total_infor_educ_6_12an_garcon,numerical,NA,Nombre éducation informelle des garçons de 6 à  12 ans,,,,
+education,Education,scolarisation_nbr,Scolarisation,NA,NA,NA,total_non_for_educ_6_12an_garcon,numerical,NA,Nombre éducation non formelle des garçons de 6 à  12 ans,,,,
+education,Education,scolarisation_nbr,Scolarisation,NA,NA,NA,total_aucune_educ_6_12an_garcon,numerical,NA,Nombre Aucune instruction des garçons de 6 à  12 ans,,,,
+education,Education,scolarisation_nbr,Scolarisation,NA,NA,NA,total_educ_6_12an_fille,numerical,NA,Nombre éducation formelle,,,,
+education,Education,scolarisation_nbr,Scolarisation,NA,NA,NA,total_infor_educ_6_12an_fille,numerical,NA,Nombre éducation informelle,,,,
+education,Education,scolarisation_nbr,Scolarisation,NA,NA,NA,total_non_for_educ_6_12an_fille,numerical,NA,Nombre éducation non formelle des fille de 6 à  12 ans,,,,
 education,Education,scolarisation_nbr,Scolarisation,NA,NA,NA,total_aucune_educ_6_12an_fille,numerical,NA,Nombre Aucune instruction,,,,
-education,Education,scolarisation_nbr,Scolarisation,NA,NA,NA,total_educ_13_17an_garcon,numerical,NA,Nombre Ã‰ducation formelle des garÃ§ons de 13 Ã Â  17 ans,,,,
-education,Education,scolarisation_nbr,Scolarisation,NA,NA,NA,total_infor_educ_13_17an_garcon,numerical,NA,Nombre Ã‰ducation informelle des garÃ§ons de 13 Ã Â  17 ans,,,,
-education,Education,scolarisation_nbr,Scolarisation,NA,NA,NA,total_non_for_educ_13_17an_garcon,numerical,NA,Nombre Ã‰ducation non formelle des garÃ§ons de 13 Ã Â  17 ans,,,,
-education,Education,scolarisation_nbr,Scolarisation,NA,NA,NA,total_aucune_educ_13_17an_garcon,numerical,NA,Nombre aucune instruction des garÃ§ons de 13 Ã Â  17 ans,,,,
-education,Education,scolarisation_nbr,Scolarisation,NA,NA,NA,total_educ_13_17an_fille,numerical,NA,Nombre Ã‰ducation formelle des filles de 13 Ã Â  17 ans,,,,
-education,Education,scolarisation_nbr,Scolarisation,NA,NA,NA,total_infor_educ_13_17an_fille,numerical,NA,Nombre Ã‰ducation informelle des filles de 13 Ã Â  17 ans,,,,
-education,Education,scolarisation_nbr,Scolarisation,NA,NA,NA,total_non_for_educ_13_17an_fille,numerical,NA,Nombre Ã‰ducation non formelle des fille de 13 Ã Â  17 ans,,,,
-education,Education,scolarisation_nbr,Scolarisation,NA,NA,NA,total_aucune_educ_13_17an_fille,numerical,NA,Nombre Aucune instruction des filles de 13 Ã Â  17 ans,,,,
-education,Education,scolarisation_nbr,Scolarisation,NA,NA,NA,total_scolarise,numerical,NA,Nombre des enfants scolarisÃ©s,,,,
-education,Education,scolarisation_nbr,Scolarisation,NA,NA,NA,total_non_scolarise,numerical,NA,Nombre des enfants non scolarisÃ©s,,,,
-general_info,Information gÃ©nÃ©rale,deplacement,DÃ©placement,NA,NA,NA,pdi_present,categorical,NA,MÃ©nage accueil dÃ©placÃ©s,,,,
-general_info,Information gÃ©nÃ©rale,deplacement,DÃ©placement,NA,NA,NA,pdi_present_combien,numerical,NA,Nombre mÃ©nages accueillis,,,,
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,soins_difficile,categorical,NA,Au moins une personne ayant des difficultÃ©s Ã  prendre soin dâ€™elle-mÃªme (Washington Group),,,,
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,nombre_soins_difficile,numerical,NA,Nombre de personnes ayant du mal Ã  prendre soin dâ€™elles-mÃªmes (Washington Group),,,,
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,freq_soins_dif,categorical,NA,% n'arrivant pas Ã  prendre soin dâ€™eux-mÃªmes,select_one,age_sex_categ,garcons_moins5,GarÃ§ons de moins de 5 ans
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,freq_soins_dif,categorical,NA,% n'arrivant pas Ã  prendre soin dâ€™eux-mÃªmes,select_one,age_sex_categ,filles_moins5,Filles de moins de 5 ans
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,freq_soins_dif,categorical,NA,% n'arrivant pas Ã  prendre soin dâ€™eux-mÃªmes,select_one,age_sex_categ,garcons_5_18,GarÃ§ons de 5 Ã  17 ans
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,freq_soins_dif,categorical,NA,% n'arrivant pas Ã  prendre soin dâ€™eux-mÃªmes,select_one,age_sex_categ,filles_5_18,Filles de 5 Ã  17 ans
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,freq_soins_dif,categorical,NA,% n'arrivant pas Ã  prendre soin dâ€™eux-mÃªmes,select_one,age_sex_categ,hommes_18_64,Hommes de 18 Ã  64 ans
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,freq_soins_dif,categorical,NA,% n'arrivant pas Ã  prendre soin dâ€™eux-mÃªmes,select_one,age_sex_categ,femmes_18_64,Femmes de 18 Ã  64 ans
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,freq_soins_dif,categorical,NA,% n'arrivant pas Ã  prendre soin dâ€™eux-mÃªmes,select_one,age_sex_categ,hommes_65plus,Hommes de plus de 65 ans
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,freq_soins_dif,categorical,NA,% n'arrivant pas Ã  prendre soin dâ€™eux-mÃªmes,select_one,age_sex_categ,femmes_65plus,Femmes de plus de 65 ans
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,difficulte_vision,categorical,NA,Au moins une personne ayant des difficultÃ©s Ã  voir (Washington Group),,,,
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,nombre_vision,numerical,NA,Nombre de personnes ayant des difficultÃ©s Ã  voir (Washington Group),,,,
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,freq_vision_dif,categorical,NA,% ayant de la difficultÃ©  Ã  voir,select_one,age_sex_categ,garcons_moins5,GarÃ§ons de moins de 5 ans
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,freq_vision_dif,categorical,NA,% ayant de la difficultÃ©  Ã  voir,select_one,age_sex_categ,filles_moins5,Filles de moins de 5 ans
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,freq_vision_dif,categorical,NA,% ayant de la difficultÃ©  Ã  voir,select_one,age_sex_categ,garcons_5_18,GarÃ§ons de 5 Ã  17 ans
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,freq_vision_dif,categorical,NA,% ayant de la difficultÃ©  Ã  voir,select_one,age_sex_categ,filles_5_18,Filles de 5 Ã  17 ans
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,freq_vision_dif,categorical,NA,% ayant de la difficultÃ©  Ã  voir,select_one,age_sex_categ,hommes_18_64,Hommes de 18 Ã  64 ans
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,freq_vision_dif,categorical,NA,% ayant de la difficultÃ©  Ã  voir,select_one,age_sex_categ,femmes_18_64,Femmes de 18 Ã  64 ans
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,freq_vision_dif,categorical,NA,% ayant de la difficultÃ©  Ã  voir,select_one,age_sex_categ,hommes_65plus,Hommes de plus de 65 ans
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,freq_vision_dif,categorical,NA,% ayant de la difficultÃ©  Ã  voir,select_one,age_sex_categ,femmes_65plus,Femmes de plus de 65 ans
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,difficulte_entendre,categorical,NA,Au moins une personne ayant des difficultÃ©s pour entendre (Washington Group),,,,
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,nombre_difficulte_entendre,numerical,NA,Nombre de personnes ayant des difficultÃ©s Ã  entendre (Washington Group),,,,
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,freq_entendre_dif,categorical,NA,% ayant de la difficultÃ©  Ã  entendre,select_one,age_sex_categ,garcons_moins5,GarÃ§ons de moins de 5 ans
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,freq_entendre_dif,categorical,NA,% ayant de la difficultÃ©  Ã  entendre,select_one,age_sex_categ,filles_moins5,Filles de moins de 5 ans
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,freq_entendre_dif,categorical,NA,% ayant de la difficultÃ©  Ã  entendre,select_one,age_sex_categ,garcons_5_18,GarÃ§ons de 5 Ã  17 ans
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,freq_entendre_dif,categorical,NA,% ayant de la difficultÃ©  Ã  entendre,select_one,age_sex_categ,filles_5_18,Filles de 5 Ã  17 ans
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,freq_entendre_dif,categorical,NA,% ayant de la difficultÃ©  Ã  entendre,select_one,age_sex_categ,hommes_18_64,Hommes de 18 Ã  64 ans
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,freq_entendre_dif,categorical,NA,% ayant de la difficultÃ©  Ã  entendre,select_one,age_sex_categ,femmes_18_64,Femmes de 18 Ã  64 ans
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,freq_entendre_dif,categorical,NA,% ayant de la difficultÃ©  Ã  entendre,select_one,age_sex_categ,hommes_65plus,Hommes de plus de 65 ans
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,freq_entendre_dif,categorical,NA,% ayant de la difficultÃ©  Ã  entendre,select_one,age_sex_categ,femmes_65plus,Femmes de plus de 65 ans
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,difficulte_marche,categorical,NA,Au moins une personne ayant des difficultÃ© Ã  marcher (Washington Group),,,,
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,nombre_difficulte_marche,numerical,NA,Nombre de personnes ayant des difficultÃ©s Ã  marcher (Washington Group),,,,
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,freq_marche_dif,categorical,NA,% ayant de la difficultÃ© Ã  marcher/monter des marches,select_one,age_sex_categ,garcons_moins5,GarÃ§ons de moins de 5 ans
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,freq_marche_dif,categorical,NA,% ayant de la difficultÃ© Ã  marcher/monter des marches,select_one,age_sex_categ,filles_moins5,Filles de moins de 5 ans
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,freq_marche_dif,categorical,NA,% ayant de la difficultÃ© Ã  marcher/monter des marches,select_one,age_sex_categ,garcons_5_18,GarÃ§ons de 5 Ã  17 ans
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,freq_marche_dif,categorical,NA,% ayant de la difficultÃ© Ã  marcher/monter des marches,select_one,age_sex_categ,filles_5_18,Filles de 5 Ã  17 ans
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,freq_marche_dif,categorical,NA,% ayant de la difficultÃ© Ã  marcher/monter des marches,select_one,age_sex_categ,hommes_18_64,Hommes de 18 Ã  64 ans
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,freq_marche_dif,categorical,NA,% ayant de la difficultÃ© Ã  marcher/monter des marches,select_one,age_sex_categ,femmes_18_64,Femmes de 18 Ã  64 ans
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,freq_marche_dif,categorical,NA,% ayant de la difficultÃ© Ã  marcher/monter des marches,select_one,age_sex_categ,hommes_65plus,Hommes de plus de 65 ans
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,freq_marche_dif,categorical,NA,% ayant de la difficultÃ© Ã  marcher/monter des marches,select_one,age_sex_categ,femmes_65plus,Femmes de plus de 65 ans
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,difficulte_concentration,categorical,NA,Au moins une personne ayant des difficultÃ©s pour se concentrer (Washington Group),,,,
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,nombre_difficulte_concentration,numerical,NA,Nombre de personnes ayant des difficultÃ©s pour se concentrer (Washington Group),,,,
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,freq_concentration_dif,categorical,NA,% ayant de la difficultÃ© Ã  se concentrer/se souvenir,select_one,age_sex_categ,garcons_moins5,GarÃ§ons de moins de 5 ans
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,freq_concentration_dif,categorical,NA,% ayant de la difficultÃ© Ã  se concentrer/se souvenir,select_one,age_sex_categ,filles_moins5,Filles de moins de 5 ans
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,freq_concentration_dif,categorical,NA,% ayant de la difficultÃ© Ã  se concentrer/se souvenir,select_one,age_sex_categ,garcons_5_18,GarÃ§ons de 5 Ã  17 ans
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,freq_concentration_dif,categorical,NA,% ayant de la difficultÃ© Ã  se concentrer/se souvenir,select_one,age_sex_categ,filles_5_18,Filles de 5 Ã  17 ans
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,freq_concentration_dif,categorical,NA,% ayant de la difficultÃ© Ã  se concentrer/se souvenir,select_one,age_sex_categ,hommes_18_64,Hommes de 18 Ã  64 ans
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,freq_concentration_dif,categorical,NA,% ayant de la difficultÃ© Ã  se concentrer/se souvenir,select_one,age_sex_categ,femmes_18_64,Femmes de 18 Ã  64 ans
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,freq_concentration_dif,categorical,NA,% ayant de la difficultÃ© Ã  se concentrer/se souvenir,select_one,age_sex_categ,hommes_65plus,Hommes de plus de 65 ans
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,freq_concentration_dif,categorical,NA,% ayant de la difficultÃ© Ã  se concentrer/se souvenir,select_one,age_sex_categ,femmes_65plus,Femmes de plus de 65 ans
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,difficulte_communication,categorical,NA,Au moins une personne ayant des difficultÃ©s pour communiquer (Washington Group),,,,
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,nombre_difficulte_communication,numerical,NA,Nombre de personnes ayant des difficultÃ©s pour communiquer (Washington Group),,,,
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,freq_communication_dif,categorical,NA,% ayant de la difficultÃ© Ã  communiquer,select_one,age_sex_categ,garcons_moins5,GarÃ§ons de moins de 5 ans
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,freq_communication_dif,categorical,NA,% ayant de la difficultÃ© Ã  communiquer,select_one,age_sex_categ,filles_moins5,Filles de moins de 5 ans
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,freq_communication_dif,categorical,NA,% ayant de la difficultÃ© Ã  communiquer,select_one,age_sex_categ,garcons_5_18,GarÃ§ons de 5 Ã  17 ans
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,freq_communication_dif,categorical,NA,% ayant de la difficultÃ© Ã  communiquer,select_one,age_sex_categ,filles_5_18,Filles de 5 Ã  17 ans
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,freq_communication_dif,categorical,NA,% ayant de la difficultÃ© Ã  communiquer,select_one,age_sex_categ,hommes_18_64,Hommes de 18 Ã  64 ans
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,freq_communication_dif,categorical,NA,% ayant de la difficultÃ© Ã  communiquer,select_one,age_sex_categ,femmes_18_64,Femmes de 18 Ã  64 ans
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,freq_communication_dif,categorical,NA,% ayant de la difficultÃ© Ã  communiquer,select_one,age_sex_categ,hommes_65plus,Hommes de plus de 65 ans
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,freq_communication_dif,categorical,NA,% ayant de la difficultÃ© Ã  communiquer,select_one,age_sex_categ,femmes_65plus,Femmes de plus de 65 ans
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,auMoinsUneWG,categorical,NA,Au moins une personne vulnÃ©rable Ã  charge,select_one,oui_non_add,oui,Oui
-general_info,Information gÃ©nÃ©rale,washington_group,Washington Group,NA,NA,NA,auMoinsUneWG,categorical,NA,Au moins une personne vulnÃ©rable Ã  charge,select_one,oui_non_add,non,Non
-education,Education,barrieres,BarriÃ¨res,NA,NA,NA,barriere_edu,categorical,NA,BarriÃ¨res Ã  lâ€™Ã©ducation,,,,
-NFI_abris,BNA/Abri,abris,Abri,NA,NA,NA,type_abri,categorical,NA,Type dâ€™abri,,,,
+education,Education,scolarisation_nbr,Scolarisation,NA,NA,NA,total_educ_13_17an_garcon,numerical,NA,Nombre éducation formelle des garçons de 13 à  17 ans,,,,
+education,Education,scolarisation_nbr,Scolarisation,NA,NA,NA,total_infor_educ_13_17an_garcon,numerical,NA,Nombre éducation informelle des garçons de 13 à  17 ans,,,,
+education,Education,scolarisation_nbr,Scolarisation,NA,NA,NA,total_non_for_educ_13_17an_garcon,numerical,NA,Nombre éducation non formelle des garçons de 13 à  17 ans,,,,
+education,Education,scolarisation_nbr,Scolarisation,NA,NA,NA,total_aucune_educ_13_17an_garcon,numerical,NA,Nombre aucune instruction des garçons de 13 à  17 ans,,,,
+education,Education,scolarisation_nbr,Scolarisation,NA,NA,NA,total_educ_13_17an_fille,numerical,NA,Nombre éducation formelle des filles de 13 à  17 ans,,,,
+education,Education,scolarisation_nbr,Scolarisation,NA,NA,NA,total_infor_educ_13_17an_fille,numerical,NA,Nombre éducation informelle des filles de 13 à  17 ans,,,,
+education,Education,scolarisation_nbr,Scolarisation,NA,NA,NA,total_non_for_educ_13_17an_fille,numerical,NA,Nombre éducation non formelle des fille de 13 à  17 ans,,,,
+education,Education,scolarisation_nbr,Scolarisation,NA,NA,NA,total_aucune_educ_13_17an_fille,numerical,NA,Nombre Aucune instruction des filles de 13 à  17 ans,,,,
+education,Education,scolarisation_nbr,Scolarisation,NA,NA,NA,total_scolarise,numerical,NA,Nombre des enfants scolarisés,,,,
+education,Education,scolarisation_nbr,Scolarisation,NA,NA,NA,total_non_scolarise,numerical,NA,Nombre des enfants non scolarisés,,,,
+general_info,Information générale,deplacement,Déplacement,NA,NA,NA,pdi_present,categorical,NA,Ménage accueil déplacés,,,,
+general_info,Information générale,deplacement,Déplacement,NA,NA,NA,pdi_present_combien,numerical,NA,Nombre ménages accueillis,,,,
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,soins_difficile,categorical,NA,Au moins une personne ayant des difficultés à prendre soin d'elle-même (Washington Group),,,,
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,nombre_soins_difficile,numerical,NA,Nombre de personnes ayant du mal à prendre soin d'elles-mêmes (Washington Group),,,,
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,freq_soins_dif,categorical,NA,% n'arrivant pas à prendre soin d'eux-mêmes,select_one,age_sex_categ,garcons_moins5,Garçons de moins de 5 ans
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,freq_soins_dif,categorical,NA,% n'arrivant pas à prendre soin d'eux-mêmes,select_one,age_sex_categ,filles_moins5,Filles de moins de 5 ans
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,freq_soins_dif,categorical,NA,% n'arrivant pas à prendre soin d'eux-mêmes,select_one,age_sex_categ,garcons_5_18,Garçons de 5 à 17 ans
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,freq_soins_dif,categorical,NA,% n'arrivant pas à prendre soin d'eux-mêmes,select_one,age_sex_categ,filles_5_18,Filles de 5 à 17 ans
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,freq_soins_dif,categorical,NA,% n'arrivant pas à prendre soin d'eux-mêmes,select_one,age_sex_categ,hommes_18_64,Hommes de 18 à 64 ans
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,freq_soins_dif,categorical,NA,% n'arrivant pas à prendre soin d'eux-mêmes,select_one,age_sex_categ,femmes_18_64,Femmes de 18 à 64 ans
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,freq_soins_dif,categorical,NA,% n'arrivant pas à prendre soin d'eux-mêmes,select_one,age_sex_categ,hommes_65plus,Hommes de plus de 65 ans
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,freq_soins_dif,categorical,NA,% n'arrivant pas à prendre soin d'eux-mêmes,select_one,age_sex_categ,femmes_65plus,Femmes de plus de 65 ans
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,difficulte_vision,categorical,NA,Au moins une personne ayant des difficultés à voir (Washington Group),,,,
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,nombre_vision,numerical,NA,Nombre de personnes ayant des difficultés à voir (Washington Group),,,,
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,freq_vision_dif,categorical,NA,% ayant de la difficulté  à voir,select_one,age_sex_categ,garcons_moins5,Garçons de moins de 5 ans
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,freq_vision_dif,categorical,NA,% ayant de la difficulté  à voir,select_one,age_sex_categ,filles_moins5,Filles de moins de 5 ans
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,freq_vision_dif,categorical,NA,% ayant de la difficulté  à voir,select_one,age_sex_categ,garcons_5_18,Garçons de 5 à 17 ans
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,freq_vision_dif,categorical,NA,% ayant de la difficulté  à voir,select_one,age_sex_categ,filles_5_18,Filles de 5 à 17 ans
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,freq_vision_dif,categorical,NA,% ayant de la difficulté  à voir,select_one,age_sex_categ,hommes_18_64,Hommes de 18 à 64 ans
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,freq_vision_dif,categorical,NA,% ayant de la difficulté  à voir,select_one,age_sex_categ,femmes_18_64,Femmes de 18 à 64 ans
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,freq_vision_dif,categorical,NA,% ayant de la difficulté  à voir,select_one,age_sex_categ,hommes_65plus,Hommes de plus de 65 ans
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,freq_vision_dif,categorical,NA,% ayant de la difficulté  à voir,select_one,age_sex_categ,femmes_65plus,Femmes de plus de 65 ans
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,difficulte_entendre,categorical,NA,Au moins une personne ayant des difficultés pour entendre (Washington Group),,,,
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,nombre_difficulte_entendre,numerical,NA,Nombre de personnes ayant des difficultés à entendre (Washington Group),,,,
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,freq_entendre_dif,categorical,NA,% ayant de la difficulté  à entendre,select_one,age_sex_categ,garcons_moins5,Garçons de moins de 5 ans
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,freq_entendre_dif,categorical,NA,% ayant de la difficulté  à entendre,select_one,age_sex_categ,filles_moins5,Filles de moins de 5 ans
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,freq_entendre_dif,categorical,NA,% ayant de la difficulté  à entendre,select_one,age_sex_categ,garcons_5_18,Garçons de 5 à 17 ans
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,freq_entendre_dif,categorical,NA,% ayant de la difficulté  à entendre,select_one,age_sex_categ,filles_5_18,Filles de 5 à 17 ans
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,freq_entendre_dif,categorical,NA,% ayant de la difficulté  à entendre,select_one,age_sex_categ,hommes_18_64,Hommes de 18 à 64 ans
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,freq_entendre_dif,categorical,NA,% ayant de la difficulté  à entendre,select_one,age_sex_categ,femmes_18_64,Femmes de 18 à 64 ans
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,freq_entendre_dif,categorical,NA,% ayant de la difficulté  à entendre,select_one,age_sex_categ,hommes_65plus,Hommes de plus de 65 ans
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,freq_entendre_dif,categorical,NA,% ayant de la difficulté  à entendre,select_one,age_sex_categ,femmes_65plus,Femmes de plus de 65 ans
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,difficulte_marche,categorical,NA,Au moins une personne ayant des difficulté à marcher (Washington Group),,,,
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,nombre_difficulte_marche,numerical,NA,Nombre de personnes ayant des difficultés à marcher (Washington Group),,,,
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,freq_marche_dif,categorical,NA,% ayant de la difficulté à marcher/monter des marches,select_one,age_sex_categ,garcons_moins5,Garçons de moins de 5 ans
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,freq_marche_dif,categorical,NA,% ayant de la difficulté à marcher/monter des marches,select_one,age_sex_categ,filles_moins5,Filles de moins de 5 ans
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,freq_marche_dif,categorical,NA,% ayant de la difficulté à marcher/monter des marches,select_one,age_sex_categ,garcons_5_18,Garçons de 5 à 17 ans
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,freq_marche_dif,categorical,NA,% ayant de la difficulté à marcher/monter des marches,select_one,age_sex_categ,filles_5_18,Filles de 5 à 17 ans
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,freq_marche_dif,categorical,NA,% ayant de la difficulté à marcher/monter des marches,select_one,age_sex_categ,hommes_18_64,Hommes de 18 à 64 ans
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,freq_marche_dif,categorical,NA,% ayant de la difficulté à marcher/monter des marches,select_one,age_sex_categ,femmes_18_64,Femmes de 18 à 64 ans
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,freq_marche_dif,categorical,NA,% ayant de la difficulté à marcher/monter des marches,select_one,age_sex_categ,hommes_65plus,Hommes de plus de 65 ans
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,freq_marche_dif,categorical,NA,% ayant de la difficulté à marcher/monter des marches,select_one,age_sex_categ,femmes_65plus,Femmes de plus de 65 ans
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,difficulte_concentration,categorical,NA,Au moins une personne ayant des difficultés pour se concentrer (Washington Group),,,,
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,nombre_difficulte_concentration,numerical,NA,Nombre de personnes ayant des difficultés pour se concentrer (Washington Group),,,,
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,freq_concentration_dif,categorical,NA,% ayant de la difficulté à se concentrer/se souvenir,select_one,age_sex_categ,garcons_moins5,Garçons de moins de 5 ans
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,freq_concentration_dif,categorical,NA,% ayant de la difficulté à se concentrer/se souvenir,select_one,age_sex_categ,filles_moins5,Filles de moins de 5 ans
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,freq_concentration_dif,categorical,NA,% ayant de la difficulté à se concentrer/se souvenir,select_one,age_sex_categ,garcons_5_18,Garçons de 5 à 17 ans
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,freq_concentration_dif,categorical,NA,% ayant de la difficulté à se concentrer/se souvenir,select_one,age_sex_categ,filles_5_18,Filles de 5 à 17 ans
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,freq_concentration_dif,categorical,NA,% ayant de la difficulté à se concentrer/se souvenir,select_one,age_sex_categ,hommes_18_64,Hommes de 18 à 64 ans
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,freq_concentration_dif,categorical,NA,% ayant de la difficulté à se concentrer/se souvenir,select_one,age_sex_categ,femmes_18_64,Femmes de 18 à 64 ans
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,freq_concentration_dif,categorical,NA,% ayant de la difficulté à se concentrer/se souvenir,select_one,age_sex_categ,hommes_65plus,Hommes de plus de 65 ans
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,freq_concentration_dif,categorical,NA,% ayant de la difficulté à se concentrer/se souvenir,select_one,age_sex_categ,femmes_65plus,Femmes de plus de 65 ans
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,difficulte_communication,categorical,NA,Au moins une personne ayant des difficultés pour communiquer (Washington Group),,,,
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,nombre_difficulte_communication,numerical,NA,Nombre de personnes ayant des difficultés pour communiquer (Washington Group),,,,
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,freq_communication_dif,categorical,NA,% ayant de la difficulté à communiquer,select_one,age_sex_categ,garcons_moins5,Garçons de moins de 5 ans
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,freq_communication_dif,categorical,NA,% ayant de la difficulté à communiquer,select_one,age_sex_categ,filles_moins5,Filles de moins de 5 ans
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,freq_communication_dif,categorical,NA,% ayant de la difficulté à communiquer,select_one,age_sex_categ,garcons_5_18,Garçons de 5 à 17 ans
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,freq_communication_dif,categorical,NA,% ayant de la difficulté à communiquer,select_one,age_sex_categ,filles_5_18,Filles de 5 à 17 ans
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,freq_communication_dif,categorical,NA,% ayant de la difficulté à communiquer,select_one,age_sex_categ,hommes_18_64,Hommes de 18 à 64 ans
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,freq_communication_dif,categorical,NA,% ayant de la difficulté à communiquer,select_one,age_sex_categ,femmes_18_64,Femmes de 18 à 64 ans
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,freq_communication_dif,categorical,NA,% ayant de la difficulté à communiquer,select_one,age_sex_categ,hommes_65plus,Hommes de plus de 65 ans
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,freq_communication_dif,categorical,NA,% ayant de la difficulté à communiquer,select_one,age_sex_categ,femmes_65plus,Femmes de plus de 65 ans
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,auMoinsUneWG,categorical,NA,Au moins une personne vulnérable à charge,select_one,oui_non_add,oui,Oui
+general_info,Information générale,washington_group,Washington Group,NA,NA,NA,auMoinsUneWG,categorical,NA,Au moins une personne vulnérable à charge,select_one,oui_non_add,non,Non
+education,Education,barrieres,Barrières,NA,NA,NA,barriere_edu,categorical,NA,Barrières à l'éducation,,,,
+NFI_abris,BNA/Abri,abris,Abri,NA,NA,NA,type_abri,categorical,NA,Type d'abri,,,,
 NFI_abris,BNA/Abri,abris,Abri,NA,NA,NA,abri_com,categorical,NA,Type abri communautaire,,,,
 NFI_abris,BNA/Abri,abris,Abri,NA,NA,NA,abri_reli,categorical,NA,Type abri religieux,,,,
 NFI_abris,BNA/Abri,abris,Abri,NA,NA,NA,abri_logement,categorical,NA,Type abri logement,,,,
-NFI_abris,BNA/Abri,abris,Abri,NA,NA,NA,dorme_exterieur,numerical,NA,Nombre de personnes dormant Ã  lâ€™extÃ©rieur,,,,
-NFI_abris,BNA/Abri,abris,Abri,NA,NA,NA,auMoinsUnePersonneDortDehors,categorical,NA,Au moins un membre du mÃ©nage dort dehors,,,,
+NFI_abris,BNA/Abri,abris,Abri,NA,NA,NA,dorme_exterieur,numerical,NA,Nombre de personnes dormant à l'extérieur,,,,
+NFI_abris,BNA/Abri,abris,Abri,NA,NA,NA,auMoinsUnePersonneDortDehors,categorical,NA,Au moins un membre du ménage dort dehors,,,,
 NFI_abris,BNA/Abri,abris,Abri,NA,NA,NA,taille_abri,numerical,NA,Taille abris (m2),,,,
 NFI_abris,BNA/Abri,abris,Abri,NA,NA,NA,personne_m2,categorical,NA,m2/personne,,,,
-NFI_abris,BNA/Abri,abris,Abri,NA,NA,NA,situation_menage,categorical,NA,Situation mÃ©nage logement,,,,
-NFI_abris,BNA/Abri,abris,Abri,NA,NA,NA,auto_confinement,categorical,NA,Conditions adÃ©quates pour auto-isolement,,,,
-NFI_abris,BNA/Abri,abris,Abri,NA,NA,NA,etat_abri,categorical,NA,Ã‰tat abri,,,,
-NFI_abris,BNA/Abri,abris,Abri,NA,NA,NA,probleme_abri,categorical,NA,ProblÃ¨me abri,,,,
-NFI_abris,BNA/Abri,abris,Abri,NA,NA,NA,abri_adapt,categorical,NA,Abri adaptÃ©,,,,
-NFI_abris,BNA/Abri,nfi,BNA,NA,NA,NA,article,categorical,NA,BNA les plus demandÃ©s,,,,
+NFI_abris,BNA/Abri,abris,Abri,NA,NA,NA,situation_menage,categorical,NA,Situation ménage logement,,,,
+NFI_abris,BNA/Abri,abris,Abri,NA,NA,NA,auto_confinement,categorical,NA,Conditions adéquates pour auto-isolement,,,,
+NFI_abris,BNA/Abri,abris,Abri,NA,NA,NA,etat_abri,categorical,NA,état abri,,,,
+NFI_abris,BNA/Abri,abris,Abri,NA,NA,NA,probleme_abri,categorical,NA,Problème abri,,,,
+NFI_abris,BNA/Abri,abris,Abri,NA,NA,NA,abri_adapt,categorical,NA,Abri adapté,,,,
+NFI_abris,BNA/Abri,nfi,BNA,NA,NA,NA,article,categorical,NA,BNA les plus demandés,,,,
 NFI_abris,BNA/Abri,nfi,BNA,NA,NA,NA,article/npr,numerical,NA,,,,,
-sante,SantÃ©,naissance,Naissance,NA,NA,NA,naissance,categorical,NA,MÃ©nage ayant eu une naissance dans la derniÃ¨re annÃ©e,,,,
-sante,SantÃ©,naissance,Naissance,NA,NA,NA,total_naissance,numerical,NA,Nombre de naissance,,,,
-sante,SantÃ©,naissance,Naissance,NA,NA,NA,freq_lieu_accouchement,categorical,NA,Lieu naissanceÂ :,select_one,lieu_accouche,centre_sante,Centre De SantÃ©
-sante,SantÃ©,naissance,Naissance,NA,NA,NA,freq_lieu_accouchement,categorical,NA,Lieu naissanceÂ :,select_one,lieu_accouche,maison,Maison
-sante,SantÃ©,naissance,Naissance,NA,NA,NA,freq_lieu_accouchement,categorical,NA,Lieu naissanceÂ :,select_one,lieu_accouche,autre,Autre
-sante,SantÃ©,naissance,Naissance,NA,NA,NA,freq_raison_domicil,categorical,NA,Raison accouchement Ã  domicileÂ :,select_one,accouche_domicile,accouche_assiste_domicil,Assistance Personnel De SantÃ© Ã€ Domicile
-sante,SantÃ©,naissance,Naissance,NA,NA,NA,freq_raison_domicil,categorical,NA,Raison accouchement Ã  domicileÂ :,select_one,accouche_domicile,accouche_centre_ferme,Centre De SantÃ©/MaternitÃ© FermÃ©
-sante,SantÃ©,naissance,Naissance,NA,NA,NA,freq_raison_domicil,categorical,NA,Raison accouchement Ã  domicileÂ :,select_one,accouche_domicile,accouche_centre_financ_inacc,Centre De SantÃ©/MaternitÃ© FinanciÃ¨rement Inaccessible
-sante,SantÃ©,naissance,Naissance,NA,NA,NA,freq_raison_domicil,categorical,NA,Raison accouchement Ã  domicileÂ :,select_one,accouche_domicile,centre_surpeuple,Centre De SantÃ©/MaternitÃ© SurpeuplÃ©
-sante,SantÃ©,naissance,Naissance,NA,NA,NA,freq_raison_domicil,categorical,NA,Raison accouchement Ã  domicileÂ :,select_one,accouche_domicile,maternite_pas_sur,MaternitÃ©/Centre De SantÃ© Par SÃ»r
-sante,SantÃ©,naissance,Naissance,NA,NA,NA,freq_raison_domicil,categorical,NA,Raison accouchement Ã  domicileÂ :,select_one,accouche_domicile,physique_mere,Physiquement Impossible Pour La MÃ¨re De Se Rendre Au Centre De SantÃ©/MaternitÃ©
-sante,SantÃ©,naissance,Naissance,NA,NA,NA,freq_raison_domicil,categorical,NA,Raison accouchement Ã  domicileÂ :,select_one,accouche_domicile,rejoindre_centre,Coutumes/Tradition/Pas NÃ©cessaire Dâ€™Aller Au Centre De SantÃ©/MaternitÃ©
-sante,SantÃ©,naissance,Naissance,NA,NA,NA,freq_raison_domicil,categorical,NA,Raison accouchement Ã  domicileÂ :,select_one,accouche_domicile,nsp,Ne Sait Pas / Ne Veut Pas RÃ©pondre
-sante,SantÃ©,services,Services,NA,NA,NA,service_sante,categorical,NA,AccÃ¨s service de santÃ©,,,,
-sante,SantÃ©,services,Services,NA,NA,NA,raison_service_sante,categorical,NA,Raison manque accÃ¨s service de santÃ©,,,,
-sante,SantÃ©,services,Services,NA,NA,NA,temps_centre_sante,categorical,NA,Temps nÃ©cessaire pour aller au service de santÃ© le plus proche,,,,
-sante,SantÃ©,malade_5ans,Malade de moins de 5 ans,NA,NA,NA,malade_5ans,numerical,NA,Nombre enfants 0 Ã  5 ans malade dans 30 derniers jours,,,,
-sante,SantÃ©,malade_5ans,Malade de moins de 5 ans,NA,NA,NA,auMoinsUnEnfantMalade,numerical,NA,Au moins un enfant malade dans 30 derniers jours,,,,
-sante,SantÃ©,malade_5ans,Malade de moins de 5 ans,NA,NA,NA,freq_enfants_5ans_maladie,categorical,NA,Enfants de moins de 5 ans avecÂ :,select_multiple,liste_maladie,palu,Paludisme
-sante,SantÃ©,malade_5ans,Malade de moins de 5 ans,NA,NA,NA,freq_enfants_5ans_maladie,categorical,NA,Enfants de moins de 5 ans avecÂ :,select_multiple,liste_maladie,infect_respiratoire,Infections respiratoires
-sante,SantÃ©,malade_5ans,Malade de moins de 5 ans,NA,NA,NA,freq_enfants_5ans_maladie,categorical,NA,Enfants de moins de 5 ans avecÂ :,select_multiple,liste_maladie,diarrhee,DiarrhÃ©e
-sante,SantÃ©,malade_5ans,Malade de moins de 5 ans,NA,NA,NA,freq_enfants_5ans_maladie,categorical,NA,Enfants de moins de 5 ans avecÂ :,select_multiple,liste_maladie,autre,Autre
-sante,SantÃ©,malade_5ans,Malade de moins de 5 ans,NA,NA,NA,freq_enfants_5ans_maladie,categorical,NA,Enfants de moins de 5 ans avecÂ :,select_multiple,liste_maladie,nsp,Ne sait pas
-sante,SantÃ©,deces,DÃ©cÃ¨s,NA,NA,NA,deces_hh,categorical,NA,DÃ©cÃ¨s dans le mÃ©nage durant 30 derniers jours,,,,
-sante,SantÃ©,deces,DÃ©cÃ¨s,NA,NA,NA,total_deces,numerical,NA,Nombre de dÃ©cÃ¨s dans les 30 derniers jours,,,,
-sante,SantÃ©,deces,DÃ©cÃ¨s,NA,NA,NA,freq_deces_dif,categorical,NA,% de dÃ©cÃ¨s,select_one,age_sex_categ,garcons_moins5,GarÃ§ons de moins de 5 ans
-sante,SantÃ©,deces,DÃ©cÃ¨s,NA,NA,NA,freq_deces_dif,categorical,NA,% de dÃ©cÃ¨s,select_one,age_sex_categ,filles_moins5,Filles de moins de 5 ans
-sante,SantÃ©,deces,DÃ©cÃ¨s,NA,NA,NA,freq_deces_dif,categorical,NA,% de dÃ©cÃ¨s,select_one,age_sex_categ,garcons_5_18,GarÃ§ons de 5 Ã  17 ans
-sante,SantÃ©,deces,DÃ©cÃ¨s,NA,NA,NA,freq_deces_dif,categorical,NA,% de dÃ©cÃ¨s,select_one,age_sex_categ,filles_5_18,Filles de 5 Ã  17 ans
-sante,SantÃ©,deces,DÃ©cÃ¨s,NA,NA,NA,freq_deces_dif,categorical,NA,% de dÃ©cÃ¨s,select_one,age_sex_categ,hommes_18_64,Hommes de 18 Ã  64 ans
-sante,SantÃ©,deces,DÃ©cÃ¨s,NA,NA,NA,freq_deces_dif,categorical,NA,% de dÃ©cÃ¨s,select_one,age_sex_categ,femmes_18_64,Femmes de 18 Ã  64 ans
-sante,SantÃ©,deces,DÃ©cÃ¨s,NA,NA,NA,freq_deces_dif,categorical,NA,% de dÃ©cÃ¨s,select_one,age_sex_categ,hommes_65plus,Hommes de plus de 65 ans
-sante,SantÃ©,deces,DÃ©cÃ¨s,NA,NA,NA,freq_deces_dif,categorical,NA,% de dÃ©cÃ¨s,select_one,age_sex_categ,femmes_65plus,Femmes de plus de 65 ans
-sante,SantÃ©,deces,DÃ©cÃ¨s,NA,NA,NA,freq_raison_deces,categorical,NA,Raison du dÃ©cÃ¨s: ,select_one,cause_deces,diarrhee,DiarrhÃ©e
-sante,SantÃ©,deces,DÃ©cÃ¨s,NA,NA,NA,freq_raison_deces,categorical,NA,Raison du dÃ©cÃ¨s: ,select_one,cause_deces,autre_maladie,Autre Maladie
-sante,SantÃ©,deces,DÃ©cÃ¨s,NA,NA,NA,freq_raison_deces,categorical,NA,Raison du dÃ©cÃ¨s: ,select_one,cause_deces,morsure,Morsure
-sante,SantÃ©,deces,DÃ©cÃ¨s,NA,NA,NA,freq_raison_deces,categorical,NA,Raison du dÃ©cÃ¨s: ,select_one,cause_deces,deces_natu,Cause Naturelle
-sante,SantÃ©,deces,DÃ©cÃ¨s,NA,NA,NA,freq_raison_deces,categorical,NA,Raison du dÃ©cÃ¨s: ,select_one,cause_deces,faim,Faim
-sante,SantÃ©,deces,DÃ©cÃ¨s,NA,NA,NA,freq_raison_deces,categorical,NA,Raison du dÃ©cÃ¨s: ,select_one,cause_deces,accident_travail,Accident De Travail
-sante,SantÃ©,deces,DÃ©cÃ¨s,NA,NA,NA,freq_raison_deces,categorical,NA,Raison du dÃ©cÃ¨s: ,select_one,cause_deces,problemes_respi,ProblÃ¨mes Respiratoires
-sante,SantÃ©,deces,DÃ©cÃ¨s,NA,NA,NA,freq_raison_deces,categorical,NA,Raison du dÃ©cÃ¨s: ,select_one,cause_deces,autre,Autre
-sante,SantÃ©,deces,DÃ©cÃ¨s,NA,NA,NA,freq_raison_deces,categorical,NA,Raison du dÃ©cÃ¨s: ,select_one,cause_deces,catastrophe_natu,Catastrophe Naturelle
-sante,SantÃ©,deces,DÃ©cÃ¨s,NA,NA,NA,freq_raison_deces,categorical,NA,Raison du dÃ©cÃ¨s: ,select_one,cause_deces,accident_conflit,Accident/Conflit
-sante,SantÃ©,deces,DÃ©cÃ¨s,NA,NA,NA,freq_raison_deces,categorical,NA,Raison du dÃ©cÃ¨s: ,select_one,cause_deces,en_couche,En Couche
-sante,SantÃ©,deces,DÃ©cÃ¨s,NA,NA,NA,freq_raison_deces,categorical,NA,Raison du dÃ©cÃ¨s: ,select_one,cause_deces,accident_route,Accident De La Route
-sante,SantÃ©,nut,Nutrition,NA,NA,NA,centre_nut,categorical,NA,AccÃ¨s centres nutritionnels,,,,
-sante,SantÃ©,nut,Nutrition,NA,NA,NA,time_service_nut,categorical,NA,Temps pour accÃ©der au service nutritionnels,,,,
-sante,SantÃ©,nut,Nutrition,NA,NA,NA,service_nut,categorical,NA,Services nutritionnels disponibles,,,,
-sante,SantÃ©,nut,Nutrition,NA,NA,NA,depistage_muac,categorical,NA,Formation dâ€™un membre au dÃ©pistage du MUAC,,,,
-sante,SantÃ©,nut,Nutrition,NA,NA,NA,ruban_muac,categorical,NA,PossÃ¨de un ruban MUAC,,,,
-secal,SÃ©curitÃ© alimentaire,revenu,Revenus,NA,NA,NA,revenu_mensuel,numerical,NA,Revenu mensuel moyen sur les 30 derniers jours,,,,
-secal,SÃ©curitÃ© alimentaire,revenu,Revenus,NA,NA,NA,source_revenu1,categorical,NA,PremiÃ¨re source de revenu,,,,
-secal,SÃ©curitÃ© alimentaire,revenu,Revenus,NA,NA,NA,source_revenu2,categorical,NA,DeuxiÃ¨me source de revenu,,,,
-secal,SÃ©curitÃ© alimentaire,revenu,Revenus,NA,NA,NA,source_revenu3,categorical,NA,TroisiÃ¨me source de revenu,,,,
-secal,SÃ©curitÃ© alimentaire,revenu,Revenus,NA,NA,NA,integra_besoin,categorical,NA,Revenu couvrent ,,,,
-secal,SÃ©curitÃ© alimentaire,fcs,Food consumption score,NA,NA,NA,jr_consom_cereale,numerical,NA,"Nombre de jours consomment cÃ©rÃ©ales, racines et tubercules pendant les 7 derniers jours",,,,
-secal,SÃ©curitÃ© alimentaire,fcs,Food consumption score,NA,NA,NA,acqui_cereale,categorical,NA,"Moyens dâ€™acquisition des cÃ©rÃ©ales, racines et tubercules",,,,
-secal,SÃ©curitÃ© alimentaire,fcs,Food consumption score,NA,NA,NA,jr_consom_noix,numerical,NA,Nombre de jours consomment lÃ©gumineuses/noix pendant les 7 derniers jours,,,,
-secal,SÃ©curitÃ© alimentaire,fcs,Food consumption score,NA,NA,NA,acqui_noix,categorical,NA,Moyens dâ€™acquisition des lÃ©gumineuses/noix,,,,
-secal,SÃ©curitÃ© alimentaire,fcs,Food consumption score,NA,NA,NA,jr_consom_lait,numerical,NA,Nombre de jours consomment lait et autres produits laitiers pendant les 7 derniers jours,,,,
-secal,SÃ©curitÃ© alimentaire,fcs,Food consumption score,NA,NA,NA,acqui_lait,categorical,NA,Moyens dâ€™acquisition du lait et autres produits laitiers,,,,
-secal,SÃ©curitÃ© alimentaire,fcs,Food consumption score,NA,NA,NA,jr_consom_viande,numerical,NA,"Nombre de jours consomment viande, poisson et oeufs pendant les 7 derniers jours",,,,
-secal,SÃ©curitÃ© alimentaire,fcs,Food consumption score,NA,NA,NA,acqui_viande,categorical,NA,"Moyens dâ€™acquisition des viande, poisson et oeufs",,,,
-secal,SÃ©curitÃ© alimentaire,fcs,Food consumption score,NA,NA,NA,jr_consom_legume,numerical,NA,Nombre de jours consomment lÃ©gumes et feuilles vertes pendant les 7 derniers jours,,,,
-secal,SÃ©curitÃ© alimentaire,fcs,Food consumption score,NA,NA,NA,acqui_legume,categorical,NA,Moyens dâ€™acquisition des lÃ©gumes et feuilles vertes,,,,
-secal,SÃ©curitÃ© alimentaire,fcs,Food consumption score,NA,NA,NA,jr_consom_fruit,numerical,NA,Nombre de jours consomment fruits pendant les 7 derniers jours,,,,
-secal,SÃ©curitÃ© alimentaire,fcs,Food consumption score,NA,NA,NA,acqui_fruit,categorical,NA,Moyens dâ€™acquisition des fruits,,,,
-secal,SÃ©curitÃ© alimentaire,fcs,Food consumption score,NA,NA,NA,jr_consom_huile,numerical,NA,"Nombre de jours consomment huile, gras et beurre pendant les 7 derniers jours",,,,
-secal,SÃ©curitÃ© alimentaire,fcs,Food consumption score,NA,NA,NA,acqui_huile,categorical,NA,"Moyens dâ€™acquisition des huile, gras et beurre",,,,
-secal,SÃ©curitÃ© alimentaire,fcs,Food consumption score,NA,NA,NA,jr_consom_sucre,numerical,NA,Nombre de jours consomment sucre ou produits sucrÃ©s pendant les 7 derniers jours,,,,
-secal,SÃ©curitÃ© alimentaire,fcs,Food consumption score,NA,NA,NA,acqui_sucre,categorical,NA,Moyens dâ€™acquisition des sucre ou produits sucrÃ©s,,,,
-secal,SÃ©curitÃ© alimentaire,fcs,Food consumption score,NA,NA,NA,jr_consom_epice,numerical,NA,Nombre de jours consomment Ã©pices/condiments pendant les 7 derniers jours,,,,
-secal,SÃ©curitÃ© alimentaire,fcs,Food consumption score,NA,NA,NA,acqui_epice,categorical,NA,Moyens dâ€™acquisition des Ã©pices/condiments,,,,
-secal,SÃ©curitÃ© alimentaire,fcs,Food consumption score,NA,NA,NA,fcs2,numerical,NA,FCS score,,,,
-secal,SÃ©curitÃ© alimentaire,fcs,Food consumption score,NA,NA,NA,fcs2_thresholds,categorical,NA,FCS seuils,select_one,liste_fcs_seuils,pauvre,Pauvre
-secal,SÃ©curitÃ© alimentaire,fcs,Food consumption score,NA,NA,NA,fcs2_thresholds,categorical,NA,FCS seuils,select_one,liste_fcs_seuils,limite,Limite
-secal,SÃ©curitÃ© alimentaire,fcs,Food consumption score,NA,NA,NA,fcs2_thresholds,categorical,NA,FCS seuils,select_one,liste_fcs_seuils,acceptable,Acceptable
-secal,SÃ©curitÃ© alimentaire,hhs,Household hunger scale,NA,NA,NA,aucun_aliment,categorical,NA,Aucune nourriture dans le mÃ©nage Ã  un moment durant les 30 derniers jours,,,,
-secal,SÃ©curitÃ© alimentaire,hhs,Household hunger scale,NA,NA,NA,nbr_aucun_aliment,categorical,NA,Nombre de fois aucune nourriture durant les 30 derniers jours,,,,
-secal,SÃ©curitÃ© alimentaire,hhs,Household hunger scale,NA,NA,NA,dormir_affame,categorical,NA,Dormir affamÃ© Ã  un moment durant les 30 derniers jours,,,,
-secal,SÃ©curitÃ© alimentaire,hhs,Household hunger scale,NA,NA,NA,nbr_dormir_affame,categorical,NA,Nombre de fois dormir affamÃ© durant les 30 derniers jours,,,,
-secal,SÃ©curitÃ© alimentaire,hhs,Household hunger scale,NA,NA,NA,pas_assez_nourriture,categorical,NA,Un membre du mÃ©nage a passÃ© 24 heures sans rien manger dÃ» au manque de nourriture Ã  un moment durant les 30 derniers jours,,,,
-secal,SÃ©curitÃ© alimentaire,hhs,Household hunger scale,NA,NA,NA,nbr_pas_assez_nourriture,categorical,NA,Nombre de fois oÃ¹ un membre du mÃ©nage a passÃ© 24 heures sans rien manger dÃ» au manque de nourriture durant les 30 derniers jours,,,,
-secal,SÃ©curitÃ© alimentaire,hhs,Household hunger scale,NA,NA,NA,hhs_score,numerical,NA,HHS score,,,,
-secal,SÃ©curitÃ© alimentaire,hhs,Household hunger scale,NA,NA,NA,hhs_thresholds,categorical,NA,HHS seuils,select_one,liste_hhs_seuils,peu_pasFaim,Peu ou pas de faim
-secal,SÃ©curitÃ© alimentaire,hhs,Household hunger scale,NA,NA,NA,hhs_thresholds,categorical,NA,HHS seuils,select_one,liste_hhs_seuils,faim_moderee,Faim modÃ©rÃ©e
-secal,SÃ©curitÃ© alimentaire,hhs,Household hunger scale,NA,NA,NA,hhs_thresholds,categorical,NA,HHS seuils,select_one,liste_hhs_seuils,faim_severe,Faim sÃ©vÃ¨re
-secal,SÃ©curitÃ© alimentaire,agri,Agriculture,NA,NA,NA,pratiq_agri,categorical,NA,Pratique optimale de lâ€™agriculture,,,,
-secal,SÃ©curitÃ© alimentaire,agri,Agriculture,NA,NA,NA,non_pratiq_agri,categorical,NA,Raison pratique non-optimale de lâ€™agriculture,,,,
-secal,SÃ©curitÃ© alimentaire,marche,MarchÃ©,NA,NA,NA,marche_fonctionel,categorical,NA,MarchÃ© fonctionnel Ã  distance de marche durant les 7 derniers jours,,,,
-secal,SÃ©curitÃ© alimentaire,rcsi,Reduced Coping Strategies Index,NA,NA,NA,moins_prefere,categorical,NA,Consommer aliments moins prÃ©fÃ©rÃ©s,,,,
-secal,SÃ©curitÃ© alimentaire,rcsi,Reduced Coping Strategies Index,NA,NA,NA,jr_moins_prefere,numerical,NA,Nombre de jours consommer des aliments moins prÃ©fÃ©rÃ©s,,,,
-secal,SÃ©curitÃ© alimentaire,rcsi,Reduced Coping Strategies Index,NA,NA,NA,emprunt_nourriture,categorical,NA,Emprunter de la nourriture,,,,
-secal,SÃ©curitÃ© alimentaire,rcsi,Reduced Coping Strategies Index,NA,NA,NA,jr_emprunt_nourriture,numerical,NA,Nombre de jours emprunter de la nourriture,,,,
-secal,SÃ©curitÃ© alimentaire,rcsi,Reduced Coping Strategies Index,NA,NA,NA,diminu_quantite,categorical,NA,Diminuer la quantitÃ© consommÃ©e pendant les repas,,,,
-secal,SÃ©curitÃ© alimentaire,rcsi,Reduced Coping Strategies Index,NA,NA,NA,jr_diminu_quantite,numerical,NA,Nombre de jours diminuer la quantitÃ© consommÃ©e pendant les repas,,,,
-secal,SÃ©curitÃ© alimentaire,rcsi,Reduced Coping Strategies Index,NA,NA,NA,rest_consommation,categorical,NA,Restreindre la consommation des adultes pour permettre aux plus jeunes de manger davantage,,,,
-secal,SÃ©curitÃ© alimentaire,rcsi,Reduced Coping Strategies Index,NA,NA,NA,jr_rest_consommation,numerical,NA,Nombre de jours restreindre la consommation des adultes pour permettre aux plus jeunes de manger davantage? ,,,,
-secal,SÃ©curitÃ© alimentaire,rcsi,Reduced Coping Strategies Index,NA,NA,NA,nbr_repas,categorical,NA,Diminuer le nombre de repas par jour,,,,
-secal,SÃ©curitÃ© alimentaire,rcsi,Reduced Coping Strategies Index,NA,NA,NA,jr_nbr_repas,numerical,NA,Nombre de jours diminuer le nombre de repas par jour ?,,,,
-secal,SÃ©curitÃ© alimentaire,rcsi,Reduced Coping Strategies Index,NA,NA,NA,rcsi_score,numerical,NA,rCSI score,,,,
-secal,SÃ©curitÃ© alimentaire,rcsi,Reduced Coping Strategies Index,NA,NA,NA,rcsi_thresholds,categorical,NA,rCSI seuils,select_one,liste_rcsi_seuils,high,ElevÃ©es
-secal,SÃ©curitÃ© alimentaire,rcsi,Reduced Coping Strategies Index,NA,NA,NA,rcsi_thresholds,categorical,NA,rCSI seuils,select_one,liste_rcsi_seuils,medium,Moyennes
-secal,SÃ©curitÃ© alimentaire,rcsi,Reduced Coping Strategies Index,NA,NA,NA,rcsi_thresholds,categorical,NA,rCSI seuils,select_one,liste_rcsi_seuils,low,Basses
-secal,SÃ©curitÃ© alimentaire,rcsi,Reduced Coping Strategies Index,NA,NA,NA,rcsi_thresholds,categorical,NA,rCSI seuils,select_one,liste_rcsi_seuils,no_coping,Pas de stratÃ©gie utilisÃ©e
-eha,EHA,cop,MÃ©canisme dâ€™adaptation,NA,NA,NA,redu_quant_eau,categorical,NA,"RÃ©duire la quantitÃ© d'eau utilisÃ©e Ã Â  des fins domestiques (pour boire, laver, cuisiner, etc.)",,,,
-eha,EHA,cop,MÃ©canisme dâ€™adaptation,NA,NA,NA,jr_redu_quant_eau,numerical,NA,"Nombre de jours rÃ©duire la quantitÃ© d'eau utilisÃ©e Ã Â  des fins domestiques (pour boire, laver, cuisiner, etc.)",,,,
-eha,EHA,cop,MÃ©canisme dâ€™adaptation,NA,NA,NA,eau_sure,categorical,NA,Utiliser de l'eau non sÃ»re (sans la bouillir ou la purifier) d'une source non-amÃ©liorÃ©e,,,,
-eha,EHA,cop,MÃ©canisme dâ€™adaptation,NA,NA,NA,jr_eau_sure,numerical,NA,Nombre de jours utiliser de l'eau non sÃ»re d'une source non-amÃ©liorÃ©e,,,,
-secal,SÃ©curitÃ© alimentaire,lcs,Livelihood Coping Strategies,NA,NA,NA,vente_actif,categorical,NA,MÃ©nages ayant vendu actifs non-productifs dans 30 derniers jours,,,,
-secal,SÃ©curitÃ© alimentaire,lcs,Livelihood Coping Strategies,NA,NA,NA,vente_actif_prod,categorical,NA,MÃ©nages ayant vendu des actifs productifs dans 30 derniers jours,,,,
-secal,SÃ©curitÃ© alimentaire,lcs,Livelihood Coping Strategies,NA,NA,NA,reduction_depense,categorical,NA,MÃ©nages ayant rÃ©duit les dÃ©penses non-alimentaires dans 30 derniers jours,,,,
-secal,SÃ©curitÃ© alimentaire,lcs,Livelihood Coping Strategies,NA,NA,NA,epargne,categorical,NA,MÃ©nages ayant dÃ©penser lâ€™Ã©pargne dans 30 derniers jours,,,,
-secal,SÃ©curitÃ© alimentaire,lcs,Livelihood Coping Strategies,NA,NA,NA,emprunt_nourritur,categorical,NA,MÃ©nages ayant emprunter argent/nourriture  dans 30 derniers jours,,,,
-secal,SÃ©curitÃ© alimentaire,lcs,Livelihood Coping Strategies,NA,NA,NA,enfant_ecole,categorical,NA,MÃ©nages ayant retirer les enfants de lâ€™Ã©cole,,,,
-secal,SÃ©curitÃ© alimentaire,lcs,Livelihood Coping Strategies,NA,NA,NA,vente_maison,categorical,NA,MÃ©nages ayant vendu maison/parcelle/champ  dans 30 derniers jours,,,,
-secal,SÃ©curitÃ© alimentaire,lcs,Livelihood Coping Strategies,NA,NA,NA,activite_risque,categorical,NA,MÃ©nages ayant un membre sâ€™engageant dans activitÃ©s risquÃ©es/illÃ©gales  dans 30 derniers jours,,,,
-secal,SÃ©curitÃ© alimentaire,lcs,Livelihood Coping Strategies,NA,NA,NA,mendie,categorical,NA,MÃ©nages ayant mendiÃ©  dans 30 derniers jours,,,,
-secal,SÃ©curitÃ© alimentaire,lcs,Livelihood Coping Strategies,NA,NA,NA,vente_animal,categorical,NA,MÃ©nages ayant vendu plus dâ€™animaux  dans 30 derniers jours,,,,
-secal,SÃ©curitÃ© alimentaire,lcs,Livelihood Coping Strategies,NA,NA,NA,conso_semence,categorical,NA,MÃ©nages ayant consommÃ© des semences  dans 30 derniers jours,,,,
-secal,SÃ©curitÃ© alimentaire,lcs,Livelihood Coping Strategies,NA,NA,NA,lcs_urgence,numerical,NA,LCS urgence,,,,
-secal,SÃ©curitÃ© alimentaire,lcs,Livelihood Coping Strategies,NA,NA,NA,lcs_crise,numerical,NA,LCS crise,,,,
-secal,SÃ©curitÃ© alimentaire,lcs,Livelihood Coping Strategies,NA,NA,NA,lcs_stress,numerical,NA,LCS stress,,,,
-secal,SÃ©curitÃ© alimentaire,lcs,Livelihood Coping Strategies,NA,NA,NA,lcs_minimal,numerical,NA,LCS minimal,,,,
-secal,SÃ©curitÃ© alimentaire,lcs,Livelihood Coping Strategies,NA,NA,NA,lcsi,categorical,NA,LCS seuils,select_one,liste_lcsi_seuils,none,Aucune
-secal,SÃ©curitÃ© alimentaire,lcs,Livelihood Coping Strategies,NA,NA,NA,lcsi,categorical,NA,LCS seuils,select_one,liste_lcsi_seuils,stress,Stresse
-secal,SÃ©curitÃ© alimentaire,lcs,Livelihood Coping Strategies,NA,NA,NA,lcsi,categorical,NA,LCS seuils,select_one,liste_lcsi_seuils,crisis,Crise
-secal,SÃ©curitÃ© alimentaire,lcs,Livelihood Coping Strategies,NA,NA,NA,lcsi,categorical,NA,LCS seuils,select_one,liste_lcsi_seuils,emergency,Urgence
-eha,EHA,eau,Eau,NA,NA,NA,source_eau,categorical,NA,Principale source dâ€™eau pour boire,,,,
-eha,EHA,eau,Eau,NA,NA,NA,typologie_source_eau,categorical,NA,Type de source dâ€™eau principale pour boire,,,,
+sante,Santé,naissance,Naissance,NA,NA,NA,naissance,categorical,NA,Ménage ayant eu une naissance dans la dernière année,,,,
+sante,Santé,naissance,Naissance,NA,NA,NA,total_naissance,numerical,NA,Nombre de naissance,,,,
+sante,Santé,naissance,Naissance,NA,NA,NA,freq_lieu_accouchement,categorical,NA,Lieu naissance :,select_one,lieu_accouche,centre_sante,Centre De Santé
+sante,Santé,naissance,Naissance,NA,NA,NA,freq_lieu_accouchement,categorical,NA,Lieu naissance :,select_one,lieu_accouche,maison,Maison
+sante,Santé,naissance,Naissance,NA,NA,NA,freq_lieu_accouchement,categorical,NA,Lieu naissance :,select_one,lieu_accouche,autre,Autre
+sante,Santé,naissance,Naissance,NA,NA,NA,freq_raison_domicil,categorical,NA,Raison accouchement à domicile :,select_one,accouche_domicile,accouche_assiste_domicil,Assistance Personnel De Santé à Domicile
+sante,Santé,naissance,Naissance,NA,NA,NA,freq_raison_domicil,categorical,NA,Raison accouchement à domicile :,select_one,accouche_domicile,accouche_centre_ferme,Centre De Santé/Maternité Fermé
+sante,Santé,naissance,Naissance,NA,NA,NA,freq_raison_domicil,categorical,NA,Raison accouchement à domicile :,select_one,accouche_domicile,accouche_centre_financ_inacc,Centre De Santé/Maternité Financièrement Inaccessible
+sante,Santé,naissance,Naissance,NA,NA,NA,freq_raison_domicil,categorical,NA,Raison accouchement à domicile :,select_one,accouche_domicile,centre_surpeuple,Centre De Santé/Maternité Surpeuplé
+sante,Santé,naissance,Naissance,NA,NA,NA,freq_raison_domicil,categorical,NA,Raison accouchement à domicile :,select_one,accouche_domicile,maternite_pas_sur,Maternité/Centre De Santé Par Sûr
+sante,Santé,naissance,Naissance,NA,NA,NA,freq_raison_domicil,categorical,NA,Raison accouchement à domicile :,select_one,accouche_domicile,physique_mere,Physiquement Impossible Pour La Mère De Se Rendre Au Centre De Santé/Maternité
+sante,Santé,naissance,Naissance,NA,NA,NA,freq_raison_domicil,categorical,NA,Raison accouchement à domicile :,select_one,accouche_domicile,rejoindre_centre,Coutumes/Tradition/Pas Nécessaire D'Aller Au Centre De Santé/Maternité
+sante,Santé,naissance,Naissance,NA,NA,NA,freq_raison_domicil,categorical,NA,Raison accouchement à domicile :,select_one,accouche_domicile,nsp,Ne Sait Pas / Ne Veut Pas Répondre
+sante,Santé,services,Services,NA,NA,NA,service_sante,categorical,NA,Accès service de santé,,,,
+sante,Santé,services,Services,NA,NA,NA,raison_service_sante,categorical,NA,Raison manque accès service de santé,,,,
+sante,Santé,services,Services,NA,NA,NA,temps_centre_sante,categorical,NA,Temps nécessaire pour aller au service de santé le plus proche,,,,
+sante,Santé,malade_5ans,Malade de moins de 5 ans,NA,NA,NA,malade_5ans,numerical,NA,Nombre enfants 0 à 5 ans malade dans 30 derniers jours,,,,
+sante,Santé,malade_5ans,Malade de moins de 5 ans,NA,NA,NA,auMoinsUnEnfantMalade,numerical,NA,Au moins un enfant malade dans 30 derniers jours,,,,
+sante,Santé,malade_5ans,Malade de moins de 5 ans,NA,NA,NA,freq_enfants_5ans_maladie,categorical,NA,Enfants de moins de 5 ans avec :,select_multiple,liste_maladie,palu,Paludisme
+sante,Santé,malade_5ans,Malade de moins de 5 ans,NA,NA,NA,freq_enfants_5ans_maladie,categorical,NA,Enfants de moins de 5 ans avec :,select_multiple,liste_maladie,infect_respiratoire,Infections respiratoires
+sante,Santé,malade_5ans,Malade de moins de 5 ans,NA,NA,NA,freq_enfants_5ans_maladie,categorical,NA,Enfants de moins de 5 ans avec :,select_multiple,liste_maladie,diarrhee,Diarrhée
+sante,Santé,malade_5ans,Malade de moins de 5 ans,NA,NA,NA,freq_enfants_5ans_maladie,categorical,NA,Enfants de moins de 5 ans avec :,select_multiple,liste_maladie,autre,Autre
+sante,Santé,malade_5ans,Malade de moins de 5 ans,NA,NA,NA,freq_enfants_5ans_maladie,categorical,NA,Enfants de moins de 5 ans avec :,select_multiple,liste_maladie,nsp,Ne sait pas
+sante,Santé,deces,Décès,NA,NA,NA,deces_hh,categorical,NA,Décès dans le ménage durant 30 derniers jours,,,,
+sante,Santé,deces,Décès,NA,NA,NA,total_deces,numerical,NA,Nombre de décès dans les 30 derniers jours,,,,
+sante,Santé,deces,Décès,NA,NA,NA,freq_deces_dif,categorical,NA,% de décès,select_one,age_sex_categ,garcons_moins5,Garçons de moins de 5 ans
+sante,Santé,deces,Décès,NA,NA,NA,freq_deces_dif,categorical,NA,% de décès,select_one,age_sex_categ,filles_moins5,Filles de moins de 5 ans
+sante,Santé,deces,Décès,NA,NA,NA,freq_deces_dif,categorical,NA,% de décès,select_one,age_sex_categ,garcons_5_18,Garçons de 5 à 17 ans
+sante,Santé,deces,Décès,NA,NA,NA,freq_deces_dif,categorical,NA,% de décès,select_one,age_sex_categ,filles_5_18,Filles de 5 à 17 ans
+sante,Santé,deces,Décès,NA,NA,NA,freq_deces_dif,categorical,NA,% de décès,select_one,age_sex_categ,hommes_18_64,Hommes de 18 à 64 ans
+sante,Santé,deces,Décès,NA,NA,NA,freq_deces_dif,categorical,NA,% de décès,select_one,age_sex_categ,femmes_18_64,Femmes de 18 à 64 ans
+sante,Santé,deces,Décès,NA,NA,NA,freq_deces_dif,categorical,NA,% de décès,select_one,age_sex_categ,hommes_65plus,Hommes de plus de 65 ans
+sante,Santé,deces,Décès,NA,NA,NA,freq_deces_dif,categorical,NA,% de décès,select_one,age_sex_categ,femmes_65plus,Femmes de plus de 65 ans
+sante,Santé,deces,Décès,NA,NA,NA,freq_raison_deces,categorical,NA,Raison du décès: ,select_one,cause_deces,diarrhee,Diarrhée
+sante,Santé,deces,Décès,NA,NA,NA,freq_raison_deces,categorical,NA,Raison du décès: ,select_one,cause_deces,autre_maladie,Autre Maladie
+sante,Santé,deces,Décès,NA,NA,NA,freq_raison_deces,categorical,NA,Raison du décès: ,select_one,cause_deces,morsure,Morsure
+sante,Santé,deces,Décès,NA,NA,NA,freq_raison_deces,categorical,NA,Raison du décès: ,select_one,cause_deces,deces_natu,Cause Naturelle
+sante,Santé,deces,Décès,NA,NA,NA,freq_raison_deces,categorical,NA,Raison du décès: ,select_one,cause_deces,faim,Faim
+sante,Santé,deces,Décès,NA,NA,NA,freq_raison_deces,categorical,NA,Raison du décès: ,select_one,cause_deces,accident_travail,Accident De Travail
+sante,Santé,deces,Décès,NA,NA,NA,freq_raison_deces,categorical,NA,Raison du décès: ,select_one,cause_deces,problemes_respi,Problèmes Respiratoires
+sante,Santé,deces,Décès,NA,NA,NA,freq_raison_deces,categorical,NA,Raison du décès: ,select_one,cause_deces,autre,Autre
+sante,Santé,deces,Décès,NA,NA,NA,freq_raison_deces,categorical,NA,Raison du décès: ,select_one,cause_deces,catastrophe_natu,Catastrophe Naturelle
+sante,Santé,deces,Décès,NA,NA,NA,freq_raison_deces,categorical,NA,Raison du décès: ,select_one,cause_deces,accident_conflit,Accident/Conflit
+sante,Santé,deces,Décès,NA,NA,NA,freq_raison_deces,categorical,NA,Raison du décès: ,select_one,cause_deces,en_couche,En Couche
+sante,Santé,deces,Décès,NA,NA,NA,freq_raison_deces,categorical,NA,Raison du décès: ,select_one,cause_deces,accident_route,Accident De La Route
+sante,Santé,nut,Nutrition,NA,NA,NA,centre_nut,categorical,NA,Accès centres nutritionnels,,,,
+sante,Santé,nut,Nutrition,NA,NA,NA,time_service_nut,categorical,NA,Temps pour accéder au service nutritionnels,,,,
+sante,Santé,nut,Nutrition,NA,NA,NA,service_nut,categorical,NA,Services nutritionnels disponibles,,,,
+sante,Santé,nut,Nutrition,NA,NA,NA,depistage_muac,categorical,NA,Formation d'un membre au dépistage du MUAC,,,,
+sante,Santé,nut,Nutrition,NA,NA,NA,ruban_muac,categorical,NA,Possède un ruban MUAC,,,,
+secal,Sécurité alimentaire,revenu,Revenus,NA,NA,NA,revenu_mensuel,categorical,NA,Revenu mensuel moyen sur les 30 derniers jours,,,,
+secal,Sécurité alimentaire,revenu,Revenus,NA,NA,NA,source_revenu1,categorical,NA,Première source de revenu,,,,
+secal,Sécurité alimentaire,revenu,Revenus,NA,NA,NA,source_revenu2,categorical,NA,Deuxième source de revenu,,,,
+secal,Sécurité alimentaire,revenu,Revenus,NA,NA,NA,source_revenu3,categorical,NA,Troisième source de revenu,,,,
+secal,Sécurité alimentaire,revenu,Revenus,NA,NA,NA,integra_besoin,categorical,NA,Revenu couvrent ,,,,
+secal,Sécurité alimentaire,fcs,Food consumption score,NA,NA,NA,jr_consom_cereale,numerical,NA,"Nombre de jours consomment céréales, racines et tubercules pendant les 7 derniers jours",,,,
+secal,Sécurité alimentaire,fcs,Food consumption score,NA,NA,NA,acqui_cereale,categorical,NA,"Moyens d'acquisition des céréales, racines et tubercules",,,,
+secal,Sécurité alimentaire,fcs,Food consumption score,NA,NA,NA,jr_consom_noix,numerical,NA,Nombre de jours consomment légumineuses/noix pendant les 7 derniers jours,,,,
+secal,Sécurité alimentaire,fcs,Food consumption score,NA,NA,NA,acqui_noix,categorical,NA,Moyens d'acquisition des légumineuses/noix,,,,
+secal,Sécurité alimentaire,fcs,Food consumption score,NA,NA,NA,jr_consom_lait,numerical,NA,Nombre de jours consomment lait et autres produits laitiers pendant les 7 derniers jours,,,,
+secal,Sécurité alimentaire,fcs,Food consumption score,NA,NA,NA,acqui_lait,categorical,NA,Moyens d'acquisition du lait et autres produits laitiers,,,,
+secal,Sécurité alimentaire,fcs,Food consumption score,NA,NA,NA,jr_consom_viande,numerical,NA,"Nombre de jours consomment viande, poisson et oeufs pendant les 7 derniers jours",,,,
+secal,Sécurité alimentaire,fcs,Food consumption score,NA,NA,NA,acqui_viande,categorical,NA,"Moyens d'acquisition des viande, poisson et oeufs",,,,
+secal,Sécurité alimentaire,fcs,Food consumption score,NA,NA,NA,jr_consom_legume,numerical,NA,Nombre de jours consomment légumes et feuilles vertes pendant les 7 derniers jours,,,,
+secal,Sécurité alimentaire,fcs,Food consumption score,NA,NA,NA,acqui_legume,categorical,NA,Moyens d'acquisition des légumes et feuilles vertes,,,,
+secal,Sécurité alimentaire,fcs,Food consumption score,NA,NA,NA,jr_consom_fruit,numerical,NA,Nombre de jours consomment fruits pendant les 7 derniers jours,,,,
+secal,Sécurité alimentaire,fcs,Food consumption score,NA,NA,NA,acqui_fruit,categorical,NA,Moyens d'acquisition des fruits,,,,
+secal,Sécurité alimentaire,fcs,Food consumption score,NA,NA,NA,jr_consom_huile,numerical,NA,"Nombre de jours consomment huile, gras et beurre pendant les 7 derniers jours",,,,
+secal,Sécurité alimentaire,fcs,Food consumption score,NA,NA,NA,acqui_huile,categorical,NA,"Moyens d'acquisition des huile, gras et beurre",,,,
+secal,Sécurité alimentaire,fcs,Food consumption score,NA,NA,NA,jr_consom_sucre,numerical,NA,Nombre de jours consomment sucre ou produits sucrés pendant les 7 derniers jours,,,,
+secal,Sécurité alimentaire,fcs,Food consumption score,NA,NA,NA,acqui_sucre,categorical,NA,Moyens d'acquisition des sucre ou produits sucrés,,,,
+secal,Sécurité alimentaire,fcs,Food consumption score,NA,NA,NA,jr_consom_epice,numerical,NA,Nombre de jours consomment épices/condiments pendant les 7 derniers jours,,,,
+secal,Sécurité alimentaire,fcs,Food consumption score,NA,NA,NA,acqui_epice,categorical,NA,Moyens d'acquisition des épices/condiments,,,,
+secal,Sécurité alimentaire,fcs,Food consumption score,NA,NA,NA,fcs2,numerical,NA,FCS score,,,,
+secal,Sécurité alimentaire,fcs,Food consumption score,NA,NA,NA,fcs2_thresholds,categorical,NA,FCS seuils,select_one,liste_fcs_seuils,pauvre,Pauvre
+secal,Sécurité alimentaire,fcs,Food consumption score,NA,NA,NA,fcs2_thresholds,categorical,NA,FCS seuils,select_one,liste_fcs_seuils,limite,Limite
+secal,Sécurité alimentaire,fcs,Food consumption score,NA,NA,NA,fcs2_thresholds,categorical,NA,FCS seuils,select_one,liste_fcs_seuils,acceptable,Acceptable
+secal,Sécurité alimentaire,hhs,Household hunger scale,NA,NA,NA,aucun_aliment,categorical,NA,Aucune nourriture dans le ménage à un moment durant les 30 derniers jours,,,,
+secal,Sécurité alimentaire,hhs,Household hunger scale,NA,NA,NA,nbr_aucun_aliment,categorical,NA,Nombre de fois aucune nourriture durant les 30 derniers jours,,,,
+secal,Sécurité alimentaire,hhs,Household hunger scale,NA,NA,NA,dormir_affame,categorical,NA,Dormir affamé à un moment durant les 30 derniers jours,,,,
+secal,Sécurité alimentaire,hhs,Household hunger scale,NA,NA,NA,nbr_dormir_affame,categorical,NA,Nombre de fois dormir affamé durant les 30 derniers jours,,,,
+secal,Sécurité alimentaire,hhs,Household hunger scale,NA,NA,NA,pas_assez_nourriture,categorical,NA,Un membre du ménage a passé 24 heures sans rien manger dû au manque de nourriture à un moment durant les 30 derniers jours,,,,
+secal,Sécurité alimentaire,hhs,Household hunger scale,NA,NA,NA,nbr_pas_assez_nourriture,categorical,NA,Nombre de fois où un membre du ménage a passé 24 heures sans rien manger dû au manque de nourriture durant les 30 derniers jours,,,,
+secal,Sécurité alimentaire,hhs,Household hunger scale,NA,NA,NA,hhs_score,numerical,NA,HHS score,,,,
+secal,Sécurité alimentaire,hhs,Household hunger scale,NA,NA,NA,hhs_thresholds,categorical,NA,HHS seuils,select_one,liste_hhs_seuils,peu_pasFaim,Peu ou pas de faim
+secal,Sécurité alimentaire,hhs,Household hunger scale,NA,NA,NA,hhs_thresholds,categorical,NA,HHS seuils,select_one,liste_hhs_seuils,faim_moderee,Faim modérée
+secal,Sécurité alimentaire,hhs,Household hunger scale,NA,NA,NA,hhs_thresholds,categorical,NA,HHS seuils,select_one,liste_hhs_seuils,faim_severe,Faim sévère
+secal,Sécurité alimentaire,agri,Agriculture,NA,NA,NA,pratiq_agri,categorical,NA,Pratique optimale de l'agriculture,,,,
+secal,Sécurité alimentaire,agri,Agriculture,NA,NA,NA,non_pratiq_agri,categorical,NA,Raison pratique non-optimale de l'agriculture,,,,
+secal,Sécurité alimentaire,marche,Marché,NA,NA,NA,marche_fonctionel,categorical,NA,Marché fonctionnel à distance de marche durant les 7 derniers jours,,,,
+secal,Sécurité alimentaire,rcsi,Reduced Coping Strategies Index,NA,NA,NA,moins_prefere,categorical,NA,Consommer aliments moins préférés,,,,
+secal,Sécurité alimentaire,rcsi,Reduced Coping Strategies Index,NA,NA,NA,jr_moins_prefere,numerical,NA,Nombre de jours consommer des aliments moins préférés,,,,
+secal,Sécurité alimentaire,rcsi,Reduced Coping Strategies Index,NA,NA,NA,emprunt_nourriture,categorical,NA,Emprunter de la nourriture,,,,
+secal,Sécurité alimentaire,rcsi,Reduced Coping Strategies Index,NA,NA,NA,jr_emprunt_nourriture,numerical,NA,Nombre de jours emprunter de la nourriture,,,,
+secal,Sécurité alimentaire,rcsi,Reduced Coping Strategies Index,NA,NA,NA,diminu_quantite,categorical,NA,Diminuer la quantité consommée pendant les repas,,,,
+secal,Sécurité alimentaire,rcsi,Reduced Coping Strategies Index,NA,NA,NA,jr_diminu_quantite,numerical,NA,Nombre de jours diminuer la quantité consommée pendant les repas,,,,
+secal,Sécurité alimentaire,rcsi,Reduced Coping Strategies Index,NA,NA,NA,rest_consommation,categorical,NA,Restreindre la consommation des adultes pour permettre aux plus jeunes de manger davantage,,,,
+secal,Sécurité alimentaire,rcsi,Reduced Coping Strategies Index,NA,NA,NA,jr_rest_consommation,numerical,NA,Nombre de jours restreindre la consommation des adultes pour permettre aux plus jeunes de manger davantage? ,,,,
+secal,Sécurité alimentaire,rcsi,Reduced Coping Strategies Index,NA,NA,NA,nbr_repas,categorical,NA,Diminuer le nombre de repas par jour,,,,
+secal,Sécurité alimentaire,rcsi,Reduced Coping Strategies Index,NA,NA,NA,jr_nbr_repas,numerical,NA,Nombre de jours diminuer le nombre de repas par jour ?,,,,
+secal,Sécurité alimentaire,rcsi,Reduced Coping Strategies Index,NA,NA,NA,rcsi_score,numerical,NA,rCSI score,,,,
+secal,Sécurité alimentaire,rcsi,Reduced Coping Strategies Index,NA,NA,NA,rcsi_thresholds,categorical,NA,rCSI seuils,select_one,liste_rcsi_seuils,high,Elevées
+secal,Sécurité alimentaire,rcsi,Reduced Coping Strategies Index,NA,NA,NA,rcsi_thresholds,categorical,NA,rCSI seuils,select_one,liste_rcsi_seuils,medium,Moyennes
+secal,Sécurité alimentaire,rcsi,Reduced Coping Strategies Index,NA,NA,NA,rcsi_thresholds,categorical,NA,rCSI seuils,select_one,liste_rcsi_seuils,low,Basses
+secal,Sécurité alimentaire,rcsi,Reduced Coping Strategies Index,NA,NA,NA,rcsi_thresholds,categorical,NA,rCSI seuils,select_one,liste_rcsi_seuils,no_coping,Pas de stratégie utilisée
+eha,EHA,cop,Mécanisme d'adaptation,NA,NA,NA,redu_quant_eau,categorical,NA,"Réduire la quantité d'eau utilisée à  des fins domestiques (pour boire, laver, cuisiner, etc.)",,,,
+eha,EHA,cop,Mécanisme d'adaptation,NA,NA,NA,jr_redu_quant_eau,numerical,NA,"Nombre de jours réduire la quantité d'eau utilisée à  des fins domestiques (pour boire, laver, cuisiner, etc.)",,,,
+eha,EHA,cop,Mécanisme d'adaptation,NA,NA,NA,eau_sure,categorical,NA,Utiliser de l'eau non sûre (sans la bouillir ou la purifier) d'une source non-améliorée,,,,
+eha,EHA,cop,Mécanisme d'adaptation,NA,NA,NA,jr_eau_sure,numerical,NA,Nombre de jours utiliser de l'eau non sûre d'une source non-améliorée,,,,
+secal,Sécurité alimentaire,lcs,Livelihood Coping Strategies,NA,NA,NA,vente_actif,categorical,NA,Ménages ayant vendu actifs non-productifs dans 30 derniers jours,,,,
+secal,Sécurité alimentaire,lcs,Livelihood Coping Strategies,NA,NA,NA,vente_actif_prod,categorical,NA,Ménages ayant vendu des actifs productifs dans 30 derniers jours,,,,
+secal,Sécurité alimentaire,lcs,Livelihood Coping Strategies,NA,NA,NA,reduction_depense,categorical,NA,Ménages ayant réduit les dépenses non-alimentaires dans 30 derniers jours,,,,
+secal,Sécurité alimentaire,lcs,Livelihood Coping Strategies,NA,NA,NA,epargne,categorical,NA,Ménages ayant dépenser l'épargne dans 30 derniers jours,,,,
+secal,Sécurité alimentaire,lcs,Livelihood Coping Strategies,NA,NA,NA,emprunt_nourritur,categorical,NA,Ménages ayant emprunter argent/nourriture  dans 30 derniers jours,,,,
+secal,Sécurité alimentaire,lcs,Livelihood Coping Strategies,NA,NA,NA,enfant_ecole,categorical,NA,Ménages ayant retirer les enfants de l'école,,,,
+secal,Sécurité alimentaire,lcs,Livelihood Coping Strategies,NA,NA,NA,vente_maison,categorical,NA,Ménages ayant vendu maison/parcelle/champ  dans 30 derniers jours,,,,
+secal,Sécurité alimentaire,lcs,Livelihood Coping Strategies,NA,NA,NA,activite_risque,categorical,NA,Ménages ayant un membre s'engageant dans activités risquées/illégales  dans 30 derniers jours,,,,
+secal,Sécurité alimentaire,lcs,Livelihood Coping Strategies,NA,NA,NA,mendie,categorical,NA,Ménages ayant mendié  dans 30 derniers jours,,,,
+secal,Sécurité alimentaire,lcs,Livelihood Coping Strategies,NA,NA,NA,vente_animal,categorical,NA,Ménages ayant vendu plus d'animaux  dans 30 derniers jours,,,,
+secal,Sécurité alimentaire,lcs,Livelihood Coping Strategies,NA,NA,NA,conso_semence,categorical,NA,Ménages ayant consommé des semences  dans 30 derniers jours,,,,
+secal,Sécurité alimentaire,lcs,Livelihood Coping Strategies,NA,NA,NA,lcs_urgence,numerical,NA,LCS urgence,,,,
+secal,Sécurité alimentaire,lcs,Livelihood Coping Strategies,NA,NA,NA,lcs_crise,numerical,NA,LCS crise,,,,
+secal,Sécurité alimentaire,lcs,Livelihood Coping Strategies,NA,NA,NA,lcs_stress,numerical,NA,LCS stress,,,,
+secal,Sécurité alimentaire,lcs,Livelihood Coping Strategies,NA,NA,NA,lcs_minimal,numerical,NA,LCS minimal,,,,
+secal,Sécurité alimentaire,lcs,Livelihood Coping Strategies,NA,NA,NA,lcsi,categorical,NA,LCS seuils,select_one,liste_lcsi_seuils,none,Aucune
+secal,Sécurité alimentaire,lcs,Livelihood Coping Strategies,NA,NA,NA,lcsi,categorical,NA,LCS seuils,select_one,liste_lcsi_seuils,stress,Stresse
+secal,Sécurité alimentaire,lcs,Livelihood Coping Strategies,NA,NA,NA,lcsi,categorical,NA,LCS seuils,select_one,liste_lcsi_seuils,crisis,Crise
+secal,Sécurité alimentaire,lcs,Livelihood Coping Strategies,NA,NA,NA,lcsi,categorical,NA,LCS seuils,select_one,liste_lcsi_seuils,emergency,Urgence
+eha,EHA,eau,Eau,NA,NA,NA,source_eau,categorical,NA,Principale source d'eau pour boire,,,,
+eha,EHA,eau,Eau,NA,NA,NA,typologie_source_eau,categorical,NA,Type de source d'eau principale pour boire,,,,
 eha,EHA,eau,Eau,NA,NA,NA,temps_eau,categorical,NA,Temps de trajet aller-retour vers source principale,,,,
-eha,EHA,eau,Eau,NA,NA,NA,age_diffi_eau,categorical,NA,Personnes Ã¢gÃ©es/difficultÃ© Ã  se dÃ©placer/voir ayant accÃ¨s Ã  la source dâ€™eau principale,,,,
-eha,EHA,eau,Eau,NA,NA,NA,temps_collecte,categorical,NA,Temps de collecte de lâ€˜eau Ã  source principale (attente et collecte),,,,
-eha,EHA,eau,Eau,NA,NA,NA,eau_propre,categorical,NA,AccÃ¨s Ã  une source dâ€™eau propre/amÃ©liorÃ©e en saison sÃ¨che,,,,
-eha,EHA,eau,Eau,NA,NA,NA,eau_suffi,categorical,NA,AccÃ¨s Ã  suffisamment dâ€™eau pour rÃ©pondre aux besoins,,,,
-eha,EHA,eau,Eau,NA,NA,NA,princip_raison,categorical,NA,Principale raison pour manque dâ€™eau,,,,
-eha,EHA,eau,Eau,NA,NA,NA,person_non_acces,categorical,NA,Groupes nâ€™ayant pas accÃ¨s Ã  lâ€™eau,,,,
-eha,EHA,assainissement,Assainissement,NA,NA,NA,infra_sanitaire,categorical,NA,Type latrine utilisÃ©e,,,,
+eha,EHA,eau,Eau,NA,NA,NA,age_diffi_eau,categorical,NA,Personnes âgées/difficulté à se déplacer/voir ayant accès à la source d'eau principale,,,,
+eha,EHA,eau,Eau,NA,NA,NA,temps_collecte,categorical,NA,Temps de collecte de l'eau à source principale (attente et collecte),,,,
+eha,EHA,eau,Eau,NA,NA,NA,eau_propre,categorical,NA,Accès à une source d'eau propre/améliorée en saison sèche,,,,
+eha,EHA,eau,Eau,NA,NA,NA,eau_suffi,categorical,NA,Accès à suffisamment d'eau pour répondre aux besoins,,,,
+eha,EHA,eau,Eau,NA,NA,NA,princip_raison,categorical,NA,Principale raison pour manque d'eau,,,,
+eha,EHA,eau,Eau,NA,NA,NA,person_non_acces,categorical,NA,Groupes n'ayant pas accès à l'eau,,,,
+eha,EHA,assainissement,Assainissement,NA,NA,NA,infra_sanitaire,categorical,NA,Type latrine utilisée,,,,
 eha,EHA,assainissement,Assainissement,NA,NA,NA,type_latrine,categorical,NA,Nombre de personnes partageant latrine,,,,
-eha,EHA,assainissement,Assainissement,NA,NA,NA,lat_hygiene,categorical,NA,Latrines hygiÃ©niques,,,,
-eha,EHA,assainissement,Assainissement,NA,NA,NA,deplacement_lat,categorical,NA,Personnes Ã¢gÃ©es/difficultÃ© Ã  se dÃ©placer/voir ayant accÃ¨s facilement aux latrines,,,,
-eha,EHA,hygiene,HygiÃ¨ne,NA,NA,NA,lave_main,categorical,NA,Moments du lavage des mains du mÃ©nage hier,,,,
-eha,EHA,hygiene,HygiÃ¨ne,NA,NA,NA,moyen_lave_main,categorical,NA,MÃ©thode de lavage des mains hier,,,,
-eha,EHA,hygiene,HygiÃ¨ne,NA,NA,NA,acces_savon,categorical,NA,AccÃ¨s au savon,,,,
-eha,EHA,hygiene,HygiÃ¨ne,NA,NA,NA,dispo_lave_main,categorical,NA,Dispositif de lavage des mains,,,,
-eha,EHA,diarrhee,HygiÃ¨ne,NA,NA,NA,enfant_selle,numerical,NA,Nombre dâ€™enfants de moins de 5ans ayant diarrhÃ©e dans les 2 derniÃ¨res semaines,,,,
-eha,EHA,diarrhee,HygiÃ¨ne,NA,NA,NA,freq_enfants_moins5_diarrhee,categorical,NA,% des enfants de moins de 5ans ayant diarrhÃ©e dans les 2 derniÃ¨res semaines,select_one,oui_non_add,oui,Oui
-eha,EHA,diarrhee,HygiÃ¨ne,NA,NA,NA,freq_enfants_moins5_diarrhee,categorical,NA,% des enfants de moins de 5ans ayant diarrhÃ©e dans les 2 derniÃ¨res semaines,select_one,oui_non_add,non,Non
-eha,EHA,hygiene,HygiÃ¨ne,NA,NA,NA,pasEau_DAL_pasSavon,categorical,NA,"% de mÃ©nages nâ€™ayant pas suffisamment dâ€™eau, nâ€™ayant pas de savon et pratiquant la dÃ©fÃ©cation Ã  lâ€™air libre",select_one,oui_non_add,oui,Oui
-eha,EHA,hygiene,HygiÃ¨ne,NA,NA,NA,pasEau_DAL_pasSavon,categorical,NA,"% de mÃ©nages nâ€™ayant pas suffisamment dâ€™eau, nâ€™ayant pas de savon et pratiquant la dÃ©fÃ©cation Ã  lâ€™air libre",select_one,oui_non_add,non,Non
-eha,EHA,hygiene,HygiÃ¨ne,NA,NA,NA,auMoins_5moments_mains,categorical,NA,% de mÃ©nages dÃ©clarant se laver les mains Ã  au moins cinq des sept moments possibles,select_one,oui_non_add,oui,Oui
-eha,EHA,hygiene,HygiÃ¨ne,NA,NA,NA,auMoins_5moments_mains,categorical,NA,% de mÃ©nages dÃ©clarant se laver les mains Ã  au moins cinq des sept moments possibles,select_one,oui_non_add,non,Non
-eha,EHA,hygiene,HygiÃ¨ne,NA,NA,NA,auMoins_aprLat_avantMan,categorical,NA,% de mÃ©nages dÃ©clarant se laver les mains au moins aprÃ¨s Ãªtre aller aux toilettes/latrines et avant de manger,select_one,oui_non_add,oui,Oui
-eha,EHA,hygiene,HygiÃ¨ne,NA,NA,NA,auMoins_aprLat_avantMan,categorical,NA,% de mÃ©nages dÃ©clarant se laver les mains au moins aprÃ¨s Ãªtre aller aux toilettes/latrines et avant de manger,select_one,oui_non_add,non,Non
-eha,EHA,eau,Eau,NA,NA,NA,temps_total_eau,categorical,NA,Temps total pour collecter lâ€™eau de la source principale (trajet aller-retour et temps dâ€™attente et de remplissage),select_one,liste_temp_eau,,
-protection,Protection,securite,SÃ©curitÃ©,NA,NA,NA,incident_secur,categorical,NA,Au moins un membre du mÃ©nage affectÃ© par incident sÃ©curitaire,,,,
-protection,Protection,securite,SÃ©curitÃ©,NA,NA,NA,secur_fem,categorical,NA,PrÃ©occupation en matiÃ¨re de protection des femmes,,,,
-protection,Protection,securite,SÃ©curitÃ©,NA,NA,NA,risque_fem,categorical,NA,Risque femmes exposÃ©es,,,,
-protection,Protection,securite,SÃ©curitÃ©,NA,NA,NA,secur_hom,categorical,NA,PrÃ©occupation en matiÃ¨re de protection des hommes,,,,
-protection,Protection,securite,SÃ©curitÃ©,NA,NA,NA,risque_hom,categorical,NA,Risque hommes exposÃ©es,,,,
-protection,Protection,securite,SÃ©curitÃ©,NA,NA,NA,secur_fille,categorical,NA,PrÃ©occupation en matiÃ¨re de protection des filles (moins de 18 ans),,,,
-protection,Protection,securite,SÃ©curitÃ©,NA,NA,NA,risque_fille,categorical,NA,Risque filles (moins de 18 ans) exposÃ©es,,,,
-protection,Protection,securite,SÃ©curitÃ©,NA,NA,NA,secur_garcon,categorical,NA,PrÃ©occupation en matiÃ¨re de protection des garÃ§ons (moins de 18 ans),,,,
-protection,Protection,securite,SÃ©curitÃ©,NA,NA,NA,risque_garcon,categorical,NA,Risque garÃ§ons (moins de 18 ans) exposÃ©es,,,,
-protection,Protection,travail_enfants,Travail des enfants,NA,NA,NA,travail_fille,numerical,NA,Nombre de filles travaillant dans le mÃ©nage,,,,
+eha,EHA,assainissement,Assainissement,NA,NA,NA,lat_hygiene,categorical,NA,Latrines hygiéniques,,,,
+eha,EHA,assainissement,Assainissement,NA,NA,NA,deplacement_lat,categorical,NA,Personnes âgées/difficulté à se déplacer/voir ayant accès facilement aux latrines,,,,
+eha,EHA,hygiene,Hygiène,NA,NA,NA,lave_main,categorical,NA,Moments du lavage des mains du ménage hier,,,,
+eha,EHA,hygiene,Hygiène,NA,NA,NA,moyen_lave_main,categorical,NA,Méthode de lavage des mains hier,,,,
+eha,EHA,hygiene,Hygiène,NA,NA,NA,acces_savon,categorical,NA,Accès au savon,,,,
+eha,EHA,hygiene,Hygiène,NA,NA,NA,dispo_lave_main,categorical,NA,Dispositif de lavage des mains,,,,
+eha,EHA,diarrhee,Hygiène,NA,NA,NA,enfant_selle,numerical,NA,Nombre d'enfants de moins de 5ans ayant diarrhée dans les 2 dernières semaines,,,,
+eha,EHA,diarrhee,Hygiène,NA,NA,NA,freq_enfants_moins5_diarrhee,categorical,NA,% des enfants de moins de 5ans ayant diarrhée dans les 2 dernières semaines,select_one,oui_non_add,oui,Oui
+eha,EHA,diarrhee,Hygiène,NA,NA,NA,freq_enfants_moins5_diarrhee,categorical,NA,% des enfants de moins de 5ans ayant diarrhée dans les 2 dernières semaines,select_one,oui_non_add,non,Non
+eha,EHA,hygiene,Hygiène,NA,NA,NA,pasEau_DAL_pasSavon,categorical,NA,"% de ménages n'ayant pas suffisamment d'eau, n'ayant pas de savon et pratiquant la défécation à l'air libre",select_one,oui_non_add,oui,Oui
+eha,EHA,hygiene,Hygiène,NA,NA,NA,pasEau_DAL_pasSavon,categorical,NA,"% de ménages n'ayant pas suffisamment d'eau, n'ayant pas de savon et pratiquant la défécation à l'air libre",select_one,oui_non_add,non,Non
+eha,EHA,hygiene,Hygiène,NA,NA,NA,auMoins_5moments_mains,categorical,NA,% de ménages déclarant se laver les mains à au moins cinq des sept moments possibles,select_one,oui_non_add,oui,Oui
+eha,EHA,hygiene,Hygiène,NA,NA,NA,auMoins_5moments_mains,categorical,NA,% de ménages déclarant se laver les mains à au moins cinq des sept moments possibles,select_one,oui_non_add,non,Non
+eha,EHA,hygiene,Hygiène,NA,NA,NA,auMoins_aprLat_avantMan,categorical,NA,% de ménages déclarant se laver les mains au moins après être aller aux toilettes/latrines et avant de manger,select_one,oui_non_add,oui,Oui
+eha,EHA,hygiene,Hygiène,NA,NA,NA,auMoins_aprLat_avantMan,categorical,NA,% de ménages déclarant se laver les mains au moins après être aller aux toilettes/latrines et avant de manger,select_one,oui_non_add,non,Non
+eha,EHA,eau,Eau,NA,NA,NA,temps_total_eau,categorical,NA,Temps total pour collecter l'eau de la source principale (trajet aller-retour et temps d'attente et de remplissage),select_one,liste_temp_eau,,
+protection,Protection,securite,Sécurité,NA,NA,NA,incident_secur,categorical,NA,Au moins un membre du ménage affecté par incident sécuritaire,,,,
+protection,Protection,securite,Sécurité,NA,NA,NA,secur_fem,categorical,NA,Préoccupation en matière de protection des femmes,,,,
+protection,Protection,securite,Sécurité,NA,NA,NA,risque_fem,categorical,NA,Risque femmes exposées,,,,
+protection,Protection,securite,Sécurité,NA,NA,NA,secur_hom,categorical,NA,Préoccupation en matière de protection des hommes,,,,
+protection,Protection,securite,Sécurité,NA,NA,NA,risque_hom,categorical,NA,Risque hommes exposées,,,,
+protection,Protection,securite,Sécurité,NA,NA,NA,secur_fille,categorical,NA,Préoccupation en matière de protection des filles (moins de 18 ans),,,,
+protection,Protection,securite,Sécurité,NA,NA,NA,risque_fille,categorical,NA,Risque filles (moins de 18 ans) exposées,,,,
+protection,Protection,securite,Sécurité,NA,NA,NA,secur_garcon,categorical,NA,Préoccupation en matière de protection des garçons (moins de 18 ans),,,,
+protection,Protection,securite,Sécurité,NA,NA,NA,risque_garcon,categorical,NA,Risque garçons (moins de 18 ans) exposées,,,,
+protection,Protection,travail_enfants,Travail des enfants,NA,NA,NA,travail_fille,numerical,NA,Nombre de filles travaillant dans le ménage,,,,
 protection,Protection,travail_enfants,Travail des enfants,,,,freq_travail_fille,categorical,NA,% de filles travaillant,,,,
-protection,Protection,travail_enfants,Travail des enfants,NA,NA,NA,travail_garcon,numerical,NA,Nombre de garÃ§ons travaillant dans le mÃ©nage,,,,
-protection,Protection,travail_enfants,Travail des enfants,,,,freq_travail_garcon,categorical,NA,% de garÃ§ons travaillant,,,,
+protection,Protection,travail_enfants,Travail des enfants,NA,NA,NA,travail_garcon,numerical,NA,Nombre de garçons travaillant dans le ménage,,,,
+protection,Protection,travail_enfants,Travail des enfants,,,,freq_travail_garcon,categorical,NA,% de garçons travaillant,,,,
 protection,Protection,travail_enfants,Travail des enfants,NA,NA,NA,type_trav_enft,categorical,NA,Type de travail des enfants,,,,
-protection,Protection,enfants,Enfants,NA,NA,NA,enfant_absent,numerical,NA,Nombre dâ€™enfants (moins de 18 ans) vivant hors du mÃ©nage,,,,
-protection,Protection,enfants,Enfants,NA,NA,NA,detress,categorical,NA,Au moins un membre du mÃ©nage montrant signes de dÃ©tresse psychologique,,,,
-protection,Protection,detresse,DÃ©tresse,NA,NA,NA,detres_enft,numerical,NA,Nombre dâ€™enfants montrant signes de dÃ©tresse psychologique,,,,
-protection,Protection,detresse,DÃ©tresse,NA,NA,NA,detres_adult,numerical,NA,Nombre dâ€™adultes montrant signes de dÃ©tresse psychologique,,,,
-protection,Protection,documents,Documentation,NA,NA,NA,document_identite,categorical,NA,Documents dâ€™identitÃ© possÃ©dÃ©s par le mÃ©nage,,,,
-protection,Protection,documents,Documentation,NA,NA,NA,titre_propriete,categorical,NA,Titre de propriÃ©tÃ© possÃ©dÃ© par le mÃ©nage,,,,
-protection,Protection,relations_comm,Relations communautaires,NA,NA,NA,relation_pdi_hote,categorical,NA,Perception relation avec communautÃ© hÃ´te ,,,,
-protection,Protection,relations_comm,Relations communautaires,NA,NA,NA,relation_hote_pdi,categorical,NA,Perception relation avec personnes dÃ©placÃ©es,,,,
-aap,RedevabilitÃ© aux personnes affectÃ©es,info,Information,NA,NA,NA,source_info,categorical,NA,Source de confiance pour recevoir information,,,,
-aap,RedevabilitÃ© aux personnes affectÃ©es,info,Information,NA,NA,NA,type_info_hum,categorical,NA,Type dâ€™information nÃ©cessaire,,,,
-aap,RedevabilitÃ© aux personnes affectÃ©es,info,Information,NA,NA,NA,moy_pref_info,categorical,NA,Moyen prÃ©fÃ©rÃ© pour recevoir information,,,,
-aap,RedevabilitÃ© aux personnes affectÃ©es,info,Information,NA,NA,NA,retour_info,categorical,NA,Moyen prÃ©fÃ©rÃ© pour retour aux fournisseurs dâ€™aide humanitaire,,,,
-aap,RedevabilitÃ© aux personnes affectÃ©es,info,Information,NA,NA,NA,telephone,categorical,NA,MÃ©nage possÃ©dant un tÃ©lÃ©phone fonctionnel,,,,
-aap,RedevabilitÃ© aux personnes affectÃ©es,info,Information,NA,NA,NA,acces_reseau_tel,categorical,NA,MÃ©nage ayant accÃ¨s Ã  un rÃ©seau tÃ©lÃ©phonique stable Ã  la maison,,,,
-aap,RedevabilitÃ© aux personnes affectÃ©es,energie,Energie,NA,NA,NA,hour_jr,numerical,NA,Nombre dâ€™heure moyen avec de lâ€™Ã©lectricitÃ©/Ã©nergie par jour ,,,,
-aap,RedevabilitÃ© aux personnes affectÃ©es,assistance,Assistance,NA,NA,NA,assistance,categorical,NA,MÃ©nages ayant reÃ§u de lâ€™assistance humanitaire dans les 12 derniers mois,,,,
-aap,RedevabilitÃ© aux personnes affectÃ©es,assistance,Assistance,NA,NA,NA,satisf_assistance,categorical,NA,Satisfaction par rapport Ã  lâ€™assistance reÃ§ue,,,,
-aap,RedevabilitÃ© aux personnes affectÃ©es,assistance,Assistance,NA,NA,NA,raison_insatis,categorical,NA,Principale raison dâ€™insatisfaction face Ã  lâ€™aide reÃ§ue,,,,
-aap,RedevabilitÃ© aux personnes affectÃ©es,redevabilite,RedevabilitÃ©,NA,NA,NA,sugges_plainte,categorical,NA,MÃ©nage ayant dÃ©jÃ  faire une suggestion/plainte aux fournisseurs dâ€™aide,,,,
-aap,RedevabilitÃ© aux personnes affectÃ©es,redevabilite,RedevabilitÃ©,NA,NA,NA,response_plainte,categorical,NA,MÃ©nage ayant reÃ§u une rÃ©ponse Ã  leur plainte,,,,
-aap,RedevabilitÃ© aux personnes affectÃ©es,redevabilite,RedevabilitÃ©,NA,NA,NA,bar_plainte,categorical,NA,BarriÃ¨res pour accÃ©der aux mÃ©canismes de plainte,,,,
-aap,RedevabilitÃ© aux personnes affectÃ©es,redevabilite,RedevabilitÃ©,NA,NA,NA,inter_type_assis,categorical,NA,MÃ©nages consultÃ©s sur le type dâ€™assistance quâ€™ils voudraient recevoir,,,,
-aap,RedevabilitÃ© aux personnes affectÃ©es,besoin_prio,Besoins prioritaires,NA,NA,NA,besoin_prioritaire1,categorical,NA,Principal besoin du mÃ©nage,,,,
-aap,RedevabilitÃ© aux personnes affectÃ©es,besoin_prio,Besoins prioritaires,NA,NA,NA,besoin_prioritaire2,categorical,NA,DeuxiÃ¨me besoin du mÃ©nage,,,,
-aap,RedevabilitÃ© aux personnes affectÃ©es,besoin_prio,Besoins prioritaires,NA,NA,NA,besoin_prioritaire3,categorical,NA,TroisiÃ¨me besoin du mÃ©nage,,,,
-aap,RedevabilitÃ© aux personnes affectÃ©es,besoin_prio,Besoins prioritaires,NA,NA,NA,assistance_bna,categorical,NA,Type de rÃ©ponse BNA prÃ©fÃ©rÃ©s,,,,
-aap,RedevabilitÃ© aux personnes affectÃ©es,besoin_prio,Besoins prioritaires,NA,NA,NA,bna_cash,categorical,NA,ManiÃ¨re prÃ©fÃ©rÃ©e de recevoir assistance cash BNA,,,,
-aap,RedevabilitÃ© aux personnes affectÃ©es,besoin_prio,Besoins prioritaires,NA,NA,NA,bna_prov_bien,categorical,NA,ManiÃ¨re prÃ©fÃ©rÃ©e de recevoir assistance in-kind biens BNA,,,,
-aap,RedevabilitÃ© aux personnes affectÃ©es,besoin_prio,Besoins prioritaires,NA,NA,NA,bna_prov_service,categorical,NA,ManiÃ¨re prÃ©fÃ©rÃ©e de recevoir assistance in-kind services BNA,,,,
-aap,RedevabilitÃ© aux personnes affectÃ©es,besoin_prio,Besoins prioritaires,NA,NA,NA,assistance_secal,categorical,NA,Type de rÃ©ponse sÃ©curitÃ© alimentaire prÃ©fÃ©rÃ©s,,,,
-aap,RedevabilitÃ© aux personnes affectÃ©es,besoin_prio,Besoins prioritaires,NA,NA,NA,secal_cash,categorical,NA,ManiÃ¨re prÃ©fÃ©rÃ©e de recevoir assistance cash sÃ©curitÃ© alimentaire,,,,
-aap,RedevabilitÃ© aux personnes affectÃ©es,besoin_prio,Besoins prioritaires,NA,NA,NA,secal_prov_bien,categorical,NA,ManiÃ¨re prÃ©fÃ©rÃ©e de recevoir assistance in-kind biens sÃ©curitÃ© alimentaire,,,,
-aap,RedevabilitÃ© aux personnes affectÃ©es,besoin_prio,Besoins prioritaires,NA,NA,NA,secal_prov_service,categorical,NA,ManiÃ¨re prÃ©fÃ©rÃ©e de recevoir assistance in-kind services sÃ©curitÃ© alimentaire,,,,
-aap,RedevabilitÃ© aux personnes affectÃ©es,besoin_prio,Besoins prioritaires,NA,NA,NA,assistance_sante,categorical,NA,Type de rÃ©ponse santÃ© prÃ©fÃ©rÃ©s,,,,
-aap,RedevabilitÃ© aux personnes affectÃ©es,besoin_prio,Besoins prioritaires,NA,NA,NA,sante_cash,categorical,NA,ManiÃ¨re prÃ©fÃ©rÃ©e de recevoir assistance cash santÃ©,,,,
-aap,RedevabilitÃ© aux personnes affectÃ©es,besoin_prio,Besoins prioritaires,NA,NA,NA,sante_prov_bien,categorical,NA,ManiÃ¨re prÃ©fÃ©rÃ©e de recevoir assistance in-kind biens santÃ©,,,,
-aap,RedevabilitÃ© aux personnes affectÃ©es,besoin_prio,Besoins prioritaires,NA,NA,NA,sante_prov_service,categorical,NA,ManiÃ¨re prÃ©fÃ©rÃ©e de recevoir assistance in-kind services santÃ©,,,,
-aap,RedevabilitÃ© aux personnes affectÃ©es,besoin_prio,Besoins prioritaires,NA,NA,NA,assistance_nutrition,categorical,NA,Type de rÃ©ponse nutrition prÃ©fÃ©rÃ©s,,,,
-aap,RedevabilitÃ© aux personnes affectÃ©es,besoin_prio,Besoins prioritaires,NA,NA,NA,nutri_cash,categorical,NA,ManiÃ¨re prÃ©fÃ©rÃ©e de recevoir assistance cash nutrition,,,,
-aap,RedevabilitÃ© aux personnes affectÃ©es,besoin_prio,Besoins prioritaires,NA,NA,NA,nutri_prov_bien,categorical,NA,ManiÃ¨re prÃ©fÃ©rÃ©e de recevoir assistance in-kind biens nutrition,,,,
-aap,RedevabilitÃ© aux personnes affectÃ©es,besoin_prio,Besoins prioritaires,NA,NA,NA,assistance_eau,categorical,NA,Type de rÃ©ponse EHA prÃ©fÃ©rÃ©s,,,,
-aap,RedevabilitÃ© aux personnes affectÃ©es,besoin_prio,Besoins prioritaires,NA,NA,NA,eau_cash,categorical,NA,ManiÃ¨re prÃ©fÃ©rÃ©e de recevoir assistance cash EHA,,,,
-aap,RedevabilitÃ© aux personnes affectÃ©es,besoin_prio,Besoins prioritaires,NA,NA,NA,eau_prov_bien,categorical,NA,ManiÃ¨re prÃ©fÃ©rÃ©e de recevoir assistance in-kind biens EHA,,,,
-aap,RedevabilitÃ© aux personnes affectÃ©es,besoin_prio,Besoins prioritaires,NA,NA,NA,eau_prov_service,categorical,NA,ManiÃ¨re prÃ©fÃ©rÃ©e de recevoir assistance in-kind services EHA,,,,
-aap,RedevabilitÃ© aux personnes affectÃ©es,besoin_prio,Besoins prioritaires,NA,NA,NA,assistance_educ,categorical,NA,Type de rÃ©ponse Ã©ducation prÃ©fÃ©rÃ©s,,,,
-aap,RedevabilitÃ© aux personnes affectÃ©es,besoin_prio,Besoins prioritaires,NA,NA,NA,educ_cash,categorical,NA,ManiÃ¨re prÃ©fÃ©rÃ©e de recevoir assistance cash Ã©ducation,,,,
-aap,RedevabilitÃ© aux personnes affectÃ©es,besoin_prio,Besoins prioritaires,NA,NA,NA,educ_prov_bien,categorical,NA,ManiÃ¨re prÃ©fÃ©rÃ©e de recevoir assistance in-kind biens Ã©ducation,,,,
-aap,RedevabilitÃ© aux personnes affectÃ©es,besoin_prio,Besoins prioritaires,NA,NA,NA,educ_prov_service,categorical,NA,ManiÃ¨re prÃ©fÃ©rÃ©e de recevoir assistance in-kind services Ã©ducation,,,,
-aap,RedevabilitÃ© aux personnes affectÃ©es,besoin_prio,Besoins prioritaires,NA,NA,NA,assistance_protec,categorical,NA,Type de rÃ©ponse protection prÃ©fÃ©rÃ©s,,,,
-protection,Protection,securite,SÃ©curitÃ©,NA,NA,NA,vbg,numerical,NA,% de mÃ©nages dÃ©clarant quâ€™au moins un membre est exposÃ© Ã  des violences sexuelles au cours des 30 derniers jours,,,,
+protection,Protection,enfants,Enfants,NA,NA,NA,enfant_absent,numerical,NA,Nombre d'enfants (moins de 18 ans) vivant hors du ménage,,,,
+protection,Protection,enfants,Enfants,NA,NA,NA,detress,categorical,NA,Au moins un membre du ménage montrant signes de détresse psychologique,,,,
+protection,Protection,detresse,Détresse,NA,NA,NA,detres_enft,numerical,NA,Nombre d'enfants montrant signes de détresse psychologique,,,,
+protection,Protection,detresse,Détresse,NA,NA,NA,detres_adult,numerical,NA,Nombre d'adultes montrant signes de détresse psychologique,,,,
+protection,Protection,documents,Documentation,NA,NA,NA,document_identite,categorical,NA,Documents d'identité possédés par le ménage,,,,
+protection,Protection,documents,Documentation,NA,NA,NA,titre_propriete,categorical,NA,Titre de propriété possédé par le ménage,,,,
+protection,Protection,relations_comm,Relations communautaires,NA,NA,NA,relation_pdi_hote,categorical,NA,Perception relation avec communauté hôte ,,,,
+protection,Protection,relations_comm,Relations communautaires,NA,NA,NA,relation_hote_pdi,categorical,NA,Perception relation avec personnes déplacées,,,,
+aap,Redevabilité aux personnes affectées,info,Information,NA,NA,NA,source_info,categorical,NA,Source de confiance pour recevoir information,,,,
+aap,Redevabilité aux personnes affectées,info,Information,NA,NA,NA,type_info_hum,categorical,NA,Type d'information nécessaire,,,,
+aap,Redevabilité aux personnes affectées,info,Information,NA,NA,NA,moy_pref_info,categorical,NA,Moyen préféré pour recevoir information,,,,
+aap,Redevabilité aux personnes affectées,info,Information,NA,NA,NA,retour_info,categorical,NA,Moyen préféré pour retour aux fournisseurs d'aide humanitaire,,,,
+aap,Redevabilité aux personnes affectées,info,Information,NA,NA,NA,telephone,categorical,NA,Ménage possédant un téléphone fonctionnel,,,,
+aap,Redevabilité aux personnes affectées,info,Information,NA,NA,NA,acces_reseau_tel,categorical,NA,Ménage ayant accès à un réseau téléphonique stable à la maison,,,,
+aap,Redevabilité aux personnes affectées,energie,Energie,NA,NA,NA,hour_jr,numerical,NA,Nombre d'heure moyen avec de l'électricité/énergie par jour ,,,,
+aap,Redevabilité aux personnes affectées,assistance,Assistance,NA,NA,NA,assistance,categorical,NA,Ménages ayant reçu de l'assistance humanitaire dans les 12 derniers mois,,,,
+aap,Redevabilité aux personnes affectées,assistance,Assistance,NA,NA,NA,satisf_assistance,categorical,NA,Satisfaction par rapport à l'assistance reçue,,,,
+aap,Redevabilité aux personnes affectées,assistance,Assistance,NA,NA,NA,raison_insatis,categorical,NA,Principale raison d'insatisfaction face à l'aide reçue,,,,
+aap,Redevabilité aux personnes affectées,redevabilite,Redevabilité,NA,NA,NA,sugges_plainte,categorical,NA,Ménage ayant déjà faire une suggestion/plainte aux fournisseurs d'aide,,,,
+aap,Redevabilité aux personnes affectées,redevabilite,Redevabilité,NA,NA,NA,response_plainte,categorical,NA,Ménage ayant reçu une réponse à leur plainte,,,,
+aap,Redevabilité aux personnes affectées,redevabilite,Redevabilité,NA,NA,NA,bar_plainte,categorical,NA,Barrières pour accéder aux mécanismes de plainte,,,,
+aap,Redevabilité aux personnes affectées,redevabilite,Redevabilité,NA,NA,NA,inter_type_assis,categorical,NA,Ménages consultés sur le type d'assistance qu'ils voudraient recevoir,,,,
+aap,Redevabilité aux personnes affectées,besoin_prio,Besoins prioritaires,NA,NA,NA,besoin_prioritaire1,categorical,NA,Principal besoin du ménage,,,,
+aap,Redevabilité aux personnes affectées,besoin_prio,Besoins prioritaires,NA,NA,NA,besoin_prioritaire2,categorical,NA,Deuxième besoin du ménage,,,,
+aap,Redevabilité aux personnes affectées,besoin_prio,Besoins prioritaires,NA,NA,NA,besoin_prioritaire3,categorical,NA,Troisième besoin du ménage,,,,
+aap,Redevabilité aux personnes affectées,besoin_prio,Besoins prioritaires,NA,NA,NA,assistance_bna,categorical,NA,Type de réponse BNA préférés,,,,
+aap,Redevabilité aux personnes affectées,besoin_prio,Besoins prioritaires,NA,NA,NA,bna_cash,categorical,NA,Manière préférée de recevoir assistance cash BNA,,,,
+aap,Redevabilité aux personnes affectées,besoin_prio,Besoins prioritaires,NA,NA,NA,bna_prov_bien,categorical,NA,Manière préférée de recevoir assistance in-kind biens BNA,,,,
+aap,Redevabilité aux personnes affectées,besoin_prio,Besoins prioritaires,NA,NA,NA,bna_prov_service,categorical,NA,Manière préférée de recevoir assistance in-kind services BNA,,,,
+aap,Redevabilité aux personnes affectées,besoin_prio,Besoins prioritaires,NA,NA,NA,assistance_secal,categorical,NA,Type de réponse sécurité alimentaire préférés,,,,
+aap,Redevabilité aux personnes affectées,besoin_prio,Besoins prioritaires,NA,NA,NA,secal_cash,categorical,NA,Manière préférée de recevoir assistance cash sécurité alimentaire,,,,
+aap,Redevabilité aux personnes affectées,besoin_prio,Besoins prioritaires,NA,NA,NA,secal_prov_bien,categorical,NA,Manière préférée de recevoir assistance in-kind biens sécurité alimentaire,,,,
+aap,Redevabilité aux personnes affectées,besoin_prio,Besoins prioritaires,NA,NA,NA,secal_prov_service,categorical,NA,Manière préférée de recevoir assistance in-kind services sécurité alimentaire,,,,
+aap,Redevabilité aux personnes affectées,besoin_prio,Besoins prioritaires,NA,NA,NA,assistance_sante,categorical,NA,Type de réponse santé préférés,,,,
+aap,Redevabilité aux personnes affectées,besoin_prio,Besoins prioritaires,NA,NA,NA,sante_cash,categorical,NA,Manière préférée de recevoir assistance cash santé,,,,
+aap,Redevabilité aux personnes affectées,besoin_prio,Besoins prioritaires,NA,NA,NA,sante_prov_bien,categorical,NA,Manière préférée de recevoir assistance in-kind biens santé,,,,
+aap,Redevabilité aux personnes affectées,besoin_prio,Besoins prioritaires,NA,NA,NA,sante_prov_service,categorical,NA,Manière préférée de recevoir assistance in-kind services santé,,,,
+aap,Redevabilité aux personnes affectées,besoin_prio,Besoins prioritaires,NA,NA,NA,assistance_nutrition,categorical,NA,Type de réponse nutrition préférés,,,,
+aap,Redevabilité aux personnes affectées,besoin_prio,Besoins prioritaires,NA,NA,NA,nutri_cash,categorical,NA,Manière préférée de recevoir assistance cash nutrition,,,,
+aap,Redevabilité aux personnes affectées,besoin_prio,Besoins prioritaires,NA,NA,NA,nutri_prov_bien,categorical,NA,Manière préférée de recevoir assistance in-kind biens nutrition,,,,
+aap,Redevabilité aux personnes affectées,besoin_prio,Besoins prioritaires,NA,NA,NA,assistance_eau,categorical,NA,Type de réponse EHA préférés,,,,
+aap,Redevabilité aux personnes affectées,besoin_prio,Besoins prioritaires,NA,NA,NA,eau_cash,categorical,NA,Manière préférée de recevoir assistance cash EHA,,,,
+aap,Redevabilité aux personnes affectées,besoin_prio,Besoins prioritaires,NA,NA,NA,eau_prov_bien,categorical,NA,Manière préférée de recevoir assistance in-kind biens EHA,,,,
+aap,Redevabilité aux personnes affectées,besoin_prio,Besoins prioritaires,NA,NA,NA,eau_prov_service,categorical,NA,Manière préférée de recevoir assistance in-kind services EHA,,,,
+aap,Redevabilité aux personnes affectées,besoin_prio,Besoins prioritaires,NA,NA,NA,assistance_educ,categorical,NA,Type de réponse éducation préférés,,,,
+aap,Redevabilité aux personnes affectées,besoin_prio,Besoins prioritaires,NA,NA,NA,educ_cash,categorical,NA,Manière préférée de recevoir assistance cash éducation,,,,
+aap,Redevabilité aux personnes affectées,besoin_prio,Besoins prioritaires,NA,NA,NA,educ_prov_bien,categorical,NA,Manière préférée de recevoir assistance in-kind biens éducation,,,,
+aap,Redevabilité aux personnes affectées,besoin_prio,Besoins prioritaires,NA,NA,NA,educ_prov_service,categorical,NA,Manière préférée de recevoir assistance in-kind services éducation,,,,
+aap,Redevabilité aux personnes affectées,besoin_prio,Besoins prioritaires,NA,NA,NA,assistance_protec,categorical,NA,Type de réponse protection préférés,,,,
+protection,Protection,securite,Sécurité,NA,NA,NA,vbg,numerical,NA,% de ménages déclarant qu'au moins un membre est exposé à des violences sexuelles au cours des 30 derniers jours,,,,
