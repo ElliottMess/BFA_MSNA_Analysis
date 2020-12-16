@@ -58,18 +58,21 @@ lsg_analysis <- function(data){
             age_chef_menage == "plus_65ans"  ~ 1L,
             age_chef_menage %in% c("moins_18ans", "18_65ans") ~ 0L,
             TRUE ~ NA_integer_
-          ),
-          ###YS does not sum NA
+          ))
+  
+  df <- df%>%
+    mutate(
           vulnerabilite = case_when(
-            (depl_plus6m+ auMoinsUneWG+ femme_cheffe_menage + enfant_chef_menage + pers_agee_chef_menage) >=1 ~ 1L,
-            (depl_plus6m+ auMoinsUneWG+ femme_cheffe_menage + enfant_chef_menage + pers_agee_chef_menage) == 0 ~ 0L,
+            rowSums(dplyr::select(., depl_plus6m, auMoinsUneWG, femme_cheffe_menage, enfant_chef_menage, pers_agee_chef_menage), na.rm = T) >=1 ~ 1L,
+            rowSums(dplyr::select(., depl_plus6m, auMoinsUneWG, femme_cheffe_menage, enfant_chef_menage, pers_agee_chef_menage), na.rm = T) == 0 ~ 0L,
             TRUE ~ NA_integer_
           ),
-          ###YS will be written in order (ie if there is a femme_cheffe + enfant_chef, it will femme_chef.)
           vuln_profil_chef_menage = case_when(
-            femme_cheffe_menage == 1 ~ "femme_cheffe",
-            enfant_chef_menage == 1 ~ "enfant_chef",
-            pers_agee_chef_menage == 1 ~ "pers_agee_chef_menage",
+            femme_cheffe_menage == 1 & enfant_chef_menage == 1 & pers_agee_chef_menage == 0 ~ "fille_cheffe",
+            femme_cheffe_menage == 0 & enfant_chef_menage == 1 & pers_agee_chef_menage == 0 ~ "garcon_chef",
+            femme_cheffe_menage == 1 & pers_agee_chef_menage == 1 ~ "femme_agee_chef_menage",
+            femme_cheffe_menage == 0 & pers_agee_chef_menage == 1 ~ "homme_age_chef_menage",
+            femme_cheffe_menage == 1 & enfant_chef_menage == 0 & pers_agee_chef_menage == 0 ~ "femme_chef",
             femme_cheffe_menage == 0 & enfant_chef_menage == 0 & pers_agee_chef_menage == 0 ~ "homme_chef",
             TRUE ~ NA_character_
           ),
@@ -119,11 +122,14 @@ lsg_analysis <- function(data){
             abna_final_score >=1 & abna_final_score <= 2 ~ 0L,
             TRUE ~ NA_integer_
           ),
-          ###YS not a T/F
-          abna_cg = dorme_ext + cap_gap,
+          abna_cg = case_when(
+            dorme_ext + cap_gap >= 1 ~ 1L,
+            dorme_ext + cap_gap == 0 ~ 0L,
+            TRUE ~ NA_integer_
+          ),
           abna_lsg_vln = case_when(
             abna_lsg == 1 & vulnerabilite == 1 ~ 1L,
-            abna_lsg == 0 | vulnerabilite == 0 ~ 1L,
+            abna_lsg == 0 | vulnerabilite == 0 ~ 0L,
             TRUE ~ NA_integer_
           ),
           #WASH
@@ -184,7 +190,6 @@ lsg_analysis <- function(data){
             eha_NC_prop >2/3 & eha_NC_prop <= 1 ~ 3L,
             TRUE ~ NA_integer_
           ),
-          ###YS the last one uses a AND condition while the others uses a OR condition.
           eha_DT = case_when(
             typologie_source_eau == "surface" ~ 5L,
             typologie_source_eau == "non_amelioree" | infra_sanitaire %in% c("dal_zonep", "dal_precis", "dal_zonep_am", "dal_eau")  ~ 4L,
@@ -212,7 +217,7 @@ lsg_analysis <- function(data){
           ),
           eha_lsg_vln = case_when(
             eha_lsg == 1 & vulnerabilite == 1 ~ 1L,
-            eha_lsg == 0 | vulnerabilite == 0 ~ 1L,
+            eha_lsg == 0 | vulnerabilite == 0 ~ 0L,
             TRUE ~ NA_integer_
           ),
           
@@ -258,7 +263,7 @@ lsg_analysis <- function(data){
           educ_cg = cap_gap,
           educ_lsg_vln = case_when(
             educ_lsg == 1 & vulnerabilite == 1 ~ 1L,
-            educ_lsg == 0 | vulnerabilite == 0 ~ 1L,
+            educ_lsg == 0 | vulnerabilite == 0 ~ 0L,
             TRUE ~ NA_integer_
           ),
           
@@ -314,15 +319,14 @@ lsg_analysis <- function(data){
           sante_nut_cg = cap_gap,
           sante_nut_lsg_vln = case_when(
             sante_nut_lsg == 1 & vulnerabilite == 1 ~ 1L,
-            sante_nut_lsg == 0 | vulnerabilite == 0 ~ 1L,
+            sante_nut_lsg == 0 | vulnerabilite == 0 ~ 0L,
             TRUE ~ NA_integer_
           ),
           
           # Protection
           membres_doc = case_when(
             document_identite == "all" ~ 0L,
-            ### YS ???
-            document_identite %in% c("partie", "aucun", "all", "logement", "terre", "aucun") ~ 1L,
+            document_identite %in% c("partie", "aucun") ~ 1L,
             TRUE ~ NA_integer_
             ),
           expo_risqueSec = case_when(
@@ -393,7 +397,7 @@ lsg_analysis <- function(data){
           protection_cg = cap_gap,
           protection_lsg_vln = case_when(
             protection_lsg == 1 & vulnerabilite == 1 ~ 1L,
-            protection_lsg == 0 | vulnerabilite == 0 ~ 1L,
+            protection_lsg == 0 | vulnerabilite == 0 ~ 0L,
             TRUE ~ NA_integer_
           ),
           # Sec Al
@@ -415,9 +419,8 @@ lsg_analysis <- function(data){
             TRUE ~ NA_integer_
           ),
           rcsi_acceptable = case_when(
-            ###YS no "no_coping"
-            rcsi_thresholds == "no_coping" ~ 0L,
-            rcsi_thresholds %in% c("high", "medium", "low") ~ 1L,
+            rcsi_thresholds == "low" ~ 0L,
+            rcsi_thresholds %in% c("high", "medium") ~ 1L,
             TRUE ~ NA_integer_
           ),
           lcsi_acceptable = case_when(
@@ -483,21 +486,18 @@ lsg_analysis <- function(data){
           # No LSG but CG
           no_lsg_cap_gap = case_when(
             has_lsg == 0L & has_cap_gap == 1L ~ 1L,
-            ###YS do want to us a or / and ?
-            has_lsg == 0L | has_cap_gap == 0L ~ 0L,
+            has_lsg == 0L & has_cap_gap >= 0L ~ 0L,
             TRUE ~ NA_integer_
           ),
           
           no_lsg_vuln = case_when(
             has_lsg == 0L & vulnerabilite == 1L ~ 1L,
-            ###YS do want to us a or / and ?
-            has_lsg == 0L | vulnerabilite == 0L ~ 0L,
+            has_lsg == 0L & vulnerabilite >= 0L ~ 0L,
             TRUE ~ NA_integer_
           ),
           no_lsg_cap_gap_vuln = case_when(
             no_lsg_cap_gap == 1L & vulnerabilite == 1L ~ 1L,
-            ###YS do want to us a or / and ?
-            no_lsg_cap_gap == 0L | vulnerabilite == 0L ~ 0L,
+            no_lsg_cap_gap == 0L & vulnerabilite >= 0L ~ 0L,
             TRUE ~ NA_integer_
           ),
           # MSNI
@@ -523,8 +523,7 @@ non_critiques <- list(abna = list("dommage_abri", "probleme_isolation", "surface
                    secal = list("acces_marche", "principale_source_rev", "fsc_acceptable")
                    )
 
-NC_scores <- c("abna_NC_score", "eha_NC_score", "educ_NC_score", "sante_nut_NC_score", "protection_NC_score", "secal_NC_score")
-###YS protection missing in DT
+NC_scores <- c("abna_NC_score", "eha_NC_score", "educ_NC_score", "sante_nut_NC_score", "protection_NC_score", "secal_NC_score", "protection_DT")
 DT_scores <- c("abna_DT", "eha_DT", "educ_DT", "sante_nut_DT", "secal_DT")
 final_scores <- c("abna_final_score", "eha_final_score", "educ_final_score", "sante_nut_final_score", "protection_final_score", "secal_final_score")
 final_scores_labels <- c("ABNA", "EHA", "Education", "Santé", "Protection", "SécuritéAlimentaire")
