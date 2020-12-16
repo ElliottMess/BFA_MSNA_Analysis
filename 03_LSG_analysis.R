@@ -59,11 +59,13 @@ lsg_analysis <- function(data){
             age_chef_menage %in% c("moins_18ans", "18_65ans") ~ 0L,
             TRUE ~ NA_integer_
           ),
+          ###YS does not sum NA
           vulnerabilite = case_when(
             (depl_plus6m+ auMoinsUneWG+ femme_cheffe_menage + enfant_chef_menage + pers_agee_chef_menage) >=1 ~ 1L,
             (depl_plus6m+ auMoinsUneWG+ femme_cheffe_menage + enfant_chef_menage + pers_agee_chef_menage) == 0 ~ 0L,
             TRUE ~ NA_integer_
           ),
+          ###YS will be written in order (ie if there is a femme_cheffe + enfant_chef, it will femme_chef.)
           vuln_profil_chef_menage = case_when(
             femme_cheffe_menage == 1 ~ "femme_cheffe",
             enfant_chef_menage == 1 ~ "enfant_chef",
@@ -117,6 +119,7 @@ lsg_analysis <- function(data){
             abna_final_score >=1 & abna_final_score <= 2 ~ 0L,
             TRUE ~ NA_integer_
           ),
+          ###YS not a T/F
           abna_cg = dorme_ext + cap_gap,
           abna_lsg_vln = case_when(
             abna_lsg == 1 & vulnerabilite == 1 ~ 1L,
@@ -181,6 +184,7 @@ lsg_analysis <- function(data){
             eha_NC_prop >2/3 & eha_NC_prop <= 1 ~ 3L,
             TRUE ~ NA_integer_
           ),
+          ###YS the last one uses a AND condition while the others uses a OR condition.
           eha_DT = case_when(
             typologie_source_eau == "surface" ~ 5L,
             typologie_source_eau == "non_amelioree" | infra_sanitaire %in% c("dal_zonep", "dal_precis", "dal_zonep_am", "dal_eau")  ~ 4L,
@@ -188,6 +192,13 @@ lsg_analysis <- function(data){
             typologie_source_eau == "amelioree" & temps_total_eau %in% c("eau_concession", "moins_5mn", "entre_5_15mn", "entre_16_30mn") & latrine_shared %in% c("ind", "lat_com_20") ~ 1L,
             TRUE ~ NA_integer_
           ),
+          # eha_DT2 = case_when(
+          #   typologie_source_eau == "surface" ~ 5L,
+          #   typologie_source_eau == "non_amelioree" | infra_sanitaire %in% c("dal_zonep", "dal_precis", "dal_zonep_am", "dal_eau")  ~ 4L,
+          #   (typologie_source_eau == "amelioree" & temps_total_eau %in% c("entre_31_45mn", "plus_46mn")) | latrine_shared %in% c("lat_com_50", "lat_com") ~ 3L,
+          #   (typologie_source_eau == "amelioree" & temps_total_eau %in% c("eau_concession", "moins_5mn", "entre_5_15mn", "entre_16_30mn")) | latrine_shared %in% c("ind", "lat_com_20") ~ 1L,
+          #   TRUE ~ NA_integer_
+          # ),
           eha_final_score = pmax(eha_DT, eha_NC_score, na.rm = TRUE),
           eha_lsg = case_when(
             eha_final_score >= 3 ~ 1L,
@@ -310,6 +321,7 @@ lsg_analysis <- function(data){
           # Protection
           membres_doc = case_when(
             document_identite == "all" ~ 0L,
+            ### YS ???
             document_identite %in% c("partie", "aucun", "all", "logement", "terre", "aucun") ~ 1L,
             TRUE ~ NA_integer_
             ),
@@ -403,6 +415,7 @@ lsg_analysis <- function(data){
             TRUE ~ NA_integer_
           ),
           rcsi_acceptable = case_when(
+            ###YS no "no_coping"
             rcsi_thresholds == "no_coping" ~ 0L,
             rcsi_thresholds %in% c("high", "medium", "low") ~ 1L,
             TRUE ~ NA_integer_
@@ -470,17 +483,20 @@ lsg_analysis <- function(data){
           # No LSG but CG
           no_lsg_cap_gap = case_when(
             has_lsg == 0L & has_cap_gap == 1L ~ 1L,
+            ###YS do want to us a or / and ?
             has_lsg == 0L | has_cap_gap == 0L ~ 0L,
             TRUE ~ NA_integer_
           ),
           
           no_lsg_vuln = case_when(
             has_lsg == 0L & vulnerabilite == 1L ~ 1L,
+            ###YS do want to us a or / and ?
             has_lsg == 0L | vulnerabilite == 0L ~ 0L,
             TRUE ~ NA_integer_
           ),
           no_lsg_cap_gap_vuln = case_when(
             no_lsg_cap_gap == 1L & vulnerabilite == 1L ~ 1L,
+            ###YS do want to us a or / and ?
             no_lsg_cap_gap == 0L | vulnerabilite == 0L ~ 0L,
             TRUE ~ NA_integer_
           ),
@@ -508,6 +524,7 @@ non_critiques <- list(abna = list("dommage_abri", "probleme_isolation", "surface
                    )
 
 NC_scores <- c("abna_NC_score", "eha_NC_score", "educ_NC_score", "sante_nut_NC_score", "protection_NC_score", "secal_NC_score")
+###YS protection missing in DT
 DT_scores <- c("abna_DT", "eha_DT", "educ_DT", "sante_nut_DT", "secal_DT")
 final_scores <- c("abna_final_score", "eha_final_score", "educ_final_score", "sante_nut_final_score", "protection_final_score", "secal_final_score")
 final_scores_labels <- c("ABNA", "EHA", "Education", "Santé", "Protection", "SécuritéAlimentaire")
