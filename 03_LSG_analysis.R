@@ -15,6 +15,7 @@ source("utils.R")
 source("analysisplan_factory.R", encoding = "UTF-8")
 source("analysis_functions.R", encoding = "UTF-8")
 
+cleaned_data_adm1$admin0 <- "BFA"
 
 lsg_analysis <- function(data){
   df <- data%>%
@@ -506,12 +507,34 @@ lsg_analysis <- function(data){
             msni >= 3 ~ 1L,
             msni >= 1 & msni < 3 ~ 0L,
             TRUE ~ NA_integer_
-          )
+          ),
+          nb_lsg = rowSums(dplyr::select(., secal_lsg, protection_lsg, sante_nut_lsg, educ_lsg, eha_lsg, abna_lsg), na.rm = T)
+
         )
     return(df)
 }
 
 cleaned_data_adm1 <- lsg_analysis(cleaned_data_adm1)
+msni_3plus_regions <- cleaned_data_adm1%>%
+  as_survey(weights = weights_sampling, cluster_id = sampling_id)%>%
+  group_by(admin1)%>%
+  summarise(msni3plus = survey_mean(msni_needs))
+write_csv(msni_3plus_regions, "outputs/LSG/MSNI/admin0/msni_3plus_regions.csv")
+
+msni_4plus_regions <- cleaned_data_adm1%>%
+  mutate(msni_4plus = case_when(msni >= 4 ~ 1L,
+                                msni < 4 ~ 0L,
+                                TRUE ~ NA_integer_))%>%
+  as_survey(weights = weights_sampling, cluster_id = sampling_id)%>%
+  group_by(admin1)%>%
+  summarise(msni_4plus = survey_mean(msni_needs))
+
+cleaned_data_adm1%>%
+  as_survey(weights = weights_sampling, cluster_id = sampling_id)%>%
+  summarise(eha_mean = mean(eha_lsg, na.rm = T))
+
+write_csv(msni_4plus_regions, "outputs/LSG/MSNI/admin0/msni_4plus_regions.csv")
+
 # IICI
 
 non_critiques <- list(abna = list("dommage_abri", "probleme_isolation", "surface_pers", "modalite_occup"),
@@ -535,10 +558,10 @@ vulnerabilites <- c("depl_plus6m","auMoinsUneWG","femme_cheffe_menage","enfant_c
 
 results_sector <- function(data, sector, group = "status", lsgs_list = final_scores, lsgs_labels_list = final_scores_labels, list_indic = non_critiques,
                            weights = "weights_sampling", weights_fun = combined_weights_adm1, strata = "sampling_id",
-                           write_files = F){
+                           write_files = F, admin_level = "admin0"){
   
-  if(!dir.exists(paste0("outputs/LSG/", sector))){
-    dir.create(paste0("outputs/LSG/", sector))
+  if(!dir.exists(paste0("outputs/LSG/", sector, "/", admin_level))){
+    dir.create(paste0("outputs/LSG/", sector, "/", admin_level))
   }
   print(sector)
   
@@ -546,6 +569,7 @@ results_sector <- function(data, sector, group = "status", lsgs_list = final_sco
   sector_lsg <- sym(paste0(sector, "_lsg"))
   lsg_vln <- sym(paste0(sector, "_lsg_vln"))
   group <- sym(group)
+  admin_level <- sym(admin_level)
   
   indic_NC <- unlist(list_indic[[sector]])
 
@@ -558,30 +582,32 @@ results_sector <- function(data, sector, group = "status", lsgs_list = final_sco
   results <- list()
   
   results$lsg <- data_survey%>%
+    group_by(!!admin_level)%>%
     summarise(
       perc_menage_LSG = survey_mean(!!sector_lsg, na.rm = T)
     )%>%
     select(-perc_menage_LSG_se)
   
   results$lsg_grp <- data_survey%>%
-    group_by(!!group)%>%
+    group_by(!!group, !!admin_level)%>%
     summarise(
       perc_menage_LSG = survey_mean(!!sector_lsg, na.rm = T)
     )%>%
     select(-perc_menage_LSG_se)
 
   results$lsg_seuils <- data_survey%>%
-    group_by(!!final_score)%>%
+    group_by(!!final_score, !!admin_level)%>%
     summarise(prop_LSG_score = survey_mean(na.rm = T))%>%
     select(-prop_LSG_score_se)
   
   results$lsg_seuils_grp <- data_survey%>%
-    group_by(!!group, !!final_score)%>%
+    group_by(!!group, !!final_score, !!admin_level)%>%
     summarise(prop_LSG_score = survey_mean(na.rm = T))%>%
     select(-prop_LSG_score_se)%>%
     pivot_wider(names_from = !!final_score, values_from = prop_LSG_score)
   
   results$no_lsg_vuln <- data_survey%>%
+    group_by(!!admin_level)%>%
     summarise(
       perc_menage_no_lsg_vuln = survey_mean(no_lsg_vuln, na.rm = T)
     )%>%
@@ -589,12 +615,25 @@ results_sector <- function(data, sector, group = "status", lsgs_list = final_sco
     
   
   results$no_lsg_vuln_grp <- data_survey%>%
-    group_by(!!group)%>%
+    group_by(!!group, !!admin_level)%>%
     summarise(
       perc_menage_no_lsg_vuln = survey_mean(no_lsg_vuln, na.rm = T)
     )%>%
     select(-perc_menage_no_lsg_vuln_se)
   
+  results$lsg_vln <- data_survey%>%
+    group_by(!!admin_level)%>%
+    summarise(
+      perc_menage_lsg_vuln = survey_mean(!!lsg_vln, na.rm = T)
+    )%>%
+    select(-perc_menage_lsg_vuln_se)
+  
+  results$lsg_vln_grp <- data_survey%>%
+    group_by(!!admin_level, !!group)%>%
+    summarise(
+      perc_menage_lsg_vuln = survey_mean(!!lsg_vln, na.rm = T)
+    )%>%
+    select(-perc_menage_lsg_vuln_se)
   
   results$top_5_admin1 <- data_survey%>%
     group_by(admin1)%>%
@@ -612,21 +651,27 @@ results_sector <- function(data, sector, group = "status", lsgs_list = final_sco
     select(-perc_menage_LSG_se)%>%
     top_n(5, perc_menage_LSG )
   
-  results$lsg_indic <- sapply(indic_NC, function(x){
+  results$lsg_indic <- lapply(indic_NC, function(x){
     x <- sym(x)
     result <- data_survey%>%
+      group_by(!!admin_level)%>%
       summarise(!!x := survey_mean(!!x, na.rm =T))%>%
       select(-paste0(x, "_se"))
     return(result)
-  })%>% bind_rows()
+  })%>%
+    bind_cols()%>%
+    rename(!!admin_level := !!paste0(admin_level, "...1"))%>%
+    select(-contains("..."))
+  
   names(results$lsg_indic) <- gsub("\\..*$", "", names(results$lsg_indic))
 
   if(write_files == TRUE){
-    sapply(names(results), function(x){write_csv(results[[x]], paste0("outputs/LSG/", sector,"/", sector, "_",x, ".csv"))})
+    sapply(names(results), function(x){write_csv(results[[x]], paste0("outputs/LSG/", sector,"/",admin_level,"/", sector, "_",x, ".csv"))})
   }
   
   contrib_NC_indic <- results$lsg_indic%>%
-    pivot_longer(everything(), names_to = "variables", values_to = "values")
+    group_by(!!admin_level)%>%
+    pivot_longer(-!!admin_level, names_to = "variables", values_to = "values")
   
   if(length(indic_NC)>2){
     plot_set_percentages <- Setviz::plot_set_percentages(
@@ -639,69 +684,95 @@ results_sector <- function(data, sector, group = "status", lsgs_list = final_sco
     dev.off()
   }
   
-  contrib_NC_indic_grap <- ggplot(contrib_NC_indic, aes(x = reorder(variables, values, sum), y = values))+
-    geom_bar(stat= "identity")+
-    coord_flip()+
-    ggsave(paste0("outputs/LSG/", sector,"/contribution_LSG_", sector, ".png"))
-  
+  if(admin_level == "admin0"){
+    contrib_NC_indic_grap <- ggplot(contrib_NC_indic, aes(x = reorder(variables, values, sum), y = values))+
+      geom_bar(stat= "identity")+
+      coord_flip()+
+      ggsave(paste0("outputs/LSG/", sector,"/contribution_LSG_", sector, ".png"))
     
-  
-  index_fill <- c("#EE5A59", "#F7ACAC", "#FACDCD", "#A7A9AC", "#58585A")
-  index_labels <- c("Extrême+ (4+)", "Extrême (4)", "Sévère (3)", "Stress (2)", "Minimal (1)")
-  
-
-  index_chart_overall <- ggplot(results$lsg_seuils, aes(x = prop_LSG_score, y = ""))+
-    geom_bar(aes(fill = forcats::fct_rev(!!final_score)), stat = "identity")+
-    labs(fill = "", x = "", y = "") +
-    theme_minimal() + 
-    scale_fill_manual(values = index_fill, labels = index_labels) +
-    scale_x_continuous(labels = scales::percent_format(accuracy = 1, 
-                                                       scale = 1))+
-    ggsave(paste0("outputs/LSG/", sector,"/severity_bar_chart_", sector, ".png"))
-  
-  lsg_seuils_grp_barchart <- results$lsg_seuils_grp%>%
-    pivot_longer(-!!group, names_to = "seuils", values_to = "prop_LSG_score")%>%
-    mutate(seuils = as.factor(seuils))%>%
-    filter(seuils != "NA")
+      
     
-  index_chart_grp <- ggplot(lsg_seuils_grp_barchart, aes(x = prop_LSG_score, y = !!group))+
-    geom_bar(aes(fill = forcats::fct_rev(seuils)), stat = "identity")+
-    labs(fill = "", x = "", y = "") +
-    theme_minimal() + 
-    scale_fill_manual(values = index_fill, labels = index_labels)+
-    scale_x_continuous(labels = scales::percent_format(accuracy = 1, 
-                                                       scale = 1))+
-    ggsave(paste0("outputs/LSG/", sector,"/severity_bar_chart_grp", sector, ".png"))
-  
+    index_fill <- c("#EE5A59", "#F7ACAC", "#FACDCD", "#A7A9AC", "#58585A")
+    index_labels <- c("Extrême+ (4+)", "Extrême (4)", "Sévère (3)", "Stress (2)", "Minimal (1)")
+    
+    
+    index_chart_overall <- ggplot(results$lsg_seuils, aes(x = prop_LSG_score, y = ""))+
+      geom_bar(aes(fill = forcats::fct_rev(!!final_score)), stat = "identity")+
+      labs(fill = "", x = "", y = "") +
+      theme_minimal() + 
+      scale_fill_manual(values = index_fill, labels = index_labels) +
+      scale_x_continuous(labels = scales::percent_format(accuracy = 1, 
+                                                         scale = 1))+
+      ggsave(paste0("outputs/LSG/", sector,"/severity_bar_chart_", sector, ".png"))
+    
+    lsg_seuils_grp_barchart <- results$lsg_seuils_grp%>%
+      pivot_longer(c(-!!group, -!!admin_level), names_to = "seuils", values_to = "prop_LSG_score")%>%
+      mutate(seuils = as.factor(seuils))%>%
+      filter(seuils != "NA")
+      
+    index_chart_grp <- ggplot(lsg_seuils_grp_barchart, aes(x = prop_LSG_score, y = !!group))+
+      geom_bar(aes(fill = forcats::fct_rev(seuils)), stat = "identity")+
+      labs(fill = "", x = "", y = "") +
+      theme_minimal() + 
+      scale_fill_manual(values = index_fill, labels = index_labels)+
+      scale_x_continuous(labels = scales::percent_format(accuracy = 1, 
+                                                         scale = 1))+
+      ggsave(paste0("outputs/LSG/", sector,"/severity_bar_chart_grp", sector, ".png"))
+  }
   
   return(results)
 }
 
 
 a <- lapply(sectors, results_sector, data = cleaned_data_adm1, write_files = T)
+b <- lapply(sectors, admin_level = "admin1", results_sector, data = cleaned_data_adm1, write_files = T)
+
+cleaned_data_adm1%>%
+  mutate(eha_no_other = case_when(
+    eha_final_score >= 3 & any(lsgs_list_noEHA >=3) ~ 1L,
+    eha_final_score < 3 & any(lsgs_list_noEHA <3) ~ 0L,
+    TRUE ~ NA_integer_
+  ))%>%
+  summarise(eha_no_other = mean(eha_no_other, na.rm = T))
+
 
 msni_analysis <- function(data, group = "status", lsgs_list = final_scores, lsgs_labels_list = final_scores_labels, list_indic = non_critiques,
-                          weights = "weights_sampling", weights_fun = combined_weights_adm1, strata = "sampling_id", cap_gap_var = "has_cap_gap"){
+                          weights = "weights_sampling", weights_fun = combined_weights_adm1, strata = "sampling_id", cap_gap_var = "has_cap_gap",
+                          admin_level = "admin0"){
   
-  if(!dir.exists("outputs/LSG/MSNI")){
-    dir.create("outputs/LSG/MSNI")
+  if(!dir.exists(paste0("outputs/LSG/MSNI/", admin_level))){
+    dir.create(paste0("outputs/LSG/MSNI/", admin_level))
   }
 
   group <- sym(group)
   cap_gap_var <- sym(cap_gap_var)
+  admin_level <- sym(admin_level)
   
   msni_intersection <- msni19::index_intersections(data,
                                                    lsg =  lsgs_list,
                                                    lsg_labels = lsgs_labels_list,
                                                    weighting_function = weights_fun,
-                                                   # y_label = "% dans le besoin par combinaison des secteurs",
-                                                   exclude_unique = F,
+                                                   y_label = "% dans le besoin par combinaison des secteurs",
+                                                   exclude_unique = T,
                                                    mutually_exclusive_sets = F,
                                                    round_to_1_percent = T,
                                                    print_plot = T,
                                                    plot_name = "intersection",
                                                    path = "outputs/LSG/MSNI"
   )
+  msni_intersection_withUnique <- msni19::index_intersections(data,
+                                                   lsg =  lsgs_list,
+                                                   lsg_labels = lsgs_labels_list,
+                                                   weighting_function = weights_fun,
+                                                   y_label = "% dans le besoin par combinaison des secteurs",
+                                                   exclude_unique = F,
+                                                   mutually_exclusive_sets = F,
+                                                   round_to_1_percent = T,
+                                                   print_plot = T,
+                                                   plot_name = "intersection_withUnique",
+                                                   path = "outputs/LSG/MSNI"
+  )
+  
   
   msni_radar_grp <- msni19::radar_graph(data,
                                         lsg =  lsgs_list,
@@ -782,32 +853,43 @@ msni_analysis <- function(data, group = "status", lsgs_list = final_scores, lsgs
   results <- list()
   
   results$msni_seuils <- data_survey%>%
-    group_by(msni)%>%
+    group_by(!!admin_level, msni)%>%
     summarise(prop_msni_score = survey_mean(na.rm = T))%>%
     select(-prop_msni_score_se)
   
-  write_csv(results$msni_seuils, "outputs/LSG/MSNI/msni_overall_score.csv")
+  write_csv(results$msni_seuils, paste0("outputs/LSG/MSNI/",admin_level, "/msni_overall_score.csv"))
   
   results$msni_seuils_grp <- data_survey%>%
-    group_by(!!group, msni)%>%
+    group_by(!!admin_level, !!group, msni)%>%
     summarise(prop_msni_score = survey_mean(na.rm = T))%>%
     select(-prop_msni_score_se)%>%
     pivot_wider(names_from = msni, values_from = prop_msni_score)
   
-  write_csv(results$msni_seuils_grp, "outputs/LSG/MSNI/msni_grp_score.csv")
+  write_csv(results$msni_seuils_grp, paste0("outputs/LSG/MSNI/", admin_level, "/msni_grp_score.csv"))
+  
+  results$nb_lsg_groups <- data_survey%>%
+    group_by(!!admin_level, !!group, nb_lsg)%>%
+    summarise(prop_nb_lsg = survey_mean(na.rm = T))%>%
+    select(-prop_nb_lsg_se)%>%
+    pivot_wider(names_from = nb_lsg, values_from = prop_nb_lsg)
+  
+  write_csv(results$nb_lsg_groups, paste0("outputs/LSG/MSNI/",admin_level,"/nb_lsg_groups.csv"))
   
   return(results)
 }
 
 msni_resutls <- msni_analysis(cleaned_data_adm1)
+msni_resutls_admin1 <- msni_analysis(cleaned_data_adm1, admin_level = "admin1")
+
 
 cg_analysis <- function(data, group = "status", lsgs_list = final_scores, lsgs_labels_list = final_scores_labels, list_indic = non_critiques,
                         weights = "weights_sampling", weights_fun = combined_weights_adm1, strata = "sampling_id", cap_gap_var = "has_cap_gap",
-                        write_files = FALSE){
+                        write_files = FALSE, admin_level = "admin0"){
   
-  if(!dir.exists("outputs/LSG/CG")){
-    dir.create("outputs/LSG/CG")
+  if(!dir.exists(paste0("outputs/LSG/CG/",admin_level))){
+    dir.create(paste0("outputs/LSG/CG/",admin_level))
   }
+  admin_level <- sym(admin_level)
   
   data <- data%>%
     mutate(cap_gap_scaled = case_when(!!cap_gap_var == 1 ~ 3L,
@@ -820,20 +902,22 @@ cg_analysis <- function(data, group = "status", lsgs_list = final_scores, lsgs_l
   results <- list()
   
   results$no_lsg_cap_gap <- data_survey%>%
+    group_by(!!admin_level)%>%
     summarise(prop_no_lsg_cap_gap = survey_mean(no_lsg_cap_gap, na.rm = T))%>%
     select(-prop_no_lsg_cap_gap_se)
   
   results$no_lsg_cap_gap_grp <- data_survey%>%
-    group_by(!!group)%>%
+    group_by(!!admin_level, !!group)%>%
     summarise(prop_no_lsg_cap_gap = survey_mean(no_lsg_cap_gap, na.rm = T))%>%
     select(-prop_no_lsg_cap_gap_se)
   
   results$no_lsg_cap_gap_vuln <- data_survey%>%
+    group_by(!!admin_level)%>%
     summarise(prop_no_lsg_cap_gap_vuln = survey_mean(no_lsg_cap_gap_vuln, na.rm = T))%>%
     select(-prop_no_lsg_cap_gap_vuln_se)
   
   results$no_lsg_cap_gap_vuln_grp <- data_survey%>%
-    group_by(!!group)%>%
+    group_by(!!admin_level,!!group)%>%
     summarise(prop_no_lsg_cap_gap_vuln = survey_mean(no_lsg_cap_gap_vuln, na.rm = T))%>%
     select(-prop_no_lsg_cap_gap_vuln_se)
   
@@ -864,8 +948,10 @@ cg_analysis <- function(data, group = "status", lsgs_list = final_scores, lsgs_l
       has_lsg_has_CG = msni_venn$data$fitted.values["A&B"]/sum(msni_venn$data$fitted.values[1:3])
     )
   
+  
+  
   if(write_files == TRUE){
-    sapply(names(results), function(x){write_csv(results[[x]], paste0("outputs/LSG/CG/cg_",x, ".csv"))})
+    sapply(names(results), function(x){write_csv(results[[x]], paste0("outputs/LSG/CG/",admin_level,"/cg_",x, ".csv"))})
   }
   
   return(results)
@@ -873,13 +959,15 @@ cg_analysis <- function(data, group = "status", lsgs_list = final_scores, lsgs_l
 }
 
 cg_results <- cg_analysis(cleaned_data_adm1, write_files = TRUE)
+cg_results_admin1 <- cg_analysis(cleaned_data_adm1, write_files = TRUE, admin_level = "admin1")
+
 
 vulnerabilites_analysis <- function(data, group = "status", lsgs_list = final_scores, lsgs_labels_list = final_scores_labels, list_indic = non_critiques,
                                     weights = "weights_sampling", weights_fun = combined_weights_adm1, strata = "sampling_id", cap_gap_var = "has_cap_gap",
                                     list_vuln = vulnerabilites, sectors_list = sectors,
-                                    write_files = FALSE){
-  if(!dir.exists("outputs/LSG/vulnerabilites")){
-    dir.create("outputs/LSG/vulnerabilites")
+                                    write_files = FALSE, admin_level = "admin0"){
+  if(!dir.exists(paste0("outputs/LSG/vulnerabilites/", admin_level))){
+    dir.create(paste0("outputs/LSG/vulnerabilites/", admin_level))
   }
   data <- data%>%
     mutate(cap_gap_scaled = case_when(!!cap_gap_var == 1 ~ 3L,
@@ -888,32 +976,40 @@ vulnerabilites_analysis <- function(data, group = "status", lsgs_list = final_sc
            )
   
   group <- sym(group)
+  admin_level <- sym(admin_level)
   data_survey <- data%>%
     as_survey(weights = !!weights)
   
   results <- list()
   
   results$has_lsg_vuln <- data_survey%>%
+    group_by(!!admin_level)%>%
     summarise(prop_has_lsg_vuln = survey_mean(has_lsg_vuln, na.rm = T))%>%
     select(-prop_has_lsg_vuln_se)
   
   results$has_lsg_vuln_grp <- data_survey%>%
-    group_by(!!group)%>%
+    group_by(!!admin_level, !!group)%>%
     summarise(prop_has_lsg_vuln = survey_mean(has_lsg_vuln, na.rm = T))%>%
     select(-prop_has_lsg_vuln_se)
   
-  results$vuln_indic <- sapply(list_vuln, function(x){
+  results$vuln_indic <- lapply(list_vuln, function(x){
     x <- sym(x)
     result <- data_survey%>%
+      group_by(!!admin_level)%>%
       summarise(!!x := survey_mean(!!x, na.rm =T))%>%
       select(-paste0(x, "_se"))
     return(result)
-  })%>% bind_rows()
+  })%>%
+    bind_cols()%>%
+    rename(!!admin_level := !!paste0(admin_level, "...1"))%>%
+    select(-contains("..."))
+  
+  
   names(results$vuln_indic) <- gsub("\\..*$", "", names(results$vuln_indic))
   
 
   contrib_vuln_indic <- results$vuln_indic%>%
-    pivot_longer(everything(), names_to = "variables", values_to = "values")
+    pivot_longer(-!!admin_level, names_to = "variables", values_to = "values")
   
   if(length(list_vuln)>2){
     plot_set_percentages <- Setviz::plot_set_percentages(
@@ -932,13 +1028,13 @@ vulnerabilites_analysis <- function(data, group = "status", lsgs_list = final_sc
   sectors_lsgs_lsg_cg <- c(sectors_lsgs, "has_lsg", "has_cap_gap")
   
   has_lsg_sectors_profil_chef_menage <-data_survey %>%
-    group_by(vuln_profil_chef_menage)%>%
+    group_by(!!admin_level, vuln_profil_chef_menage)%>%
     summarise_at(sectors_lsgs_lsg_cg, survey_mean, na.rm = T)%>%
     select(- ends_with("_se"))%>%
     rename(profil_vuln = vuln_profil_chef_menage )
   
   has_lsg_sectors_profil_depl_plus6m <- data_survey %>%
-    group_by(depl_plus6m)%>%
+    group_by(!!admin_level, depl_plus6m)%>%
     summarise_at(sectors_lsgs_lsg_cg, survey_mean, na.rm = T)%>%
     select(- ends_with("_se"), -contains("SRVYR_WITHIN"))%>%
     filter(depl_plus6m == 1)%>%
@@ -946,7 +1042,7 @@ vulnerabilites_analysis <- function(data, group = "status", lsgs_list = final_sc
     rename(profil_vuln = depl_plus6m)
   
   has_lsg_sectors_profil_auMoinsUneWG <- data_survey %>%
-    group_by(auMoinsUneWG)%>%
+    group_by(!!admin_level, auMoinsUneWG)%>%
     summarise_at(sectors_lsgs_lsg_cg, survey_mean, na.rm = T)%>%
     select(- ends_with("_se"), -contains("SRVYR_WITHIN"))%>%
     filter(auMoinsUneWG == 1)%>%
@@ -958,10 +1054,11 @@ vulnerabilites_analysis <- function(data, group = "status", lsgs_list = final_sc
   
   
   if(write_files == TRUE){
-    sapply(names(results), function(x){write_csv(results[[x]], paste0("outputs/LSG/vulnerabilites/vuln_",x, ".csv"))})
+    sapply(names(results), function(x){write_csv(results[[x]], paste0("outputs/LSG/vulnerabilites/",admin_level, "/vuln_",x, ".csv"))})
   }
   
 }
 
 
 result_vulnerabilites <- vulnerabilites_analysis(cleaned_data_adm1)
+result_vulnerabilites_admin1 <- vulnerabilites_analysis(cleaned_data_adm1, admin_level = "admin1")

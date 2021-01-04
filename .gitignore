@@ -175,3 +175,6 @@ outputs/tables/beautified/summary_stats_admin_1_grp_tableaux_masterfile.xlsx
 outputs/tables/summary_stats_admin_1_final_rcsi
 utils.R
 data/analysis_plan_allVars_template.csv
+data/reach_bfa_msna_outil_V2_deployed.xlsx
+outputs/LSG/MSNI/intersection_withUnique.pdf
+data/reach_bfa_msna_outil_V2_deployed.xlsx
