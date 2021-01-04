@@ -507,9 +507,11 @@ lsg_analysis <- function(data){
             msni >= 3 ~ 1L,
             msni >= 1 & msni < 3 ~ 0L,
             TRUE ~ NA_integer_
-          ),
+          )
+          )
+        df <- df%>%
+          mutate(
           nb_lsg = rowSums(dplyr::select(., secal_lsg, protection_lsg, sante_nut_lsg, educ_lsg, eha_lsg, abna_lsg), na.rm = T)
-
         )
     return(df)
 }
@@ -1060,5 +1062,5 @@ vulnerabilites_analysis <- function(data, group = "status", lsgs_list = final_sc
 }
 
 
-result_vulnerabilites <- vulnerabilites_analysis(cleaned_data_adm1)
-result_vulnerabilites_admin1 <- vulnerabilites_analysis(cleaned_data_adm1, admin_level = "admin1")
+result_vulnerabilites <- vulnerabilites_analysis(cleaned_data_adm1, write_files = T)
+result_vulnerabilites_admin1 <- vulnerabilites_analysis(cleaned_data_adm1, admin_level = "admin1", write_files = T)
