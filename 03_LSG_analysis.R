@@ -481,6 +481,7 @@ lsg_analysis <- function(data){
           #Has LSG and vulnerabilities
           has_lsg_vuln = case_when(
             has_lsg == 1L & vulnerabilite == 1L ~ 1L,
+            has_lsg == 1L | vulnerabilite == 1L ~ 0L,
             has_lsg == 0L & vulnerabilite == 0L ~ 0L,
             TRUE ~ NA_integer_
           ),
@@ -493,6 +494,7 @@ lsg_analysis <- function(data){
           
           no_lsg_vuln = case_when(
             has_lsg == 0L & vulnerabilite == 1L ~ 1L,
+            has_lsg == 1L | vulnerabilite == 1L ~ 0L,
             has_lsg == 0L & vulnerabilite >= 0L ~ 0L,
             TRUE ~ NA_integer_
           ),
@@ -534,6 +536,14 @@ msni_4plus_regions <- cleaned_data_adm1%>%
 cleaned_data_adm1%>%
   as_survey(weights = weights_sampling, cluster_id = sampling_id)%>%
   summarise(eha_mean = mean(eha_lsg, na.rm = T))
+
+cleaned_data_adm1%>%
+  as_survey(weights = weights_sampling, cluster_id = sampling_id)%>%
+  summarise(has_lsg_vuln = survey_mean(has_lsg_vuln, na.rm = T),
+            has_lsg = survey_mean(has_lsg, na.rm = T),
+            vulnerabilite = survey_mean(vulnerabilite, na.rm = T))
+
+  
 
 write_csv(msni_4plus_regions, "outputs/LSG/MSNI/admin0/msni_4plus_regions.csv")
 
@@ -1051,9 +1061,20 @@ vulnerabilites_analysis <- function(data, group = "status", lsgs_list = final_sc
     mutate(auMoinsUneWG = "auMoinsUneWG")%>%
     rename(profil_vuln = auMoinsUneWG)
   
+
   results$has_lsg_sectors_profil <- bind_rows(has_lsg_sectors_profil_chef_menage, has_lsg_sectors_profil_depl_plus6m, has_lsg_sectors_profil_auMoinsUneWG) 
   
+  results$has_vulnerabilities <- data_survey %>% 
+    group_by(!!admin_level) %>% 
+    summarise(has_vulnerabilitie = survey_mean(vulnerabilite, na.rm = T)) %>%
+    select(- ends_with("_se"), -contains("SRVYR_WITHIN"))
   
+  results$has_vulnerabilities_grp <- data_survey %>% 
+    group_by(!!admin_level, !!group) %>% 
+    summarise(has_vulnerabilitie = survey_mean(vulnerabilite, na.rm = T)) %>%
+    select(- ends_with("_se"), -contains("SRVYR_WITHIN"))
+  
+
   
   if(write_files == TRUE){
     sapply(names(results), function(x){write_csv(results[[x]], paste0("outputs/LSG/vulnerabilites/",admin_level, "/vuln_",x, ".csv"))})
