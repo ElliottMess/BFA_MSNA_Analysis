@@ -247,6 +247,15 @@ format_results <- function(data, result, aggregate_level=NULL, pop_grp= NULL, we
     select(!!aggregate_level)%>%
     distinct()
   
+  choices <- read_csv("data/choices.csv", locale = locale(encoding = "UTF-8"))
+  survey <- read_csv("data/survey.csv", locale = locale(encoding = "UTF-8"))
+  
+  questionnaire <- load_questionnaire(data, choices = choices, questions = survey)
+  analysisplanTemplate <- read_csv("./data/analysis_plan_allVars_template.csv", locale = locale(encoding = "latin1"))
+  
+  dico <- form_dictionnary(data, survey, choices, analysisplanTemplate)
+  
+  
   target_research_question_order <- unique(dico$research.question_label)
   target_sub_research_question_order <- unique(dico$sub.research.question_label)
   

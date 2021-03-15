@@ -9,7 +9,7 @@ package_list <- c("elliottmess/butteR", "hypegrammaR","ellieallien/cleaninginspe
 loadInstall_package(package_list)
 
 
-source("01_PrepingAnalysis.R", encoding = "UTF-8")
+# source("01_PrepingAnalysis.R", encoding = "UTF-8")
 
 source("utils.R")
 source("analysisplan_factory.R", encoding = "UTF-8")
@@ -180,11 +180,16 @@ lsg_analysis <- function(data){
             enfant_selle >0 ~ 1L,
             enfant_selle == 0 ~ 0L,
             TRUE ~ NA_integer_
+          ),
+          auMoins_aprLat_avantMan_neg = case_when(
+            auMoins_aprLat_avantMan == 0 ~ 1L,
+            auMoins_aprLat_avantMan == 1 ~ 0L,
+            TRUE ~ NA_integer_
           ))
       
       df <- df%>%
         mutate(
-          eha_NC_prop = rowSums(select(., latrine_moins20, suffisamment_eau, temps_eau, savon, dispo_lavageMain, auMoins_aprLat_avantMan, latrine_pashygenique, diarr), na.rm = T)/8,
+          eha_NC_prop = rowSums(select(., latrine_moins20, suffisamment_eau, temps_eau, savon, dispo_lavageMain, auMoins_aprLat_avantMan_neg, latrine_pashygenique, diarr), na.rm = T)/8,
           eha_NC_score = case_when(
             eha_NC_prop >=0 & eha_NC_prop <=1/3 ~ 1L,
             eha_NC_prop >1/3 & eha_NC_prop <=2/3 ~ 2L,
@@ -361,16 +366,28 @@ lsg_analysis <- function(data){
             protection_NC_prop >2/3 & protection_NC_prop <= 1 ~ 3L,
             TRUE ~ NA_integer_
           ),
+          sum_na_mines = case_when(rowSums(is.na(select(., risque_fem.incident, risque_hom.incident, risque_garcon.incident,
+                                                  risque_fille.incident))) == 4 ~ 1L,
+                                   rowSums(is.na(select(., risque_fem.incident, risque_hom.incident, risque_garcon.incident,
+                                                        risque_fille.incident))) >= 0 ~ 0L,
+                                   TRUE ~ NA_integer_
+                                   ),
           exp_mines_explosions = case_when(rowSums(select(., risque_fem.incident, risque_hom.incident, risque_garcon.incident,
                                                risque_fille.incident), na.rm = TRUE) > 0 ~ 1L,
                                            rowSums(select(., risque_fem.incident, risque_hom.incident, risque_garcon.incident,
-                                              risque_fille.incident), na.rm = TRUE) == 0 ~ 0L, 
+                                              risque_fille.incident), na.rm = TRUE) == 0 & sum_na_mines == 0 ~ 0L, 
                                           TRUE ~ NA_integer_),
           travail_enfant_mines_rectures = case_when(
                                             rowSums(select(., type_trav_enft.carriere, type_trav_enft.recrue, type_trav_enft.prostitutiom), na.rm = TRUE) >0 ~ 1L,
                                             rowSums(select(., type_trav_enft.carriere, type_trav_enft.recrue, type_trav_enft.prostitutiom), na.rm = TRUE) <= 0 ~ 0L, 
                                             TRUE ~ NA_integer_
           ),
+          expo_risqueSec_all = case_when(
+            rowSums(select(., matches("risque_fem.|risque_hom.|risque_fille.|risque_garcon.")), na.rm = T) > 0 ~ 1L,
+            rowSums(select(., matches("risque_fem.|risque_hom.|risque_fille.|risque_garcon.")), na.rm = T) == 0 ~ 0L,
+            TRUE ~ NA_integer_
+          ),
+          #### Recoding expo_risqueSec pour 
           exp_hardcore_stuff = case_when(
             rowSums(select(., vbg, risque_fem.enlevements_gene,risque_fem.enlevements, risque_fem.meurtre_grp,risque_fem.meurtre,
                 risque_hom.enlevements_gene,risque_hom.enlevements, risque_hom.meurtre_grp,risque_hom.meurtre,
@@ -385,7 +402,7 @@ lsg_analysis <- function(data){
           protection_DT = case_when(
             exp_mines_explosions == 1 | travail_enfant_mines_rectures == 1 ~ 5L,
             exp_hardcore_stuff == 1 ~ 4L,
-            expo_risqueSec == 1 ~ 3L,
+            expo_risqueSec_all == 1 ~ 3L,
             expo_risqueSec == 0 ~ 1L,
             TRUE ~ NA_integer_
           ),
@@ -518,7 +535,10 @@ lsg_analysis <- function(data){
     return(df)
 }
 
+
 cleaned_data_adm1 <- lsg_analysis(cleaned_data_adm1)
+
+
 msni_3plus_regions <- cleaned_data_adm1%>%
   as_survey(weights = weights_sampling, cluster_id = sampling_id)%>%
   group_by(admin1)%>%
@@ -551,7 +571,7 @@ write_csv(msni_4plus_regions, "outputs/LSG/MSNI/admin0/msni_4plus_regions.csv")
 
 non_critiques <- list(abna = list("dommage_abri", "probleme_isolation", "surface_pers", "modalite_occup"),
                    eha = list("latrine_moins20", "suffisamment_eau", "temps_eau", "savon", "dispo_lavageMain",
-                                      "auMoins_aprLat_avantMan", "latrine_pashygenique", "diarr"),
+                                      "auMoins_aprLat_avantMan_neg", "latrine_pashygenique", "diarr"),
                    educ = list("enfants_scol", "barrieres_edu"),
                    sante_nut = list("lieu_accouch", "temps_service_sante"),
                    protection = list("membres_doc", "expo_risqueSec", "enfant_detress_psy", "travail_enfant", "vbg","titres"),
@@ -585,11 +605,11 @@ results_sector <- function(data, sector, group = "status", lsgs_list = final_sco
   
   indic_NC <- unlist(list_indic[[sector]])
 
-  data <- data%>%
+  data_conv <- data%>%
     mutate(!!final_score := fct_recode(as.factor(!!final_score), "1" = "1", "2" = "2", "3" = "3", "4" = "4", "4+" = "5"))
     
   
-  data_survey <- as_survey(data, weights = !!weights)
+  data_survey <- as_survey(data_conv, weights = !!weights)
 
   results <- list()
   
@@ -601,19 +621,19 @@ results_sector <- function(data, sector, group = "status", lsgs_list = final_sco
     select(-perc_menage_LSG_se)
   
   results$lsg_grp <- data_survey%>%
-    group_by(!!group, !!admin_level)%>%
+    group_by(!!admin_level,!!group)%>%
     summarise(
       perc_menage_LSG = survey_mean(!!sector_lsg, na.rm = T)
     )%>%
     select(-perc_menage_LSG_se)
 
   results$lsg_seuils <- data_survey%>%
-    group_by(!!final_score, !!admin_level)%>%
+    group_by(!!admin_level,!!final_score)%>%
     summarise(prop_LSG_score = survey_mean(na.rm = T))%>%
     select(-prop_LSG_score_se)
   
   results$lsg_seuils_grp <- data_survey%>%
-    group_by(!!group, !!final_score, !!admin_level)%>%
+    group_by(!!admin_level,!!group, !!final_score)%>%
     summarise(prop_LSG_score = survey_mean(na.rm = T))%>%
     select(-prop_LSG_score_se)%>%
     pivot_wider(names_from = !!final_score, values_from = prop_LSG_score)
@@ -627,7 +647,7 @@ results_sector <- function(data, sector, group = "status", lsgs_list = final_sco
     
   
   results$no_lsg_vuln_grp <- data_survey%>%
-    group_by(!!group, !!admin_level)%>%
+    group_by(!!admin_level, !!group)%>%
     summarise(
       perc_menage_no_lsg_vuln = survey_mean(no_lsg_vuln, na.rm = T)
     )%>%
@@ -641,7 +661,7 @@ results_sector <- function(data, sector, group = "status", lsgs_list = final_sco
     select(-perc_menage_lsg_vuln_se)
   
   results$lsg_vln_grp <- data_survey%>%
-    group_by(!!admin_level, !!group)%>%
+    group_by(!!group,!!admin_level)%>%
     summarise(
       perc_menage_lsg_vuln = survey_mean(!!lsg_vln, na.rm = T)
     )%>%
@@ -678,7 +698,12 @@ results_sector <- function(data, sector, group = "status", lsgs_list = final_sco
   names(results$lsg_indic) <- gsub("\\..*$", "", names(results$lsg_indic))
 
   if(write_files == TRUE){
-    sapply(names(results), function(x){write_csv(results[[x]], paste0("outputs/LSG/", sector,"/",admin_level,"/", sector, "_",x, ".csv"))})
+    
+    for(i in 1:length(names(results))){
+      write_csv(results[[i]],paste0("outputs/LSG/", sector,"/",admin_level,"/", sector, "_",names(results)[i], ".csv"))
+    }
+    
+    # sapply(names(results), function(x){write_csv(results[[x]], paste0("outputs/LSG/", sector,"/",admin_level,"/", sector, "_",x, ".csv"))})
   }
   
   contrib_NC_indic <- results$lsg_indic%>%
@@ -737,7 +762,7 @@ results_sector <- function(data, sector, group = "status", lsgs_list = final_sco
 
 
 a <- lapply(sectors, results_sector, data = cleaned_data_adm1, write_files = T)
-b <- lapply(sectors, admin_level = "admin1", results_sector, data = cleaned_data_adm1, write_files = T)
+b <- lapply(sectors, function(x){results_sector(sector = x, data = cleaned_data_adm1,admin_level = "admin1", write_files = T)})
 
 cleaned_data_adm1%>%
   mutate(eha_no_other = case_when(
@@ -766,6 +791,7 @@ msni_analysis <- function(data, group = "status", lsgs_list = final_scores, lsgs
                                                    weighting_function = weights_fun,
                                                    y_label = "% dans le besoin par combinaison des secteurs",
                                                    exclude_unique = T,
+                                                   nintersects = 40,
                                                    mutually_exclusive_sets = F,
                                                    round_to_1_percent = T,
                                                    print_plot = T,
@@ -778,7 +804,8 @@ msni_analysis <- function(data, group = "status", lsgs_list = final_scores, lsgs
                                                    weighting_function = weights_fun,
                                                    y_label = "% dans le besoin par combinaison des secteurs",
                                                    exclude_unique = F,
-                                                   mutually_exclusive_sets = F,
+                                                   mutually_exclusive_sets = T,
+                                                   nintersects = 8,
                                                    round_to_1_percent = T,
                                                    print_plot = T,
                                                    plot_name = "intersection_withUnique",
@@ -869,6 +896,28 @@ msni_analysis <- function(data, group = "status", lsgs_list = final_scores, lsgs
     summarise(prop_msni_score = survey_mean(na.rm = T))%>%
     select(-prop_msni_score_se)
   
+  perc_scores <- function(data_survey, score, admin_level){
+    score_var <- sym(paste0("prop_",score))
+    
+    data_survey%>%
+      mutate(!!sym(score) := fct_recode(as.factor(!!sym(score)), "1" = "1", "2" = "2", "3" = "3", "4" = "4", "4+" = "5")) %>% 
+      group_by(!!admin_level, !!sym(score))%>%
+      summarise(!!sym(score_var) := survey_mean(na.rm = T))%>%
+      select(-paste0(score_var, "_se"))
+  }
+  
+
+  scores_prop_results <- lapply(lsgs_list, function(x){perc_scores(data_survey = data_survey, score = x, admin_level = admin_level)})
+  names(scores_prop_results) <- lsgs_list
+  
+  results$msni_seuils <- results$msni_seuils %>% 
+    left_join(scores_prop_results$abna_final_score, by = c(paste0(admin_level), "msni" = "abna_final_score")) %>% 
+    left_join(scores_prop_results$eha_final_score, by = c(paste0(admin_level), "msni" = "eha_final_score")) %>% 
+    left_join(scores_prop_results$educ_final_score, by = c(paste0(admin_level), "msni" = "educ_final_score")) %>% 
+    left_join(scores_prop_results$sante_nut_final_score, by = c(paste0(admin_level), "msni" = "sante_nut_final_score")) %>% 
+    left_join(scores_prop_results$protection_final_score, by = c(paste0(admin_level), "msni" = "protection_final_score")) %>% 
+    left_join(scores_prop_results$secal_final_score, by = c(paste0(admin_level), "msni" = "secal_final_score"))
+
   write_csv(results$msni_seuils, paste0("outputs/LSG/MSNI/",admin_level, "/msni_overall_score.csv"))
   
   results$msni_seuils_grp <- data_survey%>%
@@ -1045,24 +1094,47 @@ vulnerabilites_analysis <- function(data, group = "status", lsgs_list = final_sc
     select(- ends_with("_se"))%>%
     rename(profil_vuln = vuln_profil_chef_menage )
   
+  has_lsg_sectors_profil_femme_cheffe <- data_survey %>%
+    group_by(!!admin_level, femme_cheffe_menage)%>%
+    summarise_at(sectors_lsgs_lsg_cg, survey_mean, na.rm = T)%>%
+    select(- ends_with("_se"), -contains("SRVYR_WITHIN"))%>%
+    mutate(femme_cheffe_menage = case_when(femme_cheffe_menage == 0L ~ "homme_chef_tout_age",
+                                           femme_cheffe_menage == 1L ~ "femme_cheffe_tout_age",
+                                           TRUE ~ NA_character_
+                                           ))%>%
+    rename(profil_vuln = femme_cheffe_menage)
+  
+  has_lsg_sectors_profil_age_chef_menage <- data_survey %>%
+    mutate(age_chef_menage = case_when(vuln_profil_chef_menage %in% c("homme_age_chef_menage", "femme_agee_chef_menage") ~ "pers_agee_chef",
+                                       vuln_profil_chef_menage %in% c("homme_chef", "femme_chef") ~ "adulte_chef_menage",
+                                       vuln_profil_chef_menage %in% c("fille_cheffe", "garcon_chef") ~ "enfant_chef",
+                                       TRUE ~ NA_character_)
+    )%>% 
+    group_by(!!admin_level, age_chef_menage)%>%
+    summarise_at(sectors_lsgs_lsg_cg, survey_mean, na.rm = T)
+
   has_lsg_sectors_profil_depl_plus6m <- data_survey %>%
     group_by(!!admin_level, depl_plus6m)%>%
     summarise_at(sectors_lsgs_lsg_cg, survey_mean, na.rm = T)%>%
     select(- ends_with("_se"), -contains("SRVYR_WITHIN"))%>%
-    filter(depl_plus6m == 1)%>%
-    mutate(depl_plus6m = "depl_plus6m")%>%
+    mutate(depl_plus6m = case_when(depl_plus6m == 1 ~ "depl_plus6m",
+                                   depl_plus6m == 0 ~ "nondepl_depl_moins6m",
+                                   TRUE ~ NA_character_))%>%
     rename(profil_vuln = depl_plus6m)
   
   has_lsg_sectors_profil_auMoinsUneWG <- data_survey %>%
     group_by(!!admin_level, auMoinsUneWG)%>%
     summarise_at(sectors_lsgs_lsg_cg, survey_mean, na.rm = T)%>%
     select(- ends_with("_se"), -contains("SRVYR_WITHIN"))%>%
-    filter(auMoinsUneWG == 1)%>%
-    mutate(auMoinsUneWG = "auMoinsUneWG")%>%
+    mutate(auMoinsUneWG = case_when (auMoinsUneWG == 1 ~ "auMoinsUneWG",
+                                     auMoinsUneWG == 0 ~ "pasWG",
+                                     TRUE ~ NA_character_))%>%
     rename(profil_vuln = auMoinsUneWG)
   
 
-  results$has_lsg_sectors_profil <- bind_rows(has_lsg_sectors_profil_chef_menage, has_lsg_sectors_profil_depl_plus6m, has_lsg_sectors_profil_auMoinsUneWG) 
+  results$has_lsg_sectors_profil <- bind_rows(has_lsg_sectors_profil_chef_menage, has_lsg_sectors_profil_femme_cheffe,
+                                              has_lsg_sectors_profil_age_chef_menage,
+                                              has_lsg_sectors_profil_depl_plus6m, has_lsg_sectors_profil_auMoinsUneWG) 
   
   results$has_vulnerabilities <- data_survey %>% 
     group_by(!!admin_level) %>% 
@@ -1079,6 +1151,8 @@ vulnerabilites_analysis <- function(data, group = "status", lsgs_list = final_sc
   if(write_files == TRUE){
     sapply(names(results), function(x){write_csv(results[[x]], paste0("outputs/LSG/vulnerabilites/",admin_level, "/vuln_",x, ".csv"))})
   }
+  
+  return(results)
   
 }
 

@@ -29,8 +29,7 @@ raw_data <- read_csv(raw_data_csv)%>%
       group_pop %in% c("pdi") ~ "pdi",
       group_pop %in% c("pop_local", "migrant_burkina", "rapatrie", "refugie", "migrant_int", "retourne") ~ "host",
       TRUE ~ NA_character_
-      ) # standardising pop groups names
-    )
+      ))# standardising pop groups names
 
 names(raw_data) <- gsub("è", "e", names(raw_data))
 
@@ -578,8 +577,9 @@ raw_data <- raw_data%>%
   mutate(
       age_chef_menage = case_when( chef_menage == "oui" && is.na(age_chef_menage) ~ ic_age,
                                   TRUE ~ age_chef_menage),
-      genre_chef_menage = case_when(chef_menage == "oui" && is.na(genre_chef_menage) ~ ic_genre,
-                                    TRUE ~ ic_genre),
+      genre_chef_menage = case_when(chef_menage == "oui" ~ ic_genre,
+                                    chef_menage == "non" ~ genre_chef_menage,
+                                    TRUE ~ genre_chef_menage),
       taille_abri = case_when(taille_abri == "NSP" ~ NA_integer_, TRUE ~ as.integer(taille_abri)),
       personne_m2 = taille_abri/taille_menage,
       fcs2 =sum(jr_consom_cereale*2, jr_consom_noix*3, jr_consom_lait*4, jr_consom_viande*4, jr_consom_legume*1, jr_consom_fruit*1, jr_consom_huile*0.5,
@@ -705,16 +705,16 @@ raw_data <- raw_data%>%
       vbg = case_when(sum(risque_fem.violence_sex, risque_hom.violence_sex, risque_garcon.violence_sex, risque_fille.violence_sex, na.rm = TRUE) >0 ~ 1L,
                               sum(risque_fem.violence_sex, risque_hom.violence_sex, risque_garcon.violence_sex, risque_fille.violence_sex, na.rm = TRUE) <= 0 ~ 0L, 
                               TRUE ~ NA_integer_),
-      taille_menage = as.factor(case_when(
-        taille_menage > 0 & taille_menage <= 2 ~ "1_2personnes",
-        taille_menage > 2 & taille_menage <= 5 ~ "3_5personnes",
-        taille_menage > 5 & taille_menage <= 8 ~ "6_8personnes",
-        taille_menage > 8 & taille_menage <= 10 ~ "9_10personnes",
-        taille_menage > 10 & taille_menage <= 12 ~ "10_12personnes",
-        taille_menage > 12 & taille_menage < Inf ~ "12plus_personnes",
-        TRUE ~ NA_character_
-        )
-      ),
+      # taille_menage = as.factor(case_when(
+      #   taille_menage > 0 & taille_menage <= 2 ~ "1_2personnes",
+      #   taille_menage > 2 & taille_menage <= 5 ~ "3_5personnes",
+      #   taille_menage > 5 & taille_menage <= 8 ~ "6_8personnes",
+      #   taille_menage > 8 & taille_menage <= 10 ~ "9_10personnes",
+      #   taille_menage > 10 & taille_menage <= 12 ~ "10_12personnes",
+      #   taille_menage > 12 & taille_menage < Inf ~ "12plus_personnes",
+      #   TRUE ~ NA_character_
+      #   )
+      # ),
       revenu_mensuel = as.factor(
         case_when(
           revenu_mensuel > 0 & revenu_mensuel <= quantile(raw_data$revenu_mensuel, na.rm = T, .25) ~ paste0("0_", quantile(raw_data$revenu_mensuel, na.rm = T, .25)),

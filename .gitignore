@@ -179,3 +179,6 @@ data/reach_bfa_msna_outil_V2_deployed.xlsx
 outputs/LSG/MSNI/intersection_withUnique.pdf
 data/reach_bfa_msna_outil_V2_deployed.xlsx
 .RDataTmp1
+outputs/tables/summary_stats_admin_1_secal.csv
+outputs/LSG/eha/REACH_BFA_MSNA2020_LSG_EHA.zip
+outputs/tables/summary_stats_admin_1_secal.csv

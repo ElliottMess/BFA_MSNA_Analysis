@@ -374,3 +374,66 @@ jmp_ladder <- cleaned_data_adm1%>%
 #  )
 # )
 
+
+type_attente_total <- srv_cleaned_data_adm1 %>%
+  filter(!is.na(source_eau), !is.na(temps_total_eau)) %>% 
+  group_by(source_eau, temps_total_eau) %>% 
+  summarise(pourcentage = survey_mean()) %>% 
+  select(-pourcentage_se) %>% 
+  group_by(source_eau) %>%
+  mutate(pourcentage = case_when(is.na(pourcentage) ~ 0,
+                                 TRUE ~ pourcentage)) %>% 
+  pivot_wider(names_from = temps_total_eau, values_from = pourcentage) %>% 
+  relocate(source_eau, c("eau_concession","moins_5mn", "entre_5_15mn", "entre_16_30mn",
+                         "entre_31_45mn", "plus_46mn")) %>% 
+  mutate(across(where(is.numeric), ~replace_na(., 0)))  
+
+
+type_attente_total <- srv_cleaned_data_adm1 %>%
+  filter(!is.na(source_eau), !is.na(temps_total_eau)) %>% 
+  group_by(source_eau, temps_total_eau) %>% 
+  summarise(pourcentage = survey_mean()) %>% 
+  select(-pourcentage_se) %>% 
+  group_by(source_eau) %>%
+  mutate(pourcentage = case_when(is.na(pourcentage) ~ 0,
+                                 TRUE ~ pourcentage)) %>% 
+  pivot_wider(names_from = temps_total_eau, values_from = pourcentage) %>% 
+  relocate(source_eau, c("eau_concession","moins_5mn", "entre_5_15mn", "entre_16_30mn",
+                         "entre_31_45mn", "plus_46mn")) %>% 
+  mutate(across(where(is.numeric), ~replace_na(., 0)))  
+
+write_csv(type_attente_total, "source_eau_temps_total.csv")
+
+
+
+type_attente_distance <- srv_cleaned_data_adm1 %>%
+  filter(!is.na(source_eau), !is.na(temps_eau)) %>% 
+  group_by(source_eau, temps_eau) %>% 
+  summarise(pourcentage = survey_mean()) %>% 
+  select(-pourcentage_se) %>% 
+  group_by(source_eau) %>%
+  mutate(pourcentage = case_when(is.na(pourcentage) ~ 0,
+                                 TRUE ~ pourcentage)) %>% 
+  pivot_wider(names_from = temps_eau, values_from = pourcentage) %>% 
+  relocate(source_eau, c("eau_concession","moins_5mn", "entre_5_15mn", "entre_16_30mn",
+                         "entre_31_45mn", "plus_46mn")) %>% 
+  mutate(across(where(is.numeric), ~replace_na(., 0)))  
+
+write_csv(type_attente_distance, "source_eau_temps_distance.csv")
+
+
+type_attente_collect <- srv_cleaned_data_adm1 %>%
+  filter(!is.na(source_eau), !is.na(temps_collecte)) %>% 
+  group_by(source_eau, temps_collecte) %>% 
+  summarise(pourcentage = survey_mean()) %>% 
+  select(-pourcentage_se) %>% 
+  group_by(source_eau) %>%
+  mutate(pourcentage = case_when(is.na(pourcentage) ~ 0,
+                                 TRUE ~ pourcentage)) %>% 
+  pivot_wider(names_from = temps_collecte, values_from = pourcentage) %>% 
+  relocate(source_eau, c("eau_concession","moins_5mn", "entre_5_15mn", "entre_16_30mn",
+                         "entre_31_45mn", "plus_46mn")) %>% 
+  mutate(across(where(is.numeric), ~replace_na(., 0)))
+
+write_csv(type_attente_collect, "source_eau_temps_collecte.csv")
+
